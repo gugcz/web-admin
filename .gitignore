@@ -1,0 +1,6 @@
+.idea
+public
+node_modules
+bower_components
+
+templates.js

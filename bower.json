@@ -1,0 +1,24 @@
+{
+  "name": "gug-cz_web-admin",
+  "description": "Administration for new GUG.cz web",
+  "license": "MIT",
+  "keywords": [
+    "gugCZ",
+    "angular",
+    "administration"
+  ],
+  "homepage": "https://github.com/gugcz/web-admin",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.4.7",
+    "angular-material": "0.11.4",
+    "angular-ui-router": "0.2.15",
+    "ui-router-extras": "~0.1.0"
+  }
+}
