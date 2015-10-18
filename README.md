@@ -12,6 +12,5 @@ npm install
 pro vývoj pak
 
 ```
-gulp devel
+npm start
 ```
-
