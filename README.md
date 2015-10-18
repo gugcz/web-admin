@@ -14,3 +14,10 @@ pro vývoj pak
 ```
 npm start
 ```
+
+
+### Build pro nasazení ###
+```
+npm run buil
+```
+zbuilduje aplikaci do několika statických souborů ve složce /public

@@ -8,6 +8,7 @@
     "start": "gulp devel",
     "test": "karma start test/karma.conf.js --single-run",
     "tests": "karma start test/karma.conf.js",
+    "build": "gulp build",
     "update-webdriver": "webdriver-manager update",
     "protractor": "protractor test/protractor-conf.js",
     "protractor-debug": "protractor debug test/protractor-conf.js",
