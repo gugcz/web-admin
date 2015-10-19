@@ -2,9 +2,12 @@
   'use strict';
 
   angular.module('gugCZ.webAdmin', [
-        'gugCZ.webAdmin.templates',  // templates in template cache
         'ngMaterial',
         'ui.router',
+        'pascalprecht.translate',
+
+        'gugCZ.webAdmin.templates',      // templates in template cache
+        'gugCZ.webAdmin.translations',  // translations from locale files
 
         'gugCZ.webAdmin.dashboard',
         'gugCZ.webAdmin.errors',
@@ -41,5 +44,11 @@
         $urlRouterProvider
             .otherwise('/dashboard');
       })
+
+      .config(function($translateProvider) {
+        $translateProvider.useSanitizeValueStrategy('escaped');
+//        $translateProvider.useLocalStorage();
+        $translateProvider.preferredLanguage('cs'); // TODO config
+      });
 
 })();

@@ -16,11 +16,11 @@ var url = require('url');
 
 var config = require('./gulp-config.js');
 
-var mkdirSync = function (path) {
+var mkdirSync = function(path) {
   try {
     fs.mkdirSync(path);
-  } catch(e) {
-    if ( e.code != 'EEXIST' ) throw e;
+  } catch (e) {
+    if (e.code != 'EEXIST') throw e;
   }
 };
 
@@ -131,7 +131,7 @@ gulp.task('translations', function() {
       .pipe(plugins.angularTranslate(config.gulp.filename.js.translations, {
         module: config.application.name + '.translations'
       }))
-      .pipe(gulp.dest(config.gulp.dirs.build));
+      .pipe(gulp.dest(config.gulp.dirs.src));
 });
 
 gulp.task('templates', ['jade-index'], function() {
@@ -140,7 +140,7 @@ gulp.task('templates', ['jade-index'], function() {
       .pipe(plugins.jade({
         pretty: true,
         jade: jadeCompiler
-      }))
+      }, {}))
       .pipe(plugins.angularTemplatecache(config.gulp.filename.js.templates, {
         module: config.application.name + '.templates',
         standalone: true

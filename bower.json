@@ -19,9 +19,16 @@
     "angular": "1.4.7",
     "angular-material": "0.11.4",
     "angular-ui-router": "0.2.15",
-    "ui-router-extras": "~0.1.0"
+    "ui-router-extras": "~0.1.0",
+    "angular-translate": "~2.8.1",
+    "angular-i18n": "~1.4.7"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.7"
+  },
+  "overrides": {
+    "angular-i18n": {
+      "main": "./angular-locale_cs.js"
+    }
   }
 }

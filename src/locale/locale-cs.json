@@ -1,6 +1,6 @@
 {
-  "TEST": {
-    "TITLE": "Title",
-    "BODY": "Body"
+  "DASHBOARD": {
+    "TITLE": "Dashboars",
+    "DESCRIPTION": "tady budou grafy,widgety, ..."
   }
 }
