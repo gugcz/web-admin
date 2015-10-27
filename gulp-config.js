@@ -19,7 +19,7 @@ module.exports = {
       //}
     },
     dirs: {
-      build: 'public/',
+      build: 'build/static/',
       src: 'src/',
       parts: {
         app: 'app/',
@@ -30,7 +30,7 @@ module.exports = {
       srcApp: 'src/app/',
       srcCss: 'src/css/',
       srcSass: 'src/scss/',
-      buildCss: 'build/css/'
+      buildCss: 'build/static/css/'
     },
     filename: {
       index: 'index.html',

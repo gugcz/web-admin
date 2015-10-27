@@ -4,6 +4,7 @@
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var fs = require('fs');
+var mkdirp = require('mkdirp');
 
 var del = require('del');
 var esteWatch = require('este-watch');
@@ -18,7 +19,7 @@ var config = require('./gulp-config.js');
 
 var mkdirSync = function(path) {
   try {
-    fs.mkdirSync(path);
+    mkdirp.sync(path);
   } catch (e) {
     if (e.code != 'EEXIST') throw e;
   }
@@ -38,7 +39,7 @@ config.gulp.filepath = {
 };
 
 config.gulp.filepath.assets = config.gulp.dirs.parts.assets.map(function(relativePath) {
-  return config.gulp.dirs.src + relativePath;
+  return fs.realpathSync(config.gulp.dirs.src + relativePath);
 });
 
 config.gulp.destinationDir = config.gulp.dirs.build;
@@ -89,7 +90,6 @@ config.gulp.paths.angularScripts = (function getAngularScripts() {
 
   return angularScripts;
 })();
-
 
 /**
  * @param {object} options {option.host, option.port}
@@ -263,7 +263,7 @@ gulp.task('build-index', ['jade-index'], function() {
 });
 
 gulp.task('build-assets', function() {
-  return gulp.src(config.gulp.filepath.assets, {base: config.gulp.dirs.src})
+  return gulp.src(config.gulp.filepath.assets)
       .pipe(gulp.dest(config.gulp.dirs.build));
 });
 
@@ -307,9 +307,9 @@ gulp.task('build-test', function() {
 
 gulp.task('build-rev', function() {
   return gulp.src([
-    config.gulp.dirs.build + '**/*.css',
-    config.gulp.dirs.build + '*.js'
-  ])
+        config.gulp.dirs.build + '**/*.css',
+        config.gulp.dirs.build + '*.js'
+      ])
       .pipe(plugins.rev())
       .pipe(plugins.revDeleteOriginal())
       .pipe(gulp.dest(config.gulp.dirs.build))
@@ -325,7 +325,6 @@ gulp.task('build-copy-config', function() {
 
 gulp.task('build', ['build-clean'], function() {
   config.gulp.isProduction = true;
-
 
   mkdirSync(config.gulp.destinationDir);
 
@@ -357,6 +356,25 @@ gulp.task('jade-index', function() {
         jade: jadeCompiler
       }))
       .pipe(gulp.dest(config.gulp.dirs.build));
+});
+
+gulp.task('prepare-deploy', function() {
+  return gulp.src('app.yaml')
+      .pipe(gulp.dest('build/'));
+});
+
+gulp.task('deploy-to-gcloud', plugins.shell.task([
+  'gcloud config set project gug-web-admin',
+  'gcloud config set app/use_appengine_api false',
+  'gcloud preview app deploy app.yaml --quiet --promote',
+], {
+  cwd: 'build/'
+}));
+
+gulp.task('deploy', function() {
+  return runSequence(
+      'build', 'prepare-deploy', 'deploy-to-gcloud'
+  );
 });
 
 gulp.task('default', ['build']);
