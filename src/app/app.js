@@ -28,6 +28,10 @@
                 link: 'events',
                 title: 'Events',
                 icon: 'events'
+              },
+              {
+                link: 'https://secure.meetup.com/oauth2/authorize?client_id=r2pktvok5j0drsc07b1lc77evb&response_type=token&redirect_uri=http://gug-web-admin.appspot.com/', // TODO: save clientId and redirect uri to constant
+                title: 'Sign in'
               }
             ];
 
