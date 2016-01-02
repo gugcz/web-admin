@@ -120,7 +120,7 @@ function httpServer(options) {
   console.log('HTTP server running on ', options.host + ':' + options.port);
 
   if (options.open) {
-    var appUrl = 'http://' + options.host + ':' + options.port + '/public';
+    var appUrl = 'http://' + options.host + ':' + options.port + '/' + config.gulp.dirs.build;
     console.log('Opening ' + appUrl);
     open(appUrl);
   }
