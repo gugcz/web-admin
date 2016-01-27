@@ -14,6 +14,13 @@
       return this.data;
     };
 
+    /**
+     * @returns boolean
+     */
+    this.hasToken = function() {
+      return Boolean(this.data);
+    };
+
     this.clear = function() {
       this.data = null;
 
@@ -30,7 +37,7 @@
         return;
       }
 
-      webStorage.session.add('cz.angular.auth:token', tokenData);
+      webStorage.session.set('cz.angular.auth:token', tokenData);
 
       this.data = tokenData;
       $rootScope.$broadcast('gugCZ.auth:changedState');

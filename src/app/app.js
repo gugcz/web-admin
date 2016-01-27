@@ -2,6 +2,7 @@
   'use strict';
 
   angular.module('gugCZ.webAdmin', [
+        'angular-loading-bar',
         'ngMaterial',
         'ui.router',
         'pascalprecht.translate',
@@ -47,6 +48,19 @@
       .config(function($urlRouterProvider) {
         $urlRouterProvider
             .otherwise('/dashboard');
+      })
+
+      .config(function(oauthUrlProvider){
+        oauthUrlProvider.setClientId('r2pktvok5j0drsc07b1lc77evb');
+        oauthUrlProvider.setRedirectUrl('http://gug-web-admin.appspot.com');
+      })
+
+      .config(function($mdThemingProvider, cfpLoadingBarProvider) {
+        cfpLoadingBarProvider.includeSpinner = false;
+        cfpLoadingBarProvider.setC
+
+        $mdThemingProvider.theme('default')
+            .primaryPalette('blue-grey');
       })
 
       .config(function($translateProvider) {

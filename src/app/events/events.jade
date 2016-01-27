@@ -1,1 +1,10 @@
 h1 Events
+
+md-card(ng-repeat="event in eventsCtrl.events")
+  md-card-title
+    md-card-title-text
+      span.md-headline {{event.name}}
+  md-card-actions(layout='row', layout-align='end center')
+    md-button(target="_blank", ng-href='{{event.eventUrl}}') Meetup-event
+  md-card-content
+    p(ng-bind-html='event.description')
