@@ -21,6 +21,6 @@ npm start
 
 ### Build pro nasazení ###
 ```
-npm run buil
+npm run build
 ```
 zbuilduje aplikaci do několika statických souborů ve složce /public
