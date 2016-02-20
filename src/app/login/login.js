@@ -9,7 +9,7 @@
 
         $stateProvider.state('login', {
           parent: 'base',
-          url: 'access_token={accessToken}&token_type={tokenType}&expires_in={expiresIn}',
+          url: 'access_token={accessToken:[^\&]*}&scope{scope}&token_type={tokenType}&expires_in={expiresIn}',
           controller: function($stateParams, authTokenStore) {
 
             this.tokenData = {
