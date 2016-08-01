@@ -1,0 +1,83 @@
+html(lang='en')
+    head
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        // Angular Material style sheet
+        link(rel='stylesheet', href='http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css')
+        link(rel='stylesheet', href='styles.css')
+        link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+        script(src='https://use.fontawesome.com/d10a25834e.js')
+    body(ng-app='AddChapterApp', ng-cloak='')
+        md-toolbar.md-whiteframe-3dp
+            .md-toolbar-tools
+                h3
+                    span Add chapter
+        md-button(class='md-fab md-fab-bottom-right md-primary')
+            md-icon(md-font-icon='material-icons step') done
+        .md-inline-form(ng-controller='AddChapterCtrl as vm', layout='column', ng-cloak='')
+            md-content(md-theme='docs-dark', layout-padding='')
+                h2.md-title Select the section of a chapter and type name...
+                div(layout-gt-xs='row', layout-xs='column')
+                    md-input-container
+                        label Section
+                        md-select(ng-model='vm.chapter.section')
+                            md-option
+                                | GDG
+                            md-option
+                                | GBG
+                            md-option
+                                | GEG
+                            md-option
+                                | GXG
+                    md-input-container(flex-gt-xs='')
+                        label Name of chapter city, school or some other...
+                        input(ng-model='vm.chapter.name')
+            md-content(layout-padding='')
+                div
+                    h2.md-title Now, write some text about chapter...
+                    md-input-container.md-block
+                        label Description
+                        textarea(ng-model='vm.chapter.description', md-maxlength='500', rows='5', md-select-on-focus='')
+                    h2.md-title Add orgs to the chapter...
+                    md-contact-chips(ng-model='vm.chapter.orgs', md-contacts='vm.delayedQuerySearch($query)', md-contact-name='name', md-contact-image='image', md-contact-email='email', md-require-match='true', md-highlight-flags='i', filter-selected='vm.filterSelected', placeholder='Add minimally one...')
+                    h2.md-title Please also set a chapter contact informations...
+
+                    div(layout='column')
+                        div(layout-gt-xs='row', layout-xs='column')
+                            md-input-container(flex-gt-xs='')
+                                md-icon(class='fa fa-envelope-square fa-2x')
+                                label Mail address
+                                input(ng-model='vm.chapter.email')
+                            md-input-container(flex-gt-xs='')
+                                md-icon(class='fa fa-google-plus-square fa-2x')
+                                label Google Plus
+                                input(ng-model='vm.chapter.googlePlusLink')
+                        div(layout-gt-xs='row', layout-xs='column')
+                            md-input-container(flex-gt-xs='')
+                                md-icon(class='fa fa-facebook-square fa-2x')
+                                label Facebook
+                                input(ng-model='vm.chapter.facebookLink')
+                            md-input-container(flex-gt-xs='')
+                                md-icon(class='fa fa-twitter-square fa-2x')
+                                label Twitter
+                                input(ng-model='vm.chapter.twitterLink')
+                        div(layout-gt-xs='row', layout-xs='column')
+                            md-input-container(flex-gt-xs='')
+                                md-icon(class='fa fa-pencil-square fa-2x')
+                                label Meetup ID
+                                input(ng-model='vm.chapter.meetupID')
+                            md-input-container(flex-gt-xs='')
+                                md-icon(class='fa fa-pencil-square fa-2x')
+                                label Meetup URL Name
+                                input(ng-model='vm.chapter.meetupURL')
+
+
+        // Angular Material requires Angular.js Libraries
+        script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js')
+        script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js')
+        script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js')
+        script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js')
+        // Angular Material Library
+        script(src='http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js')
+
+        // Your application bootstrap
+        script(type='text/javascript', src='app.js')
