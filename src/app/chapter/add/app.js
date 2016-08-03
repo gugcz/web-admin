@@ -31,7 +31,7 @@ function AddChapterCtrl($q, $timeout) {
         if ( !pendingSearch || !debounceSearch() )  {
             cancelSearch();
 
-            // htttp get
+            // http get
             return pendingSearch = $q(function(resolve, reject) {
                 // Simulate async search... (after debouncing)
                 cancelSearch = reject;
@@ -49,7 +49,7 @@ function AddChapterCtrl($q, $timeout) {
 
     self.chapter = {
         section: 'GDG',
-        name: 'Prague',
+        name: '',
         description: '',
         profilePicture: '',
         orgs: [],
@@ -61,6 +61,10 @@ function AddChapterCtrl($q, $timeout) {
         meetupURL: '',
         coordinates: ''
 
+    };
+
+    self.add = function () {
+        
     };
 
     function refreshDebounce() {
@@ -103,7 +107,7 @@ function AddChapterCtrl($q, $timeout) {
             var contact = {
                 name: c,
                 email: cParts[0][0].toLowerCase() + '.' + cParts[1].toLowerCase() + '@example.com',
-                image: 'http://lorempixel.com/50/50/people?' + index
+                image: gravatar('example@example.com')
             };
             contact._lowername = contact.name.toLowerCase();
             return contact;

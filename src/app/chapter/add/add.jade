@@ -1,6 +1,7 @@
 html(lang='en')
     head
         meta(name='viewport', content='width=device-width, initial-scale=1')
+        title Add chapter
         // Angular Material style sheet
         link(rel='stylesheet', href='http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css')
         link(rel='stylesheet', href='styles.css')
@@ -11,11 +12,11 @@ html(lang='en')
             .md-toolbar-tools
                 h3
                     span Add chapter
-        md-button(class='md-fab md-fab-bottom-right md-primary')
+        md-button(class='md-fab md-fab-bottom-right md-primary' ng-click='vm.add()')
             md-icon(md-font-icon='material-icons step') done
         .md-inline-form(ng-controller='AddChapterCtrl as vm', layout='column', ng-cloak='')
             md-content(md-theme='docs-dark', layout-padding='')
-                h2.md-title Select the section of a chapter and type name...
+                h2.md-title Select the section of a chapter and type name:
                 div(layout-gt-xs='row', layout-xs='column')
                     md-input-container
                         label Section
@@ -33,14 +34,13 @@ html(lang='en')
                         input(ng-model='vm.chapter.name')
             md-content(layout-padding='')
                 div
-                    h2.md-title Now, write some text about chapter...
+                    h2.md-title Now, write some text about chapter:
                     md-input-container.md-block
                         label Description
                         textarea(ng-model='vm.chapter.description', md-maxlength='500', rows='5', md-select-on-focus='')
-                    h2.md-title Add orgs to the chapter...
+                    h2.md-title Add orgs to the chapter:
                     md-contact-chips(ng-model='vm.chapter.orgs', md-contacts='vm.delayedQuerySearch($query)', md-contact-name='name', md-contact-image='image', md-contact-email='email', md-require-match='true', md-highlight-flags='i', filter-selected='vm.filterSelected', placeholder='Add minimally one...')
-                    h2.md-title Please also set a chapter contact informations...
-
+                    h2.md-title Please also set a chapter contact info:
                     div(layout='column')
                         div(layout-gt-xs='row', layout-xs='column')
                             md-input-container(flex-gt-xs='')
@@ -71,6 +71,7 @@ html(lang='en')
                                 input(ng-model='vm.chapter.meetupURL')
 
 
+
         // Angular Material requires Angular.js Libraries
         script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js')
         script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js')
@@ -81,3 +82,4 @@ html(lang='en')
 
         // Your application bootstrap
         script(type='text/javascript', src='app.js')
+        script(type='text/javascript', src='gravatar.js')
