@@ -2,3 +2,83 @@
 @import 'loading-bar';
 
 @import '../../bower_components/angular-material/angular-material.scss';
+
+//@extend-elements
+//original selectors
+//.chipsdemoContactChips .contact-item .md-list-item-text h3, .chipsdemoContactChips .contact-item .md-list-item-text p
+%extend_1 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+.chipsdemoContactChips {
+  .contact-item {
+    //Instead of the line below you could use @include box-sizing($bs)
+    box-sizing: border-box;
+    &.selected {
+      opacity: 0.5;
+      h3 {
+        opacity: 0.5;
+      }
+    }
+    .md-list-item-text {
+      padding: 14px 0;
+      max-width: 190px;
+      h3 {
+        margin: 0 !important;
+        padding: 0;
+        line-height: 1.2em !important;
+        @extend %extend_1;
+      }
+      p {
+        @extend %extend_1;
+      }
+    }
+  }
+  md-contact-chips {
+    margin-bottom: 10px;
+  }
+  .md-chips {
+    padding: 5px 0 8px;
+  }
+  .fixedRows {
+    height: 250px;
+    overflow: hidden;
+  }
+  md-content.autocomplete {
+    min-height: 250px;
+    input {
+      min-width: 800px;
+    }
+  }
+  .md-item-text.compact {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
+@media(min-width: 960px) {
+  .chipsdemoContactChips .contact-item {
+    float: left;
+    width: 33%;
+  }
+}
+md-input-container {
+  padding-right: 25px;
+  &.md-icon-left {
+    padding-left: 36px;
+    padding-right: 25px;
+  }
+}
+.md-chips {
+  display: block;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+  font-size: 16px;
+  vertical-align: middle;
+  margin-right: 25px;
+  margin-bottom: 40px;
+}
+.md-virtual-repeat-container.md-autocomplete-suggestions-container {
+  width: 400px !important;
+}
