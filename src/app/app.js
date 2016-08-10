@@ -1,12 +1,11 @@
 (function() {
   'use strict';
 
-    function AddChapterCtrl() {
+    function AddChapterCtrl($q, $timeout) {
         var self = this;
         var pendingSearch, cancelSearch = angular.noop;
         var cachedQuery, lastSearch;
-        // var organizers = loadContactsProfilePicture(firebaseData.getAllOrganizers());
-        var organizers = [];
+        var organizers = loadContactsProfilePicture([new  Orgnizer('Jan Novák', 'example@example.com'), new  Orgnizer('Libor Straka', 'example@example.com')]);
 
         self.asyncContacts = [];
         self.filterSelected = true;
@@ -21,14 +20,16 @@
             if ( !pendingSearch || !debounceSearch() )  {
                 cancelSearch();
 
-                // http get
-                return pendingSearch = $q(function (resolve, reject) {
-
+                return pendingSearch = $q(function(resolve, reject) {
+                    // Simulate async search... (after debouncing)
                     cancelSearch = reject;
-                    // Now, it shows all contacts
-                    refreshDebounce();
-                    resolve(self.querySearch());
-                })
+                    $timeout(function() {
+
+                        resolve( self.querySearch() );
+
+                        refreshDebounce();
+                    }, Math.random() * 500, true)
+                });
             }
 
             return pendingSearch;
@@ -56,6 +57,16 @@
             cancelSearch = angular.noop;
         }
 
+
+        function createFilterFor(query) {
+            var lowercaseQuery = angular.lowercase(query);
+
+            return function filterFn(organizer) {
+                return (organizer._lowername.indexOf(lowercaseQuery) != -1);
+            };
+
+        }
+
         function debounceSearch() {
             var now = new Date().getMilliseconds();
             lastSearch = lastSearch || now;
@@ -69,11 +80,17 @@
                 var organizer = {
                     name: org.name,
                     email: org.mail,
-                    image: gravatar(org.mail)
+                    image: gravatar(org.mail),
+                    _lowername: org.name.toLowerCase()
                 };
                 return organizer;
             });
         }
+    }
+
+    function Orgnizer(name, mail) {
+        this.name = name;
+        this.mail = mail;
     }
 
   angular.module('gugCZ.webAdmin', [
