@@ -1,97 +1,45 @@
 (function() {
   'use strict';
 
-    function AddChapterCtrl($q, $timeout) {
+    function FirebaseFactory(FIREBASE_URL, $firebaseArray) {
+        var config = {
+            apiKey: "AIzaSyAdB-QKqwRcZGy_k6FIMEBK5PQhtZrTad4",
+            authDomain: "helloworld-ee64c.firebaseapp.com",
+            databaseURL: "https://helloworld-ee64c.firebaseio.com",
+            storageBucket: "helloworld-ee64c.appspot.com"
+        };
+        firebase.initializeApp(config);
+        var firebaseDB = firebase.database();
         var self = this;
-        var pendingSearch, cancelSearch = angular.noop;
-        var cachedQuery, lastSearch;
-        var organizers = loadContactsProfilePicture([new  Orgnizer('Jan Novák', 'example@example.com'), new  Orgnizer('Libor Straka', 'example@example.com')]);
+        self.chapters = null;
 
-        self.asyncContacts = [];
-        self.filterSelected = true;
-
-        self.querySearch = function (criteria) {
-            cachedQuery = cachedQuery || criteria;
-            return cachedQuery ? organizers.filter(createFilterFor(cachedQuery)) : [];
-        };
-
-        self.delayedQuerySearch = function (criteria) {
-            cachedQuery = criteria;
-            if ( !pendingSearch || !debounceSearch() )  {
-                cancelSearch();
-
-                return pendingSearch = $q(function(resolve, reject) {
-                    // Simulate async search... (after debouncing)
-                    cancelSearch = reject;
-                    $timeout(function() {
-
-                        resolve( self.querySearch() );
-
-                        refreshDebounce();
-                    }, Math.random() * 500, true)
-                });
-            }
-
-            return pendingSearch;
-        };
-
-        self.chapter = {
-            section: 'GDG',
-            name: '',
-            description: '',
-            profilePicture: '',
-            orgs: [],
-            email: '',
-            googlePlusLink: '',
-            facebookLink: '',
-            twitterLink: '',
-            meetupID: '',
-            meetupURL: '',
-            coordinates: ''
-
-        };
-
-        function refreshDebounce() {
-            lastSearch = 0;
-            pendingSearch = null;
-            cancelSearch = angular.noop;
-        }
-
-
-        function createFilterFor(query) {
-            var lowercaseQuery = angular.lowercase(query);
-
-            return function filterFn(organizer) {
-                return (organizer._lowername.indexOf(lowercaseQuery) != -1);
-            };
-
-        }
-
-        function debounceSearch() {
-            var now = new Date().getMilliseconds();
-            lastSearch = lastSearch || now;
-
-            return ((now - lastSearch) < 300);
-        }
-
-        function loadContactsProfilePicture(organizers) {
-
-            return organizers.map(function (org, index) {
-                var organizer = {
-                    name: org.name,
-                    email: org.mail,
-                    image: gravatar(org.mail),
-                    _lowername: org.name.toLowerCase()
-                };
-                return organizer;
+        self.getAllOrganizers = function () {
+            var ref = firebaseDB.ref('orgs/');
+            var organizers = $firebaseArray(ref);
+            ref.on('value', function(snapshot) {
+                organizers.push(snapshot.val());
             });
-        }
-    }
+            return organizers;
+        };
 
-    function Orgnizer(name, mail) {
-        this.name = name;
-        this.mail = mail;
+        self.addChapter = function (chapter) {
+            var ref = new Firebase(FIREBASE_URL  + '/chapters');
+            var chapters = $firebaseArray(ref);
+            chapters.$add(chapter)
+        };
+
+        self.addChapterWithOwnID = function (chapter) {
+            var chaptersRef = firebaseDB.ref('chapters/');
+            chaptersRef.child(getChapterID(chapter)).set(chapter);
+        };
+
+        function getChapterID(chapter) {
+            return chapter.section.toLowerCase() + '_' + chapter.name.replace(' ', '_').toLowerCase();
+        }
+
+
     }
+    
 
   angular.module('gugCZ.webAdmin', [
         'angular-loading-bar',
@@ -100,15 +48,16 @@
         'pascalprecht.translate',
         'gugCZ.auth',
         'gugCZ.webAdmin.templates',      // templates in template cache
-        'gugCZ.webAdmin.translations',  // translations from locale files
-
+        'gugCZ.webAdmin.translations',
         'gugCZ.webAdmin.login',
-
+        'firebase',
         'gugCZ.webAdmin.dashboard',
         'gugCZ.webAdmin.errors',
         'gugCZ.webAdmin.events'
       ]
   )
+      .constant('FIREBASE_URL', 'https://helloworld-ee64c.firebaseio.com/')// Testing project for
+      .service('FirebaseData', FirebaseFactory)
       .config(function($stateProvider) {
         $stateProvider.state('base', {
           url:'/',
@@ -150,6 +99,8 @@
         oauthUrlProvider.setClientId('r2pktvok5j0drsc07b1lc77evb');
         oauthUrlProvider.setRedirectUrl('http://gug-web-admin.appspot.com');
       })
+
+      
 
       .config(function($mdThemingProvider, cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;
