@@ -3,8 +3,6 @@ html(lang='en')
         meta(name='viewport', content='width=device-width, initial-scale=1')
         title Add chapter
         // Angular Material style sheet
-        link(rel='stylesheet', href='http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css')
-        link(rel='stylesheet', href='styles.css')
         link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
         script(src='https://use.fontawesome.com/d10a25834e.js')
     body(ng-app='AddChapterApp', ng-cloak='')
@@ -12,10 +10,8 @@ html(lang='en')
             .md-toolbar-tools
                 h3
                     span Add chapter
-        md-button(class='md-fab md-fab-bottom-right md-primary' ng-click='vm.add()')
-            md-icon(md-font-icon='material-icons step') done
-        .md-inline-form(ng-controller='AddChapterCtrl as vm', layout='column', ng-cloak='')
-            md-content(md-theme='docs-dark', layout-padding='')
+        .md-inline-form(layout='column', ng-cloak='')
+            md-content(layout-padding='')
                 h2.md-title Select the section of a chapter and type name:
                 div(layout-gt-xs='row', layout-xs='column')
                     md-input-container
@@ -32,7 +28,6 @@ html(lang='en')
                     md-input-container(flex-gt-xs='')
                         label Name of chapter city, school or some other...
                         input(ng-model='vm.chapter.name')
-            md-content(layout-padding='')
                 div
                     h2.md-title Now, write some text about chapter:
                     md-input-container.md-block
@@ -69,17 +64,11 @@ html(lang='en')
                                 md-icon(class='fa fa-pencil-square fa-2x')
                                 label Meetup URL Name
                                 input(ng-model='vm.chapter.meetupURL')
+            md-button(class='md-fab md-fab-bottom-right md-primary', ng-click='vm.add()')
+                md-icon(md-font-icon='material-icons step') done
 
+        // Firebase
+        script(src='https://cdn.firebase.com/js/client/2.2.4/firebase.js')
+        // AngularFire
+        script(src='https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js')
 
-
-        // Angular Material requires Angular.js Libraries
-        script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js')
-        script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js')
-        script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js')
-        script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js')
-        // Angular Material Library
-        script(src='http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js')
-
-        // Your application bootstrap
-        script(type='text/javascript', src='app.js')
-        script(type='text/javascript', src='gravatar.js')
