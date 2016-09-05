@@ -12,13 +12,14 @@
                 return organizers.filter(createFilterFor(criteria));
             });
         };
+        
+        vm.organizers = [];
 
         vm.chapter = {
             section: 'GDG',
             name: '',
             description: '',
             profilePicture: '',
-            orgs: [],
             email: '',
             googlePlusLink: '',
             facebookLink: '',
@@ -37,10 +38,12 @@
         }
 
         function loadContactsProfilePicture(organizers) {
+            console.log(organizers);
 
             return organizers.map(function (org) {
                 return {
                     name: org.name,
+                    chapters: org.chapters,
                     email: org.mail,
                     image: gravatar(org.mail),
                     _lowername: org.name.toLowerCase()
@@ -50,7 +53,7 @@
         }
 
         vm.add = function () {
-            firebaseData.addChapterWithOwnID(vm.chapter)
+            firebaseData.addChapter(vm.chapter, vm.organizers);
         }
     }
 

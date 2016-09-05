@@ -3,7 +3,7 @@
 
     function firebaseFactory(firebaseDB, $q, $firebaseArray) {
         var self = this;
-        self.chapters = null;
+        var chapterName = null;
 
         self.getAllOrganizers = function () {
             var organizers = [];
@@ -17,19 +17,37 @@
 
         };
 
-        self.addChapter = function (chapter) {
-            var ref = new Firebase(FIREBASE_URL + '/chapters');
-            var chapters = $firebaseArray(ref);
-            chapters.$add(chapter)
-        };
-
-        self.addChapterWithOwnID = function (chapter) {
+        self.addChapter = function (chapter, organizers) {
+            chapterName = getChapterID(chapter)
             var chaptersRef = firebaseDB.ref('chapters/');
             chaptersRef.child(getChapterID(chapter)).set(chapter);
+            self.addChapterToOrganizers(organizers)
         };
 
         function getChapterID(chapter) {
             return chapter.section.toLowerCase() + '_' + chapter.name.replace(' ', '_').toLowerCase();
+        }
+
+        self.addChapterToOrganizers = function (organizers) {
+            organizers.forEach(function (org) {
+                addChapterToOrganizer(org.email);
+            })
+        };
+
+        function addChapterToOrganizer(orgMail) {
+            firebaseDB.ref('orgs/').orderByChild('mail').equalTo(orgMail).once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    var orgID = childSnapshot.key;
+                    var updates = getOrgObjectWhichHasAddedChapter();
+                    firebaseDB.ref('orgs/' + orgID + '/chapters').update(updates);
+                });
+            });
+        }
+
+        function getOrgObjectWhichHasAddedChapter() {
+            var organizerObject = {};
+            organizerObject[chapterName] = true;
+            return organizerObject;
         }
 
     }

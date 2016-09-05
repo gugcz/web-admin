@@ -34,7 +34,7 @@ html(lang='en')
                         label Description
                         textarea(ng-model='vm.chapter.description', md-maxlength='500', rows='5', md-select-on-focus='')
                     h2.md-title Add orgs to the chapter:
-                    md-contact-chips(ng-model='vm.chapter.orgs', md-contacts='vm.delayedQuerySearch($query)', md-contact-name='name', md-contact-image='image', md-contact-email='email', md-require-match='true', md-highlight-flags='i', filter-selected='vm.filterSelected', placeholder='Add minimally one...')
+                    md-contact-chips(ng-model='vm.organizers', md-contacts='vm.delayedQuerySearch($query)', md-contact-name='name', md-contact-image='image', md-contact-email='email', md-require-match='true', md-highlight-flags='i', filter-selected='vm.filterSelected', placeholder='Add minimally one...')
                     h2.md-title Please also set a chapter contact info:
                     div(layout='column')
                         div(layout-gt-xs='row', layout-xs='column')
