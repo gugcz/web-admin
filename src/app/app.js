@@ -5,6 +5,7 @@
             'angular-loading-bar',
             'ngMaterial',
             'ui.router',
+        'txx.diacritics',
             'pascalprecht.translate',
             'gugCZ.auth',
             'gugCZ.webAdmin.common.firebase',
