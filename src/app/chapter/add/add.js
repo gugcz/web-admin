@@ -32,8 +32,8 @@
         function createFilterFor(query) {
             var lowercaseQuery = angular.lowercase(query);
 
-            return function filterFn(organizer) {
-                return (organizer._lowername.indexOf(lowercaseQuery) != -1);
+            return function filterFn(org) {
+                return (org._lowername.indexOf(lowercaseQuery) != -1);
             };
         }
 
@@ -53,7 +53,9 @@
         }
 
         vm.add = function () {
-            firebaseData.addChapter(vm.chapter, vm.organizers);
+            firebaseData.setChapterID(vm.chapter);
+            firebaseData.addChapter(vm.chapter);
+            firebaseData.addChapterToOrganizers(vm.organizers);
         }
     }
 

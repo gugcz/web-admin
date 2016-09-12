@@ -1,9 +1,9 @@
 (function () {
     'use strict';
 
-    function firebaseFactory(firebaseDB, $q, $firebaseArray) {
+    function firebaseFactory(firebaseDB, $q, $firebaseArray, removeDiacritics) {
         var self = this;
-        var chapterName = null;
+        var chapterID = null;
 
         self.getAllOrganizers = function () {
             var organizers = [];
@@ -17,15 +17,17 @@
 
         };
 
-        self.addChapter = function (chapter, organizers) {
-            chapterName = getChapterID(chapter)
+        self.setChapterID = function (chapter) {
+            chapterID = getChapterID(chapter);
+        };
+
+        self.addChapter = function (chapter) {
             var chaptersRef = firebaseDB.ref('chapters/');
-            chaptersRef.child(getChapterID(chapter)).set(chapter);
-            self.addChapterToOrganizers(organizers)
+            chaptersRef.child(chapterID).set(chapter);
         };
 
         function getChapterID(chapter) {
-            return chapter.section.toLowerCase() + '_' + chapter.name.replace(' ', '_').toLowerCase();
+            return chapter.section.toLowerCase() + '_' + removeDiacritics.replace(chapter.name).replace(' ', '_').toLowerCase();
         }
 
         self.addChapterToOrganizers = function (organizers) {
@@ -46,9 +48,11 @@
 
         function getOrgObjectWhichHasAddedChapter() {
             var organizerObject = {};
-            organizerObject[chapterName] = true;
+            organizerObject[chapterID] = true;
             return organizerObject;
         }
+
+        
 
     }
 
