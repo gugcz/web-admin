@@ -4,6 +4,7 @@
     angular.module('gugCZ.webAdmin', [
             'angular-loading-bar',
             'ngMaterial',
+            'ngMessages',
             'ui.router',
         'txx.diacritics',
             'pascalprecht.translate',
