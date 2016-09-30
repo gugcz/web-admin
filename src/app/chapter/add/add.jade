@@ -1,10 +1,12 @@
+// TODO - Fix type error on first loading
 html(lang='en')
     head
         meta(name='viewport', content='width=device-width, initial-scale=1')
         title Add chapter
         // Angular Material style sheet
+
         link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
-        //script(src='https://use.fontawesome.com/d10a25834e.js')
+        // TODO - Show Font Awesome icons
     body(ng-app='AddChapterApp', ng-cloak='')
         md-toolbar.md-whiteframe-3dp
             .md-toolbar-tools
@@ -37,15 +39,20 @@ html(lang='en')
                             div(ng-message='required')
                                 | This field is required
 
-
-
                 div
                     h2.md-title Now, write some text about chapter:
                     md-input-container.md-block
                         label Description
                         textarea(ng-model='vm.chapter.description', md-maxlength='500', rows='5', md-select-on-focus='')
+
+                    // TODO - Add orgs validation
                     h2.md-title Add orgs to the chapter:
                     md-contact-chips(ng-model='vm.organizers', md-contacts='vm.delayedQuerySearch($query)', md-contact-name='name', md-contact-image='image', md-contact-email='email', md-require-match='true', md-highlight-flags='i', filter-selected='vm.filterSelected', placeholder='Add minimally one...')
+
+                    // TODO - Add field for position (selecting on map)
+                    // TODO - Upload picture
+
+
                     h2.md-title Please also set a chapter contact info:
                     div(layout='column')
                         div(layout-gt-xs='row', layout-xs='column')

@@ -2,6 +2,8 @@
     'use strict';
 
     function firebaseDB() {
+        // TODO - Add authentication with token
+
         var config = {
             apiKey: "AIzaSyAdB-QKqwRcZGy_k6FIMEBK5PQhtZrTad4",
             authDomain: "helloworld-ee64c.firebaseapp.com",
