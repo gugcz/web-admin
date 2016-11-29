@@ -1,0 +1,27 @@
+{
+  "extends": "angular",
+  "rules": {
+    "indent": [
+      "warn",
+      2
+    ],
+    "quotes": [
+      "warn",
+      "single"
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "semi": [
+      "warn",
+      "always"
+    ],
+    "angular/controller-as-vm": "off",
+    "angular/no-service-method":  "off",
+    "angular/on-watch":  "off"
+  },
+  "env": {
+    "browser": true
+  }
+}

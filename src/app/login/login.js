@@ -4,7 +4,7 @@
   angular.module('gugCZ.webAdmin.login', [
         'ui.router'
       ]
-      )
+  )
       .config(function($stateProvider) {
 
         $stateProvider.state('login', {

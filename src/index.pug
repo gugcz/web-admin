@@ -5,7 +5,9 @@ html(ng-app='gugCZ.webAdmin', lang='en')
     link(rel='stylesheet', href='css/app.css')
 
     meta(name='viewport', content='initial-scale=1')
-    body(layout='column', ui-view='')
 
-      script(type='text/javascript', src='vendor.js')
-      script(type='text/javascript', src='scripts.js')
+  body
+  #page(layout='column', ui-view='')
+
+    script(type='text/javascript', src='vendor.js')
+    script(type='text/javascript', src='scripts.js')

@@ -8,7 +8,7 @@ var mkdirp = require('mkdirp');
 
 var del = require('del');
 var esteWatch = require('este-watch');
-var jadeCompiler = require('jade');
+var pugCompiler = require('pug');
 var mainBowerFiles = require('main-bower-files');
 var minimatch = require('minimatch');
 var open = require('open');
@@ -59,8 +59,8 @@ config.gulp.paths = {
     '!' + config.gulp.dirs.src + config.gulp.filename.js.config
   ],
   templates: [
-    config.gulp.dirs.src + '**/*.jade',
-    '!' + config.gulp.dirs.src + 'index.jade'
+    config.gulp.dirs.src + '**/*.pug',
+    '!' + config.gulp.dirs.src + 'index.pug'
   ],
   sass: [
     config.gulp.dirs.srcSass + '**/*.scss'
@@ -134,12 +134,12 @@ gulp.task('translations', function() {
       .pipe(gulp.dest(config.gulp.dirs.src));
 });
 
-gulp.task('templates', ['jade-index'], function() {
+gulp.task('templates', ['pug-index'], function() {
   return gulp.src(config.gulp.paths.templates)
       .pipe(plugins.plumber())
-      .pipe(plugins.jade({
+      .pipe(plugins.pug({
         pretty: true,
-        jade: jadeCompiler
+        pug: pugCompiler
       }, {}))
       .pipe(plugins.angularTemplatecache(config.gulp.filename.js.templates, {
         module: config.application.name + '.templates',
@@ -211,7 +211,7 @@ gulp.task('watch', function() {
 
     switch (e.extension) {
       case 'html':
-      case 'jade':
+      case 'pug':
         gulp.start('templates');
         break;
       case 'json':
@@ -236,7 +236,7 @@ gulp.task('watch', function() {
 
 gulp.task('devel', function() {
   runSequence(
-      ['sass', 'js-vendor', 'js-main', 'jade-index'],
+      ['sass', 'js-vendor', 'js-main', 'pug-index'],
       'watch'
   );
 });
@@ -254,7 +254,7 @@ gulp.task('build-post-clean', function(cb) {
 
 });
 
-gulp.task('build-index', ['jade-index'], function() {
+gulp.task('build-index', ['pug-index'], function() {
   var manifest = gulp.src(config.gulp.paths.revManifest);
 
   return gulp.src(config.gulp.filepath.index)
@@ -307,9 +307,9 @@ gulp.task('build-test', function() {
 
 gulp.task('build-rev', function() {
   return gulp.src([
-        config.gulp.dirs.build + '**/*.css',
-        config.gulp.dirs.build + '*.js'
-      ])
+    config.gulp.dirs.build + '**/*.css',
+    config.gulp.dirs.build + '*.js'
+  ])
       .pipe(plugins.rev())
       .pipe(plugins.revDeleteOriginal())
       .pipe(gulp.dest(config.gulp.dirs.build))
@@ -337,7 +337,7 @@ gulp.task('build', ['build-clean'], function() {
 
 });
 
-jadeCompiler.filters.escape = function(block) {
+pugCompiler.filters.escape = function(block) {
   return block
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
@@ -347,13 +347,13 @@ jadeCompiler.filters.escape = function(block) {
       .replace(/\\/g, '\\\\');
 };
 
-gulp.task('jade-index', function() {
+gulp.task('pug-index', function() {
 
-  gulp.src('src/index.jade')
+  gulp.src('src/index.pug')
       .pipe(plugins.plumber())
-      .pipe(plugins.jade({
+      .pipe(plugins.pug({
         pretty: true,
-        jade: jadeCompiler
+        pug: pugCompiler
       }))
       .pipe(gulp.dest(config.gulp.dirs.build));
 });
@@ -366,7 +366,7 @@ gulp.task('prepare-deploy', function() {
 gulp.task('deploy-to-gcloud', plugins.shell.task([
   'gcloud config set project gug-web-admin',
   'gcloud config set app/use_appengine_api false',
-  'gcloud preview app deploy app.yaml --quiet --promote',
+  'gcloud preview app deploy app.yaml --quiet --promote'
 ], {
   cwd: 'build/'
 }));

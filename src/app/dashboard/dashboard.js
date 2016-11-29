@@ -10,7 +10,8 @@
         $stateProvider.state('dashboard', {
           parent: 'base',
           url: 'dashboard',
-          controller: function() {},
+          controller: function() {
+          },
           controllerAs: 'dashboard',
           templateUrl: 'app/dashboard/dashboard.html'
         });

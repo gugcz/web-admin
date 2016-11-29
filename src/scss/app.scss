@@ -3,6 +3,11 @@
 
 @import '../../bower_components/angular-material/angular-material.scss';
 
+#page {
+  height: 100%;
+  position: relative;
+}
+
 //@extend-elements
 //original selectors
 //.chipsdemoContactChips .contact-item .md-list-item-text h3, .chipsdemoContactChips .contact-item .md-list-item-text p

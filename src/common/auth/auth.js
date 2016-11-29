@@ -39,9 +39,9 @@
   }
 
   angular.module('gugCZ.auth', [
-        'webStorageModule',
-        'gugCZ.webAdmin.config'
-      ])
+    'webStorageModule',
+    'gugCZ.webAdmin.config'
+  ])
       .provider('oauthUrl', oauthUrlProvider)
       .config(function($httpProvider) {
         $httpProvider.interceptors.push(tokenInterceptor)

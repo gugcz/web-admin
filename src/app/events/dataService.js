@@ -18,7 +18,7 @@
   };
 
   angular.module('gugCZ.webAdmin.events.service', [
-        'gugCZ.webAdmin.config'
+    'gugCZ.webAdmin.config'
   ])
       .service('eventsDataService', Events);
 
