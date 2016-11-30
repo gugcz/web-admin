@@ -1,6 +1,4 @@
-
 @import 'loading-bar';
-
 @import '../../bower_components/angular-material/angular-material.scss';
 
 #page {
@@ -16,7 +14,6 @@
   white-space: nowrap;
   overflow: hidden;
 }
-
 
 .chipsdemoContactChips {
   .contact-item {
@@ -63,12 +60,14 @@
     padding-bottom: 8px;
   }
 }
+
 @media(min-width: 960px) {
   .chipsdemoContactChips .contact-item {
     float: left;
     width: 33%;
   }
 }
+
 md-input-container {
   padding-right: 25px;
   &.md-icon-left {
@@ -76,6 +75,7 @@ md-input-container {
     padding-right: 25px;
   }
 }
+
 .md-chips {
   display: block;
   font-family: Roboto, Helvetica Neue, sans-serif;
@@ -84,6 +84,30 @@ md-input-container {
   margin-right: 25px;
   margin-bottom: 40px;
 }
+
 .md-virtual-repeat-container.md-autocomplete-suggestions-container {
   width: 400px !important;
+}
+
+.my-events {
+  .future {
+    background: cornflowerblue;
+    .report {
+      display: none;
+    }
+  }
+
+  .unreported {
+    background: orange;
+    .report {
+      color: black;
+    }
+  }
+
+  .finished {
+    background: lightgrey;
+    .report {
+      color: gray;
+    }
+  }
 }

@@ -1,10 +1,16 @@
 md-toolbar(layout='row')
   .md-toolbar-tools
     md-button.md-icon-button(ng-click="app.toggleSidenav('left')")
-      md-icon(aria-label='Menu', md-svg-icon='//s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg')
+      md-icon(aria-label='Menu')
     h1 GUG CZ Administrace
     span(flex='')
     md-button(auth-login-link) Sign In
+
+    md-button {{app.user.name}}
+    md-select.md-no-underline(ng-model='app.selectedChapter')
+      md-option(value='gdgjihlava') GDG Jihlava
+      md-option(value='gdgbrno') GDG Brno
+
 div(layout='row', flex='')
   md-sidenav.md-sidenav-left.md-whiteframe-z2(layout='column', md-component-id='left', md-is-locked-open="$mdMedia('gt-sm')")
     md-list

@@ -37,6 +37,16 @@
               }
             ];
 
+            this.user = {
+              name: "Jan Novák",
+              chapters: {
+                gdgjihlava: "GDG Jihlava",
+                gdgBrno: "GDG Brno"
+              }
+            };
+
+            this.selectedChapter = Object.keys(this.user.chapters)[0];
+
             this.toggleSidenav = function(menuId) {
               $mdSidenav(menuId).toggle();
             };
