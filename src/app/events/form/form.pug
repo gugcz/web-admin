@@ -2,9 +2,19 @@ md-content(layout-padding)
     form(name='addEventForm', ng-submit='addEventForm.$valid && vm.addEvent()', novalidate, layout='column')
         md-input-container
             label(translate='EVENTS.FORM.NAME')
-            input
+            input(ng-model='vm.event.name')
 
         md-input-container
             label(translate='EVENTS.FORM.SUBTITLE')
+            input(ng-model='vm.event.subtitle')
+
+        md-input-container
+            label(translate='EVENTS.FORM.DESCRIPTION')
+            textarea(rows='7')
+
+        md-input-container
+            label(translate='EVENTS.FORM.REGFORM_LINK')
             input
+
+        md-chips(placeholder="{{ 'EVENTS.FORM.CHAPTERS' | translate }}", ng-model='vm.event.chapters')
 
