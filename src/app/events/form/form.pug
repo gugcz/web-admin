@@ -1,0 +1,10 @@
+md-content(layout-padding)
+    form(name='addEventForm', ng-submit='addEventForm.$valid && vm.addEvent()', novalidate, layout='column')
+        md-input-container
+            label(translate='EVENTS.FORM.NAME')
+            input
+
+        md-input-container
+            label(translate='EVENTS.FORM.SUBTITLE')
+            input
+

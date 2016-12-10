@@ -23,8 +23,10 @@
       .config(function($stateProvider) {
         $stateProvider.state('base', {
           url: '/',
-          controller: function($mdSidenav) {
-            this.menu = [
+          controller: function($mdSidenav, $state) {
+                this.state = $state;
+
+              this.menu = [
               {
                 link: 'dashboard',
                 title: 'Dashboard',
@@ -32,6 +34,11 @@
               },
               {
                 link: 'events',
+                title: 'Events',
+                icon: 'events'
+              },
+                  {
+                link: 'events-form',
                 title: 'Events',
                 icon: 'events'
               }
@@ -52,7 +59,10 @@
             };
           },
           controllerAs: 'app',
-          templateUrl: 'app/app.html'
+          templateUrl: 'app/app.html',
+            data: {
+              title: 'GUG CZ Administrace'
+            }
         })
 
       })
@@ -78,6 +88,5 @@
         $translateProvider.useSanitizeValueStrategy('escaped');
 //        $translateProvider.useLocalStorage();
         $translateProvider.preferredLanguage('cs'); // TODO config
-      });
-
+      })
 })();

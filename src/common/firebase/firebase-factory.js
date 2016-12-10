@@ -4,13 +4,16 @@
   function firebaseDB() {
     // TODO - Add authentication with token
 
-    var config = {
-      apiKey: "AIzaSyAdB-QKqwRcZGy_k6FIMEBK5PQhtZrTad4",
-      authDomain: "helloworld-ee64c.firebaseapp.com",
-      databaseURL: "https://helloworld-ee64c.firebaseio.com",
-      storageBucket: "helloworld-ee64c.appspot.com"
-    };
+	  var config = {
+		  apiKey: "AIzaSyAkP1lF6Y4k7F1lTNA_tXufK0YQX7I72uo",
+		  authDomain: "gugcz.firebaseapp.com",
+		  databaseURL: "https://gugcz.firebaseio.com",
+		  storageBucket: "firebase-gugcz.appspot.com",
+		  messagingSenderId: "31582256095"
+	  };
     firebase.initializeApp(config);
+   /* firebase.auth().signInWithCustomToken();
+    firebase.database().ref('orgs/' + firebase.auth().currentUser.uid + '/name').push('Ahojda');*/
     return firebase.database();
   }
 
@@ -18,6 +21,6 @@
         'firebase'
       ]
   )
-      .service('firebaseDB', firebaseDB)
+      .service('firebaseDB', firebaseDB);
 
 })();

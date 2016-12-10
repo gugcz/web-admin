@@ -2,5 +2,14 @@
   "DASHBOARD": {
     "TITLE": "Dashboars",
     "DESCRIPTION": "tady budou grafy,widgety, ..."
+  },
+
+  "EVENTS": {
+    "FORM:": {
+      "NAME": "Nazev akce",
+      "SUBTITLE": "Podtitul",
+      "DESCRIPTION": "Popis",
+      "DESCRIPTION_HINT": "Zde muzes pridat potrebne informace k akci, popr. zde po akci umistit prezentaci"
+    }
   }
 }

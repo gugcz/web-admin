@@ -10,8 +10,8 @@
       .config(function($stateProvider) {
 
         $stateProvider.state('chapter-add', {
-          url: '/chapter/add',
-          templateUrl: 'app/chapter/add/add.html',
+          url: '/chapter/form',
+          templateUrl: 'app/chapter/form/form.html',
           controller: "AddChapterController",
           controllerAs: 'vm'
         });
