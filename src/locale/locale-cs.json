@@ -1,15 +1,17 @@
 {
   "DASHBOARD": {
     "TITLE": "Dashboars",
-    "DESCRIPTION": "tady budou grafy,widgety, ..."
+    "DESCRIPTION": "tady budou grafy,widgety, ...",
+    "NAME": "Nazev akce"
   },
 
-  "EVENTS": {
-    "FORM:": {
-      "NAME": "Nazev akce",
-      "SUBTITLE": "Podtitul",
-      "DESCRIPTION": "Popis",
-      "DESCRIPTION_HINT": "Zde muzes pridat potrebne informace k akci, popr. zde po akci umistit prezentaci"
-    }
+  "EVENTS.FORM": {
+    "NAME": "Nazev akce",
+    "SUBTITLE": "Podtitul",
+    "DESCRIPTION": "Popis",
+    "DESCRIPTION_HINT": "Zde muzes pridat potrebne informace k akci, popr. zde po akci umistit prezentaci",
+    "REGFORM_LINK": "Odkaz na registrace",
+    "CHAPTERS": "Organizující chaptery"
   }
+
 }
