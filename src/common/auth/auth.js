@@ -18,23 +18,17 @@
 
   function oauthUrlProvider() {
     this.settings = {
-      url: '//secure.meetup.com/oauth2/authorize?response_type=token&scope=ageless',
-      clientId: '',
-      redirectUri: ''
+      url: 'https://slack.com/oauth/authorize?scope=identity.basic',
+      clientId: ''
     };
 
     this.setClientId = function(clientId) {
       this.settings.clientId = clientId;
     };
 
-    this.setRedirectUrl = function(url) {
-      this.settings.redirectUri = url;
-    };
-
     this.$get = function() {
       return this.settings.url +
-          '&client_id=' + this.settings.clientId +
-          '&redirect_uri=' + this.settings.redirectUri;
+          '&client_id=' + this.settings.clientId;
     }
   }
 

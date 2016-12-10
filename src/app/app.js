@@ -63,8 +63,7 @@
       })
 
       .config(function(oauthUrlProvider) {
-        oauthUrlProvider.setClientId('r2pktvok5j0drsc07b1lc77evb');
-        oauthUrlProvider.setRedirectUrl('http://gug-web-admin.appspot.com');
+        oauthUrlProvider.setClientId('9129013744.115894198615');  // todo config
       })
 
 
