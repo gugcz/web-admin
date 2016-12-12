@@ -18,9 +18,10 @@
       "always"
     ],
     "angular/controller-as-vm": "off",
-    "angular/no-service-method":  "off",
-    "angular/on-watch":  "off",
-    "angular/log": "warn"
+    "angular/no-service-method": "off",
+    "angular/on-watch": "off",
+    "angular/log": "warn",
+    "angular/no-private-call": "warn"
   },
   "env": {
     "browser": true

@@ -14,9 +14,7 @@
           parent: 'base',
           url: 'events',
           resolve: {
-            events: function(eventsDataService) {
-              return eventsDataService.load();
-            }
+            events: function() { return []}
           },
           controller: function(events) {
             this.events = events;

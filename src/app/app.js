@@ -13,6 +13,7 @@
         'gugCZ.webAdmin.common.firebase',
         'gugCZ.webAdmin.templates',      // templates in template cache
         'gugCZ.webAdmin.translations',
+        'gugCZ.webAdmin.loginPage',
         'gugCZ.webAdmin.chapter',
         'gugCZ.webAdmin.dashboard',
         'gugCZ.webAdmin.errors',
@@ -23,7 +24,8 @@
       .config(function($stateProvider) {
         $stateProvider.state('base', {
           url: '/',
-          controller: function($mdSidenav, $firebaseObject, $state, $scope) {
+          controller: function($mdSidenav, $firebaseObject, $state, $scope, $firebaseAuth) {
+
             this.state = $state;
 
             this.menu = [
@@ -44,12 +46,8 @@
               }
             ];
 
-            $scope.$on('gugCZ.webAdmin.firebase:signInSuccess', function(event, currentUser) {
-              // TODO lépe, později nahraní níže uvedený object user
-
-              var userRef = firebase.database().ref('orgs/' + currentUser.uid);
-              this.fbUser = $firebaseObject(userRef);
-            }.bind(this));
+            var userRef = firebase.database().ref('orgs/' + firebase.auth().currentUser.uid);
+            this.fbUser = $firebaseObject(userRef);
 
             this.user = {
               name: "Jan Novák",
@@ -68,8 +66,10 @@
           controllerAs: 'app',
           templateUrl: 'app/app.html',
           data: {
-            title: 'GUG CZ Administrace'
-          }
+            title: 'GUG CZ Administrace',
+            authLogged: true
+          },
+          abstract: true
         })
 
       })
@@ -79,9 +79,9 @@
             .otherwise('/dashboard');
       })
 
-      .config(function(authProvider) {
-        authProvider.setClientId('9129013744.104633928310');  // todo config
-        authProvider.setRedirectUrl('https://agnes.gdgplzen.cz/api/auth/callback');  // todo config
+      .config(function(slackAuthProvider) {
+        slackAuthProvider.setClientId('9129013744.104633928310');  // todo config
+        slackAuthProvider.setRedirectUrl('https://agnes.gdgplzen.cz/api/auth/callback');  // todo config
       })
 
       .config(function($mdThemingProvider, cfpLoadingBarProvider) {
@@ -97,41 +97,52 @@
         $translateProvider.preferredLanguage('cs'); // TODO config
       })
 
-      .config(function(firebaseDBProvider) {
-        firebaseDBProvider.setConfig({  // TODO config
+      .config(function() {
+        var config = {  // TODO config
           apiKey: "AIzaSyAkP1lF6Y4k7F1lTNA_tXufK0YQX7I72uo",
           authDomain: "gugcz.firebaseapp.com",
           databaseURL: "https://gugcz.firebaseio.com",
           storageBucket: "firebase-gugcz.appspot.com",
           messagingSenderId: "31582256095"
-        });
+        };
+
+        firebase.initializeApp(config);
       })
+      .run(function($log, $rootScope, $state, cfpLoadingBar) {
 
-      .run(function($rootScope, webStorage, firebaseSignService) {
-        function signInWithCustomToken(customToken) {
-          firebaseSignService.signInWithCustomToken(customToken)
-              .then(function(currentUser) {
-                console.log('firebase login success', arguments);
-                $rootScope.$broadcast('gugCZ.webAdmin.firebase:signInSuccess', currentUser);
-              })
-              .catch(function(error) {
-                if (webStorage.isSupported && webStorage.has('gugCZ.auth:accessToken')) {
-                  webStorage.remove('gugCZ.auth:accessToken');
-                }
+        $rootScope.$on('$stateChangeStart', function() {
+          cfpLoadingBar.start();
+        });
 
-                console.log('firebase login error', arguments);
-                $rootScope.$broadcast('gugCZ.webAdmin.firebase:signInError', error);
-              })
-        }
+        $rootScope.$on('$stateChangeSuccess', function() {
+          cfpLoadingBar.complete();
+        });
 
+        var errorHandler = function(event, toState, fromState, toParams, fromParams, error) {
+          cfpLoadingBar.set(0);
+          $log.error(error, toState, fromState, toParams, fromParams);
+        };
 
-        if (webStorage.isSupported && webStorage.has('gugCZ.auth:accessToken')) {
-          var accessToken = webStorage.get('gugCZ.auth:accessToken');
-          signInWithCustomToken(accessToken);
-        }
+        $rootScope.$on('$stateNotFound', errorHandler);
+        $rootScope.$on('$stateChangeError', errorHandler);
 
-        $rootScope.$on('gugCZ.auth:loginSuccess', function(event, customToken) {
-          signInWithCustomToken(customToken);
-        })
+        $rootScope.$on('auth:logout', function() {
+          $state.go('loginPage');
+        });
+
+        $rootScope.$on('auth:forbidden', function(event, response) {
+          cfpLoadingBar.set(0);
+          $log.error('Forbidden API request', response.config.url);
+//          ngToast.danger('Forbidden API request: ' + response.config.url);
+          // TODO redirect?
+        });
+
+        $rootScope.$on('auth:loginCanceled', function() {
+          cfpLoadingBar.set(0);
+          $log.error('event loginCanceled', arguments);
+//          ngToast.danger('You must be logged!');
+
+          $state.go('loginPage');
+        });
       })
 })();

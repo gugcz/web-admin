@@ -1,30 +1,33 @@
 (function() {
   'use strict';
 
-  function SlackAuth(config, $rootScope, $window, $document, webStorage) {
+  function SlackAuth(config, $q, $rootScope, $window, $document) {
     this.config = config;
     this.$window = $window;
+    this.$q = $q;
     this.$rootScope = $rootScope;
     this.$document = $document;
-    this.webStorage = webStorage;
 
-    this.$window.addEventListener('message', this.authCallback_.bind(this), false)
+    this.currentDeferred = null;
+
+    this.boundedAuthCallback = this.authCallback_.bind(this);
+
   }
 
   SlackAuth.prototype.requestAuth = function() {
-    var screenCenterString = this.calculateWindowCenterOptions_(700, 700);
-    this._authWindow = this.$window.open(this.buildAuthUri_(), 'Agnes Auth', screenCenterString, true);
+    if (!this.currentDeferred) {
+      this.currentDeferred = this.$q.defer();
+      this.$window.addEventListener('message', this.boundedAuthCallback, false);
 
-    this._authWindow.addEventListener('slack-auth', function(e) {
-      console.log('slack-auth received', e.detail.result, e.detail.token);
+      var screenCenterString = this.calculateWindowCenterOptions_(700, 700);
+      this._authWindow = this.$window.open(this.buildAuthUri_(), 'Agnes Auth', screenCenterString, true);
 
-      this._authWindow.close();
-      this._authWindow = null
-    }.bind(this));
-
-    if (this._authWindow.focus) {
-      this._authWindow.focus()
+      if (this._authWindow.focus) {
+        this._authWindow.focus()
+      }
     }
+
+    return this.currentDeferred.promise;
   };
 
   SlackAuth.prototype.calculateWindowCenterOptions_ = function(width, height) {
@@ -54,23 +57,20 @@
   };
 
   SlackAuth.prototype.authCallback_ = function(event) {
-    // todo: check event.origin for security
     if (event.data.action && event.data.action === 'slack_auth') {
-      if (this._authWindow) {
-        this._authWindow.close()
-      }
 
       var resultData = event.data.data;
       if (resultData.result === 'success') {
-        this.accessToken = resultData.token;
-
-        if (this.webStorage.isSupported) {
-          this.webStorage.set('gugCZ.auth:accessToken', this.accessToken);
-        }
-
-        this.$rootScope.$broadcast('gugCZ.auth:loginSuccess', this.accessToken);
+        this.currentDeferred.resolve(resultData.token);
       } else {
-        this.$rootScope.$broadcast('gugCZ.auth:loginFailed');
+        this.currentDeferred.reject();
+      }
+
+      this.currentDeferred = null;
+
+      if (this._authWindow) {
+        this._authWindow.close();
+        this.$window.removeEventListener('message', this.boundedAuthCallback, false);
       }
     }
   };
@@ -98,10 +98,9 @@
 
   }
 
-  angular.module('gugCZ.auth', [
-    'webStorageModule',
-    'gugCZ.webAdmin.config'
+  angular.module('gugCZ.auth.slack', [
+    'webStorageModule'
   ])
-      .provider('auth', oauthProvider)
+      .provider('slackAuth', oauthProvider)
 
 })();

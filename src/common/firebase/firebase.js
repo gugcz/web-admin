@@ -12,21 +12,10 @@
         };
 
         this.$get = function() {
-          firebase.initializeApp(this.config);
           return firebase.database();
         }
 
       })
-      .service('firebaseSignService', function(firebaseDB) {  // we need initialized app
-
-        this.signInWithCustomToken = function(customToken) {
-          return firebase.auth().signInWithCustomToken(customToken).then(function(u) {
-            console.log(u)
-            return u;
-          })
-        }
-
-      });
 
 
 })

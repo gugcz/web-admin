@@ -4,12 +4,12 @@ md-toolbar(layout='row')
       md-icon(aria-label='Menu')
     h1 {{app.state.current.data.title}}
     span(flex='')
-    md-button(auth-login-link) Sign In
 
     md-button {{app.fbUser.name}}
     md-select.md-no-underline(ng-model='app.selectedChapter')
       md-option(value='gdgjihlava') GDG Jihlava
       md-option(value='gdgbrno') GDG Brno
+    md-button(auth-logout-link) Log Out
 
 div(layout='row', flex='')
   md-sidenav.md-sidenav-left.md-whiteframe-z2(layout='column', md-component-id='left', md-is-locked-open="$mdMedia('gt-sm')")
