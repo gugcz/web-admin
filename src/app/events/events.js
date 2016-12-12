@@ -4,8 +4,7 @@
   angular.module('gugCZ.webAdmin.events', [
         'ui.router',
         'gugCZ.webAdmin.events.services',
-		'gugCZ.webAdmin.events.form',
-	  "smDateTimeRangePicker"
+        'gugCZ.webAdmin.events.form'
       ]
   )
 
@@ -27,18 +26,18 @@
         });
       })
 
-	.config(function($stateProvider) {
+      .config(function($stateProvider) {
 
         $stateProvider.state('events-form', {
-			parent: 'base',
+          parent: 'base',
 
-			url: 'events/form',
+          url: 'events/form',
           templateUrl: 'app/events/form/form.html',
           controller: "EventFormController",
           controllerAs: 'vm',
-            data:{
-              title:"add event"
-            }
+          data: {
+            title: "add event"
+          }
         });
 
       });

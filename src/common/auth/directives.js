@@ -3,12 +3,12 @@
 
   angular.module('gugCZ.auth')
 
-      .directive('authLoginLink', function($window, oauthUrl) {
+      .directive('authLoginLink', function($window, auth) {
         return {
           restrict: 'A',
           link: function(scope, element) {
             element.bind('click', function() {
-              $window.location.href = oauthUrl;
+              auth.requestAuth();
             });
           }
         };
