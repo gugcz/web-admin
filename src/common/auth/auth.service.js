@@ -6,7 +6,7 @@
   };
 
 
-  var AuthService = function($firebaseAuth, $http, $q, $rootScope, $state, firebaseHelper, slackAuth) {
+  var AuthService = function($firebaseAuth, $http, $q, $rootScope, $state, $timeout, firebaseHelper, slackAuth) {
 
         this.authObj = $firebaseAuth();
 
@@ -56,19 +56,24 @@
               .then(function() {
                     // TODO config?
                     if ($state.is('loginPage')) {
-                      console.log("redirect after login");
-                      $state.go('dashboard');
+                      $timeout(function() {
+                        console.log("redirect after login");
+                        $state.go('dashboard');
+                      })
                     }
                   }
               )
-        }
-        ;
+        };
 
         /**
          * @return Promise
          */
         this.logout = function() {
           return this.authObj.$signOut();
+        };
+
+        this.isPending = function() {
+          return authDataStore.pending;
         };
 
         /**

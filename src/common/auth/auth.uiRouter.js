@@ -43,7 +43,7 @@
         return;
       }
 
-      if (authService.firebaseAuthReadyPromise.$$state.status === 0) {   // pending
+      if (authService.isPending()) {
         event.preventDefault(); // stop routing
         authService.firebaseAuthReadyPromise.then(function() {
           $state.go(toState, toParams);
