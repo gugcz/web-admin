@@ -1,11 +1,12 @@
 (function() {
   'use strict';
 
-  function SlackAuth(config, $rootScope, $window, $document) {
+  function SlackAuth(config, $rootScope, $window, $document, webStorage) {
     this.config = config;
     this.$window = $window;
     this.$rootScope = $rootScope;
     this.$document = $document;
+    this.webStorage = webStorage;
 
     this.$window.addEventListener('message', this.authCallback_.bind(this), false)
   }
@@ -62,6 +63,11 @@
       var resultData = event.data.data;
       if (resultData.result === 'success') {
         this.accessToken = resultData.token;
+
+        if (this.webStorage.isSupported) {
+          this.webStorage.set('gugCZ.auth:accessToken', this.accessToken);
+        }
+
         this.$rootScope.$broadcast('gugCZ.auth:loginSuccess', this.accessToken);
       } else {
         this.$rootScope.$broadcast('gugCZ.auth:loginFailed');

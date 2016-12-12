@@ -8,6 +8,7 @@
         'ui.router',
         'txx.diacritics',
         'pascalprecht.translate',
+        'webStorageModule',
         'gugCZ.auth',
         'gugCZ.webAdmin.common.firebase',
         'gugCZ.webAdmin.templates',      // templates in template cache
@@ -106,17 +107,31 @@
         });
       })
 
-      .run(function($rootScope, firebaseSignService) {
-        $rootScope.$on('gugCZ.auth:loginSuccess', function(event, customToken) {
+      .run(function($rootScope, webStorage, firebaseSignService) {
+        function signInWithCustomToken(customToken) {
           firebaseSignService.signInWithCustomToken(customToken)
               .then(function(currentUser) {
                 console.log('firebase login success', arguments);
                 $rootScope.$broadcast('gugCZ.webAdmin.firebase:signInSuccess', currentUser);
               })
               .catch(function(error) {
+                if (webStorage.isSupported && webStorage.has('gugCZ.auth:accessToken')) {
+                  webStorage.remove('gugCZ.auth:accessToken');
+                }
+
                 console.log('firebase login error', arguments);
                 $rootScope.$broadcast('gugCZ.webAdmin.firebase:signInError', error);
               })
+        }
+
+
+        if (webStorage.isSupported && webStorage.has('gugCZ.auth:accessToken')) {
+          var accessToken = webStorage.get('gugCZ.auth:accessToken');
+          signInWithCustomToken(accessToken);
+        }
+
+        $rootScope.$on('gugCZ.auth:loginSuccess', function(event, customToken) {
+          signInWithCustomToken(customToken);
         })
       })
 })();
