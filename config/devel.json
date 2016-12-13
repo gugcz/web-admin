@@ -1,0 +1,16 @@
+{
+  "SLACK_AUTH": {
+    "clientId": "9129013744.104633928310",
+    "redirectUrl": "https://agnes.gdgplzen.cz/api/auth/callback"
+  },
+  "FIREBASE": {
+    "apiKey": "AIzaSyAkP1lF6Y4k7F1lTNA_tXufK0YQX7I72uo",
+    "authDomain": "gugcz.firebaseapp.com",
+    "databaseURL": "https://gugcz.firebaseio.com",
+    "storageBucket": "firebase-gugcz.appspot.com",
+    "messagingSenderId": 31582256095
+  },
+  "LANGUAGE": {
+    "preferred": "cs"
+  }
+}

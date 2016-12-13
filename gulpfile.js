@@ -55,8 +55,7 @@ config.gulp.generatedFiles = [
 config.gulp.paths = {
   scripts: [
     config.gulp.dirs.src + '**/*.js',
-    '!' + config.gulp.dirs.src + '**/*spec.js',
-    '!' + config.gulp.dirs.src + config.gulp.filename.js.config
+    '!' + config.gulp.dirs.src + '**/*spec.js'
   ],
   templates: [
     config.gulp.dirs.src + '**/*.pug',
@@ -201,21 +200,26 @@ gulp.task('js-main-dev', ['lint'], function() {
 gulp.task('watch', function() {
   plugins.livereload.listen(config.gulp.httpServer.lrPort);
   httpServer(config.gulp.httpServer);
-  esteWatch([config.gulp.dirs.src], function(e) {
+  esteWatch([config.gulp.dirs.src, 'config'], function(e) {
 
     if (config.gulp.generatedFiles.some(function(pattern) {
           return minimatch(e.filepath, pattern);
         })) {
       return;
     }
-
+    console.log(e);
     switch (e.extension) {
       case 'html':
       case 'pug':
         gulp.start('templates');
         break;
       case 'json':
-        gulp.start('translations');
+        if (e.filepath.startsWith('config')) {
+          gulp.start('config');
+
+        } else {
+          gulp.start('translations');
+        }
         break;
       case 'js':
         var testFilePattern = /.spec.js$/;
@@ -236,7 +240,8 @@ gulp.task('watch', function() {
 
 gulp.task('devel', function() {
   runSequence(
-      ['sass', 'js-vendor', 'js-main', 'pug-index'],
+      ['sass', 'config-devel', 'translations', 'pug-index'],
+      ['js-vendor', 'js-main'],
       'watch'
   );
 });
@@ -317,7 +322,7 @@ gulp.task('build-rev', function() {
       .pipe(gulp.dest(config.gulp.dirs.build));
 });
 
-gulp.task('build-copy-config', function() {
+gulp.task('build-copy-config', ['config-production'], function() {
   // temporary task - config will be special for every stage
   return gulp.src('src/config.js')
       .pipe(gulp.dest(config.gulp.dirs.build));
@@ -378,3 +383,18 @@ gulp.task('deploy', function() {
 });
 
 gulp.task('default', ['build']);
+
+
+gulp.task('config-devel', function() {
+  gulp.src('config/devel.json') // TODO set by stage
+      .pipe(plugins.ngConfig(config.application.name + '.config'))
+      .pipe(plugins.rename('config.js'))
+      .pipe(gulp.dest('./src'))
+});
+
+gulp.task('config-production', function() {
+  gulp.src('config/production.json')
+      .pipe(plugins.ngConfig(config.application.name + '.config'))
+      .pipe(plugins.rename('config.js'))
+      .pipe(gulp.dest('./src'))
+});

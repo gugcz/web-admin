@@ -10,6 +10,7 @@
         'pascalprecht.translate',
         'webStorageModule',
         'gugCZ.auth',
+        "gugCZ.webAdmin.config",
         'gugCZ.webAdmin.templates',      // templates in template cache
         'gugCZ.webAdmin.translations',
         'gugCZ.webAdmin.loginPage',
@@ -82,9 +83,18 @@
             .otherwise('/login');
       })
 
-      .config(function(slackAuthProvider) {
-        slackAuthProvider.setClientId('9129013744.104633928310');  // todo config
-        slackAuthProvider.setRedirectUrl('https://agnes.gdgplzen.cz/api/auth/callback');  // todo config
+      .config(function(SLACK_AUTH, slackAuthProvider) {
+        slackAuthProvider.setClientId(SLACK_AUTH.clientId);
+        slackAuthProvider.setRedirectUrl(SLACK_AUTH.redirectUrl);
+      })
+
+      .config(function($translateProvider, LANGUAGE) {
+        $translateProvider.useSanitizeValueStrategy('escaped');
+        $translateProvider.preferredLanguage(LANGUAGE.preferred);
+      })
+
+      .config(function(FIREBASE) {
+        firebase.initializeApp(FIREBASE);
       })
 
       .config(function($mdThemingProvider, cfpLoadingBarProvider) {
@@ -94,23 +104,6 @@
             .primaryPalette('blue-grey');
       })
 
-      .config(function($translateProvider) {
-        $translateProvider.useSanitizeValueStrategy('escaped');
-//        $translateProvider.useLocalStorage();
-        $translateProvider.preferredLanguage('cs'); // TODO config
-      })
-
-      .config(function() {
-        var config = {  // TODO config
-          apiKey: "AIzaSyAkP1lF6Y4k7F1lTNA_tXufK0YQX7I72uo",
-          authDomain: "gugcz.firebaseapp.com",
-          databaseURL: "https://gugcz.firebaseio.com",
-          storageBucket: "firebase-gugcz.appspot.com",
-          messagingSenderId: "31582256095"
-        };
-
-        firebase.initializeApp(config);
-      })
       .run(function($log, $mdToast, $rootScope, $state, cfpLoadingBar) {
 
         $rootScope.$on('$stateChangeStart', function() {
