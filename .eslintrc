@@ -2,11 +2,11 @@
   "extends": "angular",
   "rules": {
     "indent": [
-      "warn",
+      "off",
       2
     ],
     "quotes": [
-      "warn",
+      "off",
       "single"
     ],
     "linebreak-style": [
