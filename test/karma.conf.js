@@ -43,7 +43,7 @@ module.exports = function(config) {
     basePath: '../',
     files: karmaFiles,
     frameworks: ['jasmine', 'angular-filesort'],
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
     plugins: [
       'karma-chrome-launcher',
       'karma-phantomjs-launcher',
