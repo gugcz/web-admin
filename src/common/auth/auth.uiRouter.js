@@ -39,7 +39,6 @@
      * @param toParams
      */
     this.checkPermissionWhenStateChangeStarted = function(event, toState, toParams) {
-      debugger
       if (this.isPublicVisible(toState)) {
         return;
       }
