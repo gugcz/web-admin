@@ -79,7 +79,7 @@
 
       .config(function($urlRouterProvider) {
         $urlRouterProvider
-            .otherwise('/dashboard');
+            .otherwise('/login');
       })
 
       .config(function(slackAuthProvider) {
