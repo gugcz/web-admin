@@ -39,26 +39,37 @@
      * @param toParams
      */
     this.checkPermissionWhenStateChangeStarted = function(event, toState, toParams) {
+      debugger
       if (this.isPublicVisible(toState)) {
         return;
       }
 
       if (authService.isPending()) {
-        event.preventDefault(); // stop routing
-        authService.firebaseAuthReadyPromise.then(function() {
-          $state.go(toState, toParams);
-        });
-
+        this.stopRoutingUntilFirebaseAuthStarts_(event, toState, toParams);
         return;
       }
 
-      if (authService.isAuthenticatedSync()) {
+      if (authService.isAuthenticated()) {
         this.checkPermissionsAndBroadcastIfError_(toState, event);
       } else {
         this.serveDeferredLogin_(event, toState, toParams);
       }
-
     };
+
+    /**
+     * @param event
+     * @param toState
+     * @param toParams
+     * @private
+     */
+    this.stopRoutingUntilFirebaseAuthStarts_ = function(event, toState, toParams) {
+      event.preventDefault();
+
+      authService.firebaseAuthReadyPromise.then(function() {
+        $state.go(toState, toParams);
+      });
+    };
+
 
     /**
      * @param state
@@ -87,21 +98,10 @@
     this.serveDeferredLogin_ = function(event, toState, toParams) {
       event.preventDefault(); // stop routing
 
-        $state.go('loginPage'); // TODO fallback?
-
-      //return authService.login().then(
-      //    function() {
-      //      debugger;
-      //      if (this.checkPermissionsAndBroadcastIfError_(toState)) {
-      //        console.log('$state.go(', toState, toParams);
-      //        $state.go(toState, toParams);
-      //      }
-      //    }.bind(this),
-      //    function() {
-      //      debugger;
-      //
-      //      this.broadcastLoginCancel_(toState);
-      //    }.bind(this));
+      return authService.login()
+          .catch(function() {
+            this.broadcastLoginCancel_(toState);
+          }.bind(this));
     };
 
     /**

@@ -17,9 +17,7 @@
           restrict: 'A',
           link: function(scope, element) {
             element.bind('click', function() {
-              authService.logout().then(function() {
-                $state.go('loginPage');
-              })
+              authService.logout();
             });
           }
         };

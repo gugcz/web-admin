@@ -1,20 +1,19 @@
 (function() {
-	'use strict';
+  'use strict';
 
-	function firebaseFactory(firebaseDB, $q, $firebaseArray, removeDiacritics) {
-		var self = this;
-		var chapterID = null;
+  function firebaseFactory(firebaseDB, $q, $firebaseArray, removeDiacritics) {
+    var self = this;
+    var chapterID = null;
 
-		self.addEvent = function(event) {
-			console.log(event);
-		};
-	}
+    self.addEvent = function(event) {
+      console.log(event);
+    };
+  }
 
 
-	angular.module('gugCZ.webAdmin.events.services', [
-		  'gugCZ.webAdmin.common.firebase'
-	  ]
-	)
-	  .service('firebaseEvents', firebaseFactory)
+  angular.module('gugCZ.webAdmin.events.services', [
+    'gugCZ.firebase'
+  ])
+      .service('firebaseEvents', firebaseFactory)
 
 })();

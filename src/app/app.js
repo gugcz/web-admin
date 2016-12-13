@@ -10,7 +10,6 @@
         'pascalprecht.translate',
         'webStorageModule',
         'gugCZ.auth',
-        'gugCZ.webAdmin.common.firebase',
         'gugCZ.webAdmin.templates',      // templates in template cache
         'gugCZ.webAdmin.translations',
         'gugCZ.webAdmin.loginPage',
@@ -24,7 +23,7 @@
       .config(function($stateProvider) {
         $stateProvider.state('base', {
           url: '/',
-          controller: function($mdSidenav, $firebaseObject, $state, $scope, $firebaseAuth) {
+          controller: function($mdSidenav, $firebaseObject, $state, $scope) {
 
             this.state = $state;
 
@@ -48,6 +47,10 @@
 
             var userRef = firebase.database().ref('orgs/' + firebase.auth().currentUser.uid);
             this.fbUser = $firebaseObject(userRef);
+
+            $scope.$on('$destroy', function() { // TODO bude toto nutné řešit všude?
+              this.fbUser.$destroy();
+            }.bind(this));
 
             this.user = {
               name: "Jan Novák",
@@ -108,7 +111,7 @@
 
         firebase.initializeApp(config);
       })
-      .run(function($log, $rootScope, $state, cfpLoadingBar) {
+      .run(function($log, $mdToast, $rootScope, $state, cfpLoadingBar) {
 
         $rootScope.$on('$stateChangeStart', function() {
           cfpLoadingBar.start();
@@ -126,21 +129,19 @@
         $rootScope.$on('$stateNotFound', errorHandler);
         $rootScope.$on('$stateChangeError', errorHandler);
 
+        $rootScope.$on('auth:login', function(event) {
+          if ($state.is('loginPage')) {
+            $state.go('dashboard');
+          }
+        });
+
         $rootScope.$on('auth:logout', function() {
           $state.go('loginPage');
         });
 
-        $rootScope.$on('auth:forbidden', function(event, response) {
-          cfpLoadingBar.set(0);
-          $log.error('Forbidden API request', response.config.url);
-//          ngToast.danger('Forbidden API request: ' + response.config.url);
-          // TODO redirect?
-        });
-
         $rootScope.$on('auth:loginCanceled', function() {
           cfpLoadingBar.set(0);
-          $log.error('event loginCanceled', arguments);
-//          ngToast.danger('You must be logged!');
+          $mdToast.showSimple('You must be logged!');
 
           $state.go('loginPage');
         });

@@ -57,7 +57,7 @@
 
 
   angular.module('gugCZ.webAdmin.chapter.services', [
-        'gugCZ.webAdmin.common.firebase'
+        'gugCZ.firebase'
       ]
   )
       .service('firebaseData', firebaseFactory)

@@ -12,14 +12,11 @@ describe('gugCZ.auth.uiRouter', function() {
     };
 
     authServiceMock = {
-      isAuthenticated: function() {
-      },
-      hasSomeRole: function() {
-      }
-    };
-
-    authLoginModalMock = {
-      prepareLoginModal: function() {
+      isAuthenticated: function() { },
+      hasSomeRole: function() { },
+      login: function() { },
+      isPending: function() {
+        return false;
       }
     };
 
@@ -132,9 +129,9 @@ describe('gugCZ.auth.uiRouter', function() {
       };
 
       spyOn(authServiceMock, 'isAuthenticated').and
-        .callFake(function() {
-          return true;
-        });
+          .callFake(function() {
+            return true;
+          });
 
       stateAuthService.checkPermissionWhenStateChangeStarted(eventMock, state);
 
@@ -154,10 +151,10 @@ describe('gugCZ.auth.uiRouter', function() {
       });
 
       spyOn(authServiceMock, 'hasSomeRole')
-        .and
-        .callFake(function() {
-          return true;
-        });
+          .and
+          .callFake(function() {
+            return true;
+          });
 
       stateAuthService.checkPermissionWhenStateChangeStarted(eventMock, state);
 
@@ -176,16 +173,16 @@ describe('gugCZ.auth.uiRouter', function() {
       };
 
       spyOn(authServiceMock, 'isAuthenticated')
-        .and
-        .callFake(function() {
-          return true;
-        });
+          .and
+          .callFake(function() {
+            return true;
+          });
 
       spyOn(authServiceMock, 'hasSomeRole')
-        .and
-        .callFake(function() {
-          return false;
-        });
+          .and
+          .callFake(function() {
+            return false;
+          });
 
       $rootScope.$on('cz.angular.auth:permissionError', function() {
         calledFlag = true;
@@ -209,96 +206,26 @@ describe('gugCZ.auth.uiRouter', function() {
       };
 
       spyOn(authServiceMock, 'isAuthenticated')
-        .and
-        .callFake(function() {
-          return false;
-        });
-
-      spyOn(authLoginModalMock, 'prepareLoginModal')
-        .and
-        .callFake(function() {
-          return $q(function() {
+          .and
+          .callFake(function() {
+            return false;
           });
-        });
+
+      spyOn(authServiceMock, 'login')
+          .and
+          .callFake(function() {
+            return $q.defer().promise;
+          });
 
       stateAuthService.checkPermissionWhenStateChangeStarted(eventMock, state);
 
       expect(eventMock.preventDefault).toHaveBeenCalled();
       expect(authServiceMock.isAuthenticated).toHaveBeenCalled();
-      expect(authLoginModalMock.prepareLoginModal).toHaveBeenCalled();
+      expect(authServiceMock.login).toHaveBeenCalled();
 
     }));
 
-    it('should call state go, if state not required role and  modal is resolved', inject(function($q, $rootScope) {
-      var state = {
-        data: {
-          authLogged: true
-        }
-      };
-
-      var stateParams = {
-        a: 1,
-        b: 2
-      };
-
-      spyOn($stateMock, 'go');
-
-      spyOn(authLoginModalMock, 'prepareLoginModal')
-        .and
-        .callFake(function() {
-          return $q(function(resolve) {
-            resolve();
-          });
-        });
-
-      stateAuthService.checkPermissionWhenStateChangeStarted(eventMock, state, stateParams);
-      $rootScope.$apply();
-
-      expect($stateMock.go).toHaveBeenCalledWith(state, stateParams);
-    }));
-
-    it('should call state go, if user has roles and  modal is resolved', inject(function($q, $rootScope) {
-      var state = {
-        data: {
-          authRoles: ['some_role']
-        }
-      };
-
-      var stateParams = {
-        a: 1,
-        b: 2
-      };
-
-      spyOn(authServiceMock, 'isAuthenticated')
-        .and
-        .callFake(function() {
-          return false;
-        });
-
-      spyOn(authServiceMock, 'hasSomeRole')
-        .and
-        .callFake(function() {
-          return true;
-        });
-
-      spyOn($stateMock, 'go');
-
-      spyOn(authLoginModalMock, 'prepareLoginModal')
-        .and
-        .callFake(function() {
-          return $q(function(resolve) {
-            resolve();
-          });
-        });
-
-      stateAuthService.checkPermissionWhenStateChangeStarted(eventMock, state, stateParams);
-      $rootScope.$apply();
-
-      expect($stateMock.go).toHaveBeenCalledWith(state, stateParams);
-      expect(authServiceMock.hasSomeRole).toHaveBeenCalled();
-    }));
-
-    it('should broadcast permissionError, if modal is resolved, but user has not roles', inject(function($q, $rootScope) {
+    it('should stop event if auth is pending', inject(function($q, $rootScope) {
       var calledFlag = false;
       var state = {
         data: {
@@ -306,38 +233,19 @@ describe('gugCZ.auth.uiRouter', function() {
         }
       };
 
-      spyOn(authServiceMock, 'isAuthenticated')
-        .and
-        .callFake(function() {
-          return false;
-        });
-
-      spyOn(authServiceMock, 'hasSomeRole')
-        .and
-        .callFake(function() {
-          return false;
-        });
-
-      spyOn($stateMock, 'go');
-
-      spyOn(authLoginModalMock, 'prepareLoginModal')
-        .and
-        .callFake(function() {
-          return $q(function(resolve) {
-            resolve();
+      spyOn(authServiceMock, 'isPending')
+          .and
+          .callFake(function() {
+            return true;
           });
-        });
 
-      $rootScope.$on('cz.angular.auth:permissionError', function() {
-        calledFlag = true;
-      });
+      authServiceMock.firebaseAuthReadyPromise = $q.defer().promise;
 
       stateAuthService.checkPermissionWhenStateChangeStarted(eventMock, state);
       $rootScope.$apply();
 
-      expect($stateMock.go).not.toHaveBeenCalled();
-      expect(authServiceMock.hasSomeRole).toHaveBeenCalled();
-      expect(calledFlag).toBe(true);
+      expect(eventMock.preventDefault).toHaveBeenCalled();
+
     }));
 
     it('should broadcast loginCanceled, if modal is rejected', inject(function($q, $rootScope) {
@@ -351,18 +259,16 @@ describe('gugCZ.auth.uiRouter', function() {
       spyOn($stateMock, 'go');
 
       spyOn(authServiceMock, 'isAuthenticated')
-        .and
-        .callFake(function() {
-          return false;
-        });
-
-      spyOn(authLoginModalMock, 'prepareLoginModal')
-        .and
-        .callFake(function() {
-          return $q(function(resolve, reject) {
-            reject();
+          .and
+          .callFake(function() {
+            return false;
           });
-        });
+
+      spyOn(authServiceMock, 'login')
+          .and
+          .callFake(function() {
+            return $q.reject();
+          });
 
       $rootScope.$on('auth:loginCanceled', function() {
         calledFlag = true;

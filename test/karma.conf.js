@@ -26,6 +26,8 @@ var libFiles = [
 ];
 
 var appFilesAndTests = [
+  'src/common/**/*.html',
+  'src/common/**/*.js',
   'src/app/**/*.html',
   'src/app/**/*.js'
 ];
@@ -41,7 +43,7 @@ module.exports = function(config) {
     basePath: '../',
     files: karmaFiles,
     frameworks: ['jasmine', 'angular-filesort'],
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
     plugins: [
       'karma-chrome-launcher',
       'karma-phantomjs-launcher',
