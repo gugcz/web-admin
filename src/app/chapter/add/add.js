@@ -55,7 +55,7 @@
       firebaseData.setChapterID(vm.chapter);
       firebaseData.addChapter(vm.chapter);
       firebaseData.addChapterToOrganizers(vm.organizers);
-    }
+    };
   }
 
 
@@ -63,7 +63,7 @@
         'gugCZ.webAdmin.chapter.services'
       ]
   )
-      .controller("AddChapterController", AddChapterCtrl)
+      .controller("AddChapterController", AddChapterCtrl);
 
 })();
 

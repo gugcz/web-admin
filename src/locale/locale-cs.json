@@ -13,7 +13,8 @@
     "DESCRIPTION": "Popis",
     "DESCRIPTION_HINT": "Zde muzes pridat potrebne informace k akci, popr. zde po akci umistit prezentaci",
     "REGFORM_LINK": "Odkaz na registrace",
-    "CHAPTERS": "Organizující chaptery"
+    "CHAPTERS": "Organizující chaptery",
+    "ORGANIZERS": "Organizátoři"
   },
   "LOGIN_PAGE": {
     "TITLE": "GUG admin page"

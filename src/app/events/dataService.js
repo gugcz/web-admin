@@ -7,14 +7,14 @@
       event.description = $sce.trustAsHtml(event.description);
 
       return event;
-    };
+    }
 
     this.load = function() {
       return $http.get(API_URL)
           .then(function(response) {
             return response.data.items.map(makeTrusted);
           });
-    }
+    };
   };
 
   angular.module('gugCZ.webAdmin.events.service', [

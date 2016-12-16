@@ -8,13 +8,22 @@ md-content(layout-padding)
             label(translate='EVENTS.FORM.SUBTITLE')
             input(ng-model='vm.event.subtitle')
 
+        div(class='calendar').md-whiteframe-3dp
+            flex-calendar
+
         md-input-container
             label(translate='EVENTS.FORM.DESCRIPTION')
-            textarea(rows='7')
+            textarea(rows='7', ng-model='vm.event.description')
 
         md-input-container
             label(translate='EVENTS.FORM.REGFORM_LINK')
-            input
+            input(ng-model='vm.event.regFormLink')
 
-        md-chips(placeholder="{{ 'EVENTS.FORM.CHAPTERS' | translate }}", ng-model='vm.event.chapters')
+        md-chips(ng-model='vm.event.chapters', md-autocomplete-snap='', md-transform-chip='vm.transformChip($chip)', md-require-match='vm.autocompleteDemoRequireMatch')
+            md-autocomplete(md-selected-item='vm.selectedItem', md-search-text='vm.searchText', md-items='item in vm.querySearch(vm.searchText)', md-item-text='item.name', placeholder="{{ 'EVENTS.FORM.CHAPTERS' | translate }}")
+                span(md-highlight-text='vm.searchText') {{item.name}}
+            md-chip-template
+                span
+                    standard {{$chip.name}}
 
+        orgs-table.md-whiteframe-3dp

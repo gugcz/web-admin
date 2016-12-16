@@ -1,5 +1,7 @@
 @import 'loading-bar';
 @import '../../bower_components/angular-material/angular-material.scss';
+@import '../../bower_components/flex-calendar/src/flex-calendar';
+
 
 #page {
   height: 100%;
@@ -110,4 +112,25 @@ md-input-container {
       color: gray;
     }
   }
+}
+
+.flex-calendar {
+  max-width: 350px;
+  font-family: 'Open Sans', sans-serif;
+
+  .month {
+    background-color: #34a853;
+  }
+
+  .days .day.selected .number {
+    background-color: #34a853;
+  }
+
+  .week {
+    background-color: forestgreen;
+  }
+}
+
+.calendar {
+  max-width: 350px;
 }

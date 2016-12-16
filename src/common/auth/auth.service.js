@@ -83,6 +83,6 @@
   angular.module('gugCZ.auth.service', [
     'gugCZ.firebase'
   ])
-      .service('authService', AuthService)
+      .service('authService', AuthService);
 
 })();

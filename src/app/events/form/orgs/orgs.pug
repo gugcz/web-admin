@@ -1,0 +1,23 @@
+div(ng-show='!vm.showSearch')
+    md-toolbar(layout-row='')
+        .md-toolbar-tools
+            h2
+                span(translate='EVENTS.FORM.ORGANIZERS')
+            span(flex)
+            md-button(ng-click='vm.showSearch = true')
+                md-icon(icon='search')
+    md-content
+        md-list
+            md-list-item(ng-repeat='org in vm.orgs')
+                md-checkbox
+                p {{org}}
+                md-switch
+                // TODO Add garant symbol
+div(ng-show='vm.showSearch')
+    md-toolbar.md-hue-1
+        .md-toolbar-tools
+            md-button(ng-click='vm.showSearch = false', aria-label='Back')
+            md-input-container(md-theme='input', flex='')
+                label  
+                input(ng-model='search.who', placeholder='enter search')
+            

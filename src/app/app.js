@@ -74,7 +74,7 @@
             authLogged: true
           },
           abstract: true
-        })
+        });
 
       })
 
@@ -138,5 +138,5 @@
 
           $state.go('loginPage');
         });
-      })
+      });
 })();

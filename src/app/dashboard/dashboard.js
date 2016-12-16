@@ -33,7 +33,7 @@
                 start: yesterday,
                 state: "finished"
               }
-            ]
+            ];
 
           },
           controllerAs: '$ctrl',

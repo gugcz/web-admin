@@ -33,7 +33,7 @@
     self.addChapterToOrganizers = function(organizers) {
       organizers.forEach(function(org) {
         addChapterToOrganizer(org.email);
-      })
+      });
     };
 
     function addChapterToOrganizer(orgMail) {
@@ -60,6 +60,6 @@
         'gugCZ.firebase'
       ]
   )
-      .service('firebaseData', firebaseFactory)
+      .service('firebaseData', firebaseFactory);
 
 })();

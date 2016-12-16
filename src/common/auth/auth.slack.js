@@ -23,7 +23,7 @@
       this._authWindow = this.$window.open(this.buildAuthUri_(), 'Agnes Auth', screenCenterString, true);
 
       if (this._authWindow.focus) {
-        this._authWindow.focus()
+        this._authWindow.focus();
       }
     }
 
@@ -101,6 +101,6 @@
   angular.module('gugCZ.auth.slack', [
     'webStorageModule'
   ])
-      .provider('slackAuth', oauthProvider)
+      .provider('slackAuth', oauthProvider);
 
 })();

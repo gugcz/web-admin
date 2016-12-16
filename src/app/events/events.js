@@ -4,7 +4,7 @@
   angular.module('gugCZ.webAdmin.events', [
         'ui.router',
         'gugCZ.webAdmin.events.services',
-        'gugCZ.webAdmin.events.form'
+		'gugCZ.webAdmin.events.form'
       ]
   )
 
@@ -14,7 +14,7 @@
           parent: 'base',
           url: 'events',
           resolve: {
-            events: function() { return []}
+            events: function() { return [];}
           },
           controller: function(events) {
             this.events = events;
