@@ -47,6 +47,6 @@
   };
 
   angular.module('gugCZ.auth')
-      .service('authTokenStore', AuthTokenStore);
+    .service('authTokenStore', AuthTokenStore);
 
 })();

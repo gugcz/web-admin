@@ -1,109 +1,109 @@
 // TODO - Fix type error on first loading
 html(lang='en')
-    head
-        meta(name='viewport', content='width=device-width, initial-scale=1')
-        title Add chapter
-        // Angular Material style sheet
+  head
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Add chapter
+    // Angular Material style sheet
 
-        link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
-        // TODO - Show Font Awesome icons
-    body(ng-app='AddChapterApp', ng-cloak='')
-        md-toolbar.md-whiteframe-3dp
-            .md-toolbar-tools
-                h3
-                    span Add chapter
-
-
-        form(layout='column', ng-cloak='', name='addChapterForm', ng-submit='addChapterForm.$valid && vm.form()', novalidate)
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    // TODO - Show Font Awesome icons
+  body(ng-app='AddChapterApp', ng-cloak='')
+    md-toolbar.md-whiteframe-3dp
+      .md-toolbar-tools
+        h3
+          span Add chapter
 
 
-
-            md-content(layout-padding='')
-                h2.md-title Select the section of a chapter and type name:
-                div(layout-gt-xs='row', layout-xs='column')
-                    md-input-container
-                        label Section
-                        md-select(ng-model='vm.chapter.section')
-                            md-option
-                                | GDG
-                            md-option
-                                | GBG
-                            md-option
-                                | GEG
-                            md-option
-                                | GXG
-                    md-input-container(flex-gt-xs='', md-is-error='addChapterForm.name.$invalid && (addChapterForm.$submitted || addChapterForm.name.$dirty)')
-                        label Name of chapter city, school or some other...
-                        input(ng-model='vm.chapter.name', id='name', name='name', ng-required='true')
-                        div(ng-messages='addChapterForm.name.$error', ng-if='addChapterForm.$submitted || addChapterForm.name.$touched')
-                            div(ng-message='required')
-                                | This field is required
-
-                div
-                    h2.md-title Now, write some text about chapter:
-                    md-input-container.md-block
-                        label Description
-                        textarea(ng-model='vm.chapter.description', md-maxlength='500', rows='5', md-select-on-focus='')
-
-                    // TODO - Add orgs validation
-                    h2.md-title Add orgs to the chapter:
-                    md-contact-chips(ng-model='vm.organizers', md-contacts='vm.delayedQuerySearch($query)', md-contact-name='name', md-contact-image='image', md-contact-email='email', md-require-match='true', md-highlight-flags='i', filter-selected='vm.filterSelected', placeholder='Add minimally one...')
-
-                    // TODO - Add field for position (selecting on map)
-                    // TODO - Upload picture
+    form(layout='column', ng-cloak='', name='addChapterForm', ng-submit='addChapterForm.$valid && vm.form()', novalidate)
 
 
-                    h2.md-title Please also set a chapter contact info:
-                    div(layout='column')
-                        div(layout-gt-xs='row', layout-xs='column')
+
+      md-content(layout-padding='')
+        h2.md-title Select the section of a chapter and type name:
+        div(layout-gt-xs='row', layout-xs='column')
+          md-input-container
+            label Section
+            md-select(ng-model='vm.chapter.section')
+              md-option
+                | GDG
+              md-option
+                | GBG
+              md-option
+                | GEG
+              md-option
+                | GXG
+          md-input-container(flex-gt-xs='', md-is-error='addChapterForm.name.$invalid && (addChapterForm.$submitted || addChapterForm.name.$dirty)')
+            label Name of chapter city, school or some other...
+            input(ng-model='vm.chapter.name', id='name', name='name', ng-required='true')
+            div(ng-messages='addChapterForm.name.$error', ng-if='addChapterForm.$submitted || addChapterForm.name.$touched')
+              div(ng-message='required')
+                | This field is required
+
+        div
+          h2.md-title Now, write some text about chapter:
+          md-input-container.md-block
+            label Description
+            textarea(ng-model='vm.chapter.description', md-maxlength='500', rows='5', md-select-on-focus='')
+
+          // TODO - Add orgs validation
+          h2.md-title Add orgs to the chapter:
+          md-contact-chips(ng-model='vm.organizers', md-contacts='vm.delayedQuerySearch($query)', md-contact-name='name', md-contact-image='image', md-contact-email='email', md-require-match='true', md-highlight-flags='i', filter-selected='vm.filterSelected', placeholder='Add minimally one...')
+
+          // TODO - Add field for position (selecting on map)
+          // TODO - Upload picture
 
 
-                            md-input-container(flex-gt-xs='', md-is-error='addChapterForm.email.$invalid && (addChapterForm.$submitted || addChapterForm.email.$dirty)')
-                                md-icon(class='fa fa-envelope-square fa-2x')
-                                label Mail address
-                                input(ng-model='vm.chapter.email', id='email', name='email', ng-required='true')
-                                div(ng-messages='addChapterForm.email.$error', ng-if='addChapterForm.$submitted || addChapterForm.email.$touched')
-                                    div(ng-message='required')
-                                        | This field is required
+          h2.md-title Please also set a chapter contact info:
+          div(layout='column')
+            div(layout-gt-xs='row', layout-xs='column')
 
-                            md-input-container(flex-gt-xs='', md-is-error='addChapterForm.googlePlusLink.$invalid && (addChapterForm.$submitted || addChapterForm.googlePlusLink.$dirty)')
-                                md-icon(class='fa fa-google-plus-square fa-2x')
-                                label Google Plus
-                                input(ng-model='vm.chapter.googlePlusLink', id='googlePlusLink', name='googlePlusLink', ng-required='true')
-                                div(ng-messages='addChapterForm.googlePlusLink.$error', ng-if='addChapterForm.$submitted || addChapterForm.googlePlusLink.$touched')
-                                    div(ng-message='required')
-                                        | This field is required
 
-                        div(layout-gt-xs='row', layout-xs='column')
-                            md-input-container(flex-gt-xs='')
-                                md-icon(class='fa fa-facebook-square fa-2x')
-                                label Facebook
-                                input(ng-model='vm.chapter.facebookLink')
-                            md-input-container(flex-gt-xs='')
-                                md-icon(class='fa fa-twitter-square fa-2x')
-                                label Twitter
-                                input(ng-model='vm.chapter.twitterLink')
+              md-input-container(flex-gt-xs='', md-is-error='addChapterForm.email.$invalid && (addChapterForm.$submitted || addChapterForm.email.$dirty)')
+                md-icon(class='fa fa-envelope-square fa-2x')
+                label Mail address
+                input(ng-model='vm.chapter.email', id='email', name='email', ng-required='true')
+                div(ng-messages='addChapterForm.email.$error', ng-if='addChapterForm.$submitted || addChapterForm.email.$touched')
+                  div(ng-message='required')
+                    | This field is required
 
-                        div(layout-gt-xs='row', layout-xs='column')
-                            md-input-container(flex-gt-xs='', md-is-error='addChapterForm.meetupID.$invalid && (addChapterForm.$submitted || addChapterForm.meetupID.$dirty)')
-                                md-icon(class='fa fa-pencil-square fa-2x')
-                                label Meetup ID
-                                input(ng-model='vm.chapter.meetupID', id='meetupID', name='meetupID', ng-required='true')
-                                div(ng-messages='addChapterForm.meetupID.$error', ng-if='addChapterForm.$submitted || addChapterForm.meetupID.$touched')
-                                    div(ng-message='required')
-                                        | This field is required
-                            md-input-container(flex-gt-xs='', md-is-error='addChapterForm.meetupURL.$invalid && (addChapterForm.$submitted || addChapterForm.meetupURL.$dirty)')
-                                md-icon(class='fa fa-pencil-square fa-2x')
-                                label Meetup URL Name
-                                input(ng-model='vm.chapter.meetupURL', id='meetupURL', name='meetupURL', ng-required='true')
-                                div(ng-messages='addChapterForm.meetupURL.$error', ng-if='addChapterForm.$submitted || addChapterForm.meetupURL.$touched')
-                                    div(ng-message='required')
-                                        | This field is required
-            md-button(class='md-fab md-fab-bottom-right md-primary', type='submit')
-                md-icon(md-font-icon='material-icons step') done
+              md-input-container(flex-gt-xs='', md-is-error='addChapterForm.googlePlusLink.$invalid && (addChapterForm.$submitted || addChapterForm.googlePlusLink.$dirty)')
+                md-icon(class='fa fa-google-plus-square fa-2x')
+                label Google Plus
+                input(ng-model='vm.chapter.googlePlusLink', id='googlePlusLink', name='googlePlusLink', ng-required='true')
+                div(ng-messages='addChapterForm.googlePlusLink.$error', ng-if='addChapterForm.$submitted || addChapterForm.googlePlusLink.$touched')
+                  div(ng-message='required')
+                    | This field is required
 
-        // Firebase
-        script(src='https://cdn.firebase.com/js/client/2.2.4/firebase.js')
-        // AngularFire
-        script(src='https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js')
+            div(layout-gt-xs='row', layout-xs='column')
+              md-input-container(flex-gt-xs='')
+                md-icon(class='fa fa-facebook-square fa-2x')
+                label Facebook
+                input(ng-model='vm.chapter.facebookLink')
+              md-input-container(flex-gt-xs='')
+                md-icon(class='fa fa-twitter-square fa-2x')
+                label Twitter
+                input(ng-model='vm.chapter.twitterLink')
+
+            div(layout-gt-xs='row', layout-xs='column')
+              md-input-container(flex-gt-xs='', md-is-error='addChapterForm.meetupID.$invalid && (addChapterForm.$submitted || addChapterForm.meetupID.$dirty)')
+                md-icon(class='fa fa-pencil-square fa-2x')
+                label Meetup ID
+                input(ng-model='vm.chapter.meetupID', id='meetupID', name='meetupID', ng-required='true')
+                div(ng-messages='addChapterForm.meetupID.$error', ng-if='addChapterForm.$submitted || addChapterForm.meetupID.$touched')
+                  div(ng-message='required')
+                    | This field is required
+              md-input-container(flex-gt-xs='', md-is-error='addChapterForm.meetupURL.$invalid && (addChapterForm.$submitted || addChapterForm.meetupURL.$dirty)')
+                md-icon(class='fa fa-pencil-square fa-2x')
+                label Meetup URL Name
+                input(ng-model='vm.chapter.meetupURL', id='meetupURL', name='meetupURL', ng-required='true')
+                div(ng-messages='addChapterForm.meetupURL.$error', ng-if='addChapterForm.$submitted || addChapterForm.meetupURL.$touched')
+                  div(ng-message='required')
+                    | This field is required
+      md-button(class='md-fab md-fab-bottom-right md-primary', type='submit')
+        md-icon(md-font-icon='material-icons step') done
+
+    // Firebase
+    script(src='https://cdn.firebase.com/js/client/2.2.4/firebase.js')
+    // AngularFire
+    script(src='https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js')
 

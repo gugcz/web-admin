@@ -4,10 +4,10 @@
   angular.module('gugCZ.firebase', [
     'firebase'
   ])
-      .factory('firebaseDB', function() {
-        return firebase.database();
-      })
-      .factory('firebaseAuth', function($firebaseAuth) {
-        return $firebaseAuth();
-      });
+    .factory('firebaseDB', function() {
+      return firebase.database();
+    })
+    .factory('firebaseAuth', function($firebaseAuth) {
+      return $firebaseAuth();
+    });
 })();

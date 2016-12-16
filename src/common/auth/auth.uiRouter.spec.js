@@ -129,9 +129,9 @@ describe('gugCZ.auth.uiRouter', function() {
       };
 
       spyOn(authServiceMock, 'isAuthenticated').and
-          .callFake(function() {
-            return true;
-          });
+        .callFake(function() {
+          return true;
+        });
 
       stateAuthService.checkPermissionWhenStateChangeStarted(eventMock, state);
 
@@ -151,10 +151,10 @@ describe('gugCZ.auth.uiRouter', function() {
       });
 
       spyOn(authServiceMock, 'hasSomeRole')
-          .and
-          .callFake(function() {
-            return true;
-          });
+        .and
+        .callFake(function() {
+          return true;
+        });
 
       stateAuthService.checkPermissionWhenStateChangeStarted(eventMock, state);
 
@@ -173,16 +173,16 @@ describe('gugCZ.auth.uiRouter', function() {
       };
 
       spyOn(authServiceMock, 'isAuthenticated')
-          .and
-          .callFake(function() {
-            return true;
-          });
+        .and
+        .callFake(function() {
+          return true;
+        });
 
       spyOn(authServiceMock, 'hasSomeRole')
-          .and
-          .callFake(function() {
-            return false;
-          });
+        .and
+        .callFake(function() {
+          return false;
+        });
 
       $rootScope.$on('cz.angular.auth:permissionError', function() {
         calledFlag = true;
@@ -206,16 +206,16 @@ describe('gugCZ.auth.uiRouter', function() {
       };
 
       spyOn(authServiceMock, 'isAuthenticated')
-          .and
-          .callFake(function() {
-            return false;
-          });
+        .and
+        .callFake(function() {
+          return false;
+        });
 
       spyOn(authServiceMock, 'login')
-          .and
-          .callFake(function() {
-            return $q.defer().promise;
-          });
+        .and
+        .callFake(function() {
+          return $q.defer().promise;
+        });
 
       stateAuthService.checkPermissionWhenStateChangeStarted(eventMock, state);
 
@@ -234,10 +234,10 @@ describe('gugCZ.auth.uiRouter', function() {
       };
 
       spyOn(authServiceMock, 'isPending')
-          .and
-          .callFake(function() {
-            return true;
-          });
+        .and
+        .callFake(function() {
+          return true;
+        });
 
       authServiceMock.firebaseAuthReadyPromise = $q.defer().promise;
 
@@ -259,16 +259,16 @@ describe('gugCZ.auth.uiRouter', function() {
       spyOn($stateMock, 'go');
 
       spyOn(authServiceMock, 'isAuthenticated')
-          .and
-          .callFake(function() {
-            return false;
-          });
+        .and
+        .callFake(function() {
+          return false;
+        });
 
       spyOn(authServiceMock, 'login')
-          .and
-          .callFake(function() {
-            return $q.reject();
-          });
+        .and
+        .callFake(function() {
+          return $q.reject();
+        });
 
       $rootScope.$on('auth:loginCanceled', function() {
         calledFlag = true;

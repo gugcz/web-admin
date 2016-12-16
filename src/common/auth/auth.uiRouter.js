@@ -13,7 +13,7 @@
       }
 
       var mustBeLogged = state.data.authLogged ||
-          (state.data.authRoles && angular.isArray(state.data.authRoles) && state.data.authRoles.length > 0);
+        (state.data.authRoles && angular.isArray(state.data.authRoles) && state.data.authRoles.length > 0);
 
       return !mustBeLogged;
     };
@@ -98,9 +98,9 @@
       event.preventDefault(); // stop routing
 
       return authService.login()
-          .catch(function() {
-            this.broadcastLoginCancel_(toState);
-          }.bind(this));
+        .catch(function() {
+          this.broadcastLoginCancel_(toState);
+        }.bind(this));
     };
 
     /**
@@ -116,9 +116,9 @@
     'ui.router',
     'gugCZ.auth.service'
   ])
-      .service('stateAuth', stateAuthService)
-      .run(function($rootScope, stateAuth) {
-        $rootScope.$on('$stateChangeStart', stateAuth.checkPermissionWhenStateChangeStarted.bind(stateAuth));
-      });
+    .service('stateAuth', stateAuthService)
+    .run(function($rootScope, stateAuth) {
+      $rootScope.$on('$stateChangeStart', stateAuth.checkPermissionWhenStateChangeStarted.bind(stateAuth));
+    });
 
 })();
