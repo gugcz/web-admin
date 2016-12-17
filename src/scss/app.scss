@@ -129,7 +129,13 @@ dates-picker {
         min-width: 14.2%;
 
         &:focus {
-          outline-width: 1px;
+          outline: none;
+
+          .number {
+            background: lightgrey;
+            color: white;
+            border-radius: 100%;
+          }
         }
       }
 
