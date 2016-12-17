@@ -240,7 +240,7 @@ gulp.task('watch', function() {
   });
 });
 
-gulp.task('devel', function() {
+gulp.task('devel', ['build-clean'], function() {
   runSequence(
     ['sass', 'config-devel', 'translations', 'pug-index'],
     ['js-vendor', 'js-main'],
@@ -396,12 +396,12 @@ gulp.task('config-devel', function() {
   gulp.src('config/devel.json') // TODO set by stage
     .pipe(plugins.ngConfig(config.application.name + '.config'))
     .pipe(plugins.rename('config.js'))
-    .pipe(gulp.dest('./src'))
+    .pipe(gulp.dest('./src'));
 });
 
 gulp.task('config-production', function() {
   gulp.src('config/production.json')
     .pipe(plugins.ngConfig(config.application.name + '.config'))
     .pipe(plugins.rename('config.js'))
-    .pipe(gulp.dest('./src'))
+    .pipe(gulp.dest('./src'));
 });
