@@ -35,7 +35,7 @@
 			var lowercaseQuery = angular.lowercase(query);
 
 			return function filterFn(chapter) {
-				return (chapter._lowername.indexOf(lowercaseQuery) === 0);
+				return (chapter._lowername.indexOf(lowercaseQuery) !== -1);
 			};
 
 		}
