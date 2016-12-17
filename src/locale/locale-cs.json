@@ -5,12 +5,16 @@
   "DASHBOARD": {
     "TITLE": "Dashboars",
     "DESCRIPTION": "tady budou grafy,widgety, ...",
-    "NAME": "Nazev akce"
+    "NAME": "Název akce"
   },
   "EVENTS.FORM": {
-    "NAME": "Nazev akce",
+    "NAME": "Název akce",
     "SUBTITLE": "Podtitul",
     "DESCRIPTION": "Popis",
+    "DATE": "Datum akce",
+    "MULTIDAY": "Akce je vícedenní",
+    "START_TIME": "Začátek akce",
+    "DURATION": "Délka trvání akce",
     "DESCRIPTION_HINT": "Zde muzes pridat potrebne informace k akci, popr. zde po akci umistit prezentaci",
     "REGFORM_LINK": "Odkaz na registrace",
     "CHAPTERS": "Organizující chaptery",

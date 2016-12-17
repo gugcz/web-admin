@@ -1,0 +1,33 @@
+div(layout='row')
+    div(flex)
+        div(class='calendar').md-whiteframe-3dp
+            flex-calendar()
+    div(flex, ng-if='vm.isMultiDay')
+        div(class='calendar').md-whiteframe-3dp
+            flex-calendar()
+    div(flex)
+        div(layout='column')
+                div(layout='row')
+                    md-input-container
+                        input()
+                        // TODO Set input for time
+                        label(translate='EVENTS.FORM.START_TIME')
+
+                    md-input-container
+                        md-checkbox(ng-model='vm.isMultiDay')
+                            span(translate='') EVENTS.FORM.MULTIDAY
+
+
+                div(layout='row',ng-if='!vm.isMultiDay')
+                    md-input-container
+                        label(translate='EVENTS.FORM.DURATION')
+                        md-select(ng-model='vm.duration')
+                            md-option(ng-repeat='(duration, label) in vm.durations', ng-value='duration') {{label}}
+
+                div(layout='row',ng-if='vm.isMultiDay')
+                    md-input-container
+                        input()
+                        // TODO Set input for time
+                        label(translate='EVENTS.FORM.START_TIME')
+
+

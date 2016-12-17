@@ -8,6 +8,8 @@
 	};
 
 	function OrgsController() {
+	  // TODO Order by activity
+    // TODO
 		this.orgs = ['Matěj Horák', 'Milan Lempera', 'Filip Procházka', 'Honza Slavík'];
 		this.showSearch = false;
 

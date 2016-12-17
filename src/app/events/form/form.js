@@ -92,7 +92,10 @@
 	}
 
 
-	angular.module('gugCZ.webAdmin.events.form', ['gugCZ.webAdmin.events.form.orgs', 'flexcalendar'])
+	angular.module('gugCZ.webAdmin.events.form', [
+	  'gugCZ.webAdmin.events.form.orgs',
+    'gugCZ.webAdmin.events.form.dates'
+  ])
 	  .controller("EventFormController", EventFormController);
 
 })();
