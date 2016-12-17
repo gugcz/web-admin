@@ -8,7 +8,7 @@ div(layout='row')
   div(flex="20")
     div.times(layout='column')
       md-input-container
-        md-checkbox(ng-model='vm.isMultiDay')
+        md-checkbox(ng-model='vm.isMultiDay', ng-change="vm.calculateEndDate()")
           span(translate='') EVENTS.FORM.MULTIDAY
 
       md-input-container
@@ -24,5 +24,4 @@ div(layout='row')
         input(type="time", ng-model="vm.dates.end")
         // TODO Set input for time
         label(translate='EVENTS.FORM.END_TIME')
-
 
