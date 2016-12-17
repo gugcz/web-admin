@@ -9,10 +9,18 @@
 
 	function OrgsController() {
 	  // TODO Order by activity
-    // TODO
+    // TODO Now guarantee not work, $id missing
 		this.orgs = ['Matěj Horák', 'Milan Lempera', 'Filip Procházka', 'Honza Slavík'];
 		this.showSearch = false;
+    this.guarantee = null;
 
+		this.setGuarantee = function(org) {
+      this.guarantee = org;
+    }
+
+    this.isGuarantee = function(org) {
+      return this.guarantee && this.guarantee.$id === org.$id;
+    }
 
 	}
 

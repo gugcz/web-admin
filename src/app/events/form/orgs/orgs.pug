@@ -8,11 +8,12 @@ div(ng-show='!vm.showSearch')
                 md-icon(icon='search')
     md-content
         md-list
-            md-list-item(ng-repeat='org in vm.orgs')
-                md-checkbox
-                p {{org}}
-                md-switch
-                // TODO Add garant symbol
+            md-radio-group
+                md-list-item(ng-repeat='org in vm.orgs')
+                    md-checkbox
+                    p {{org}}
+                    md-icon(ng-click='vm.setGuarantee(org)', ng-class='{isActive: vm.isGuarantee(org)}').md-secondary gavel
+                    // TODO Add garant symbol
 div(ng-show='vm.showSearch')
     md-toolbar.md-hue-1
         .md-toolbar-tools
@@ -20,4 +21,4 @@ div(ng-show='vm.showSearch')
             md-input-container(md-theme='input', flex='')
                 label  
                 input(ng-model='search.who', placeholder='enter search')
-            
+
