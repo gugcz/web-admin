@@ -1,30 +1,31 @@
 md-content(layout-padding)
-    form(name='addEventForm', ng-submit='addEventForm.$valid && vm.addEvent()', novalidate, layout='column')
-        md-input-container
-            label(translate='EVENTS.FORM.NAME')
-            input(ng-model='vm.event.name')
+  form(name='addEventForm', ng-submit='addEventForm.$valid && vm.addEvent()', novalidate, layout="column")
+    div(layout="row")
+      md-input-container(flex)
+        label(translate='EVENTS.FORM.NAME')
+        input(ng-model='vm.event.name')
 
-        md-input-container
-            label(translate='EVENTS.FORM.SUBTITLE')
-            input(ng-model='vm.event.subtitle')
+      md-input-container(flex)
+        label(translate='EVENTS.FORM.SUBTITLE')
+        input(ng-model='vm.event.subtitle')
 
-        dates-picker
+    md-input-container
+      label(translate='EVENTS.FORM.DESCRIPTION')
+      textarea(rows='4', ng-model='vm.event.description')
 
-        venue-selector
+    dates-picker
 
-        md-input-container
-            label(translate='EVENTS.FORM.DESCRIPTION')
-            textarea(rows='7', ng-model='vm.event.description')
+    venue-selector
 
-        md-input-container
-            label(translate='EVENTS.FORM.REGFORM_LINK')
-            input(ng-model='vm.event.regFormLink')
+    md-input-container
+      label(translate='EVENTS.FORM.REGFORM_LINK')
+      input(ng-model='vm.event.regFormLink')
 
-        md-chips(ng-model='vm.event.chapters', md-autocomplete-snap='', md-transform-chip='vm.transformChip($chip)', md-require-match='vm.autocompleteDemoRequireMatch')
-            md-autocomplete(md-selected-item='vm.selectedItem', md-search-text='vm.searchText', md-items='item in vm.querySearch(vm.searchText)', md-item-text='item.name', placeholder="{{ 'EVENTS.FORM.CHAPTERS' | translate }}")
-                span(md-highlight-text='vm.searchText') {{item.name}}
-            md-chip-template
-                span
-                    standard {{$chip.name}}
+    md-chips(ng-model='vm.event.chapters', md-autocomplete-snap='', md-transform-chip='vm.transformChip($chip)', md-require-match='vm.autocompleteDemoRequireMatch')
+      md-autocomplete(md-selected-item='vm.selectedItem', md-search-text='vm.searchText', md-items='item in vm.querySearch(vm.searchText)', md-item-text='item.name', placeholder="{{ 'EVENTS.FORM.CHAPTERS' | translate }}")
+        span(md-highlight-text='vm.searchText') {{item.name}}
+      md-chip-template
+        span
+          standard {{$chip.name}}
 
-        orgs-table.md-whiteframe-3dp
+    orgs-table.md-whiteframe-3dp
