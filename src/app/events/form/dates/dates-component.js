@@ -59,6 +59,13 @@
       360: '6 hodin'
     };
 
+    this.getBaseCalendarOptions_ = function() {
+      return angular.copy({
+        dayNamesLength: 2,
+        mondayIsFirstDay: true
+      });
+    };
+
     this.isMultiDay = false;
     this.duration = preFillData.duration;
 
@@ -74,15 +81,12 @@
 
       var startTime = this.dates.start.getTime();
       this.dates.end = new Date(startTime + this.duration * 60000);
+      this.endOptionsCache_ = null;
     };
 
     this.calculateEndDate();
 
-    this.startDateOptions = {
-      defaultDate: this.dates.start,
-      dayNamesLength: 2,
-      mondayIsFirstDay: true,
-      dateClick: function(date) {
+    this.boundedChangeStartDateListener = function(date) {
 
         this.dates.start.setFullYear(date.year);
         this.dates.start.setMonth(date.month);
@@ -90,11 +94,37 @@
 
         this.calculateEndDate();
 
-      }.bind(this)
+      }.bind(this);
+
+    this.boundedChangeEndDateListener = function(date) {
+
+      this.dates.end.setFullYear(date.year);
+      this.dates.end.setMonth(date.month);
+      this.dates.end.setDate(date.day);
+
+      this.calculateEndDate();
+
+    }.bind(this);
+
+    this.getStartDateOptions = function() {
+      if (!this.startOptionsCache_) {
+        this.startOptionsCache_ = this.getBaseCalendarOptions_();
+        this.startOptionsCache_.defaultDate = this.dates.start;
+        this.startOptionsCache_.dateClick = this.boundedChangeStartDateListener;
+      }
+
+      return this.startOptionsCache_;
     };
 
+    this.getEndDateOptions = function() {
+      if (!this.endOptionsCache_) {
+        this.endOptionsCache_ = this.getBaseCalendarOptions_();
+        this.endOptionsCache_.defaultDate = this.dates.end;
+        this.endOptionsCache_.dateClick = this.boundedChangeendDateListener;
+      }
 
-
+      return this.endOptionsCache_;
+    };
 
   }
 

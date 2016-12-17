@@ -1,35 +1,28 @@
 div(layout='row')
-  div(flex)
-    div(class='calendar').md-whiteframe-3dp
-      flex-calendar(options="vm.startDateOptions")
-  div(flex, ng-if='vm.isMultiDay')
-    div(class='calendar').md-whiteframe-3dp
-      flex-calendar()
-  div(flex)
-    div(layout='column')
-      div(layout='row')
-        md-input-container
-          input(type="time", ng-model="vm.dates.start", ng-change="vm.calculateEndDate()")
-          label(translate='EVENTS.FORM.START_TIME')
+  div(flex).calendar.md-whiteframe-3dp
+      flex-calendar(options="vm.getStartDateOptions()")
 
-        md-input-container
-          md-checkbox(ng-model='vm.isMultiDay')
-            span(translate='') EVENTS.FORM.MULTIDAY
+  div(flex, ng-if='vm.isMultiDay').calendar.md-whiteframe-3dp
+      flex-calendar(options="vm.getEndDateOptions()")
 
+  div(flex="20")
+    div.times(layout='column')
+      md-input-container
+        md-checkbox(ng-model='vm.isMultiDay')
+          span(translate='') EVENTS.FORM.MULTIDAY
 
-      div(layout='row',ng-if='!vm.isMultiDay')
-        md-input-container
-          label(translate='EVENTS.FORM.DURATION')
-          md-select(ng-model='vm.duration', ng-change="vm.calculateEndDate()")
-            md-option(ng-repeat='(duration, label) in vm.durations', ng-value='duration') {{label}}
+      md-input-container
+        input(type="time", ng-model="vm.dates.start", ng-change="vm.calculateEndDate()")
+        label(translate='EVENTS.FORM.START_TIME')
 
-      div(layout='row',ng-if='vm.isMultiDay')
-        md-input-container
-          input()
-          // TODO Set input for time
-          label(translate='EVENTS.FORM.START_TIME')
+      md-input-container(ng-if='!vm.isMultiDay')
+        label(translate='EVENTS.FORM.DURATION')
+        md-select(ng-model='vm.duration', ng-change="vm.calculateEndDate()")
+          md-option(ng-repeat='(duration, label) in vm.durations', ng-value='duration') {{label}}
 
-pre start:  {{vm.dates.start | date : "medium"}}
-pre end: {{vm.dates.end | date : "medium"}}
+      md-input-container(ng-if='vm.isMultiDay')
+        input(type="time", ng-model="vm.dates.end")
+        // TODO Set input for time
+        label(translate='EVENTS.FORM.END_TIME')
 
 

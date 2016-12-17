@@ -113,50 +113,60 @@ md-input-container {
   }
 }
 
-.flex-calendar {
-  max-width: 350px;
-  font-family: 'Open Sans', sans-serif;
+dates-picker {
+  .flex-calendar {
+    max-width: 350px;
+    font-family: 'Open Sans', sans-serif;
 
-  .month {
-    background-color: #34a853;
-  }
-
-  .days {
-    .day {
-      min-height: 30px;
-      line-height: 30px;
-      min-width: 14.2%;
-
-      &:focus {
-        outline: none;
-      }
-    }
-
-    .day .number, .day.selected .number {
-      margin:0 5px;
-      width: 30px;
-      height: 30px;
-      line-height: 30px;
-    }
-
-    .day.selected .number {
+    .month {
       background-color: #34a853;
     }
 
-  }
+    .days {
+      .day {
+        min-height: 30px;
+        line-height: 30px;
+        min-width: 14.2%;
 
-  .week {
-    .day {
-      min-width: 14.2%;
+        &:focus {
+          outline-width: 1px;
+        }
+      }
+
+      .day .number, .day.selected .number {
+        margin: 0 5px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+      }
+
+      .day.selected .number {
+        background-color: #34a853;
+      }
+
     }
 
-    background-color: forestgreen;
+    .week {
+      .day {
+        min-width: 14.2%;
+      }
+
+      background-color: forestgreen;
+    }
+
   }
 
-}
+  .calendar {
+    min-width: 285px;
+    max-width: 300px;
 
-.calendar {
-  max-width: 300px;
+    margin: 0 20px;
+  }
+
+  .times {
+    margin: 0 30px;
+  }
+
 }
 
 .isActive {

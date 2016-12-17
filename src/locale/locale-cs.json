@@ -14,6 +14,7 @@
     "DATE": "Datum akce",
     "MULTIDAY": "Akce je vícedenní",
     "START_TIME": "Začátek akce",
+    "END_TIME": "Konec akce",
     "DURATION": "Délka trvání akce",
     "DESCRIPTION_HINT": "Zde muzes pridat potrebne informace k akci, popr. zde po akci umistit prezentaci",
     "REGFORM_LINK": "Odkaz na registrace",
