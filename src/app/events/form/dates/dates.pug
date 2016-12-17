@@ -5,7 +5,7 @@ div(layout='row')
   div(flex, ng-if='vm.isMultiDay').calendar.md-whiteframe-3dp
       flex-calendar(options="vm.getEndDateOptions()")
 
-  div(flex="20")
+  div(flex="30")
     div.times(layout='column')
       md-input-container
         md-checkbox(ng-model='vm.isMultiDay', ng-change="vm.calculateEndDate()")
