@@ -167,6 +167,10 @@ dates-picker {
     max-width: 300px;
 
     margin: 0 20px;
+
+    &:first-child {
+      margin-left:0;
+    }
   }
 
   .times {
