@@ -2,7 +2,6 @@
 @import '../../bower_components/angular-material/angular-material.scss';
 @import '../../bower_components/flex-calendar/src/flex-calendar';
 
-
 #page {
   height: 100%;
   position: relative;
@@ -122,17 +121,42 @@ md-input-container {
     background-color: #34a853;
   }
 
-  .days .day.selected .number {
-    background-color: #34a853;
+  .days {
+    .day {
+      min-height: 30px;
+      line-height: 30px;
+      min-width: 14.2%;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .day .number, .day.selected .number {
+      margin:0 5px;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+    }
+
+    .day.selected .number {
+      background-color: #34a853;
+    }
+
   }
 
   .week {
+    .day {
+      min-width: 14.2%;
+    }
+
     background-color: forestgreen;
   }
+
 }
 
 .calendar {
-  max-width: 350px;
+  max-width: 300px;
 }
 
 .isActive {
