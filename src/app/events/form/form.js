@@ -94,7 +94,8 @@
 
 	angular.module('gugCZ.webAdmin.events.form', [
 	  'gugCZ.webAdmin.events.form.orgs',
-    'gugCZ.webAdmin.events.form.dates'
+    'gugCZ.webAdmin.events.form.dates',
+    'gugCZ.webAdmin.events.form.venue'
   ])
 	  .controller("EventFormController", EventFormController);
 

@@ -209,7 +209,7 @@ gulp.task('watch', function() {
       })) {
       return;
     }
-    console.log(e);
+
     switch (e.extension) {
       case 'html':
       case 'pug':

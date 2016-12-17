@@ -26,6 +26,14 @@
           url: '/',
           controller: function($mdSidenav, $firebaseObject, $state, $scope) {
 
+            this.toggleSidenav = buildToggler('left');
+
+            function buildToggler(componentId) {
+              return function() {
+                $mdSidenav(componentId).toggle();
+              };
+            }
+
             this.state = $state;
 
             this.menu = [
@@ -47,7 +55,13 @@
             ];
 
             var userRef = firebase.database().ref('orgs/' + firebase.auth().currentUser.uid);
+
             this.fbUser = $firebaseObject(userRef);
+            this.fbUser2 = $firebaseObject(userRef);
+
+            console.log(this.fbUser, this.fbUser2);
+            console.log(this.fbUser.$id === this.fbUser2.$id);
+
 
             $scope.$on('$destroy', function() { // TODO bude toto nutné řešit všude?
               this.fbUser.$destroy();
@@ -63,9 +77,6 @@
 
             this.selectedChapter = Object.keys(this.user.chapters)[0];
 
-            this.toggleSidenav = function(menuId) {
-              $mdSidenav(menuId).toggle();
-            };
           },
           controllerAs: 'app',
           templateUrl: 'app/app.html',

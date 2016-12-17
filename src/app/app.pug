@@ -1,6 +1,6 @@
 md-toolbar(layout='row')
   .md-toolbar-tools
-    md-button.md-icon-button(ng-click="app.toggleSidenav('left')")
+    md-button.md-icon-button.hide-gt-sm(ng-click="app.toggleSidenav()")
       md-icon(aria-label='Menu')
     h1 {{app.state.current.data.title}}
     span(flex='')

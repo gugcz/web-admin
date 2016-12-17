@@ -18,7 +18,8 @@
     "DESCRIPTION_HINT": "Zde muzes pridat potrebne informace k akci, popr. zde po akci umistit prezentaci",
     "REGFORM_LINK": "Odkaz na registrace",
     "CHAPTERS": "Organizující chaptery",
-    "ORGANIZERS": "Organizátoři"
+    "ORGANIZERS": "Organizátoři",
+    "ADD_VENUE": "Přidat venue"
   },
   "LOGIN_PAGE": {
     "TITLE": "GUG admin page"
