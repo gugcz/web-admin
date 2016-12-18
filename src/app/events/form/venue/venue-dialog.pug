@@ -1,16 +1,12 @@
 md-dialog(aria-label='Venue')
-  form(ng-cloak='')
     md-toolbar
       .md-toolbar-tools
         h2(translate="VENUE.TITLE")
         span(flex='')
         md-button.md-icon-button(ng-click='vm.cancel()')
           md-icon(md-svg-src='img/icons/ic_close_24px.svg', aria-label='Close dialog')
+
     md-dialog-content
       .md-dialog-content
-        venue-form(venue="vm.venue")
+        venue-form(venue="vm.venue", on-cancel="vm.cancel()", on-save="vm.save()")
 
-    md-dialog-actions(layout='row')
-      span(flex='')
-      md-button(translate="BUTTONS.CANCEL",ng-click="vm.cancel()")
-      md-button(translate="BUTTONS.SAVE", ng-click="vm.save()")

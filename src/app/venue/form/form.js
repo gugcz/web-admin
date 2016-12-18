@@ -3,10 +3,18 @@
 
   function VenueFormController() {
 
-    this.venue = {
-      name: "VŠPJ",
-      address: "Tolstého 1556/16, 586 01 Jihlava"
+    this.cancel = function() {
+      this.onCancel();
     };
+
+    this.submit = function(form) {
+      if (form.$invalid) {
+        return;
+      }
+
+      this.onSave(this.selectedVenue);
+    };
+
   }
 
   angular.module('gugCZ.webAdmin.venue.form', [
@@ -20,7 +28,8 @@
       controllerAs: 'vm',
       bindings: {
         venue: '=',
-        form: '='
+        onCancel: '&',
+        onSave: '&'
       },
       templateUrl: 'app/venue/form/form.html'
 

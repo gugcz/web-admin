@@ -30,25 +30,30 @@
     this.venues = [
       {
         name: "VŠPJ",
-        address: "Tolstého 1556/16, 586 01 Jihlava" // TODO rozpat na pole?
+        address: "Tolstého 1556/16, 586 01 Jihlava"
       },
       {
         name: "VŠPJ 2",
-        address: "Tolstého 1556/16, 586 01 Jihlava" // TODO rozpat na pole?
+        address: "Tolstého 1556/16, 586 01 Jihlava"
       },
       {
         name: "VŠPJ 3",
-        address: "Tolstého 1556/16, 586 01 Jihlava" // TODO rozpat na pole?
+        address: "Tolstého 1556/16, 586 01 Jihlava"
       }];
 
-    this.venue = null;
+    this.selectedVenue = null;
 
     this.createVenueModal_ = function(ev, venue) {
-      return $mdDialog.show({
+      var venue = angular.copy(venue);
+      if (venue.$$mdSelectId) {  // TODO some better solution?
+        delete venue.$$mdSelectId;
+      }
+
+      return $mdDialog.show({   // TODO how to set dialog width?
         controller: DialogController,
         controllerAs: 'vm',
         locals: {
-          venue: angular.copy(venue)
+          venue: venue
         },
         templateUrl: 'app/events/form/venue/venue-dialog.html',
         parent: angular.element($document.body),
@@ -58,21 +63,24 @@
     };
 
     this.editVenue = function(ev) {
-      this.createVenueModal_(ev, this.venue)
-        .then(function(answer) {
-          console.log('fullfiled', answer);
-        }, function() {
-          console.log('rejected.');
-        });
+      var index = this.venues.indexOf(this.selectedVenue);
+      this.createVenueModal_(ev, this.selectedVenue)
+        .then(function(venue) {
+          // TODO change firebase data?
+
+          this.venues[index] = venue;
+          this.selectedVenue = venue;
+        }.bind(this));
     };
 
     this.addVenue = function(ev) {
       this.createVenueModal_(ev, {})
-        .then(function(answer) {
-          console.log('fullfiled', answer);
-        }, function() {
-          console.log('rejected.');
-        });
+        .then(function(venue) {
+          // TODO change firebase data?
+
+          this.venues.push(venue);
+          this.selectedVenue = venue;
+        }.bind(this));
     };
 
   }
