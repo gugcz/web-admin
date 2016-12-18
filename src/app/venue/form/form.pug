@@ -1,0 +1,20 @@
+md-content(layout-padding)
+  form(name='venueForm', ng-submit='venueForm.$valid && vm.onSubmit()', novalidate, layout="column")
+    div(layout='row')
+      md-input-container(flex)
+        label(translate='VENUE.FORM.NAME')
+        input(required, ng-model='vm.venue.name')
+
+      md-input-container(flex)
+        label(translate='VENUE.FORM.ADDRESS')
+        input(required, ng-model='vm.venue.address')
+
+    div(layout=row)
+      md-input-container(flex)
+        label(translate='VENUE.FORM.MAP_LINK')
+        input(type="url", ng-model='vm.venue.mapLink')
+
+      md-input-container(flex)
+        label(translate='VENUE.FORM.NOTE')
+        textarea(ng-model='vm.venue.note')
+
