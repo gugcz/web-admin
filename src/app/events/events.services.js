@@ -8,6 +8,10 @@
     self.addEvent = function(event) {
       $log.debug(event);
     };
+
+    self.getChapters = function() {
+      return $firebaseArray(firebaseDB.ref('chapters'));
+    }
   }
 
 

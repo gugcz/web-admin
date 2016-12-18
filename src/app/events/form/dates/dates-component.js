@@ -146,10 +146,9 @@
       return this.endOptionsCache_;
     };
 
+    // TODO repair for the last day
     this.isDateAfterNewsletterDeadline = function() {
-
       var newsletterDeadline = getLastDayOfThisMonth();
-
       return newsletterDeadline > this.dates.start;
     };
 

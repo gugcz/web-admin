@@ -57,11 +57,6 @@
             var userRef = firebase.database().ref('orgs/' + firebase.auth().currentUser.uid);
 
             this.fbUser = $firebaseObject(userRef);
-            this.fbUser2 = $firebaseObject(userRef);
-
-            console.log(this.fbUser, this.fbUser2);
-            console.log(this.fbUser.$id === this.fbUser2.$id);
-
 
             $scope.$on('$destroy', function() { // TODO bude toto nutné řešit všude?
               this.fbUser.$destroy();

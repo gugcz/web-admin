@@ -21,11 +21,11 @@ md-content(layout-padding)
       label(translate='EVENTS.FORM.REGFORM_LINK')
       input(ng-model='vm.event.regFormLink')
 
-    md-chips(ng-model='vm.event.chapters', md-autocomplete-snap='', md-transform-chip='vm.transformChip($chip)', md-require-match='vm.autocompleteDemoRequireMatch')
-      md-autocomplete(md-selected-item='vm.selectedItem', md-search-text='vm.searchText', md-items='item in vm.querySearch(vm.searchText)', md-item-text='item.name', placeholder="{{ 'EVENTS.FORM.CHAPTERS' | translate }}")
-        span(md-highlight-text='vm.searchText') {{item.name}}
-      md-chip-template
-        span
-          standard {{$chip.name}}
+    chapters-picker(selectedChapters='vm.event.chapters')
 
     orgs-table.md-whiteframe-3dp
+
+  // TODO Submit, to the right, fix position
+  md-button.md-fab.md-primary(aria-label='Use Android', ng-click='vm.addEvent()')
+    md-icon(md-svg-src='images/done.svg')
+
