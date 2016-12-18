@@ -20,9 +20,31 @@
     "REGFORM_LINK": "Odkaz na registrace",
     "CHAPTERS": "Organizující chaptery",
     "ORGANIZERS": "Organizátoři",
+    "SELECT_VENUE": "Vyber venue",
     "ADD_VENUE": "Přidat venue"
   },
   "LOGIN_PAGE": {
     "TITLE": "GUG admin page"
-  }
+  },
+  "JANUARY": "Leden",
+  "FEBRUARY": "Únor",
+  "MARCH": "Březen",
+  "APRIL": "Duben",
+  "MAI": "Květen",
+  "JUNE": "Červen",
+  "JULY": "Červenec",
+  "AUGUST": "Srpen",
+  "SEPTEMBER": "Září",
+  "OCTOBER": "Říjen",
+  "NOVEMBER": "Listopad",
+  "DECEMBER": "Prosinec",
+
+  "SUNDAY": "Neděle",
+  "MONDAY": "Pondělí",
+  "TUESDAY": "Úterý",
+  "WEDNESDAY": "Středa",
+  "THURSDAY": "Čtvrtek",
+  "FRIDAY": "Pátek",
+  "SATURDAY": "Sobota"
+
 }
