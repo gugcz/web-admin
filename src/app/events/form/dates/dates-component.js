@@ -39,8 +39,14 @@
     return dateTime;
   };
 
+  function getLastDayOfThisMonth() {
+    var date = new Date(), y = date.getFullYear(), m = date.getMonth();
 
-  function DatesController($scope) {
+    return new Date(y, m + 1, 0);
+  }
+
+
+  function DatesController($mdDialog, $translate) {
 
     var preFillData = { // TODO vstupní data z firebase
       startTime: new Date("1970-01-01T16:00Z"),
@@ -86,15 +92,29 @@
 
     this.calculateEndDate();
 
+    function showNewsletterDialog() {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title($translate.instant('EVENTS.FORM.DATE_ALERT.TITLE'))
+          .textContent($translate.instant('EVENTS.FORM.DATE_ALERT.TEXT'))
+          .ok($translate.instant('EVENTS.FORM.DATE_ALERT.OK'))
+      );
+    }
+
     this.boundedChangeStartDateListener = function(date) {
 
-        this.dates.start.setFullYear(date.year);
-        this.dates.start.setMonth(date.month);
-        this.dates.start.setDate(date.day);
+      this.dates.start.setFullYear(date.year);
+      this.dates.start.setMonth(date.month);
+      this.dates.start.setDate(date.day);
 
-        this.calculateEndDate();
+      this.calculateEndDate();
 
-      }.bind(this);
+      if (this.isDateAfterNewsletterDeadline()) {
+        showNewsletterDialog();
+      }
+
+    }.bind(this);
 
     this.boundedChangeEndDateListener = function(date) {
 
@@ -125,6 +145,14 @@
 
       return this.endOptionsCache_;
     };
+
+    this.isDateAfterNewsletterDeadline = function() {
+
+      var newsletterDeadline = getLastDayOfThisMonth();
+
+      return newsletterDeadline > this.dates.start;
+    };
+
 
   }
 
