@@ -30,7 +30,6 @@ md-content(layout-padding)
     orgs-table.md-whiteframe-3dp
     links(links-array='vm.event.links')
 
-  // TODO Submit, to the right, fix position
-  md-button.md-fab.md-primary(aria-label='Use Android', ng-click='vm.addEvent()')
-    md-icon(md-svg-src='images/done.svg')
+    md-button(class="md-fab md-primary md-fab-bottom-right fixed", aria-label='Use Android', type='submit')
+      md-icon done
 
