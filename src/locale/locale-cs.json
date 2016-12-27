@@ -12,20 +12,25 @@
   "EVENTS.FORM": {
     "NAME": "Název akce",
     "SUBTITLE": "Podtitul",
-    "DESCRIPTION": "Popis",
+    "DESCRIPTION": "Popis (podporuje markdown, takže toho využij pro odkazy)",
 
     "DATE": "Datum akce",
     "MULTIDAY": "Akce je vícedenní",
     "START_TIME": "Začátek akce",
     "END_TIME": "Konec akce",
     "DURATION": "Délka trvání akce",
-    "DESCRIPTION_HINT": "Zde muzes pridat potrebne informace k akci, popr. zde po akci umistit prezentaci",
+    "DATE_ALERT.TITLE": "Prošvihl jsi newsletter!",
+    "DATE_ALERT.TEXT": "Toto je fail! Měl by jsi akci na web dávat dříve, aby byla zařazena do newsletteru. Tvůj chapter tak přichází o účastníky, kteří se o našich akcích dozvídají pouze z newsletteru.",
+    "DATE_ALERT.OK": "Polepším se",
+
     "REGFORM_LINK": "Odkaz na registrace",
     "CHAPTERS": "Organizující chaptery",
     "ORGANIZERS": "Organizátoři",
     "SELECT_VENUE": "Vyber venue",
     "ADD_VENUE": "Přidat venue",
-    "EDIT_VENUE": "Upravit venue"
+    "EDIT_VENUE": "Upravit venue",
+
+    "SOCIAL_LINK": "Odkaz na událost na sociální síti"
   },
   "VENUE": {
     "TITLE": "Místo"
