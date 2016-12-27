@@ -1,6 +1,6 @@
 div(layout='row')
   div(flex)
-    md-select(ng-model='vm.selectedVenue', placeholder='Select a venue')
+    md-select(ng-model='vm.selectedVenue', placeholder="{{ 'EVENTS.FORM.SELECT_VENUE' | translate}}")
       md-optgroup(label="Venues")
         md-option(ng-value='venue', ng-repeat='venue in vm.venues')
             div
