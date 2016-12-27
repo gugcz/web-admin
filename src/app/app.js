@@ -107,7 +107,7 @@
         cfpLoadingBarProvider.includeSpinner = false;
 
         $mdThemingProvider.theme('default')
-            .primaryPalette('blue');
+            .primaryPalette('green');
       })
 
       .run(function($log, $mdToast, $rootScope, $state, cfpLoadingBar) {
