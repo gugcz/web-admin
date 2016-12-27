@@ -28,6 +28,7 @@ md-content(layout-padding)
     chapters-picker(selectedChapters='vm.event.chapters')
 
     orgs-table.md-whiteframe-3dp
+    links(links-array='vm.event.links')
 
   // TODO Submit, to the right, fix position
   md-button.md-fab.md-primary(aria-label='Use Android', ng-click='vm.addEvent()')

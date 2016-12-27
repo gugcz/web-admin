@@ -49,7 +49,6 @@
     }
 
     function loadChapters() {
-      // TODO load from firebase
       var chapters = firebaseEvents.getChapters();
       return chapters;
     }

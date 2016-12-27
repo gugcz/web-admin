@@ -15,7 +15,7 @@
 			description: 'Tady bude popis',
 			regFormLink: 'forms.google.com',
 			chapters: [],
-			links: ["Ahoj"]
+			links: [{url: 'www.facebook.com'}]
 
 		};
 
@@ -29,6 +29,7 @@
 	  'gugCZ.webAdmin.events.form.orgs',
     'gugCZ.webAdmin.events.form.dates',
     'gugCZ.webAdmin.events.form.chapters',
+    'gugCZ.webAdmin.events.form.links',
     'gugCZ.webAdmin.events.form.venue'
   ])
 	  .controller("EventFormController", EventFormController);

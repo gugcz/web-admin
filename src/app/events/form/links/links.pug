@@ -1,0 +1,6 @@
+md-list
+  md-list-item(ng-repeat='link in vm.links')
+    md-input-container(flex)
+      label(translate='EVENTS.FORM.SOCIAL_LINK')
+      input(ng-model='link.url', ng-change='vm.checkEmptyItem()')
+    md-icon(ng-click='vm.removeLink($index)').md-secondary close
