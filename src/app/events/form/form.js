@@ -14,7 +14,7 @@
       startDate: getNextMonthDate(),
       description: 'Tady bude popis',
       regFormLink: 'forms.google.com',
-      chapters: [],
+      chapters: [],   // TODO selected chapter from main toolbar
       links: [
         {url: 'www.facebook.com/outer'}
       ]

@@ -15,6 +15,7 @@
 
     this.showSearch = false;
     this.guarantee = null;
+    this.possibleOrgs = [];
 
     // TODO Add default
 		this.setGuarantee = function(org) {
@@ -25,15 +26,16 @@
       return this.guarantee && this.guarantee.$id === org.$id;
     };
 
-    // TODO Order by activity
-    // TODO Repair https://docs.angularjs.org/error/$rootScope/infdig?p0=10&p1=%5B%5D
-    var possibleOrgs = firebaseEvents.getOrgnizersByChapters(this.selectedChapters);
-    this.getPossibleOrgs = function() {
-      possibleOrgs = firebaseEvents.getOrgnizersByChapters(this.selectedChapters);
-      return possibleOrgs;
+    this.updateOrgsByChapters = function() {
+      firebaseEvents.getOrganizersByChapters(this.selectedChapters)
+        .then(function(orgs) {
+          this.possibleOrgs = orgs;
+        }.bind(this));
     };
 
-
+    this.$onInit = function() {
+      this.updateOrgsByChapters();
+    };
 
     this.selectedItem = null;
     this.searchText = null;

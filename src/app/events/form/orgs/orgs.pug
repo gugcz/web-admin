@@ -1,5 +1,8 @@
-md-chips(ng-model='vm.selectedChapters', md-autocomplete-snap='', md-transform-chip='vm.transformChip($chip)', md-require-match='vm.autocompleteDemoRequireMatch')
-  md-autocomplete(md-selected-item='vm.selectedItem', md-search-text='vm.searchText', md-items='item in vm.querySearch(vm.searchText)', md-item-text='item.name', placeholder="{{ 'EVENTS.FORM.CHAPTERS' | translate }}")
+md-chips(ng-model='vm.selectedChapters', md-on-add="vm.updateOrgsByChapters()" md-on-remove="vm.updateOrgsByChapters()"
+md-autocomplete-snap='',md-transform-chip='vm.transformChip($chip)', md-require-match='vm.autocompleteDemoRequireMatch')
+  md-autocomplete(md-selected-item='vm.selectedItem', md-search-text='vm.searchText',
+  md-items='item in vm.querySearch(vm.searchText)', md-item-text='item.name',
+  placeholder="{{ 'EVENTS.FORM.CHAPTERS' | translate }}")
     span(md-highlight-text='vm.searchText') {{item.name}}
   md-chip-template
     // TODO maybe add chapter icons
@@ -16,7 +19,7 @@ div(ng-show='!vm.showSearch').md-whiteframe-3dp
         md-icon(icon='search')
   md-content
     md-list
-      md-list-item(ng-repeat='org in vm.getPossibleOrgs()')
+      md-list-item(ng-repeat='org in vm.possibleOrgs')
         md-checkbox
         p {{org.name}}
         md-icon(ng-click='vm.setGuarantee(org)', ng-class='{isActive: vm.isGuarantee(org)}').md-secondary star

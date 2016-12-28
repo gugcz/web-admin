@@ -13,31 +13,40 @@
       return $firebaseArray(firebaseDB.ref('chapters'));
     };
 
-    // TODO Refactor this very ugly code
-    self.getOrgnizersByChapters = function(chapters) {
+    /**
+     * @return Promise<array>
+     */
+    self.getOrganizersByChapters = function(chapters) {
       var organizers = [];
 
       if (isArrayBlank(chapters)) {
-        return organizers;
+        return $q.resolve(organizers);
       }
 
-      chapters.forEach(function(chapter) {
-        var chapterOrganizers = $firebaseArray(firebaseDB.ref('orgs').orderByChild('chapters/' + chapter.$id).equalTo(true));
-
-        chapterOrganizers.$loaded().then(function(chapterOrganizers) {
-          chapterOrganizers.forEach(function(organizer) {
-            organizers.push(organizer);
-          });
-        }).then(function() {
-          organizers = getArrayWithoutDuplicates(organizers);
-
+      return $q.all(chapters.map(loadChapterOrgs))
+        .then(function(chaptersOrgs) {
+          var chaptersOrgsByIds = chaptersOrgs.map(transformToOrgsById);
+          return Object.assign.apply(Object, chaptersOrgs.map(transformToOrgsById));  // merge to one object by ids
         });
-      });
-      return organizers;
     };
 
     function isArrayBlank(array) {
       return angular.isUndefined(array) || array.length <= 0;
+    }
+
+    function loadChapterOrgs(chapter) {
+      return $firebaseArray(firebaseDB
+        .ref('orgs')
+        .orderByChild('chapters/' + chapter.$id)
+        .equalTo(true))
+        .$loaded();
+    }
+
+    function transformToOrgsById(chaptersOrgs) {
+      return chaptersOrgs.reduce(function(orgsObj, org) {
+        orgsObj[org.$id] = org;
+        return orgsObj;
+      }, {});
     }
   }
 
@@ -50,6 +59,7 @@
     }
     return array;
   }
+
 
 
   angular.module('gugCZ.webAdmin.events.services', [
