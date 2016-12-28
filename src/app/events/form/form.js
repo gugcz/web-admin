@@ -16,6 +16,7 @@
       regFormLink: 'forms.google.com',
       chapters: [],   // TODO selected chapter from main toolbar
       organizers: [],
+      guarantee: null,
       links: [
         {url: 'www.facebook.com/outer'}
       ]

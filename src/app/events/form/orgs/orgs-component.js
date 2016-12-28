@@ -7,14 +7,14 @@
 		controllerAs: 'vm',
     bindings: {
 		  selectedChapters: '=',
-      organizers: '='
+      organizers: '=',
+      guarantee: '='
     }
 	};
 
 	function OrgsController(firebaseEvents) {
 
     this.showSearch = false;
-    this.guarantee = null;
     this.possibleOrgs = [];
 
     // TODO Add default
