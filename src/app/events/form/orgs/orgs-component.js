@@ -29,8 +29,18 @@
     this.updateOrgsByChapters = function() {
       firebaseEvents.getOrganizersByChapters(this.selectedChapters)
         .then(function(orgs) {
+          this.organizers = [];     // TODO Solve changing chapters after orgs selection
           this.possibleOrgs = orgs;
         }.bind(this));
+    };
+
+    this.changeEventOrganizer = function(state, org) {
+      var index = findIndexInOrgArray(this.possibleOrgs, org);
+      if (state) {
+        this.organizers.push(org);
+      } else {
+        this.organizers.splice(index, 1);
+      }
     };
 
     this.$onInit = function() {
@@ -80,6 +90,17 @@
     }
 
 	}
+
+  function findIndexInOrgArray(arraytosearch, valuetosearch) {
+
+    for (var i = 0; i < arraytosearch.length; i++) {
+
+      if (arraytosearch[i].$id == valuetosearch.$id) {
+        return i;
+      }
+    }
+    return null;
+  }
 
 	angular.module('gugCZ.webAdmin.events.form.orgs', [ ])
 	  .config(function($mdIconProvider) {

@@ -15,6 +15,7 @@
       description: 'Tady bude popis',
       regFormLink: 'forms.google.com',
       chapters: [],   // TODO selected chapter from main toolbar
+      organizers: [],
       links: [
         {url: 'www.facebook.com/outer'}
       ]
