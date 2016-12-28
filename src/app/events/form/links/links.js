@@ -6,15 +6,11 @@
 		controller: LinksController,
 		controllerAs: 'vm',
     bindings: {
-		  linksArray: '='
+		  links: '='
     }
 	};
 
 	function LinksController() {
-    // TODO repair binding
-	  this.links = [
-      {url: 'www.facebook.com'}
-    ];
 
     function isLinkBlank(link) {
       return link.url === "";
@@ -24,10 +20,9 @@
       if (index > -1 && !isLinkBlank(this.links[index])) {
         this.links.splice(index, 1);
       }
-    }
+    };
 
     this.checkEmptyItem = function() {
-
       var lastItem = this.links[this.links.length - 1];
 
       if (lastItem.url.length > 0) {
@@ -35,7 +30,10 @@
       }
     };
 
-    this.checkEmptyItem();
+    this.$onInit = function() {
+      this.checkEmptyItem();
+    };
+
 	}
 
 	angular.module('gugCZ.webAdmin.events.form.links', [ ])
