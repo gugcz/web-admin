@@ -44,7 +44,7 @@
     this.selectedVenue = null;
 
     this.createVenueModal_ = function(ev, venue) {
-      var venue = angular.copy(venue);
+      venue = angular.copy(venue);
       if (venue.$$mdSelectId) {  // TODO some better solution?
         delete venue.$$mdSelectId;
       }

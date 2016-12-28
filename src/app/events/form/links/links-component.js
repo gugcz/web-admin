@@ -1,16 +1,16 @@
-(function () {
-	'use strict';
+(function() {
+  'use strict';
 
-	var component = {
-		templateUrl: 'app/events/form/links/links.html',
-		controller: LinksController,
-		controllerAs: 'vm',
+  var component = {
+    templateUrl: 'app/events/form/links/links.html',
+    controller: LinksController,
+    controllerAs: 'vm',
     bindings: {
-		  links: '='
+      links: '='
     }
-	};
+  };
 
-	function LinksController() {
+  function LinksController() {
 
     function isLinkBlank(link) {
       return link.url === "";
@@ -34,9 +34,9 @@
       this.checkEmptyItem();
     };
 
-	}
+  }
 
-	angular.module('gugCZ.webAdmin.events.form.links', [ ])
-	.component('links', component);
+  angular.module('gugCZ.webAdmin.events.form.links', [])
+    .component('links', component);
 
 })();
