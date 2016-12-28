@@ -19,6 +19,8 @@ div(ng-show='!vm.showSearch').md-whiteframe-3dp
         md-icon(icon='search')
   md-content
     md-list
+      md-list-item(ng-if='vm.possibleOrgs.length === 0')
+        i(translate='EVENTS.FORM.NO_CHAPTERS')
       md-list-item(ng-repeat='org in vm.possibleOrgs')
         md-checkbox(ng-model='org.isOrganising', ng-change='vm.changeEventOrganizer(org.isOrganising, org)')
         p {{org.name}}
