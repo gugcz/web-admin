@@ -22,7 +22,7 @@ div(ng-show='!vm.showSearch').md-whiteframe-3dp
       md-list-item(ng-repeat='org in vm.possibleOrgs')
         md-checkbox
         p {{org.name}}
-        md-icon(ng-click='vm.setGuarantee(org)', ng-class='{isActive: vm.isGuarantee(org)}').md-secondary star
+        md-icon(md-svg-icon='mdi:crown', ng-click='vm.setGuarantee(org)', ng-class='{isActive: vm.isGuarantee(org)}').md-secondary
         // TODO Add garant symbol
 div(ng-show='vm.showSearch')
   md-toolbar.md-hue-1
