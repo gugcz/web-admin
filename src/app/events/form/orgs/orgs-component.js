@@ -29,18 +29,9 @@
     this.updateOrgsByChapters = function() {
       firebaseEvents.getOrganizersByChapters(this.selectedChapters)
         .then(function(orgs) {
-          this.organizers = [];     // TODO Solve changing chapters after orgs selection
+          // TODO Solve changing chapters after orgs selection, orgs will stay in a organizers object
           this.possibleOrgs = orgs;
         }.bind(this));
-    };
-
-    this.changeEventOrganizer = function(state, org) {
-      var index = findIndexInOrgArray(this.possibleOrgs, org);
-      if (state) {
-        this.organizers.push(org);
-      } else {
-        this.organizers.splice(index, 1);
-      }
     };
 
     this.$onInit = function() {

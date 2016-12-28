@@ -1,12 +1,30 @@
 (function() {
   'use strict';
 
-  function EventFormController(firebaseEvents, $log) {
+  function EventFormController(firebaseEvents, $log, firebaseDB, $firebaseObject) {
+
+    var signedUser = getSignedUser();
 
     // TODO
     var getNextMonthDate = function() {
       return new Date();
     };
+
+    // TODO
+    function getSelectedChapter() {
+      return $firebaseObject(firebaseDB.ref('chapters/gdg_jihlava'));
+    }
+
+    // TODO
+    function getSignedUser() {
+      return $firebaseObject(firebaseDB.ref('orgs/T093T0DMW_U0CM45CP5'));
+    }
+
+    function getOrganizersWithSignedUser() {
+      var organizers = {};
+      organizers[signedUser.$id] = true;
+      return organizers;
+    }
 
     this.event = {
       name: 'GDG Coding Dojo Brno',
@@ -14,9 +32,9 @@
       startDate: getNextMonthDate(),
       description: 'Tady bude popis',
       regFormLink: 'forms.google.com',
-      chapters: [],   // TODO selected chapter from main toolbar
-      organizers: [],
-      guarantee: null,
+      chapters: [getSelectedChapter()],
+      guarantee: signedUser,
+      organizers: getOrganizersWithSignedUser(),
       links: [
         {url: 'www.facebook.com/outer'}
       ]

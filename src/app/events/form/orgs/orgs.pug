@@ -20,9 +20,9 @@ div(ng-show='!vm.showSearch').md-whiteframe-3dp
   md-content
     md-list
       md-list-item(ng-if='vm.possibleOrgs.length === 0')
-        i(translate='EVENTS.FORM.NO_CHAPTERS') 
+        i(translate='EVENTS.FORM.NO_CHAPTERS')
       md-list-item(ng-repeat='org in vm.possibleOrgs')
-        md-checkbox(ng-model='org.isOrganising', ng-change='vm.changeEventOrganizer(org.isOrganising, org)')
+        md-checkbox(ng-model='vm.organizers[org.$id]')
         p {{org.name}}
         md-icon(md-svg-icon='mdi:crown', ng-click='vm.setGuarantee(org)', ng-class='{isActive: vm.isGuarantee(org)}').md-secondary
         // TODO Add garant symbol
