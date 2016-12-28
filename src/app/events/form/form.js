@@ -28,7 +28,6 @@
 	angular.module('gugCZ.webAdmin.events.form', [
 	  'gugCZ.webAdmin.events.form.orgs',
     'gugCZ.webAdmin.events.form.dates',
-    'gugCZ.webAdmin.events.form.chapters',
     'gugCZ.webAdmin.events.form.links',
     'gugCZ.webAdmin.events.form.venue'
   ])

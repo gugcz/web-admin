@@ -1,24 +1,32 @@
-div(ng-show='!vm.showSearch')
-    md-toolbar(layout-row='')
-        .md-toolbar-tools
-            h2
-                span(translate='EVENTS.FORM.ORGANIZERS')
-            span(flex)
-            md-button(ng-click='vm.showSearch = true')
-                md-icon(icon='search')
-    md-content
-        md-list
-            md-radio-group
-                md-list-item(ng-repeat='org in vm.orgs')
-                    md-checkbox
-                    p {{org}}
-                    md-icon(ng-click='vm.setGuarantee(org)', ng-class='{isActive: vm.isGuarantee(org)}').md-secondary gavel
-                    // TODO Add garant symbol
+md-chips(ng-model='vm.selectedChapters', md-autocomplete-snap='', md-transform-chip='vm.transformChip($chip)', md-require-match='vm.autocompleteDemoRequireMatch')
+  md-autocomplete(md-selected-item='vm.selectedItem', md-search-text='vm.searchText', md-items='item in vm.querySearch(vm.searchText)', md-item-text='item.name', placeholder="{{ 'EVENTS.FORM.CHAPTERS' | translate }}")
+    span(md-highlight-text='vm.searchText') {{item.name}}
+  md-chip-template
+    // TODO maybe add chapter icons
+    standard {{$chip.name}}
+
+
+div(ng-show='!vm.showSearch').md-whiteframe-3dp
+  md-toolbar(layout-row='')
+    .md-toolbar-tools
+      h2
+        span(translate='EVENTS.FORM.ORGANIZERS')
+      span(flex)
+      md-button(ng-click='vm.showSearch = true')
+        md-icon(icon='search')
+  md-content
+    md-list
+      md-list-item(ng-repeat='org in vm.getPossibleOrgs()')
+        md-checkbox
+        p {{org.name}}
+        md-icon(ng-click='vm.setGuarantee(org)', ng-class='{isActive: vm.isGuarantee(org)}').md-secondary star
+        // TODO Add garant symbol
 div(ng-show='vm.showSearch')
-    md-toolbar.md-hue-1
-        .md-toolbar-tools
-            md-button(ng-click='vm.showSearch = false', aria-label='Back')
-            md-input-container(md-theme='input', flex='')
-                label  
-                input(ng-model='search.who', placeholder='enter search')
+  md-toolbar.md-hue-1
+    .md-toolbar-tools
+      md-button(ng-click='vm.showSearch = false', aria-label='Back')
+      md-input-container(md-theme='input', flex='')
+        label  
+        input(ng-model='search.who', placeholder='enter search')
+
 

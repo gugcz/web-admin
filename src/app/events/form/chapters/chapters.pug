@@ -1,6 +1,0 @@
-md-chips(ng-model='vm.selectedChapters', md-autocomplete-snap='', md-transform-chip='vm.transformChip($chip)', md-require-match='vm.autocompleteDemoRequireMatch')
-    md-autocomplete(md-selected-item='vm.selectedItem', md-search-text='vm.searchText', md-items='item in vm.querySearch(vm.searchText)', md-item-text='item.name', placeholder="{{ 'EVENTS.FORM.CHAPTERS' | translate }}")
-        span(md-highlight-text='vm.searchText') {{item.name}}
-    md-chip-template
-        // TODO maybe add chapter icons
-        standard {{$chip.name}}

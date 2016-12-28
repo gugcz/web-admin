@@ -34,7 +34,7 @@
           controller: "EventFormController",
           controllerAs: 'vm',
           data: {
-            title: "add event"
+            title: "Přidat akci"  // TODO Add translation
           }
         });
 

@@ -25,9 +25,7 @@ md-content(layout-padding)
       label(translate='EVENTS.FORM.REGFORM_LINK')
       input(ng-model='vm.event.regFormLink')
 
-    chapters-picker(selectedChapters='vm.event.chapters')
-
-    orgs-table.md-whiteframe-3dp
+    orgs-table(selected-chapters='vm.event.chapters', organizers='vm.event.organizers')
 
     links(links='vm.event.links')
 
