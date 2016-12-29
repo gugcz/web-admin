@@ -29,8 +29,12 @@
     this.event = {
       name: 'GDG Coding Dojo Brno',
       subtitle: 'Intenzivní trénink programátora',
-      startDate: getNextMonthDate(),
+      dates: {
+        start: new Date(),
+        end: new Date()
+      },
       description: 'Tady bude popis',
+      venue: null,
       regFormLink: 'forms.google.com',
       chapters: [getSelectedChapter()],
       guarantee: signedUser,
@@ -47,7 +51,7 @@
       $mdToast.show(
         $mdToast.simple()
           .textContent($translate.instant('EVENTS.FORM.EVENT_ADDED'))
-          .position('top right')
+          .position('bottom right')
           .hideDelay(3000)
       );
     };

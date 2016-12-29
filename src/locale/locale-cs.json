@@ -4,6 +4,14 @@
     "SAVE": "Uložit",
     "CANCEL": "Zrušit"
   },
+
+  "DIALOG": {
+    "ARE_YOU_SURE": "Jsi si jistý?",
+    "DELETE_EVENT_WARN": "Chystáš se tuto akci smazat. Nebude možné tuto akci obnovit.",
+    "YES": "Ano",
+    "NO": "Ne"
+  },
+
   "DASHBOARD": {
     "TITLE": "Dashboars",
     "DESCRIPTION": "tady budou grafy,widgety, ...",

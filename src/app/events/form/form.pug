@@ -17,14 +17,15 @@ md-content(layout-padding)
       div(flex='50')
         div(rows='4',marked='vm.event.description')
 
-    dates-picker
+    dates-picker(dates='vm.event.dates')
 
-    venue-selector
+    venue-selector(venue='vm.event.venue')
 
     md-input-container
       label(translate='EVENTS.FORM.REGFORM_LINK')
       input(ng-model='vm.event.regFormLink', required)
 
+    // TODO Add validations
     orgs-table(selected-chapters='vm.event.chapters', organizers='vm.event.organizers', guarantee='vm.event.guarantee')
 
     links(links='vm.event.links')

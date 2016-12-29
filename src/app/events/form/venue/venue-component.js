@@ -4,7 +4,10 @@
   var component = {
     templateUrl: 'app/events/form/venue/venue.html',
     controller: VenueController,
-    controllerAs: 'vm'
+    controllerAs: 'vm',
+    bindings: {
+      venue: '='
+    }
   };
 
 

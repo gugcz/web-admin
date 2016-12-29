@@ -2,37 +2,37 @@ md-content()
   section
     md-subheader Neuveřejněné akce
     md-list(layout-padding='')
-      md-list-item.md-3-line(ng-click='alert(1)', aria-label='Open event info')
-        .md-list-item-text
-          h3 GDG Coding Dojo Brno #1
-          h4 19.12.2016 v 17:00
-          p
-            | ModernTV
-        md-icon(md-svg-src='mdi:pencil', ng-click='', aria-label='Edit event').md-secondary
-        md-icon(md-svg-src='mdi:publish', ng-click='', aria-label='Publish event').md-secondary
-        md-icon(md-svg-src='mdi:delete', ng-click='', aria-label='Delete event').md-secondary
+      div(ng-repeat='eventDraft in vm.events.drafts')
+        md-list-item.md-3-line
+          .md-list-item-text
+            h3 {{eventDraft.name}}
+            h4 {{eventDraft.dates.start | date:'dd.MM.yyyy v HH:mm'}}
+            p {{eventDraft.venue.name}}
+          md-icon(md-svg-src='mdi:pencil', ng-click='vm.editEvent(eventDraft)', aria-label='Edit event').md-secondary
+          md-icon(md-svg-src='mdi:publish', ng-click='vm.publishEvent(eventDraft, $index)', aria-label='Publish event').md-secondary
+          md-icon(md-svg-src='mdi:delete', ng-click='vm.deleteEvent(eventDraft, vm.events.drafts, $index)', aria-label='Edit event').md-secondary
   section
     md-subheader.md-primary Budoucí akce
     md-list(layout-padding='')
-      md-list-item.md-3-line(ng-click='alert(1)', aria-label='Open event info')
-        .md-list-item-text
-          h3 GDG Coding Dojo Brno #1
-          h4 19.12.2016 v 17:00
-          p
-            | ModernTV
-        md-icon(md-svg-src='mdi:pencil', ng-click='', aria-label='Edit event').md-secondary
-        md-icon(md-svg-src='mdi:download', ng-click='', aria-label='Hide event').md-secondary
-        md-icon(md-svg-src='mdi:delete', ng-click='', aria-label='Delete event').md-secondary
+      div(ng-repeat='futureEvent in vm.events.future')
+        md-list-item.md-3-line
+          .md-list-item-text
+            h3 {{futureEvent.name}}
+            h4 {{futureEvent.dates.start | date:'dd.MM.yyyy v HH:mm'}}
+            p {{futureEvent.venue.name}}
+          md-icon(md-svg-src='mdi:pencil', ng-click='vm.editEvent(futureEvent)', aria-label='Edit event').md-secondary
+          md-icon(md-svg-src='mdi:download', ng-click='vm.hideEvent(futureEvent)', aria-label='Hide event').md-secondary
+          md-icon(md-svg-src='mdi:delete', ng-click='vm.deleteEvent(futureEvent, vm.events.future, $index)', aria-label='Edit event').md-secondary
   section
     md-subheader.md-warn Proběhlé akce k reportování
     md-list(layout-padding='')
-      md-list-item.md-3-line(ng-click='alert(1)', aria-label='Open event info')
-        .md-list-item-text
-          h3 GDG Coding Dojo Brno #1
-          h4 19.12.2016 v 17:00
-          p
-            | ModernTV
-        md-icon(md-svg-src='mdi:message', ng-click='', aria-label='Report event').md-secondary
+      div(ng-repeat='unreportedEvent in vm.events.unreported')
+        md-list-item.md-3-line
+          .md-list-item-text
+            h3 {{unreportedEvent.name}}
+            h4 {{unreportedEvent.dates.start | date:'dd.MM.yyyy v HH:mm'}}
+            p {{unreportedEvent.venue.name}}
+          md-icon(md-svg-src='mdi:message', ng-click='vm.reportEvent(unreportedEvent)', aria-label='Report event').md-secondary
 
 // TODO Add loading icon
 md-button(class="md-fab md-primary md-fab-bottom-right fixed", aria-label='Add event', ng-click='vm.addEvent()')

@@ -4,7 +4,10 @@
   var component = {
     templateUrl: 'app/events/form/dates/dates.html',
     controller: DatesController,
-    controllerAs: 'vm'
+    controllerAs: 'vm',
+    bindings: {
+      dates: '='
+    }
   };
 
   /**
@@ -47,6 +50,17 @@
 
 
   function DatesController($mdDialog, $translate) {
+
+    this.$onInit = function() {
+      this.duration = preFillData.duration;
+
+      this.dates = {
+        start: setTimeByPreset(getNextMonthDate(), preFillData.startTime),
+        end: null
+      };
+
+      this.calculateEndDate();
+    };
 
     var preFillData = { // TODO vstupní data z firebase
       startTime: new Date("1970-01-01T16:00Z"),
