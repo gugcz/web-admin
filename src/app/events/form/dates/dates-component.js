@@ -53,16 +53,24 @@
       duration: 120
     };
 
-    this.durations = {
-      60: '1 hodina',
-      90: '1,5 hodiny',
-      120: '2 hodiny',
-      150: '2,5 hodiny',
-      180: '3 hodiny',
-      210: '3,5 hodiny',
-      240: '4 hodiny',
-      300: '5 hodin',
-      360: '6 hodin'
+    this.config = {
+      repeats: {
+        weekRepeat: ["FIRST", "SECOND", "THIRD", "FOURTH", "LAST"],
+        weeks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        daysInWeek: ['SUNDAY', "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"]
+      },
+      durations: {
+        60: '1 hodina',
+        90: '1,5 hodiny',
+        120: '2 hodiny',
+        150: '2,5 hodiny',
+        180: '3 hodiny',
+        210: '3,5 hodiny',
+        240: '4 hodiny',
+        300: '5 hodin',
+        360: '6 hodin'
+      }
     };
 
     this.getBaseCalendarOptions_ = function() {
@@ -72,7 +80,6 @@
       });
     };
 
-    this.isMultiDay = false;
     this.duration = preFillData.duration;
 
     this.dates = {
@@ -107,6 +114,8 @@
       this.dates.start.setFullYear(date.year);
       this.dates.start.setMonth(date.month);
       this.dates.start.setDate(date.day);
+
+      this.repeats.day = this.dates.start.getDay();
 
       this.calculateEndDate();
 
@@ -150,6 +159,11 @@
     this.isDateAfterNewsletterDeadline = function() {
       var newsletterDeadline = getLastDayOfThisMonth();
       return newsletterDeadline > this.dates.start;
+    };
+
+    this.generateTerms = function() {
+      // TODO dořešit výpočet a zobrazení
+      alert(angular.toJson(this.repeats));
     };
 
 

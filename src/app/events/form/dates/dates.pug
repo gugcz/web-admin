@@ -1,8 +1,10 @@
 div(layout='row')
-  div(flex).calendar.md-whiteframe-3dp
+  div(flex).calendar
+    div.md-whiteframe-3dp
       flex-calendar(options="vm.getStartDateOptions()")
 
-  div(flex, ng-if='vm.isMultiDay').calendar.md-whiteframe-3dp
+  div(flex, ng-if='vm.isMultiDay').calendar
+    div.md-whiteframe-3dp
       flex-calendar(options="vm.getEndDateOptions()")
 
   div(flex="30")
@@ -18,10 +20,64 @@ div(layout='row')
       md-input-container(ng-if='!vm.isMultiDay')
         label(translate='EVENTS.FORM.DURATION')
         md-select(ng-model='vm.duration', ng-change="vm.calculateEndDate()")
-          md-option(ng-repeat='(duration, label) in vm.durations', ng-value='duration') {{label}}
+          md-option(ng-repeat='(duration, label) in vm.config.durations', ng-value='duration') {{label}}
 
       md-input-container(ng-if='vm.isMultiDay')
         input(type="time", ng-model="vm.dates.end")
         // TODO Set input for time
         label(translate='EVENTS.FORM.END_TIME')
 
+      md-input-container
+        md-checkbox(ng-model='vm.isRepeating')
+          span(translate='EVENTS.FORM.REPEATING')
+
+div(ng-if="vm.isRepeating")
+
+  md-radio-group(ng-model='vm.repeats.type', layout="row")
+    label(translate='EVENTS.FORM.REPEAT_BY', flex=10)
+    md-radio-button(value='weeks')
+      span(translate='EVENTS.FORM.REPEAT_BY_WEEKS')
+    md-radio-button(value='months')
+      span(translate='EVENTS.FORM.REPEAT_BY_MONTHS')
+
+    span(flex)
+
+  div(ng-switch="vm.repeats.type")
+
+    div(ng-switch-when="weeks", flex, layout="column")
+
+      md-input-container
+        label(translate='EVENTS.FORM.REPEAT_INTERVAL')
+        md-select(ng-model='vm.repeats.weeks', flex=50)
+          md-option(ng-repeat='week in vm.config.repeats.weeks', ng-value='week', ng-pluralize, count="week", when="{'one': '{} týden', 'few': '{} týdny','other': '{} týdnů'}")
+
+      md-radio-group(layout="row", ng-model='vm.repeats.day')
+        label(translate='EVENTS.FORM.REPEAT_DAY', flex=10)
+
+        md-radio-button(flex="14", ng-repeat='(index, day) in vm.config.repeats.daysInWeek', ng-value="index")
+          span(translate="{{day}}")
+
+        span(flex)
+
+    div(ng-switch-when="months", flex, layout="column")
+
+      md-input-container
+        label(translate='EVENTS.FORM.REPEAT_INTERVAL')
+        md-select(ng-model='vm.repeats.montInterval', flex=50)
+          md-option(ng-repeat='month in vm.config.repeats.months', ng-value='month', ng-pluralize, count="month", when="{'one': '{} měsíc', 'few': '{} měsíce','other': '{} měsíců'}")
+
+      div(layout="row")
+        md-input-container(flex=25)
+          label(translate='EVENTS.FORM.REPEAT_EVERY')
+          md-select(ng-model='vm.repeats.weekInterval')
+            md-option(ng-repeat='item in vm.config.repeats.weekRepeat', ng-value='item')
+              span(translate="EVENTS.FORM.REPEAT_WEEK_INTERVAL_{{item}}")
+
+        md-input-container(flex=25)
+          label(translate='EVENTS.FORM.REPEAT_DAY')
+          md-select(ng-model='vm.repeats.day')
+            md-option(ng-repeat='(index, day) in vm.config.repeats.daysInWeek', ng-value='index')
+              span(translate="{{day}}")
+
+  div(layout="row")
+    md-button(flex=33, ng-click='vm.generateTerms()').md-raised Generovat termíny
