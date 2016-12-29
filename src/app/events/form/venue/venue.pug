@@ -1,6 +1,6 @@
 div(layout='row')
   div(flex)
-    md-select(ng-model='vm.selectedVenue', placeholder="{{ 'EVENTS.FORM.VENUE' | translate}}")
+    md-select(ng-model='vm.selectedVenue', placeholder="{{ 'EVENTS.FORM.VENUE' | translate}}", required)
       md-optgroup(label="Venues")
         md-option(ng-value='venue', ng-repeat='venue in vm.venues')
             div
@@ -8,8 +8,8 @@ div(layout='row')
               span ,&nbsp;{{venue.address}}
 
   div(flex)
-    md-button(ng-click="vm.editVenue()", ng-if="vm.selectedVenue")
+    md-button(ng-click="vm.editVenue()", ng-if="vm.selectedVenue", aria-label='Edit venue')
       span(translate="EVENTS.FORM.EDIT_VENUE")
 
-    md-button(ng-click="vm.addVenue()")
+    md-button(ng-click="vm.addVenue()", aria-label='Add venue')
       span(translate="EVENTS.FORM.ADD_VENUE")

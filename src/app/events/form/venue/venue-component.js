@@ -25,8 +25,7 @@
   }
 
   function VenueController($document, $mdDialog) {
-    // TODO Order by activity
-    // TODO Now guarantee not work, $id missing
+    // TODO load from Firebase
     this.venues = [
       {
         name: "VŠPJ",

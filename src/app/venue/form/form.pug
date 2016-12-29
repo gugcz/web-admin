@@ -4,7 +4,7 @@ form(name='venueForm', ng-submit="vm.submit(venueForm)", novalidate)
       h2(translate="VENUE.TITLE")
       span(flex='')
       md-button.md-icon-button(ng-click='vm.cancel()')
-        md-icon(aria-label='Close dialog') close
+        md-icon(md-svg-icon='mdi:close', aria-label='Close dialog')
 
   md-dialog-content(layout-padding)
     .md-dialog-content.venue-form-content
@@ -29,6 +29,6 @@ form(name='venueForm', ng-submit="vm.submit(venueForm)", novalidate)
 
   md-dialog-actions(layout='row')
     span(flex='')
-    md-button.md-raised(translate="BUTTONS.CANCEL",ng-click="vm.cancel()")
-    md-button.md-raised.md-primary(type="submit", translate="BUTTONS.SAVE")
+    md-button.md-raised(translate="BUTTONS.CANCEL",ng-click="vm.cancel()", aria-label='Cancel')
+    md-button.md-raised.md-primary(type="submit", translate="BUTTONS.SAVE", aria-label='Save venue')
 

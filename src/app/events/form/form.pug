@@ -3,7 +3,7 @@ md-content(layout-padding)
     div(layout="row")
       md-input-container(flex)
         label(translate='EVENTS.FORM.NAME')
-        input(ng-model='vm.event.name')
+        input(ng-model='vm.event.name', required)
 
       md-input-container(flex)
         label(translate='EVENTS.FORM.SUBTITLE')
@@ -12,7 +12,7 @@ md-content(layout-padding)
     div(layout="row")
       md-input-container(flex='50')
         label(translate='EVENTS.FORM.DESCRIPTION')
-        textarea(rows='4', ng-model='vm.event.description')
+        textarea(rows='4', ng-model='vm.event.description', required)
 
       div(flex='50')
         div(rows='4',marked='vm.event.description')
@@ -23,7 +23,7 @@ md-content(layout-padding)
 
     md-input-container
       label(translate='EVENTS.FORM.REGFORM_LINK')
-      input(ng-model='vm.event.regFormLink')
+      input(ng-model='vm.event.regFormLink', required)
 
     orgs-table(selected-chapters='vm.event.chapters', organizers='vm.event.organizers', guarantee='vm.event.guarantee')
 

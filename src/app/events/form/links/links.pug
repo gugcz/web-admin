@@ -9,4 +9,4 @@ md-list
       md-icon(ng-switch-default, md-svg-icon='mdi:link-variant')
 
       input(ng-model='link.url', ng-change='vm.onLinkUpdate(index)')
-    md-icon(ng-click='vm.removeLink($index)').md-secondary close
+    md-icon(ng-click='vm.removeLink($index)', aria-label='Remove link').md-secondary close

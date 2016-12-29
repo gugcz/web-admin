@@ -6,7 +6,7 @@ md-toolbar(layout='row').md-whiteframe-z2
     span(flex='')
 
     md-button {{app.fbUser.name}}
-    md-select.md-no-underline(ng-model='app.selectedChapter')
+    md-select.md-no-underline(ng-model='app.selectedChapter', aria-label='Select default chapter')
       md-option(value='gdgjihlava') GDG Jihlava
       md-option(value='gdgbrno') GDG Brno
     md-button(auth-logout-link) Log Out

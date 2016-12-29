@@ -1,12 +1,12 @@
 (function() {
   'use strict';
 
-  function firebaseFactory(firebaseDB, $q, $firebaseArray, removeDiacritics, $log) {
+  function firebaseFactory(firebaseDB, $q, $firebaseArray, $log) {
     var self = this;
     var chapterID = null;
 
     self.addEvent = function(event) {
-      $log.debug(event);
+      $log.debug('You send this event:', event);
     };
 
     self.getChapters = function() {

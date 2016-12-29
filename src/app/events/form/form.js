@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function EventFormController(firebaseEvents, $log, firebaseDB, $firebaseObject) {
+  function EventFormController(firebaseEvents, $location, $log, firebaseDB, $firebaseObject, $mdToast, $translate) {
 
     var signedUser = getSignedUser();
 
@@ -43,6 +43,13 @@
 
     this.addEvent = function() {
       firebaseEvents.addEvent(this.event);
+      $location.path('/events');
+      $mdToast.show(
+        $mdToast.simple()
+          .textContent($translate.instant('EVENTS.FORM.EVENT_ADDED'))
+          .position('bottom right')
+          .hideDelay(3000)
+      );
     };
   }
 

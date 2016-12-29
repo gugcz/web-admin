@@ -14,7 +14,7 @@ div(layout='row')
           span(translate='') EVENTS.FORM.MULTIDAY
 
       md-input-container
-        input(type="time", ng-model="vm.dates.start", ng-change="vm.calculateEndDate()")
+        input(type="time", ng-model="vm.dates.start", ng-change="vm.calculateEndDate()", required, aria-label='Start time')
         label(translate='EVENTS.FORM.START_TIME')
 
       md-input-container(ng-if='!vm.isMultiDay')
@@ -23,7 +23,7 @@ div(layout='row')
           md-option(ng-repeat='(duration, label) in vm.config.durations', ng-value='duration') {{label}}
 
       md-input-container(ng-if='vm.isMultiDay')
-        input(type="time", ng-model="vm.dates.end")
+        input(type="time", ng-model="vm.dates.end", required, aria-label='End time')
         // TODO Set input for time
         label(translate='EVENTS.FORM.END_TIME')
 

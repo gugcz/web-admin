@@ -1,5 +1,5 @@
 md-chips(ng-model='vm.selectedChapters', md-on-add="vm.updateOrgsByChapters()" md-on-remove="vm.updateOrgsByChapters()"
-md-autocomplete-snap='',md-transform-chip='vm.transformChip($chip)', md-require-match='vm.autocompleteDemoRequireMatch')
+md-autocomplete-snap='',md-transform-chip='vm.transformChip($chip)', md-require-match='vm.autocompleteDemoRequireMatch', required)
   md-autocomplete(md-selected-item='vm.selectedItem', md-search-text='vm.searchText',
   md-items='item in vm.querySearch(vm.searchText)', md-item-text='item.name',
   placeholder="{{ 'EVENTS.FORM.CHAPTERS' | translate }}")
@@ -18,7 +18,7 @@ div(ng-if="!vm.loading")
         h2
           span(translate='EVENTS.FORM.ORGANIZERS')
         span(flex)
-        md-button(ng-click='vm.showSearch = true')
+        md-button(ng-click='vm.showSearch = true', aria-label='Search')
           md-icon(icon='search')
     md-content
       md-list
@@ -27,13 +27,12 @@ div(ng-if="!vm.loading")
         md-list-item(ng-repeat='org in vm.possibleOrgs')
           md-checkbox(ng-model='vm.organizers[org.$id]')
           p {{org.name}}
-          md-icon(md-svg-icon='mdi:crown', ng-click='vm.setGuarantee(org)', ng-class='{isActive: vm.isGuarantee(org)}').md-secondary
-          // TODO Add garant symbol
+          md-icon(md-svg-icon='mdi:crown', ng-click='vm.setGuarantee(org)', ng-class='{isActive: vm.isGuarantee(org)}', aria-label='Set as guarantee').md-secondary
   div(ng-show='vm.showSearch')
     md-toolbar.md-hue-1
       .md-toolbar-tools
         md-button(ng-click='vm.showSearch = false', aria-label='Back')
-        md-input-container(md-theme='input', flex='')
+        md-input-container(flex='')
           label  
           input(ng-model='search.who', placeholder='enter search')
 
