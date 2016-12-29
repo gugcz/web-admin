@@ -9,29 +9,32 @@ md-autocomplete-snap='',md-transform-chip='vm.transformChip($chip)', md-require-
     standard {{$chip.name}}
 
 
-div(ng-show='!vm.showSearch').md-whiteframe-3dp
-  md-toolbar(layout-row='')
-    .md-toolbar-tools
-      h2
-        span(translate='EVENTS.FORM.ORGANIZERS')
-      span(flex)
-      md-button(ng-click='vm.showSearch = true')
-        md-icon(icon='search')
-  md-content
-    md-list
-      md-list-item(ng-if='vm.possibleOrgs.length === 0')
-        i(translate='EVENTS.FORM.NO_CHAPTERS')
-      md-list-item(ng-repeat='org in vm.possibleOrgs')
-        md-checkbox(ng-model='vm.organizers[org.$id]')
-        p {{org.name}}
-        md-icon(md-svg-icon='mdi:crown', ng-click='vm.setGuarantee(org)', ng-class='{isActive: vm.isGuarantee(org)}').md-secondary
-        // TODO Add garant symbol
-div(ng-show='vm.showSearch')
-  md-toolbar.md-hue-1
-    .md-toolbar-tools
-      md-button(ng-click='vm.showSearch = false', aria-label='Back')
-      md-input-container(md-theme='input', flex='')
-        label  
-        input(ng-model='search.who', placeholder='enter search')
+div(ng-if="vm.loading")
+  md-progress-circular(md-mode="indeterminate")
+div(ng-if="!vm.loading")
+  div(ng-show='!vm.showSearch').md-whiteframe-3dp
+    md-toolbar(layout-row='')
+      .md-toolbar-tools
+        h2
+          span(translate='EVENTS.FORM.ORGANIZERS')
+        span(flex)
+        md-button(ng-click='vm.showSearch = true')
+          md-icon(icon='search')
+    md-content
+      md-list
+        md-list-item(ng-if='vm.possibleOrgs.length === 0')
+          i(translate='EVENTS.FORM.NO_CHAPTERS')
+        md-list-item(ng-repeat='org in vm.possibleOrgs')
+          md-checkbox(ng-model='vm.organizers[org.$id]')
+          p {{org.name}}
+          md-icon(md-svg-icon='mdi:crown', ng-click='vm.setGuarantee(org)', ng-class='{isActive: vm.isGuarantee(org)}').md-secondary
+          // TODO Add garant symbol
+  div(ng-show='vm.showSearch')
+    md-toolbar.md-hue-1
+      .md-toolbar-tools
+        md-button(ng-click='vm.showSearch = false', aria-label='Back')
+        md-input-container(md-theme='input', flex='')
+          label  
+          input(ng-model='search.who', placeholder='enter search')
 
 

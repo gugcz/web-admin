@@ -27,9 +27,11 @@
     };
 
     this.updateOrgsByChapters = function() {
+      this.loading = true;
       firebaseEvents.getOrganizersByChapters(this.selectedChapters)
         .then(function(orgs) {
           // TODO Solve changing chapters after orgs selection, orgs will stay in a organizers object
+          this.loading = false;
           this.possibleOrgs = orgs;
         }.bind(this));
     };

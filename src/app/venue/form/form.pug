@@ -1,22 +1,33 @@
-md-content(layout-padding)
-  form(name='venueForm', ng-submit="vm.submit(venueForm)", novalidate, layout="column")
-    md-input-container
-      label(translate='VENUE.FORM.NAME')
-      input(required, ng-model='vm.venue.name')
+form(name='venueForm', ng-submit="vm.submit(venueForm)", novalidate)
+  md-toolbar
+    .md-toolbar-tools
+      h2(translate="VENUE.TITLE")
+      span(flex='')
+      md-button.md-icon-button(ng-click='vm.cancel()')
+        md-icon(aria-label='Close dialog') close
 
-    md-input-container
-      label(translate='VENUE.FORM.ADDRESS')
-      input(required, ng-model='vm.venue.address')
+  md-dialog-content(layout-padding)
+    .md-dialog-content.venue-form-content
 
-    md-input-container
-      label(translate='VENUE.FORM.MAP_LINK')
-      input(type="url", ng-model='vm.venue.mapLink')
+      div(layout="row")
+        md-input-container(flex=50)
+          label(translate='VENUE.FORM.NAME')
+          input(required, ng-model='vm.venue.name')
 
-    md-input-container
-      label(translate='VENUE.FORM.NOTE')
-      textarea(ng-model='vm.venue.note', rows=4)
+        md-input-container(flex=50)
+          label(translate='VENUE.FORM.ADDRESS')
+          input(required, ng-model='vm.venue.address')
 
-  div(layout='row')
+      div(layout="column")
+        md-input-container
+          label(translate='VENUE.FORM.MAP_LINK')
+          input(type="url", ng-model='vm.venue.mapLink')
+
+        md-input-container
+          label(translate='VENUE.FORM.NOTE')
+          textarea(ng-model='vm.venue.note', rows=4)
+
+  md-dialog-actions(layout='row')
     span(flex='')
     md-button.md-raised(translate="BUTTONS.CANCEL",ng-click="vm.cancel()")
     md-button.md-raised.md-primary(type="submit", translate="BUTTONS.SAVE")
