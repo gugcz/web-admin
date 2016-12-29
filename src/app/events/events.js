@@ -16,11 +16,18 @@
           resolve: {
             events: function() { return [];}
           },
-          controller: function(events) {
+          controller: function(events, $location) {
             this.events = events;
+
+            this.addEvent = function() {
+              $location.path('/events/form');
+            }
           },
           controllerAs: 'eventsCtrl',
-          templateUrl: 'app/events/events.html'
+          templateUrl: 'app/events/events.html',
+          data: {
+            title: 'Akce' // TODO Add translation
+          }
         });
       })
 

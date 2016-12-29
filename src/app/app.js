@@ -24,7 +24,7 @@
     .config(function($stateProvider) {
       $stateProvider.state('base', {
         url: '/',
-        controller: function($mdSidenav, $firebaseObject, $state, $scope) {
+        controller: function($mdSidenav, $firebaseObject, $state, $scope, $translate) {
 
           this.toggleSidenav = buildToggler('left');
 
@@ -40,17 +40,17 @@
             {
               link: 'dashboard',
               title: 'Dashboard',
-              icon: 'dashboard'
+              icon: 'home'
             },
             {
-              link: 'events',
-              title: 'Events',
-              icon: 'events'
+              link: 'chapters',
+              title: $translate.instant('CHAPTERS.MANAGEMENT'),
+              icon: 'account-multiple'
             },
             {
-              link: 'events-form',
-              title: 'Event form',
-              icon: 'events'
+              link: 'venues',
+              title: 'Správa venues',
+              icon: 'map-marker'
             }
           ];
 

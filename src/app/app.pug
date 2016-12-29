@@ -17,7 +17,7 @@ div(layout='row', flex='').md-whiteframe-z2
       md-list-item(ng-repeat='item in app.menu')
         md-item-content(ui-sref="{{item.link}}", md-ink-ripple, layout='row', layout-align='start center')
           .inset
-            ng-md-icon(icon='{{item.icon}}')
+            md-icon(md-svg-icon='mdi:{{item.icon}}')
           .inset {{item.title}}
 
   #content(layout='column', flex)

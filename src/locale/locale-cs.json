@@ -9,6 +9,11 @@
     "DESCRIPTION": "tady budou grafy,widgety, ...",
     "NAME": "Název akce"
   },
+
+  "EVENTS": {
+    "WORD": "Akce",
+    "YOURS": "Tvoje akce"
+  },
   "EVENTS.FORM": {
     "NAME": "Název akce",
     "SUBTITLE": "Podtitul",
@@ -47,6 +52,11 @@
 
     "EVENT_ADDED": "Akce byla vytvořena!"
   },
+
+  "CHAPTERS": {
+    "MANAGEMENT": "Správa chapterů"
+  },
+
   "VENUE": {
     "TITLE": "Místo"
   },

@@ -43,11 +43,11 @@
 
     this.addEvent = function() {
       firebaseEvents.addEvent(this.event);
-      $location.path('/events');
+      $location.path('/dashboard');
       $mdToast.show(
         $mdToast.simple()
           .textContent($translate.instant('EVENTS.FORM.EVENT_ADDED'))
-          .position('bottom right')
+          .position('top right')
           .hideDelay(3000)
       );
     };

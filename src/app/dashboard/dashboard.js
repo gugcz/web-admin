@@ -10,33 +10,29 @@
         $stateProvider.state('dashboard', {
           parent: 'base',
           url: 'dashboard',
-          controller: function() {
+          controller: function($location) {
             var yesterday, tomorrow;
             yesterday = tomorrow = new Date();
             yesterday.setDate(yesterday.getDate() - 1);
             tomorrow.setDate(tomorrow.getDate() + 1);
 
 
-            this.events = [
-              {
-                title: "Moje následující akce",
-                start: tomorrow,
-                state: "future"
-              },
-              {
-                title: "Moje minulá akce",
-                start: yesterday,
-                state: "unreported"
-              },
-              {
-                title: "Moje minulá akce",
-                start: yesterday,
-                state: "finished"
-              }
-            ];
+            this.events = {
+              drafts: [],
+              future: [],
+              unreported: []
+            }
+
+            this.editEvent = function(event) {
+              $location.path('/events/form');
+            }
+
+            this.addEvent = function() {
+              $location.path('/events/form');
+            }
 
           },
-          controllerAs: '$ctrl',
+          controllerAs: 'vm',
           templateUrl: 'app/dashboard/dashboard.html'
         });
       });

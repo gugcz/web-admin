@@ -1,24 +1,39 @@
-h1(translate="") DASHBOARD.TITLE
+md-content()
+  section
+    md-subheader Neuveřejněné akce
+    md-list(layout-padding='')
+      md-list-item.md-3-line(ng-click='alert(1)', aria-label='Open event info')
+        .md-list-item-text
+          h3 GDG Coding Dojo Brno #1
+          h4 19.12.2016 v 17:00
+          p
+            | ModernTV
+        md-icon(md-svg-src='mdi:pencil', ng-click='', aria-label='Edit event').md-secondary
+        md-icon(md-svg-src='mdi:publish', ng-click='', aria-label='Publish event').md-secondary
+        md-icon(md-svg-src='mdi:delete', ng-click='', aria-label='Delete event').md-secondary
+  section
+    md-subheader.md-primary Budoucí akce
+    md-list(layout-padding='')
+      md-list-item.md-3-line(ng-click='alert(1)', aria-label='Open event info')
+        .md-list-item-text
+          h3 GDG Coding Dojo Brno #1
+          h4 19.12.2016 v 17:00
+          p
+            | ModernTV
+        md-icon(md-svg-src='mdi:pencil', ng-click='', aria-label='Edit event').md-secondary
+        md-icon(md-svg-src='mdi:download', ng-click='', aria-label='Hide event').md-secondary
+        md-icon(md-svg-src='mdi:delete', ng-click='', aria-label='Delete event').md-secondary
+  section
+    md-subheader.md-warn Proběhlé akce k reportování
+    md-list(layout-padding='')
+      md-list-item.md-3-line(ng-click='alert(1)', aria-label='Open event info')
+        .md-list-item-text
+          h3 GDG Coding Dojo Brno #1
+          h4 19.12.2016 v 17:00
+          p
+            | ModernTV
+        md-icon(md-svg-src='mdi:message', ng-click='', aria-label='Report event').md-secondary
 
-p(translate='DASHBOARD.DESCRIPTION')
-
-
-
-
-
-div(layout='row', layout-padding='', layout-wrap='', layout-fill='', style='padding-bottom: 32px;', ng-cloak='')
-
-  md-list(flex='70').my-events
-    md-list-item.md-2-line(ng-repeat='event in $ctrl.events',ng-class="event.state")
-      .md-list-item-text()
-        h3 {{event.title}}
-        p {{event.start | date}}
-        md-icon.md-secondary.md-hue-3.report(md-font-icon='icon-report') Report
-        md-icon.md-secondary.edit(md-font-icon='icon-edit') Edit
-
-
-  md-whiteframe.md-whiteframe-1dp(flex='30', layout='', layout-align='center center')
-    span .md-whiteframe-1dp
-
-
-
+// TODO Add loading icon
+md-button(class="md-fab md-primary md-fab-bottom-right fixed", aria-label='Add event', ng-click='vm.addEvent()')
+  md-icon add
