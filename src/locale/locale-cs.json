@@ -43,7 +43,9 @@
     "ADD_VENUE": "Přidat venue",
     "EDIT_VENUE": "Upravit venue",
 
-    "SOCIAL_LINK": "Odkaz na událost na sociální síti"
+    "SOCIAL_LINK": "Odkaz na událost na sociální síti",
+
+    "EVENT_ADDED": "Akce byla vytvořena!"
   },
   "VENUE": {
     "TITLE": "Místo"
