@@ -3,9 +3,10 @@ md-content()
     md-subheader Neuveřejněné akce
     md-list(layout-padding='')
       div(ng-repeat='eventDraft in vm.events.drafts')
-        md-list-item.md-3-line
-          .md-list-item-text
+        md-list-item
+          .md-list-item-text(flex=30)
             h3 {{eventDraft.name}}
+          .md-list-item-text(flex=30)
             h4 {{eventDraft.dates.start | date:'dd.MM.yyyy v HH:mm'}}
             p {{eventDraft.venue.name}}
           md-icon(md-svg-src='mdi:pencil', ng-click='vm.editEvent(eventDraft)', aria-label='Edit event').md-secondary
@@ -15,9 +16,10 @@ md-content()
     md-subheader.md-primary Budoucí akce
     md-list(layout-padding='')
       div(ng-repeat='futureEvent in vm.events.future')
-        md-list-item.md-3-line
-          .md-list-item-text
+        md-list-item
+          .md-list-item-text(flex=30)
             h3 {{futureEvent.name}}
+          .md-list-item-text(flex=30)
             h4 {{futureEvent.dates.start | date:'dd.MM.yyyy v HH:mm'}}
             p {{futureEvent.venue.name}}
           md-icon(md-svg-src='mdi:pencil', ng-click='vm.editEvent(futureEvent)', aria-label='Edit event').md-secondary
@@ -27,13 +29,25 @@ md-content()
     md-subheader.md-warn Proběhlé akce k reportování
     md-list(layout-padding='')
       div(ng-repeat='unreportedEvent in vm.events.unreported')
-        md-list-item.md-3-line
-          .md-list-item-text
+        md-list-item
+          .md-list-item-text(flex=30)
             h3 {{unreportedEvent.name}}
+          .md-list-item-text(flex=30)
             h4 {{unreportedEvent.dates.start | date:'dd.MM.yyyy v HH:mm'}}
             p {{unreportedEvent.venue.name}}
           md-icon(md-svg-src='mdi:message', ng-click='vm.reportEvent(unreportedEvent)', aria-label='Report event').md-secondary
 
-// TODO Add loading icon
-md-button(class="md-fab md-primary md-fab-bottom-right fixed", aria-label='Add event', ng-click='vm.addEvent()')
-  md-icon add
+md-fab-speed-dial(md-open='vm.isFabOpen', md-direction='up', class="md-fab-bottom-right fixed md-hover-full")
+  md-fab-trigger
+    md-button.md-fab.md-primary(aria-label='menu')
+      md-icon add
+
+  // TODO nemělo by to fungovat i bez show?
+  md-fab-actions(ng-show="vm.isFabOpen")
+    md-button.md-fab.md-raised.md-mini(aria-label='Add event', ui-sref="events-form")
+      md-tooltip(md-direction="left", md-visible="tooltipVisible", md-autohide="false") Add event
+      md-icon(md-svg-src='mdi:plus')
+
+    md-button.md-fab.md-raised.md-mini(aria-label='Add term')
+      md-tooltip(md-direction="left", md-visible="tooltipVisible", md-autohide="false") Add term
+      md-icon(md-svg-src='mdi:calendar-plus')

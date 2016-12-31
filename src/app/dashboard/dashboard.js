@@ -11,6 +11,7 @@
           parent: 'base',
           url: 'dashboard',
           controller: function($location, $mdDialog, $translate) {
+            this.isFabOpen = false;
 
             // TODO Load from firebase
             this.events = {
@@ -125,11 +126,6 @@
             // TODO
             this.reportEvent = function(event) {
               alert('TODO');
-            }
-
-            this.addEvent = function() {
-              // TODO Add event data
-              $location.path('/events/form');
             }
 
           },

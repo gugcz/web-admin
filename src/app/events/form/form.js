@@ -1,14 +1,9 @@
 (function() {
   'use strict';
 
-  function EventFormController(firebaseEvents, $location, $log, firebaseDB, $firebaseObject, $mdToast, $translate) {
+  function EventFormController(firebaseEvents, $state, firebaseDB, $firebaseObject, $mdToast, $translate) {
 
     var signedUser = getSignedUser();
-
-    // TODO
-    var getNextMonthDate = function() {
-      return new Date();
-    };
 
     // TODO
     function getSelectedChapter() {
@@ -27,33 +22,31 @@
     }
 
     this.event = {
-      name: 'GDG Coding Dojo Brno',
-      subtitle: 'Intenzivní trénink programátora',
-      dates: {
-        start: new Date(),
-        end: new Date()
-      },
-      description: 'Tady bude popis',
+      name: '',
+      subtitle: '',
+      dates: {},
+      description: '',
       venue: null,
-      regFormLink: 'forms.google.com',
+      regFormLink: '',
       chapters: [getSelectedChapter()],
       guarantee: signedUser,
       organizers: getOrganizersWithSignedUser(),
       links: [
-        {url: 'www.facebook.com/outer'}
+        {url: ''}
       ]
 
     };
 
     this.addEvent = function() {
-      firebaseEvents.addEvent(this.event);
-      $location.path('/dashboard');
+      firebaseEvents.addEvent(this.event);  // TODO nebude to promise?
       $mdToast.show(
-        $mdToast.simple()
+        $mdToast.simple() // TODO zapouzdřit?
           .textContent($translate.instant('EVENTS.FORM.EVENT_ADDED'))
           .position('bottom right')
           .hideDelay(3000)
       );
+
+      $state.go('dashboard');
     };
   }
 

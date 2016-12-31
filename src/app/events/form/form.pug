@@ -23,7 +23,11 @@ md-content(layout-padding)
 
     md-input-container
       label(translate='EVENTS.FORM.REGFORM_LINK')
-      input(ng-model='vm.event.regFormLink', required)
+      input(type='url', name="regFormLink", ng-model='vm.event.regFormLink', required)
+      // TODO standard translated messages
+      div(ng-messages="addEventForm.regFormLink.$error")
+        div(ng-message="required") This is required.
+        div(ng-message="url") This is not url.
 
     // TODO Add validations
     orgs-table(selected-chapters='vm.event.chapters', organizers='vm.event.organizers', guarantee='vm.event.guarantee')
