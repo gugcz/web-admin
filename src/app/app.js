@@ -65,12 +65,12 @@
           this.user = {
             name: "Jan Novák",
             chapters: {
-              gdgjihlava: "GDG Jihlava",
-              gdgBrno: "GDG Brno"
+              gdg_jihlava: "GDG Jihlava",
+              gdg_brno: "GDG Brno"
             }
           };
 
-          this.selectedChapter = Object.keys(this.user.chapters)[0];
+          this.selectedChapter = "gdg_brno";
 
         },
         controllerAs: 'app',
