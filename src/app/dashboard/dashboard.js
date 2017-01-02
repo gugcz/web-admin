@@ -10,7 +10,7 @@
         $stateProvider.state('dashboard', {
           parent: 'base',
           url: 'dashboard',
-          controller: function($location, $mdDialog, $translate) {
+          controller: function($state, $mdDialog, $translate) {
             this.isFabOpen = false;
 
             // TODO Load from firebase
@@ -92,7 +92,7 @@
             }
 
             this.editEvent = function(event) {
-              $location.path('/events/form');
+              $state.go("events.edit", {id: event.$id});
             }
 
             this.deleteEvent = function(event, events, index) {
@@ -102,6 +102,7 @@
                 .ariaLabel('Are you sure?')
                 .ok($translate.instant('DIALOG.YES'))
                 .cancel($translate.instant('DIALOG.NO'));
+
 
               $mdDialog.show(confirm).then(function() {
                 events.splice(index, 1);

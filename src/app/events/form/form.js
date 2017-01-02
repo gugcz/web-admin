@@ -1,41 +1,9 @@
 (function() {
   'use strict';
 
-  function EventFormController(firebaseEvents, $state, firebaseDB, $firebaseObject, $mdToast, $translate) {
+  function EventFormController(firebaseEvents, $state, $mdToast, $translate, event) {
 
-    var signedUser = getSignedUser();
-
-    // TODO
-    function getSelectedChapter() {
-      return $firebaseObject(firebaseDB.ref('chapters/gdg_jihlava'));
-    }
-
-    // TODO
-    function getSignedUser() {
-      return $firebaseObject(firebaseDB.ref('orgs/T093T0DMW_U0CM45CP5'));
-    }
-
-    function getOrganizersWithSignedUser() {
-      var organizers = {};
-      organizers[signedUser.$id] = true;
-      return organizers;
-    }
-
-    this.event = {
-      name: '',
-      subtitle: '',
-      dates: {},
-      description: '',
-      venue: null,
-      regFormLink: '',
-      chapters: [getSelectedChapter()],
-      guarantee: signedUser,
-      organizers: getOrganizersWithSignedUser(),
-      links: [
-        {url: ''}
-      ]
-
-    };
+    this.event = event;
 
     this.addEvent = function() {
       firebaseEvents.addEvent(this.event);  // TODO nebude to promise?
