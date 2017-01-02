@@ -370,22 +370,14 @@ gulp.task('pug-index', function() {
     .pipe(gulp.dest(config.gulp.dirs.build));
 });
 
-gulp.task('prepare-deploy', function() {
-  return gulp.src('app.yaml')
-    .pipe(gulp.dest('build/'));
-});
-
-gulp.task('deploy-to-gcloud', plugins.shell.task([
-  'gcloud config set project gug-web-admin',
-  'gcloud config set app/use_appengine_api false',
-  'gcloud preview app deploy app.yaml --quiet --promote'
-], {
-  cwd: 'build/'
-}));
+gulp.task('deploy-to-firebase', plugins.shell.task([
+  'firebase deploy'
+]));
 
 gulp.task('deploy', function() {
   return runSequence(
-    'build', 'prepare-deploy', 'deploy-to-gcloud'
+    'build',
+    'deploy-to-firebase'
   );
 });
 
