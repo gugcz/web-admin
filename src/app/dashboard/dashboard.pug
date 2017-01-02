@@ -44,9 +44,10 @@ md-fab-speed-dial(md-open='vm.isFabOpen', md-direction='up', class="md-fab-botto
 
   // TODO nemělo by to fungovat i bez show?
   md-fab-actions(ng-show="vm.isFabOpen")
-    md-button.md-fab.md-raised.md-mini(aria-label='Add event', ui-sref="events-form")
-      md-tooltip(md-direction="left", md-visible="tooltipVisible", md-autohide="false") Add event
-      md-icon(md-svg-src='mdi:plus')
+    a(ui-sref="events.add")
+      md-button.md-fab.md-raised.md-mini(aria-label='Add event')
+        md-tooltip(md-direction="left", md-visible="tooltipVisible", md-autohide="false") Add event
+        md-icon(md-svg-src='mdi:plus')
 
     md-button.md-fab.md-raised.md-mini(aria-label='Add term')
       md-tooltip(md-direction="left", md-visible="tooltipVisible", md-autohide="false") Add term
