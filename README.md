@@ -2,7 +2,7 @@
 [![devDependency Status](https://david-dm.org/gugcz/web-admin/dev-status.png)](https://david-dm.org/gugcz/web-admin#info=devDependencies)
 
 # web-admin
-Administration for new GUG.cz web - http://gug-web-admin.appspot.com/
+Administration for new GUG.cz web - https://gugcz.firebaseapp.com/
 
 ## Instalace ##
 
