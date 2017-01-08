@@ -44,12 +44,12 @@
 
               // TODO
               function getSelectedChapter() {
-                return $firebaseObject(firebaseDB.ref('chapters/gdg_jihlava'));
+                return $firebaseObject(firebaseDB.ref('chapters/gdg_brno'));
               }
 
               // TODO
               function getSignedUser() {
-                return $firebaseObject(firebaseDB.ref('orgs/T093T0DMW_U0CM45CP5'));
+                return $firebaseObject(firebaseDB.ref('orgs/T093T0DMW_U1M4SU5D3'));
               }
 
               function getOrganizersWithSignedUser() {

@@ -1,6 +1,9 @@
-h1(translate="") LOGIN_PAGE.TITLE
+div(layout='row')
+  div(flex='30')
+  div(layout-padding, flex='40', layout='column')
+    h1(translate="").md-display-1 LOGIN_PAGE.TITLE
 
-p Přihlašování do administrace probíhá přes slack...
+    p.md-subhead(translate='LOGIN_PAGE.SIGN_IN_VIA_SLACK')
 
-md-button(auth-login-link,translate="BUTTONS.SIGN_IN").md-primary.md-raised
-
+    md-button(auth-login-link,translate="BUTTONS.SIGN_IN").md-primary.md-raised
+  div(flex='30')

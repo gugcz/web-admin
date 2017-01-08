@@ -5,7 +5,7 @@ md-content()
       div(ng-repeat='eventDraft in vm.events.drafts')
         md-list-item
           .md-list-item-text(flex=30)
-            h3 {{eventDraft.name}}
+            h3.md-title {{eventDraft.name}}
           .md-list-item-text(flex=30)
             h4 {{eventDraft.dates.start | date:'dd.MM.yyyy v HH:mm'}}
             p {{eventDraft.venue.name}}
@@ -18,7 +18,7 @@ md-content()
       div(ng-repeat='futureEvent in vm.events.future')
         md-list-item
           .md-list-item-text(flex=30)
-            h3 {{futureEvent.name}}
+            h3.md-title {{futureEvent.name}}
           .md-list-item-text(flex=30)
             h4 {{futureEvent.dates.start | date:'dd.MM.yyyy v HH:mm'}}
             p {{futureEvent.venue.name}}
@@ -31,7 +31,7 @@ md-content()
       div(ng-repeat='unreportedEvent in vm.events.unreported')
         md-list-item
           .md-list-item-text(flex=30)
-            h3 {{unreportedEvent.name}}
+            h3.md-title {{unreportedEvent.name}}
           .md-list-item-text(flex=30)
             h4 {{unreportedEvent.dates.start | date:'dd.MM.yyyy v HH:mm'}}
             p {{unreportedEvent.venue.name}}
@@ -42,7 +42,7 @@ md-fab-speed-dial(md-open='vm.isFabOpen', md-direction='up', class="md-fab-botto
     md-button.md-fab.md-primary(aria-label='menu')
       md-icon add
 
-  // TODO nemělo by to fungovat i bez show?
+  // TODO nemělo by to fungovat i bez show?, ui-sref rozbiji ikonu, nenahradit ng-click?
   md-fab-actions(ng-show="vm.isFabOpen")
     a(ui-sref="events.add")
       md-button.md-fab.md-raised.md-mini(aria-label='Add event')

@@ -75,7 +75,8 @@
     "NOTE": "Jak se tam dostat"
   },
   "LOGIN_PAGE": {
-    "TITLE": "GUG admin page"
+    "TITLE": "GUG.cz Administrace",
+    "SIGN_IN_VIA_SLACK": "Přihlašování do administrace probíhá přes slack..."
   },
   "JANUARY": "Leden",
   "FEBRUARY": "Únor",
