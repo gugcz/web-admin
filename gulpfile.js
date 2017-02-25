@@ -216,8 +216,8 @@ gulp.task('watch', function() {
         gulp.start('templates');
         break;
       case 'json':
-        if (e.filepath.startsWith('config')) {
-          gulp.start('config');
+        if (e.filepath.startsWith('config-devel')) {
+          gulp.start('config-devel');
 
         } else {
           gulp.start('translations');
