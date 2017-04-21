@@ -27,21 +27,9 @@
     };
   }
 
-  function VenueController($document, $mdDialog) {
+  function VenueController($document, $mdDialog, firebaseVenues) {
     // TODO load from Firebase
-    this.venues = [
-      {
-        name: "VŠPJ",
-        address: "Tolstého 1556/16, 586 01 Jihlava"
-      },
-      {
-        name: "VŠPJ 2",
-        address: "Tolstého 1556/16, 586 01 Jihlava"
-      },
-      {
-        name: "VŠPJ 3",
-        address: "Tolstého 1556/16, 586 01 Jihlava"
-      }];
+    this.venues = firebaseVenues.getChapterVenuesByID('gdg_jihlava');
 
     this.selectedVenue = null;
 
@@ -88,7 +76,8 @@
   }
 
   angular.module('gugCZ.webAdmin.events.form.venue', [
-    'gugCZ.webAdmin.venue.form'
+    'gugCZ.webAdmin.venue.form',
+    'gugCZ.webAdmin.venue.services'
   ])
     .component('venueSelector', component);
 

@@ -89,11 +89,11 @@
 
                 }
               ]
-            }
+            };
 
             this.editEvent = function(event) {
               $state.go("events.edit", {id: event.$id});
-            }
+            };
 
             this.deleteEvent = function(event, events, index) {
               var confirm = $mdDialog.confirm()
@@ -110,24 +110,24 @@
                 // Do nothing
               });
 
-            }
+            };
 
             // TODO Buggy
             this.publishEvent = function(event, index) {
               this.events.future.push(event);
               this.events.drafts.splice(index, 1);
-            }
+            };
 
             // TODO Buggy
             this.hideEvent = function(event, index) {
               this.events.drafts.push(event);
               this.events.future.splice(index, 1);
-            }
+            };
 
             // TODO
             this.reportEvent = function(event) {
               alert('TODO');
-            }
+            };
 
           },
           controllerAs: 'vm',

@@ -27,7 +27,8 @@ div(layout='row')
         // TODO Set input for time
         label(translate='EVENTS.FORM.END_TIME')
 
-      md-input-container
+      // Currently not supported
+      md-input-container(ng-if="false")
         md-checkbox(ng-model='vm.isRepeating')
           span(translate='EVENTS.FORM.REPEATING')
 

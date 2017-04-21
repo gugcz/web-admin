@@ -19,6 +19,7 @@ form(name='venueForm', ng-submit="vm.submit(venueForm)", novalidate)
           input(required, ng-model='vm.venue.address')
 
       // TODO Add contact org input field
+      orgs-chips(contact-organizers='vm.venue.contactOrganizers')
 
       div(layout="column")
         md-input-container

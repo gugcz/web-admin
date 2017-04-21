@@ -21,7 +21,7 @@
 
           this.addEvent = function() {
             $location.path('/events/form');
-          }
+          };
         },
         controllerAs: 'eventsCtrl',
         templateUrl: 'app/events/events.html',

@@ -20,6 +20,7 @@
   angular.module('gugCZ.webAdmin.venue.form', [
     'hc.marked',
     'gugCZ.webAdmin.events.form.orgs',
+    'gugCZ.webAdmin.chapters.add.orgsChips',
     'gugCZ.webAdmin.events.form.dates',
     'gugCZ.webAdmin.events.form.venue'
   ])
