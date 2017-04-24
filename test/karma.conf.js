@@ -26,9 +26,7 @@ var libFiles = [
 ];
 
 var appFilesAndTests = [
-  'src/common/**/*.html',
   'src/common/**/*.js',
-  'src/app/**/*.html',
   'src/app/**/*.js'
 ];
 
