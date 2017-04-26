@@ -63,7 +63,7 @@
       if (resultData.result === 'success') {
         this.currentDeferred.resolve(resultData.token);
       } else {
-        this.currentDeferred.reject();
+        this.currentDeferred.reject(resultData);
       }
 
       this.currentDeferred = null;

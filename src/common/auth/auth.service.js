@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   var authDataStore = {
@@ -6,14 +6,14 @@
   };
 
 
-  var AuthService = function($firebaseAuth, $http, $q, $rootScope, $state, slackAuth) {
+  var AuthService = function ($firebaseAuth, $http, $log, $q, $rootScope, $state, slackAuth) {
 
     this.authObj = $firebaseAuth();
 
     var firebaseReadyDeferred = $q.defer();
     this.firebaseAuthReadyPromise = firebaseReadyDeferred.promise;
 
-    this.authObj.$onAuthStateChanged(function(firebaseUser) {
+    this.authObj.$onAuthStateChanged(function (firebaseUser) {
       if (authDataStore.pending) {
         authDataStore.pending = false;
         firebaseReadyDeferred.resolve(firebaseUser);
@@ -30,41 +30,42 @@
 
     });
 
-    this.signInWithCustomToken_ = function(customToken) {
+    this.signInWithCustomToken_ = function (customToken) {
       return this.authObj.$signInWithCustomToken(customToken)
-          .then(function(currentUser) {
-            $rootScope.$broadcast('gugCZ.webAdmin.firebase:signInSuccess', currentUser);
+        .then(function (currentUser) {
+          $rootScope.$broadcast('gugCZ.webAdmin.firebase:signInSuccess', currentUser);
 
-            return currentUser;
-          })
-          .catch(function(error) {
-            $rootScope.$broadcast('gugCZ.webAdmin.firebase:signInError', error);
-          });
+          return currentUser;
+        })
+        .catch(function (error) {
+          $rootScope.$broadcast('gugCZ.webAdmin.firebase:signInError', error);
+        });
     };
 
     /**
      * @return Promise
      */
-    this.login = function() {
+    this.login = function () {
       return slackAuth.requestAuth()
-          .then(this.signInWithCustomToken_.bind(this));
+        .then(this.signInWithCustomToken_.bind(this))
+        .catch($log.error);
     };
 
     /**
      * @return Promise
      */
-    this.logout = function() {
+    this.logout = function () {
       return this.authObj.$signOut();
     };
 
-    this.isPending = function() {
+    this.isPending = function () {
       return authDataStore.pending;
     };
 
     /**
      * @return {boolean}
      */
-    this.isAuthenticated = function() {
+    this.isAuthenticated = function () {
       return !authDataStore.pending && authDataStore.firebaseUser;
     };
 
@@ -72,7 +73,7 @@
     /**
      * @return {boolean}
      */
-    this.hasSomeRole = function() {
+    this.hasSomeRole = function () {
       // TODO for this app is not necessary
       return false;
     };
@@ -83,6 +84,6 @@
   angular.module('gugCZ.auth.service', [
     'gugCZ.firebase'
   ])
-      .service('authService', AuthService);
+    .service('authService', AuthService);
 
 })();
