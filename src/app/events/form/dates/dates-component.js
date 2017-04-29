@@ -59,6 +59,8 @@
         end: null
       };
 
+      this.repeats = {};
+
       this.calculateEndDate();
     };
 
