@@ -19,11 +19,11 @@
 
     // TODO Add default
     this.setGuarantee = function(org) {
-      this.guarantee = org;
+      this.guarantee = org.$id;
     };
 
     this.isGuarantee = function(org) {
-      return this.guarantee && this.guarantee.$id === org.$id;
+      return this.guarantee && this.guarantee === org.$id;
     };
 
     this.updateOrgsByChapters = function() {
