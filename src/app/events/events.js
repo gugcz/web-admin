@@ -65,9 +65,9 @@
                 description: '',
                 venue: null,
                 regFormLink: '',
-                chapters: [getSelectedChapter()],
-                guarantee: signedUser,
-                organizers: getOrganizersWithSignedUser(),
+                chapters: [], // TODO
+                guarantee: null, // TODO
+                organizers: [], // TODO
                 links: [
                   {url: ''}
                 ]

@@ -36,7 +36,7 @@
 
     function loadChapterOrgs(chapter) {
       return $firebaseArray(firebaseDB
-        .ref('orgs')
+        .ref('organizers')
         .orderByChild('chapters/' + chapter.$id)
         .equalTo(true))
         .$loaded();

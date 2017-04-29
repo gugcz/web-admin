@@ -22,7 +22,7 @@ div(ng-if="!vm.loading")
           md-icon(icon='search')
     md-content
       md-list
-        md-list-item(ng-if='vm.possibleOrgs.length === 0')
+        md-list-item(ng-if='vm.possibleOrgs.length === 0 || vm.selectedChapters.length === 0')
           i(translate='EVENTS.FORM.NO_CHAPTERS')
         md-list-item(ng-repeat='org in vm.possibleOrgs')
           md-checkbox(ng-model='vm.organizers[org.$id]')
