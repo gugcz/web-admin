@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular.module('gugCZ.webAdmin.events', [
@@ -8,18 +8,18 @@
     ]
   )
 
-    .config(function($stateProvider) {
+    .config(function ($stateProvider) {
 
       $stateProvider.state('events', {
         parent: 'base',
         url: 'events',
         resolve: {
-          events: function() { return [];}
+          events: function () { return [];}
         },
-        controller: function(events, $location) {
+        controller: function (events, $location) {
           this.events = events;
 
-          this.addEvent = function() {
+          this.addEvent = function () {
             $location.path('/events/form');
           };
         },
@@ -38,23 +38,17 @@
           controller: "EventFormController",
           controllerAs: 'vm',
           resolve: {
-            event: function($firebaseObject, firebaseDB) {
+            event: function ($firebaseObject, firebaseDB, currentUser, organizerService) {
 
-              var signedUser = getSignedUser();
-
-              // TODO
-              function getSelectedChapter() {
-                return $firebaseObject(firebaseDB.ref('chapters/gdg_brno'));
+              function initChapters() {
+                return [
+                  organizerService.getCurrentChapter()
+                ];
               }
 
-              // TODO
-              function getSignedUser() {
-                return $firebaseObject(firebaseDB.ref('orgs/T093T0DMW_U1M4SU5D3'));
-              }
-
-              function getOrganizersWithSignedUser() {
+              function initOrganizers() {
                 var organizers = {};
-                organizers[signedUser.$id] = true;
+                organizers[currentUser.$id] = true;
                 return organizers;
               }
 
@@ -65,14 +59,15 @@
                 description: '',
                 venue: null,
                 regFormLink: '',
-                chapters: [], // TODO
-                guarantee: null, // TODO
-                organizers: null, // TODO
+                chapters: initChapters(),
+                guarantee: currentUser.$id,
+                organizers: initOrganizers(),
                 links: [
                   {url: ''}
                 ]
 
-              };
+              }
+                ;
             }
           },
           data: {
@@ -88,7 +83,7 @@
           controller: "EventFormController",
           controllerAs: 'vm',
           resolve: {
-            event: function($stateParams) {
+            event: function ($stateParams) {
               console.log($stateParams.id);
 
               return {};
