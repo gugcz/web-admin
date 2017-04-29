@@ -1,4 +1,4 @@
-md-chips(ng-model='vm.selectedChapters', md-on-add="vm.updateOrgsByChapters()" md-on-remove="vm.updateOrgsByChapters()"
+md-chips(ng-model='vm.selectedChapters', md-on-add="vm.updateOrgsByChapters()" md-on-remove="vm.updateOrgsByChaptersAfterChipRemove()"
 md-autocomplete-snap='',md-transform-chip='vm.transformChip($chip)', md-require-match='vm.autocompleteDemoRequireMatch', required)
   md-autocomplete(md-selected-item='vm.selectedItem', md-search-text='vm.searchText',
   md-items='item in vm.querySearch(vm.searchText)', md-item-text='item.name',
@@ -25,7 +25,8 @@ div(ng-if="!vm.loading")
         md-list-item(ng-if='vm.possibleOrgs.length === 0 || vm.selectedChapters.length === 0')
           i(translate='EVENTS.FORM.NO_CHAPTERS')
         md-list-item(ng-repeat='org in vm.possibleOrgs')
-          md-checkbox(ng-model='vm.organizers[org.$id]')
+          // TODO ng false value - mustn't store to firebase key: false
+          md-checkbox(ng-model='vm.organizers[org.$id]', ng-false-value="")
           p {{org.name}}
           md-icon(md-svg-icon='mdi:crown', ng-click='vm.setGuarantee(org)', ng-class='{isActive: vm.isGuarantee(org)}', aria-label='Set as guarantee').md-secondary
   div(ng-show='vm.showSearch')

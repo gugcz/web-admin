@@ -1,24 +1,24 @@
-(function () {
-	'use strict';
+(function() {
+  'use strict';
 
-	var component = {
-		templateUrl: 'app/events/form/orgs/orgs.html',
-		controller: OrgsController,
-		controllerAs: 'vm',
+  var component = {
+    templateUrl: 'app/events/form/orgs/orgs.html',
+    controller: OrgsController,
+    controllerAs: 'vm',
     bindings: {
-		  selectedChapters: '=',
+      selectedChapters: '=',
       organizers: '=',
       guarantee: '='
     }
-	};
+  };
 
-	function OrgsController(firebaseEvents) {
+  function OrgsController(firebaseEvents, $log) {
 
     this.showSearch = false;
     this.possibleOrgs = [];
 
     // TODO Add default
-		this.setGuarantee = function(org) {
+    this.setGuarantee = function(org) {
       this.guarantee = org;
     };
 
@@ -28,12 +28,24 @@
 
     this.updateOrgsByChapters = function() {
       this.loading = true;
-      firebaseEvents.getOrganizersByChapters(this.selectedChapters)
+      return firebaseEvents.getOrganizersByChapters(this.selectedChapters)
         .then(function(orgs) {
-          // TODO Solve changing chapters after orgs selection, orgs will stay in a organizers object
           this.loading = false;
           this.possibleOrgs = orgs;
+          return this.possibleOrgs;
         }.bind(this));
+    };
+
+    this.updateOrgsByChaptersAfterChipRemove = function() {
+      this.updateOrgsByChapters().then(function(possibleOrganizers) {
+        this.organizers = Object.keys(this.organizers).filter(function(organizer) {
+          return possibleOrganizers[organizer];
+        }).reduce(function(acc, key) {
+            acc[key] = true;
+            return acc;
+          }, {});
+        return this.organizers;
+      }.bind(this));
     };
 
     this.$onInit = function() {
@@ -54,13 +66,13 @@
       }
 
       // Otherwise, create a new one
-      return { name: chip };
+      return {name: chip};
     }
 
     /**
      * Search for chapters.
      */
-    function querySearch (query) {
+    function querySearch(query) {
       var results = query ? this.chapters.filter(createFilterFor(query)) : [];
       return results;
     }
@@ -82,7 +94,7 @@
       return chapters;
     }
 
-	}
+  }
 
   function findIndexInOrgArray(arraytosearch, valuetosearch) {
 
@@ -95,15 +107,15 @@
     return null;
   }
 
-	angular.module('gugCZ.webAdmin.events.form.orgs', [ ])
-	  .config(function($mdIconProvider) {
-		  $mdIconProvider
-			.iconSet('social', 'img/icons/sets/social-icons.svg', 24)
-			.iconSet('device', 'img/icons/sets/device-icons.svg', 24)
-			.iconSet('communication', 'img/icons/sets/communication-icons.svg', 24)
-			.defaultIconSet('img/icons/sets/core-icons.svg', 24);
-	  })
+  angular.module('gugCZ.webAdmin.events.form.orgs', [])
+    .config(function($mdIconProvider) {
+      $mdIconProvider
+        .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
+        .iconSet('device', 'img/icons/sets/device-icons.svg', 24)
+        .iconSet('communication', 'img/icons/sets/communication-icons.svg', 24)
+        .defaultIconSet('img/icons/sets/core-icons.svg', 24);
+    })
 
-	.component('orgsTable', component);
+    .component('orgsTable', component);
 
 })();

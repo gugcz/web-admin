@@ -67,7 +67,7 @@
                 regFormLink: '',
                 chapters: [], // TODO
                 guarantee: null, // TODO
-                organizers: [], // TODO
+                organizers: null, // TODO
                 links: [
                   {url: ''}
                 ]
