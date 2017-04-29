@@ -2,7 +2,9 @@
   'use strict';
 
   var getValueFromSnapshot = function (snapshot) {
-    return snapshot.val();
+    var value = snapshot.val();
+    value.$id = snapshot.key;
+    return value;
   };
 
   angular.module('gugCZ.webAdmin.organizers')
