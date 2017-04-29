@@ -14,6 +14,7 @@
     this.firebaseAuthReadyPromise = firebaseReadyDeferred.promise;
 
     this.authObj.$onAuthStateChanged(function (firebaseUser) {
+      $log.log('firebaseUser:', firebaseUser);
       if (authDataStore.pending) {
         authDataStore.pending = false;
         firebaseReadyDeferred.resolve(firebaseUser);
@@ -33,9 +34,9 @@
     this.signInWithCustomToken_ = function (customToken) {
       return this.authObj.$signInWithCustomToken(customToken)
         .then(function (currentUser) {
-          $rootScope.$broadcast('gugCZ.webAdmin.firebase:signInSuccess', currentUser);
+          $rootScope.$broadcast('gugCZ.webAdmin.firebase:signInSuccess', currentUser_);
 
-          return currentUser;
+          return currentUser_;
         })
         .catch(function (error) {
           $rootScope.$broadcast('gugCZ.webAdmin.firebase:signInError', error);

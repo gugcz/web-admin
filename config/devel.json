@@ -1,14 +1,15 @@
 {
   "SLACK_AUTH": {
     "clientId": "9129013744.104633928310",
-    "redirectUrl": "https://agnes.gdgplzen.cz/api/auth/callback"
+    "redirectUrl": "https://sso.gug.cloud/api/v1/sso/slackcallback"
   },
   "FIREBASE": {
-    "apiKey": "AIzaSyAkP1lF6Y4k7F1lTNA_tXufK0YQX7I72uo",
-    "authDomain": "gugcz.firebaseapp.com",
-    "databaseURL": "https://gugcz.firebaseio.com",
-    "storageBucket": "firebase-gugcz.appspot.com",
-    "messagingSenderId": 31582256095
+    "apiKey": "AIzaSyDwctscJW8c3CkALIrfuFtioDZzwHSx6Q0",
+    "authDomain": "gug-web-admin.firebaseapp.com",
+    "databaseURL": "https://gug-web-admin.firebaseio.com",
+    "projectId": "gug-web-admin",
+    "storageBucket": "gug-web-admin.appspot.com",
+    "messagingSenderId": "837520253086"
   },
   "LANGUAGE": {
     "preferred": "cs"

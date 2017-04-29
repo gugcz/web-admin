@@ -6,9 +6,8 @@ md-toolbar(layout='row').md-whiteframe-z2
     span(flex='')
 
     md-button {{app.fbUser.name}}
-    md-select.md-no-underline(ng-model='app.selectedChapter', aria-label='Select default chapter')
-      md-option(value='gdg_jihlava') GDG Jihlava
-      md-option(value='gdg_brno') GDG Brno
+    md-select.md-no-underline(ng-model='app.selectedChapter', ng-change="app.selectChapter()", aria-label='Select default chapter')
+      md-option(ng-repeat="(id, chapter) in app.user.chapters", value='{{id}}') {{chapter.name}}
     md-button(auth-logout-link) Log Out
 
 div(layout='row', flex='').md-whiteframe-z2
