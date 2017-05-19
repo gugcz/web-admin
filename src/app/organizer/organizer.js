@@ -1,7 +1,2 @@
-(function () {
-  'use strict';
+angular.module('gugCZ.webAdmin.organizers', []);
 
-  angular.module('gugCZ.webAdmin.organizers', []);
-
-
-})();

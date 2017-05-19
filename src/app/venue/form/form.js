@@ -1,5 +1,4 @@
-(function() {
-  'use strict';
+
 
   function VenueFormController() {
 
@@ -23,7 +22,7 @@
     'gugCZ.webAdmin.events.form.dates',
     'gugCZ.webAdmin.events.form.venue'
   ])
-    .component("venueForm", {
+    .component('venueForm', {
       controller: VenueFormController,
       controllerAs: 'vm',
       bindings: {
@@ -34,5 +33,3 @@
       templateUrl: 'app/venue/form/form.html'
 
     });
-
-})();

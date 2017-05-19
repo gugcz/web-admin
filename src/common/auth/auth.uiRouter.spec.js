@@ -2,8 +2,8 @@ describe('gugCZ.auth.uiRouter', function() {
 
   beforeEach(module('gugCZ.auth.uiRouter'));
 
-  var stateAuthService;
-  var $stateMock, authServiceMock, authLoginModalMock;
+  let stateAuthService;
+  let $stateMock, authServiceMock, authLoginModalMock;
 
   beforeEach(function() {
     $stateMock = {
@@ -43,12 +43,12 @@ describe('gugCZ.auth.uiRouter', function() {
   describe('public visibility check', function() {
 
     it('should indicate user has permission if state has no data attribute', inject(function() {
-      var state = {};
+      const state = {};
       expect(stateAuthService.isPublicVisible(state)).toBe(true);
     }));
 
     it('should indicate user has permission if data attribute does not contain auth properties', inject(function() {
-      var state = {
+      const state = {
         data: {
           a: true,
           b: false
@@ -59,7 +59,7 @@ describe('gugCZ.auth.uiRouter', function() {
     }));
 
     it('should indicate user has permission if data.authLogged is false', inject(function() {
-      var state = {
+      const state = {
         data: {
           authLogged: false
         }
@@ -69,7 +69,7 @@ describe('gugCZ.auth.uiRouter', function() {
     }));
 
     it('should indicate user has permission if data.authRoles is empty', inject(function() {
-      var state = {
+      const state = {
         data: {
           authRoles: []
         }
@@ -79,7 +79,7 @@ describe('gugCZ.auth.uiRouter', function() {
     }));
 
     it('should indicate user has not permission if data.authLogged is true and user is not logged', inject(function() {
-      var state = {
+      const state = {
         data: {
           authLogged: true
         }
@@ -89,7 +89,7 @@ describe('gugCZ.auth.uiRouter', function() {
     }));
 
     it('should indicate user has not permission if data.authRoles is not empty and user is not logged', inject(function() {
-      var state = {
+      const state = {
         data: {
           authRoles: ['some_role']
         }
@@ -101,7 +101,7 @@ describe('gugCZ.auth.uiRouter', function() {
   });
 
   describe('check if route is visible for user', function() {
-    var eventMock;
+    let eventMock;
 
     beforeEach(function() {
 
@@ -114,7 +114,7 @@ describe('gugCZ.auth.uiRouter', function() {
     });
 
     it('should not stop event, if state is public visible', inject(function() {
-      var state = {};
+      const state = {};
 
       stateAuthService.checkPermissionWhenStateChangeStarted(eventMock, state);
 
@@ -122,7 +122,7 @@ describe('gugCZ.auth.uiRouter', function() {
     }));
 
     it('should not stop event, if state need authentication and user is logger', inject(function() {
-      var state = {
+      const state = {
         data: {
           authLogged: true
         }
@@ -140,7 +140,7 @@ describe('gugCZ.auth.uiRouter', function() {
     }));
 
     it('should not stop event, if state need authentication and user has roles', inject(function() {
-      var state = {
+      const state = {
         data: {
           authRoles: ['some_role']
         }
@@ -164,8 +164,8 @@ describe('gugCZ.auth.uiRouter', function() {
     }));
 
     it('should stop event and broadcast permissionError, if state need authentication and user has not roles', inject(function($rootScope) {
-      var calledFlag = false;
-      var state = {
+      let calledFlag = false;
+      const state = {
         data: {
           authLogged: true,
           authRoles: ['someRole']
@@ -199,7 +199,7 @@ describe('gugCZ.auth.uiRouter', function() {
     }));
 
     it('should stop event and open modal window, if user is not authenticated', inject(function($q) {
-      var state = {
+      const state = {
         data: {
           authLogged: true
         }
@@ -226,8 +226,8 @@ describe('gugCZ.auth.uiRouter', function() {
     }));
 
     it('should stop event if auth is pending', inject(function($q, $rootScope) {
-      var calledFlag = false;
-      var state = {
+      const calledFlag = false;
+      const state = {
         data: {
           authRoles: ['some_role']
         }
@@ -249,8 +249,8 @@ describe('gugCZ.auth.uiRouter', function() {
     }));
 
     it('should broadcast loginCanceled, if modal is rejected', inject(function($q, $rootScope) {
-      var calledFlag = false;
-      var state = {
+      let calledFlag = false;
+      const state = {
         data: {
           authLogged: true
         }

@@ -1,84 +1,79 @@
-(function() {
-  'use strict';
+const component = {
+  templateUrl: 'app/events/form/venue/venue.html',
+  controller: VenueController,
+  controllerAs: 'vm',
+  bindings: {
+    venue: '='
+  }
+};
 
-  var component = {
-    templateUrl: 'app/events/form/venue/venue.html',
-    controller: VenueController,
-    controllerAs: 'vm',
-    bindings: {
-      venue: '='
-    }
+
+function DialogController($mdDialog, venue) {
+  this.venue = venue;
+
+  this.hide = function () {
+    $mdDialog.hide();
   };
 
+  this.cancel = function () {
+    $mdDialog.cancel();
+  };
 
-  function DialogController($mdDialog, venue) {
-    this.venue = venue;
+  this.save = function () {
+    $mdDialog.hide(this.venue);
+  };
+}
 
-    this.hide = function() {
-      $mdDialog.hide();
-    };
+function VenueController($document, $mdDialog, firebaseVenues) {
+  // TODO load from Firebase
+  this.venues = firebaseVenues.getChapterVenuesByID('gdg_jihlava');
 
-    this.cancel = function() {
-      $mdDialog.cancel();
-    };
+  this.selectedVenue = null;
 
-    this.save = function() {
-      $mdDialog.hide(this.venue);
-    };
-  }
+  this.createVenueModal_ = function (ev, venue) {
+    venue = angular.copy(venue);
+    if (venue.$$mdSelectId) {  // TODO some better solution?
+      delete venue.$$mdSelectId;
+    }
 
-  function VenueController($document, $mdDialog, firebaseVenues) {
-    // TODO load from Firebase
-    this.venues = firebaseVenues.getChapterVenuesByID('gdg_jihlava');
+    return $mdDialog.show({   // TODO how to set dialog width?
+      controller: DialogController,
+      controllerAs: 'vm',
+      locals: {
+        venue: venue
+      },
+      templateUrl: 'app/events/form/venue/venue-dialog.html',
+      parent: angular.element($document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true
+    });
+  };
 
-    this.selectedVenue = null;
+  this.editVenue = function (ev) {
+    const index = this.venues.indexOf(this.selectedVenue);
+    this.createVenueModal_(ev, this.selectedVenue)
+      .then(function (venue) {
+        // TODO change firebase data?
 
-    this.createVenueModal_ = function(ev, venue) {
-      venue = angular.copy(venue);
-      if (venue.$$mdSelectId) {  // TODO some better solution?
-        delete venue.$$mdSelectId;
-      }
+        this.venues[index] = venue;
+        this.selectedVenue = venue;
+      }.bind(this));
+  };
 
-      return $mdDialog.show({   // TODO how to set dialog width?
-        controller: DialogController,
-        controllerAs: 'vm',
-        locals: {
-          venue: venue
-        },
-        templateUrl: 'app/events/form/venue/venue-dialog.html',
-        parent: angular.element($document.body),
-        targetEvent: ev,
-        clickOutsideToClose: true
-      });
-    };
+  this.addVenue = function (ev) {
+    this.createVenueModal_(ev, {})
+      .then(function (venue) {
+        // TODO change firebase data?
 
-    this.editVenue = function(ev) {
-      var index = this.venues.indexOf(this.selectedVenue);
-      this.createVenueModal_(ev, this.selectedVenue)
-        .then(function(venue) {
-          // TODO change firebase data?
+        this.venues.push(venue);
+        this.selectedVenue = venue;
+      }.bind(this));
+  };
 
-          this.venues[index] = venue;
-          this.selectedVenue = venue;
-        }.bind(this));
-    };
+}
 
-    this.addVenue = function(ev) {
-      this.createVenueModal_(ev, {})
-        .then(function(venue) {
-          // TODO change firebase data?
-
-          this.venues.push(venue);
-          this.selectedVenue = venue;
-        }.bind(this));
-    };
-
-  }
-
-  angular.module('gugCZ.webAdmin.events.form.venue', [
-    'gugCZ.webAdmin.venue.form',
-    'gugCZ.webAdmin.venue.services'
-  ])
-    .component('venueSelector', component);
-
-})();
+angular.module('gugCZ.webAdmin.events.form.venue', [
+  'gugCZ.webAdmin.venue.form',
+  'gugCZ.webAdmin.venue.services'
+])
+  .component('venueSelector', component);
