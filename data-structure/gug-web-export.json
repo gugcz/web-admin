@@ -1,0 +1,98 @@
+{
+  "chapterOrganizers" : {
+    "chapter_id_1" : {
+      "organizer_id_1" : {
+        "leader" : true,
+        "status" : "active"
+      }
+    }
+  },
+  "chapterVenues" : {
+    "chapter_id_1" : {
+      "venue_id_1" : {
+        "lastUsed" : 12345678
+      }
+    }
+  },
+  "chapters" : {
+    "chapter_id_1" : {
+      "location" : {
+        "address" : "Pilsen, Czechia"
+      },
+      "name" : "GDG Plzen",
+      "section" : "GDG"
+    }
+  },
+  "eventOccurences" : {
+    "event_id_1" : {
+      "occurence_id_1" : {
+        "dates" : {
+          "end" : "...",
+          "start" : "..."
+        },
+        "title" : "test"
+      }
+    }
+  },
+  "events" : {
+    "event_id_1" : {
+      "chapters" : {
+        "chapter_id_1" : true
+      },
+      "cover" : "...",
+      "description" : "...",
+      "links" : {
+        "facebookLink" : "https://facebook.com",
+        "googlePlusLink" : "https://plus.google.com"
+      },
+      "logo" : "...",
+      "organizers" : {
+        "organizer_id_1" : {
+          "role" : "gurantee"
+        }
+      },
+      "registrationLink" : "https://forms.google.com",
+      "subtitle" : "Event, který musíte navštívit!",
+      "title" : "Nas uzasny event"
+    }
+  },
+  "organizers" : {
+    "T093T0DMW_U0CM45CP5" : {
+      "accounts" : {
+        "slack" : {
+          "token" : "xoxp-9129013744-12718182787-109176595750-70e7f2a7ad81faa6e4fc1e5f446d13d4"
+        }
+      },
+      "name" : "Milan Lempera"
+    },
+    "T093T0DMW_U0CM7TVQ8" : {
+      "accounts" : {
+        "slack" : {
+          "token" : "xoxp-9129013744-12721947824-173347781493-68a88c99cf3b0ab002fb1266f48559a6"
+        }
+      },
+      "name" : "Filip Procházka"
+    },
+    "organizer_id_1" : {
+      "accounts" : {
+        "slack" : {
+          "authToken" : 123,
+          "id" : "test123"
+        }
+      },
+      "email" : "honza@ovax.cz",
+      "gugEmail" : "honza@gug.cz",
+      "name" : "Honza Slavik"
+    }
+  },
+  "venues" : {
+    "venue_id_1" : {
+      "location" : {
+        "address" : "Hub Praha, Veleslavinova 453, Praha 8",
+        "latitude" : 12.21212,
+        "longitude" : 12.121212
+      },
+      "name" : "HUB Praha"
+    }
+  }
+}

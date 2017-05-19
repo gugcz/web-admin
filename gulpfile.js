@@ -1,399 +1,95 @@
-/// <binding BeforeBuild='build' />
-/* eslint-env node, global console */
+const del = require('del');
+const runSequence = require('run-sequence');
 
-var gulp = require('gulp');
-var plugins = require('gulp-load-plugins')();
-var fs = require('fs');
-var mkdirp = require('mkdirp');
+const gulp = require('gulp');
+const plugins = require('gulp-load-plugins')();
+const KarmaServer = require('karma').Server;
 
-var del = require('del');
-var esteWatch = require('este-watch');
-var pugCompiler = require('pug');
-var mainBowerFiles = require('main-bower-files');
-var minimatch = require('minimatch');
-var open = require('open');
-var runSequence = require('run-sequence');
-var url = require('url');
+const browserSync = require('./gulp-tasks/browser-sync');
+const assets = require('./gulp-tasks/assets');
+const constants = require('./gulp-tasks/constants');
+const styles = require('./gulp-tasks/styles');
+const scriptsBuild = require('./gulp-tasks/scripts-build');
+const scriptsDevel = require('./gulp-tasks/scripts-es6');
+const revisions = require('./gulp-tasks/revisions');
+const deploy = require('./gulp-tasks/deploy');
+const pugTemplates = require('./gulp-tasks/pug-templates');
+const tranlations = require('./gulp-tasks/tranlations');
 
-var config = require('./gulp-config.js');
+gulp.task('sass', styles.sass);
+gulp.task('pug-templates', pugTemplates.compile);
+gulp.task('translations', tranlations.compile);
 
-var mkdirSync = function(path) {
-  try {
-    mkdirp.sync(path);
-  } catch (e) {
-    if (e.code != 'EEXIST') throw e;
-  }
-};
+gulp.task('clean-constants', constants.cleanConstants);
+gulp.task('create-constants', ['clean-constants'], constants.createConstants);
 
-config.gulp.isProduction = false;
-config.gulp.filepath = {
-  index: config.gulp.dirs.build + config.gulp.filename.index,
-  css: config.gulp.dirs.srcCss + config.gulp.filename.css,
-  sass: config.gulp.dirs.srcSass + config.gulp.filename.sass,
-  js: {
-    application: config.gulp.dirs.src + config.gulp.filename.js.application,
-    vendor: config.gulp.dirs.src + config.gulp.filename.js.vendor,
-    templates: config.gulp.dirs.src + config.gulp.filename.js.templates,
-    templatesVendor: config.gulp.dirs.src + config.gulp.filename.js.templatesVendor
-  }
-};
+gulp.task('deploy-clean', deploy.deployClean);
+gulp.task('deploy', ['deploy-clean', 'build'], deploy.deploy);
 
-config.gulp.filepath.assets = config.gulp.dirs.parts.assets.map(function(relativePath) {
-  return fs.realpathSync(config.gulp.dirs.src + relativePath);
-});
+gulp.task('devel-app-es6', scriptsDevel.appScriptsES6);
+gulp.task('devel-app-js', ['devel-app-es6', 'pug-templates', 'translations'], scriptsDevel.es5ToScripts);
+gulp.task('lint', scriptsDevel.appScriptsES6Lint);
+gulp.task('devel-vendor-js', scriptsDevel.bowerFilesToVendor);
+gulp.task('clean-transpiled-files', scriptsDevel.cleanTranspiledFiles);
 
-config.gulp.destinationDir = config.gulp.dirs.build;
-mkdirSync(config.gulp.destinationDir);
-
-config.gulp.generatedFiles = [
-  config.gulp.destinationDir + config.gulp.filename.js.application,
-  config.gulp.destinationDir + config.gulp.filename.js.vendor,
-  config.gulp.src + config.gulp.filename.js.templates,
-  config.gulp.src + config.gulp.filename.js.templatesVendor
-];
-
-config.gulp.paths = {
-  images: config.gulp.dirs.src + 'images/**/*',
-  scripts: [
-    config.gulp.dirs.src + '**/*.js',
-    '!' + config.gulp.dirs.src + '**/*spec.js'
-  ],
-  templates: [
-    config.gulp.dirs.src + '**/*.pug',
-    '!' + config.gulp.dirs.src + 'index.pug'
-  ],
-  sass: [
-    config.gulp.dirs.srcSass + '**/*.scss'
-  ],
-  livereload: config.gulp.generatedFiles
-};
-
-config.gulp.paths.livereload.push(config.gulp.destinationDir + config.gulp.dirs.parts.css + '*.css');
-config.gulp.paths.livereload.push(config.gulp.destinationDir + 'index.html');
-
-config.gulp.paths.scripts = config.gulp.paths.scripts.concat();
-
-config.gulp.paths.revManifest = config.gulp.dirs.build + "/rev-manifest.json";
-
-config.gulp.paths.angularScripts = (function getAngularScripts() {
-  var angularScripts = config.gulp.paths.scripts.slice(0);  // clone
-
-  var templateJSIndex = angularScripts.indexOf('!' + config.gulp.destinationDir + config.gulp.filepath.js.templates);
-  if (templateJSIndex > 0) {
-    angularScripts.splice(templateJSIndex, 1);
-  }
-
-  var templateVendorJSIndex = angularScripts.indexOf('!' + config.gulp.destinationDir + config.gulp.filepath.js.templatesVendor);
-  if (templateVendorJSIndex > 0) {
-    angularScripts.splice(templateVendorJSIndex, 1);
-  }
-
-  return angularScripts;
-})();
-
-/**
- * @param {object} options {option.host, option.port}
- */
-function httpServer(options) {
-  if (!options.run) {
-    return;
-  }
-
-  var connect = require('connect');
-  var proxy = require('proxy-middleware');
-  var serveStatic = require('serve-static');
-
-  var app = connect();
-
-  if (options.proxy) {
-    var route = options.proxy.routePath || '/api';
-    if (!options.proxy.destinationUrl) {
-      throw new Error('No proxy settings. You must set gulp.httpServer.proxy.destinationUrl');
-    }
-    console.log('Create proxy ' + route + ' for ' + options.proxy.destinationUrl);
-    app.use(route, proxy(url.parse(options.proxy.destinationUrl)));
-  }
-
-  app.use('/build/static/images', serveStatic('./src/images'));
-  app.use(serveStatic("."));
-
-  app.listen(options.port);
-  console.log('HTTP server running on ', options.host + ':' + options.port);
-
-  if (options.open) {
-    var appUrl = 'http://' + options.host + ':' + options.port + '/' + config.gulp.dirs.build;
-    console.log('Opening ' + appUrl);
-    open(appUrl);
-  }
-}
-
-gulp.task('translations', function() {
-  return gulp.src('src/locale/locale-*.json')
-    .pipe(plugins.angularTranslate(config.gulp.filename.js.translations, {
-      module: config.application.name + '.translations'
-    }))
-    .pipe(gulp.dest(config.gulp.dirs.src));
-});
-
-gulp.task('templates', ['pug-index'], function() {
-  return gulp.src(config.gulp.paths.templates)
-    .pipe(plugins.plumber())
-    .pipe(plugins.pug({
-      pretty: true,
-      pug: pugCompiler
-    }, {}))
-    .pipe(plugins.angularTemplatecache(config.gulp.filename.js.templates, {
-      module: config.application.name + '.templates',
-      standalone: true
-    }))
-    .pipe(gulp.dest(config.gulp.dirs.src));
-});
-
-gulp.task('templates-vendor', function() {
-  var bowerTemplateFiles = mainBowerFiles('**/*.html');
-  return gulp.src(bowerTemplateFiles)
-    .pipe(plugins.angularTemplatecache(config.gulp.filename.js.templatesVendor, {
-        module: config.application.name + '.templates',
-        base: process.cwd(),
-        standalone: true
-      }
-    ))
-    .pipe(gulp.dest(config.gulp.dirs.src));
-});
-
-gulp.task('lint', function() {
-  return gulp.src(config.gulp.paths.scripts)
-    .pipe(plugins.eslint())
-    .pipe(plugins.eslint.format())
-    .pipe(plugins.eslint.failOnError());
-});
-
-gulp.task('js-vendor', function() {
-  return gulp.src(mainBowerFiles('**/*.js'))
-    .pipe(plugins.plumber())
-    .pipe(plugins.if(config.gulp.isProduction,
-      plugins.concat(config.gulp.filename.js.vendor),
-      plugins.pseudoconcatJs(config.gulp.filename.js.vendor, {webRoot: fs.realpathSync(__dirname + '/' + config.gulp.dirs.build)}, ['//' + config.gulp.httpServer.host + ':' + config.gulp.httpServer.lrPort + '/livereload.js'])
-    ))
-    .pipe(gulp.dest(config.gulp.destinationDir));
-});
-
-gulp.task('js-main', ['lint', 'templates', 'templates-vendor', 'translations'], function() {
-  return gulp.src(config.gulp.paths.angularScripts)
-    .pipe(plugins.plumber())
-    .pipe(plugins.angularFilesort())
-    .pipe(plugins.ngAnnotate())
-    .pipe(plugins.if(config.gulp.isProduction,
-      plugins.concat(config.gulp.filename.js.application),
-      plugins.pseudoconcatJs(config.gulp.filename.js.application, {webRoot: fs.realpathSync('./' + config.gulp.dirs.build)})
-    ))
-    .pipe(gulp.dest(config.gulp.destinationDir));
-});
-
-gulp.task('js-main-dev', ['lint'], function() {
-
-  return gulp.src(config.gulp.paths.angularScripts)
-    .pipe(plugins.plumber())
-    .pipe(plugins.angularFilesort())
-    .pipe(plugins.pseudoconcatJs(config.gulp.filename.js.application, {webRoot: fs.realpathSync('./' + config.gulp.dirs.build)}))
-    .pipe(gulp.dest(config.gulp.destinationDir));
-});
-
-gulp.task('watch', function() {
-  plugins.livereload.listen(config.gulp.httpServer.lrPort);
-  httpServer(config.gulp.httpServer);
-  esteWatch([config.gulp.dirs.src, 'config'], function(e) {
-
-    if (config.gulp.generatedFiles.some(function(pattern) {
-        return minimatch(e.filepath, pattern);
-      })) {
-      return;
-    }
-
-    switch (e.extension) {
-      case 'html':
-      case 'pug':
-        gulp.start('templates');
-        break;
-      case 'json':
-        if (e.filepath.startsWith('config-devel')) {
-          gulp.start('config-devel');
-
-        } else {
-          gulp.start('translations');
-        }
-        break;
-      case 'js':
-        var testFilePattern = /.spec.js$/;
-        if (!testFilePattern.test(e.filepath)) {
-          gulp.start('js-main-dev');
-        }
-        break;
-      case 'scss':
-        gulp.start('sass');
-        break;
-    }
-  }).start();
-
-  gulp.watch(config.gulp.paths.livereload).on('change', function(filepath) {
-    plugins.livereload.changed(filepath, config.gulp.httpServer.lrPort);
-  });
-});
-
-gulp.task('devel', ['build-clean'], function() {
+gulp.task('devel', function (callback) {
   runSequence(
-    ['sass', 'config-devel', 'translations', 'pug-index'],
-    ['js-vendor', 'js-main'],
-    'watch'
+    'clean-transpiled-files',
+    ['sass', 'devel-vendor-js', 'devel-app-js', 'create-constants'],
+    develServerFactory(callback)
   );
 });
 
-gulp.task('build-clean', function() {
-  return del([
-    config.gulp.dirs.build
-  ]);
+gulp.task('test', function (done) {
+  new KarmaServer({
+    configFile: __dirname + '/test/karma.conf.js',
+    singleRun: true
+  }, done).start();
 });
 
-gulp.task('build-post-clean', function(cb) {
-  del([
-    config.gulp.paths.revManifest
-  ], cb);
 
+gulp.task('build-clean', function () {
+  return del(['dist/']);
 });
 
-gulp.task('build-index', ['pug-index'], function() {
-  var manifest = gulp.src(config.gulp.paths.revManifest);
+gulp.task('build-assets', assets.copy);
+gulp.task('build-css', styles.cssmin);
+gulp.task('build-app-js', scriptsBuild.appScriptsProcessing);
+gulp.task('build-vendor-js', scriptsBuild.bowerFilesToVendor);
+gulp.task('build-revisions', revisions.revisions);
+gulp.task('build-index', revisions.indexHtml);
 
-  return gulp.src(config.gulp.filepath.index)
-    .pipe(plugins.revReplace({manifest: manifest}))
-    .pipe(gulp.dest(config.gulp.dirs.build));
+gulp.task('build', function (callback) {
+  runSequence('build-clean',
+    ['build-app-js', 'build-vendor-js', 'build-css', 'build-assets'],
+    'build-revisions',
+    'build-index',
+    callback);
 });
 
-gulp.task('build-assets', function() {
-  return gulp.src(config.gulp.filepath.assets)
-    .pipe(gulp.dest(config.gulp.dirs.build));
-});
+function develServerFactory(callback) {
+  return function () {
+    browserSync.init();
 
-gulp.task('build-images', function() {
-  return gulp.src(config.gulp.paths.images, {base: config.gulp.dirs.src})
-    .pipe(gulp.dest(config.gulp.dirs.build));
-});
+    gulp.watch(['src/**/*.scss'], ['sass']);
+    gulp.watch(['src/**/*.js'], ['devel-app-js']);
+    gulp.watch(['src/**/*.pug'], ['pug-templates']);
+    gulp.watch(['src/locale/locale-*.json'], ['translations']);
+    gulp.watch(['bower.json'], ['devel-vendor-js']);
 
-gulp.task('build-js', ['js-vendor', 'js-main'], function() {
-  return gulp.src([config.gulp.filepath.js.application, config.gulp.filepath.js.vendor])
-    .pipe(plugins.uglify())
-    .pipe(gulp.dest(config.gulp.dirs.build));
-});
+    gulp.watch(['src/**/*.html'], browserSync.instance.reload);
 
-gulp.task('sass', function() {
-  return gulp.src(config.gulp.filepath.sass)
-    .pipe(plugins.sass().on('error', plugins.sass.logError))
-    .pipe(gulp.dest(config.gulp.destinationDir + config.gulp.dirs.parts.css));
-});
+    process.on('uncaughtException', function (err) {
+      console.error('uncaughtException: ', err);
+      console.error(err.stack);
 
-gulp.task('build-css', ['sass'], function() {
-  return gulp.src([config.gulp.filepath.css])
-    .pipe(plugins.cssmin())
-    .pipe(gulp.dest(config.gulp.dirs.buildCss));
-});
-
-gulp.task('build-test', function() {
-  var testFiles = [
-    'test/utils/Function.bind.polyfill.js',
-    'build/vendor.js',
-    'bower_components/angular-mocks/angular-mocks.js',
-    'build/scripts.js',
-    'src/**/*.spec.js'
-  ];
-
-  return gulp.src(testFiles)
-    .pipe(plugins.karma({
-      configFile: 'test/karma.conf.js',
-      action: 'run'
-    }))
-    .on('error', function(err) {
-      // Make sure failed tests cause gulp to exit non-zero
-      throw err;
+      browserSync.instance.exit();
+      console.log('server stopped');
+      process.exit(-1);
     });
-});
 
-gulp.task('build-rev', function() {
-  return gulp.src([
-    config.gulp.dirs.build + '**/*.css',
-    config.gulp.dirs.build + '*.js'
-  ])
-    .pipe(plugins.rev())
-    .pipe(plugins.revDeleteOriginal())
-    .pipe(gulp.dest(config.gulp.dirs.build))
-    .pipe(plugins.rev.manifest())
-    .pipe(gulp.dest(config.gulp.dirs.build));
-});
+    callback();
 
-gulp.task('build-copy-config', ['config-production'], function() {
-  // temporary task - config will be special for every stage
-  return gulp.src('src/config.js')
-    .pipe(gulp.dest(config.gulp.dirs.build));
-});
+  };
 
-gulp.task('build', ['build-clean'], function() {
-  config.gulp.isProduction = true;
-
-  mkdirSync(config.gulp.destinationDir);
-
-  runSequence(
-    ['build-js', 'build-css', 'build-assets', 'build-images'],
-    'build-rev',
-    ['build-index', 'build-copy-config'],
-    'build-post-clean'
-  );
-
-});
-
-pugCompiler.filters.escape = function(block) {
-  return block
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/#/g, '&#35;')
-    .replace(/\\/g, '\\\\');
-};
-
-gulp.task('pug-index', function() {
-
-  gulp.src('src/index.pug')
-    .pipe(plugins.plumber())
-    .pipe(plugins.pug({
-      pretty: true,
-      pug: pugCompiler
-    }))
-    .pipe(gulp.dest(config.gulp.dirs.build));
-});
-
-gulp.task('deploy-to-firebase', plugins.shell.task([
-  'firebase deploy'
-]));
-
-gulp.task('deploy', function() {
-  return runSequence(
-    'build',
-    'deploy-to-firebase'
-  );
-});
-
-gulp.task('default', ['build']);
-
-
-gulp.task('config-devel', function() {
-  gulp.src('config/devel.json') // TODO set by stage
-    .pipe(plugins.ngConfig(config.application.name + '.config'))
-    .pipe(plugins.rename('config.js'))
-    .pipe(gulp.dest('./src'));
-});
-
-gulp.task('config-production', function() {
-  gulp.src('config/production.json')
-    .pipe(plugins.ngConfig(config.application.name + '.config'))
-    .pipe(plugins.rename('config.js'))
-    .pipe(gulp.dest('./src'));
-});
+}

@@ -2,25 +2,54 @@
 [![devDependency Status](https://david-dm.org/gugcz/web-admin/dev-status.png)](https://david-dm.org/gugcz/web-admin#info=devDependencies)
 
 # web-admin
-Administration for new GUG.cz web - https://gugcz.firebaseapp.com/
+Administration for new GUG.cz web - https://gug-web.firebaseapp.com/
 
-## Instalace ##
+## Requirements 
+- [git](http://git-scm.com/downloads)
+- [nodeJS](https://nodejs.org/en/)
+- [Yarn](https://yarnpkg.com/)
+- [Java Development Kit (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/index.html ) - for protractor
 
-naklonujte si repozitář a v root složce projektu spusťte
+## Installation
 
+Download this package
+
+```shell
+git clone https://github.com/gugcz/web-admin.git
 ```
-npm install
+
+Install dependencies
+
+```shell
+yarn install
 ```
 
-pro vývoj pak
+or just 
 
+```shell
+yarn
 ```
+
+note: npm is also working
+
+## Development
+Run example application with live reload
+
+```shell
 npm start
 ```
 
+Open [http://localhost:8000/](http://localhost:8000/)in browser and happy developing
 
-### Build pro nasazení ###
+## Other commands
 ```
-npm run build
+ npm start             # vývojový režim, spustí aplikaci lokálně, dělá livereload
+ 
+ npm test               # spuštění unit testů (karma)
+ 
+ npm run test-watch     # opakovené spouštění unit testů při změně souborů 
+
+ npm run protractor     # E2E testy
+ 
+ npm build              # zbuilduje celou aplikaci do složky dist
 ```
-zbuilduje aplikaci do několika statických souborů ve složce /public

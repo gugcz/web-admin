@@ -2,11 +2,14 @@
   "extends": "angular",
   "rules": {
     "indent": [
-      "off",
-      2
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
     ],
     "quotes": [
-      "off",
+      "warn",
       "single"
     ],
     "linebreak-style": [
@@ -19,11 +22,10 @@
     ],
     "angular/controller-as-vm": "off",
     "angular/no-service-method": "off",
-    "angular/on-watch": "off",
-    "angular/log": "warn",
-    "angular/no-private-call": "warn"
+    "angular/on-watch": "off"
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "es6": true
   }
 }

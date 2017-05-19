@@ -1,7 +1,8 @@
 (function () {
   'use strict';
 
-  angular.module('gugCZ.webAdmin', [
+  angular.module('gugCZ.webAdmin',
+    [
       'angular-loading-bar',
       'ngMaterial',
       'ngMessages',
@@ -10,9 +11,12 @@
       'pascalprecht.translate',
       'webStorageModule',
       'gugCZ.auth',
-      "gugCZ.webAdmin.config",
-      'gugCZ.webAdmin.templates',      // templates in template cache
-      'gugCZ.webAdmin.translations',
+
+      // generated content
+      'appConfig',
+      'appTemplates',
+      'appTranslations',
+
       'gugCZ.webAdmin.loginPage',
       'gugCZ.webAdmin.chapter',
       'gugCZ.webAdmin.dashboard',
@@ -21,6 +25,7 @@
       'gugCZ.webAdmin.organizers'
     ]
   )
+
 
     .config(function ($stateProvider) {
       $stateProvider.state('base', {
@@ -147,10 +152,10 @@
       });
     })
 
-    // .run(function ($firebaseAuth) {
-    //   var auth = $firebaseAuth();
-    //   auth.$signInWithEmailAndPassword('milanlempera@gmail.com', 'milanlempera')
-    //     .then(console.log.bind(console, 'logged'))
-    //     .catch(console.log.bind(console, 'loggin error'));
-    // });
+  // .run(function ($firebaseAuth) {
+  //   var auth = $firebaseAuth();
+  //   auth.$signInWithEmailAndPassword('milanlempera@gmail.com', 'milanlempera')
+  //     .then(console.log.bind(console, 'logged'))
+  //     .catch(console.log.bind(console, 'loggin error'));
+  // });
 })();

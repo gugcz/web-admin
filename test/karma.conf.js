@@ -1,67 +1,46 @@
-var mainBowerFiles = require('main-bower-files');
+const loader = require('./utils/bower-dependencies-loader');
 
-var currentPath = process.cwd();
+const polyfill = [];
 
-var bowerPath = currentPath;
-var mainBowerSettings = {};
-// normalization cwd in cli and webstorem
-if (currentPath.indexOf('test', currentPath.length - 5) !== -1) {
-  bowerPath = currentPath.substring(0, currentPath.length - 5);
-  mainBowerSettings = {
-    paths: bowerPath
-  };
-}
-
-var bowerJSFiles = mainBowerFiles('**/*.js', mainBowerSettings)
-  .map(function(path) {
-    return path.substring(bowerPath.length + 1);
-  });
-
-var polyfill = [
-  'test/utils/Function.bind.polyfill.js',
+const appFilesAndTests = [
+  'dependencies/bower_components/angular-mocks/angular-mocks.js',
+  'src/**/*.js'
 ];
 
-var libFiles = [
-  'bower_components/angular-mocks/angular-mocks.js'
-];
-
-var appFilesAndTests = [
-  'src/common/**/*.js',
-  'src/app/**/*.js'
-];
-
-var karmaFiles = polyfill
-  .concat(bowerJSFiles)
-  .concat(libFiles)
+const karmaFiles = polyfill
+  .concat(loader.getBowerFiles())
   .concat(appFilesAndTests);
 
-module.exports = function(config) {
+module.exports = function (config) {
 
   config.set({
     basePath: '../',
     files: karmaFiles,
     frameworks: ['jasmine', 'angular-filesort'],
-    browsers: ['PhantomJS'],
+    browsers: ['PhantomJS'],  // PhantomJS nebo Chrome
     plugins: [
       'karma-chrome-launcher',
       'karma-phantomjs-launcher',
-      'karma-angular-filesort',
       'karma-jasmine',
-      'karma-ng-html2js-preprocessor'
+      'karma-coverage',
+      'karma-babel-preprocessor',
+      'karma-angular-filesort'
     ],
-    preprocessors: {
-      '**/*.html': ['ng-html2js']
-    },
-    angularFilesort: {
-      whitelist: appFilesAndTests
-    },
-    ngHtml2JsPreprocessor: {
-      stripPrefix: 'src/',
-      moduleName: 'gugCZ.webAdmin.templates'
-    },
     autoWatch: true,
     singleRun: false,
-    reporters: ['progress']
+    reporters: ['progress', 'coverage'],
+    preprocessors: {'src/**/*.js': ['babel', 'coverage']},
+    coverageReporter: {
+      type: 'html',
+      dir: 'report/',
+      file: 'report.html'
+    },
+
+    angularFilesort: {
+      whitelist: [
+        'src/**/*.js'
+      ]
+    }
 
   });
 };
