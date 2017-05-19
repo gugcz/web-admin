@@ -4,6 +4,9 @@ const path = require('path');
 const plugins = require('gulp-load-plugins')();
 const mainBowerFiles = require('main-bower-files');
 const errorHandlers = require('./_errorHandlers');
+const pugTemplates = require('./pug-templates');
+const tranlations = require('./tranlations');
+const constants = require('./constants');
 
 exports.appScriptsProcessing = function () {
 
@@ -16,25 +19,14 @@ exports.appScriptsProcessing = function () {
       .pipe(plugins.ignore.exclude('*.spec.js'))
       .pipe(plugins.babel())
     ,
-    gulp.src(['src/**/*.html', '!src/index.html'])
-      .pipe(plugins.htmlmin({collapseWhitespace: true}))
-      .pipe(plugins.angularTemplatecache('templates.js', {
-          module: 'simpleDevstack', // http://stackoverflow.com/questions/24658966/using-templatecache-in-ui-routers-template
-          base: path.join(process.cwd(), 'src'),
-          standalone: false
-        })
-      )
-    ,
-    gulp.src('gulp-tasks/constants/relative.json')
-      .pipe(plugins.ngConstant({
-        name: 'cm.common.constants',
-        wrap: true
-      }))
+    pugTemplates.getStream(),
+    tranlations.getStream(),
+    constants.getStream()
   )
     .pipe(plugins.angularFilesort().on('error', errorHandlers.createForTask('angularFilesort')))
     .pipe(plugins.ngAnnotate())
     .pipe(plugins.concat('scripts.js'))
-    .pipe(plugins.uglify())
+//    .pipe(plugins.uglify()) TODO dořešit DI
     .pipe(gulp.dest('dist/'));
 };
 

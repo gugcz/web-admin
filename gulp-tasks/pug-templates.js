@@ -14,7 +14,7 @@ pugCompiler.filters.escape = function (block) {
     .replace(/\\/g, '\\\\');
 };
 
-exports.compile = function () {
+function getStream() {
   return gulp.src('src/**/*.pug')
     .pipe(plugins.pug({
       pretty: true,
@@ -23,8 +23,14 @@ exports.compile = function () {
     .pipe(plugins.angularTemplatecache('templates.js', {
       module: 'appTemplates',
       standalone: true
-    }))
+    }));
+};
+
+exports.compile = function () {
+  return getStream()
     .pipe(gulp.dest('dependencies/es5'))
     .pipe(browserSyncInstance.stream());
 
 };
+
+exports.getStream = getStream;

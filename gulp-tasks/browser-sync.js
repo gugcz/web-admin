@@ -5,7 +5,7 @@ exports.instance = browserSync;
 exports.init = function (port = 8000) {
   browserSync.init({
     port: port,
-    open: false,
+    open: true,
     ui: false,
     server: {
       baseDir: ['src', 'dependencies'],

@@ -2,7 +2,7 @@ const authDataStore = {
   pending: true
 };
 
-const AuthService = function ($firebaseAuth, $http, $log, $q, $rootScope, $state, SSO, slackAuth) {
+function AuthService($firebaseAuth, $http, $log, $q, $rootScope, $state, SSO, slackAuth) {
 
   this.authObj = $firebaseAuth();
 
