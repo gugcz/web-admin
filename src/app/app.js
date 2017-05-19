@@ -86,6 +86,7 @@
 
     .config(function (SLACK_AUTH, slackAuthProvider) {
       slackAuthProvider.setClientId(SLACK_AUTH.clientId);
+      slackAuthProvider.setTeamId(SLACK_AUTH.teamId);
       slackAuthProvider.setRedirectUrl(SLACK_AUTH.redirectUrl);
     })
 
@@ -145,4 +146,11 @@
         $state.go('loginPage');
       });
     })
+
+    // .run(function ($firebaseAuth) {
+    //   var auth = $firebaseAuth();
+    //   auth.$signInWithEmailAndPassword('milanlempera@gmail.com', 'milanlempera')
+    //     .then(console.log.bind(console, 'logged'))
+    //     .catch(console.log.bind(console, 'loggin error'));
+    // });
 })();

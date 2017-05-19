@@ -1,15 +1,19 @@
 {
+  "SSO": {
+    "authTokenUrl": "https://sso.gug.cloud/api/v1/sso/firebase/newToken"
+  },
   "SLACK_AUTH": {
     "clientId": "9129013744.104633928310",
-    "redirectUrl": "https://sso.gug.cloud/api/v1/sso/slackcallback"
+    "teamId": "T093T0DMW",
+    "redirectUrl": "https://sso.gug.cloud/api/v1/sso/slackCallback"
   },
   "FIREBASE": {
-    "apiKey": "AIzaSyDwctscJW8c3CkALIrfuFtioDZzwHSx6Q0",
-    "authDomain": "gug-web-admin.firebaseapp.com",
-    "databaseURL": "https://gug-web-admin.firebaseio.com",
-    "projectId": "gug-web-admin",
-    "storageBucket": "gug-web-admin.appspot.com",
-    "messagingSenderId": "837520253086"
+    "apiKey": "AIzaSyD_XXGas0P2AR6h8x9SenT0EVyvK3rFmSM",
+    "authDomain": "gug-web.firebaseapp.com",
+    "databaseURL": "https://gug-web.firebaseio.com",
+    "projectId": "gug-web",
+    "storageBucket": "gug-web.appspot.com",
+    "messagingSenderId": "1082612211992"
   },
   "LANGUAGE": {
     "preferred": "cs"

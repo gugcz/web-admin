@@ -7,7 +7,7 @@ module.exports = {
   gulp: {
     httpServer: {
       host: util.env.HOST || 'localhost',
-      port: util.env.PORT || 8080,
+      port: util.env.PORT || 8000,
       lrPort: util.env.LRPORT || 35729,
       run: true,
       open: true,

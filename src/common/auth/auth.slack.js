@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   function SlackAuth(config, $q, $rootScope, $window, $document) {
@@ -14,7 +14,7 @@
 
   }
 
-  SlackAuth.prototype.requestAuth = function() {
+  SlackAuth.prototype.requestAuth = function () {
     if (!this.currentDeferred) {
       this.currentDeferred = this.$q.defer();
       this.$window.addEventListener('message', this.boundedAuthCallback, false);
@@ -30,7 +30,7 @@
     return this.currentDeferred.promise;
   };
 
-  SlackAuth.prototype.calculateWindowCenterOptions_ = function(width, height) {
+  SlackAuth.prototype.calculateWindowCenterOptions_ = function (width, height) {
     var screen = this.$window.screen;
     var dualScreenLeft = angular.isDefined(this.$window.screenLeft) ? this.$window.screenLeft : screen.left;
     var dualScreenTop = angular.isDefined(this.$window.screenTop) ? this.$window.screenTop : screen.top;
@@ -42,7 +42,7 @@
     return 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left;
   };
 
-  SlackAuth.prototype.buildAuthUri_ = function() {
+  SlackAuth.prototype.buildAuthUri_ = function () {
     var base = 'https://slack.com/oauth/authorize';
     base += '?client_id=' + this.config.clientId;
     base += '&scope=' + this.config.scopes.join(',');
@@ -56,12 +56,12 @@
     return encodeURI(base);
   };
 
-  SlackAuth.prototype.authCallback_ = function(event) {
+  SlackAuth.prototype.authCallback_ = function (event) {
     if (event.data.action && event.data.action === 'slack_auth') {
 
       var resultData = event.data.data;
-      if (resultData.result === 'success') {
-        this.currentDeferred.resolve(resultData.token);
+      if (parseInt(resultData.statusCode) === 200) {
+        this.currentDeferred.resolve(resultData.content.token);
       } else {
         this.currentDeferred.reject(resultData);
       }
@@ -73,26 +73,31 @@
         this.$window.removeEventListener('message', this.boundedAuthCallback, false);
       }
     }
-  };
+  }
+  ;
 
   function oauthProvider() {
     this.settings = {
-      url: 'https://slack.com/oauth/authorize?scope=identity.basic',
+      url: 'https://slack.com/oauth/authorize',
       clientId: '',
       redirectUrl: '',
       teamId: '',
-      scopes: ['identity.basic']
+      scopes: ['identity.basic', 'identity.email']
     };
 
-    this.setClientId = function(clientId) {
+    this.setClientId = function (clientId) {
       this.settings.clientId = clientId;
     };
 
-    this.setRedirectUrl = function(redirectUrl) {
+    this.setTeamId = function (teamId) {
+      this.settings.teamId = teamId;
+    };
+
+    this.setRedirectUrl = function (redirectUrl) {
       this.settings.redirectUrl = redirectUrl;
     };
 
-    this.$get = function($injector) {
+    this.$get = function ($injector) {
       return $injector.instantiate(SlackAuth, {config: this.settings});
     };
 
@@ -101,6 +106,7 @@
   angular.module('gugCZ.auth.slack', [
     'webStorageModule'
   ])
-      .provider('slackAuth', oauthProvider);
+    .provider('slackAuth', oauthProvider);
 
-})();
+})
+();

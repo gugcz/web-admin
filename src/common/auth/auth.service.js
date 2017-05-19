@@ -6,7 +6,7 @@
   };
 
 
-  var AuthService = function ($firebaseAuth, $http, $log, $q, $rootScope, $state, slackAuth) {
+  var AuthService = function ($firebaseAuth, $http, $log, $q, $rootScope, $state, SSO, slackAuth) {
 
     this.authObj = $firebaseAuth();
 
@@ -34,12 +34,21 @@
     this.signInWithCustomToken_ = function (customToken) {
       return this.authObj.$signInWithCustomToken(customToken)
         .then(function (currentUser) {
-          $rootScope.$broadcast('gugCZ.webAdmin.firebase:signInSuccess', currentUser_);
+          $rootScope.$broadcast('gugCZ.webAdmin.firebase:signInSuccess', currentUser);
 
-          return currentUser_;
+          return currentUser;
         })
         .catch(function (error) {
           $rootScope.$broadcast('gugCZ.webAdmin.firebase:signInError', error);
+        });
+    };
+
+    this.getFirebaseToken = function (token) {
+      return $http.get(SSO.authTokenUrl, {
+        headers: {'Authorization': 'token=' + token}
+      })
+        .then(function (response) {
+          return response.data.firebaseToken;
         });
     };
 
@@ -48,6 +57,7 @@
      */
     this.login = function () {
       return slackAuth.requestAuth()
+        .then(this.getFirebaseToken.bind(this))
         .then(this.signInWithCustomToken_.bind(this))
         .catch($log.error);
     };

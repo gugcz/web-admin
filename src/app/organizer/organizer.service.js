@@ -3,7 +3,9 @@
 
   var getValueFromSnapshot = function (snapshot) {
     var value = snapshot.val();
-    value.$id = snapshot.key;
+    if (value) {
+      value.$id = snapshot.key;
+    }
     return value;
   };
 
@@ -13,13 +15,15 @@
       this.currentUser_ = null;
 
       this.getCurrentUser = function () {
-        var userRef = firebaseDB.ref('organizers/-Kiq0zwfvevwW87mwwY_');
-        //  TODO firebase.auth().currentUser.uid
+        var userRef = firebaseDB.ref('organizers/' + firebase.auth().currentUser.uid);
         // TODO update when fb user change
 
         return userRef.once("value")
           .then(getValueFromSnapshot)
           .then(function (user) {
+            if (!user) {
+              return {};
+            }
 
             var chapterPromises = Object.keys(user.chapters)
               .reduce(function (acc, key) {
@@ -43,7 +47,6 @@
       };
 
       this.setCurrentChapter = function (chapterId) {
-        console.log(chapterId)
         this.currentChapter_ = chapterId;
       };
 
