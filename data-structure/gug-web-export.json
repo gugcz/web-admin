@@ -60,7 +60,7 @@
     "T093T0DMW_U0CM45CP5" : {
       "accounts" : {
         "slack" : {
-          "token" : "xoxp-9129013744-12718182787-109176595750-70e7f2a7ad81faa6e4fc1e5f446d13d4"
+          "token" : "xxxxxxxxxxxx"
         }
       },
       "name" : "Milan Lempera"
@@ -68,7 +68,7 @@
     "T093T0DMW_U0CM7TVQ8" : {
       "accounts" : {
         "slack" : {
-          "token" : "xoxp-9129013744-12721947824-173347781493-68a88c99cf3b0ab002fb1266f48559a6"
+          "token" : "xxxxxxxxxxxx"
         }
       },
       "name" : "Filip Procházka"
