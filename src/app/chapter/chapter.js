@@ -9,7 +9,10 @@ angular.module('gugCZ.webAdmin.chapter', [
       parent: 'base',
       templateUrl: 'app/chapter/form/form.html',
       controller: 'ChapterFormController',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      data: {
+        title: 'Správa chapteru'  // TODO Add translation
+      }
     });
 
   });

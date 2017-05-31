@@ -1,29 +1,33 @@
-function ChapterFormCtrl(firebaseData) {
+function ChapterFormCtrl(firebaseData, $log) {
   const vm = this;
   const organizersPromise = firebaseData.getAllOrganizers().then(loadContactsProfilePicture);
 
   vm.filterSelected = true;
 
   vm.delayedQuerySearch = function (criteria) {
+    console.log(criteria);
+    console.log(organizersPromise)
     return organizersPromise.then(function (organizers) {
+      $log.debug(organizers);
       return organizers.filter(createFilterFor(criteria));
     });
   };
 
   vm.organizers = [];
 
+  // TODO
+  vm.isAdmin = true;
+
   vm.chapter = {
-    section: 'GDG',
-    name: '',
+    section: '',
+    name: 'Brno',
     description: '',
     profilePicture: '',
     email: '',
-    googlePlusLink: '',
-    facebookLink: '',
-    twitterLink: '',
-    meetupID: '',
-    meetupURL: '',
-    coordinates: ''
+    coordinates: '',
+    links: [
+      {url: ''}
+    ]
   };
 
   function createFilterFor(query) {
@@ -40,8 +44,8 @@ function ChapterFormCtrl(firebaseData) {
       return {
         name: org.name,
         chapters: org.chapters,
-        email: org.mail,
-        image: gravatar(org.mail),
+        email: org.email,
+        image: gravatar(org.email),
         _lowername: org.name.toLowerCase()
       };
 
@@ -57,7 +61,8 @@ function ChapterFormCtrl(firebaseData) {
 
 
 angular.module('gugCZ.webAdmin.chapter.form', [
-  'gugCZ.webAdmin.chapter.services'
+  'gugCZ.webAdmin.chapter.services',
+  'gugCZ.webAdmin.events.form.links'
 ])
   .controller('ChapterFormController', ChapterFormCtrl);
 

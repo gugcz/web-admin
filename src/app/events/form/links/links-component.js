@@ -43,7 +43,7 @@ function LinksController() {
   };
 
   this.checkLastItem = function (index) {
-    let isLast = this.links.length - index;
+    var isLast = this.links.length - index;
     if (!isLast) {
       return;
     }

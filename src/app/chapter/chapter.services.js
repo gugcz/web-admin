@@ -1,14 +1,20 @@
-function firebaseFactory(firebaseDB, $q, $firebaseArray, removeDiacritics) {
+function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray) {
   const self = this;
   var chapterID = null;
 
   self.getAllOrganizers = function () {
     const organizers = [];
-    const ref = firebaseDB.ref('orgs/');
+    const ref = firebaseDB.ref('organizers');
+
+    //return $q.when($firebaseArray(ref));
+
     return $q.when(ref.once('value').then(function (snapshot) {
       snapshot.forEach(function (childSnapshot) {
+
         organizers.push(childSnapshot.val());
       });
+      $log.debug(organizers);
+
       return organizers;
     }));
 
