@@ -49,6 +49,16 @@ angular.module('gugCZ.webAdmin', [
             icon: 'home'
           },
           {
+            link: 'profile',
+            title: $translate.instant('PROFILE.MANAGEMENT'),
+            icon: 'account'
+          },
+          {
+            link: 'chapter',
+            title: $translate.instant('CHAPTER.MANAGEMENT'),
+            icon: 'account-multiple'
+          },
+          {
             link: 'chapters',
             title: $translate.instant('CHAPTERS.MANAGEMENT'),
             icon: 'account-multiple'

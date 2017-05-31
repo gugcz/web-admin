@@ -61,8 +61,16 @@
     "EVENT_ADDED": "Akce byla vytvořena!"
   },
 
+  "PROFILE": {
+    "MANAGEMENT": "Profil"
+  },
+
   "CHAPTERS": {
     "MANAGEMENT": "Správa chapterů"
+  },
+
+  "CHAPTER": {
+    "MANAGEMENT": "Správa chapteru"
   },
 
   "VENUE": {

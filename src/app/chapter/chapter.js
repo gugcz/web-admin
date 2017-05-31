@@ -4,9 +4,9 @@ angular.module('gugCZ.webAdmin.chapter', [
 ])
   .config(function ($stateProvider) {
 
-    $stateProvider.state('chapter-add', {
+    $stateProvider.state('chapter', {
       url: '/chapter/form',
-      templateUrl: 'app/chapter/form/form.html',
+      templateUrl: 'app/chapter/add/add.html',
       controller: 'AddChapterController',
       controllerAs: 'vm'
     });
