@@ -1,6 +1,6 @@
 function firebaseFactory(firebaseDB, $q, $firebaseArray, removeDiacritics) {
   const self = this;
-  let chapterID = null;
+  var chapterID = null;
 
   self.getAllOrganizers = function () {
     const organizers = [];

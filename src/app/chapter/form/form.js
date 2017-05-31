@@ -1,4 +1,4 @@
-function AddChapterCtrl(firebaseData) {
+function ChapterFormCtrl(firebaseData) {
   const vm = this;
   const organizersPromise = firebaseData.getAllOrganizers().then(loadContactsProfilePicture);
 
@@ -56,10 +56,10 @@ function AddChapterCtrl(firebaseData) {
 }
 
 
-angular.module('gugCZ.webAdmin.chapter.add', [
+angular.module('gugCZ.webAdmin.chapter.form', [
   'gugCZ.webAdmin.chapter.services'
 ])
-  .controller('AddChapterController', AddChapterCtrl);
+  .controller('ChapterFormController', ChapterFormCtrl);
 
 
 
