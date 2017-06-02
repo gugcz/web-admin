@@ -5,8 +5,6 @@ function ChapterFormCtrl(firebaseData, $log) {
   vm.filterSelected = true;
 
   vm.delayedQuerySearch = function (criteria) {
-    console.log(criteria);
-    console.log(organizersPromise)
     return organizersPromise.then(function (organizers) {
       $log.debug(organizers);
       return organizers.filter(createFilterFor(criteria));

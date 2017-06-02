@@ -1,0 +1,31 @@
+md-content(layout-padding)
+  form(layout='column', ng-cloak='', name='OrganizerForm', ng-submit='OrganizerForm.$valid && vm.form()', novalidate)
+
+    md-input-container()
+      label Jméno
+      input(ng-model='vm.organizer.name', id='name', name='name')
+
+      // TODO - Upload picture
+
+    md-input-container()
+      label Email
+      input(ng-model='vm.organizer.email')
+
+    md-input-container()
+      label Telefoní číslo
+      input(ng-model='vm.organizer.email')
+
+    md-input-container
+      label O mě
+      textarea(ng-model='vm.organizer.description', md-maxlength='500', rows='5', md-select-on-focus='')
+
+
+
+    links(links='vm.organizer.links')
+
+
+
+    md-button(class='md-fab md-fab-bottom-right md-primary', type='submit')
+      md-icon(md-font-icon='material-icons step') done
+
+

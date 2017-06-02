@@ -49,7 +49,7 @@ angular.module('gugCZ.webAdmin', [
             icon: 'home'
           },
           {
-            link: 'profile',
+            link: 'organizer',
             title: $translate.instant('PROFILE.MANAGEMENT'),
             icon: 'account'
           },
