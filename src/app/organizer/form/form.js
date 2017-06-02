@@ -3,12 +3,11 @@ function OrganizerFormCtrl(firebaseData, $log) {
 
 
   vm.organizer = {
-    section: '',
-    name: 'Brno',
-    description: '',
+    name: 'Matěj Horák',
+    about: '',
     profilePicture: '',
     email: '',
-    coordinates: '',
+    phoneNumber: '',
     links: [
       {url: ''}
     ]
