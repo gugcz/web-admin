@@ -3,10 +3,12 @@ const component = {
   controller: LinksController,
   controllerAs: 'vm',
   bindings: {
-    links: '='
+    links: '=',
+    context: '<'
   }
 };
 
+// TODO Extract from events
 function LinksController() {
 
   this.linkTypes = [

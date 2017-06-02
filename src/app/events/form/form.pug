@@ -32,7 +32,8 @@ md-content(layout-padding)
     // TODO Add validations
     orgs-table(selected-chapters='vm.event.chapters', organizers='vm.event.organizers', guarantee='vm.event.guarantee')
 
-    links(links='vm.event.links')
+    // TODO Add translation
+    links(links='vm.event.links', context='"událost"')
 
     md-button(class="md-fab md-primary md-fab-bottom-right fixed", aria-label='Use Android', type='submit')
       md-icon done

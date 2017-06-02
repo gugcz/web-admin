@@ -1,7 +1,7 @@
 md-list
   md-list-item(ng-repeat='(index, link) in vm.links')
     md-input-container(flex, ng-switch='link.type')
-      label(translate='EVENTS.FORM.SOCIAL_LINK')
+      label {{"COMMON.LINK_COMPONENT.SOCIAL_LINK_START" | translate }} {{vm.context}} {{"COMMON.LINK_COMPONENT.SOCIAL_LINK_END" | translate }}
 
       md-icon(ng-switch-when='facebook', md-svg-icon='mdi:facebook-box')
       md-icon(ng-switch-when='google-plus', md-svg-icon='mdi:google-plus-box')
