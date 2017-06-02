@@ -1,14 +1,14 @@
 md-content(layout-padding)
   form(layout='column', ng-cloak='', name='addChapterForm', ng-submit='addChapterForm.$valid && vm.form()', novalidate)
     md-input-container
-      label Sekce
+      label(translate='CHAPTERS.FORM.SECTION')
       md-select(ng-model='vm.chapter.section', ng-disabled="vm.isAdmin")
         md-option(ng-value='"GDG"') GDG
         md-option(ng-value='"GBG"') GBG
         md-option(ng-value='"GEG"') GEG
         md-option(ng-value='"GXG"') GXG
     md-input-container()
-      label Jméno
+      label(translate='CHAPTERS.FORM.NAME')
       input(ng-model='vm.chapter.name', id='name', name='name', ng-disabled="vm.isAdmin")
 
     // TODO - Add orgs validation
@@ -18,13 +18,13 @@ md-content(layout-padding)
         // TODO - Upload picture
 
     md-input-container()
-      label Email
+      label(translate='CHAPTERS.FORM.EMAIL')
       input(ng-model='vm.chapter.email', ng-disabled="vm.isAdmin")
 
 
 
     md-input-container
-      label Popis
+      label(translate='CHAPTERS.FORM.DESCRIPTION')
       textarea(ng-model='vm.chapter.description', md-maxlength='500', rows='5', md-select-on-focus='')
 
 

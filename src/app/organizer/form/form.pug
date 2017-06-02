@@ -1,26 +1,27 @@
 md-content(layout-padding)
   form(layout='column', ng-cloak='', name='OrganizerForm', ng-submit='OrganizerForm.$valid && vm.form()', novalidate)
 
+
     md-input-container()
-      label Jméno
+      label(translate='ORGANIZERS.FORM.NAME')
       input(ng-model='vm.organizer.name', id='name', name='name')
 
       // TODO - Upload picture
 
     md-input-container()
-      label Email
+      label(translate='ORGANIZERS.FORM.EMAIL')
       input(ng-model='vm.organizer.email')
 
     md-input-container()
-      label Telefoní číslo
+      label(translate='ORGANIZERS.FORM.PHONE_NUMBER')
       input(ng-model='vm.organizer.phoneNumber')
 
     md-input-container
-      label O mě
+      label(translate='ORGANIZERS.FORM.ABOUT_ME')
       textarea(ng-model='vm.organizer.about', md-maxlength='500', rows='5', md-select-on-focus='')
 
 
-
+    // TODO Add transaltion
     links(links='vm.organizer.links', context='"profil"')
 
 
