@@ -4,7 +4,7 @@ const component = {
   controllerAs: 'vm',
   bindings: {
     links: '=',
-    context: '<'
+    context: '@'
   }
 };
 
