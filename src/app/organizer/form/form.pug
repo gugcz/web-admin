@@ -20,9 +20,7 @@ md-content(layout-padding)
       label(translate='ORGANIZERS.FORM.ABOUT_ME')
       textarea(ng-model='vm.organizer.about', md-maxlength='500', rows='5', md-select-on-focus='')
 
-
-    // TODO Add transaltion
-    links(links='vm.organizer.links', context='"profil"')
+    links(links='vm.organizer.links', context='{{"ORGANIZERS.FORM.PROFILE" | translate}}')
 
 
 

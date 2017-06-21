@@ -70,6 +70,7 @@
 
   "ORGANIZERS": {
     "FORM": {
+      "PROFILE": "profil",
       "NAME": "Jméno",
       "EMAIL": "Email",
       "PHONE_NUMBER": "Telefonní číslo",
@@ -79,7 +80,7 @@
 
   "CHAPTERS": {
     "FORM": {
-      "CHAPTER": "chapteru",
+      "CHAPTER": "chapter",
       "SECTION": "Sekce",
       "NAME": "Jméno",
       "ORGANIZERS": "Organizátoři",
