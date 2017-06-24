@@ -1,0 +1,38 @@
+md-content(layout-padding)
+  form(layout='column', ng-cloak='', name='WebForm', ng-submit='WebForm.$valid && vm.form()', novalidate)
+
+
+    md-input-container()
+      label(translate='WEB.FORM.TITLE')
+      input(ng-model='vm.web.title', id='title', name='title')
+
+    md-input-container()
+      label(translate='WEB.FORM.SUBTITLE')
+      input(ng-model='vm.web.subtitle', id='subtitle', name='subtitle')
+
+    md-input-container()
+      label(translate='WEB.FORM.ABOUT_TITLE')
+      input(ng-model='vm.web.aboutTitle', id='aboutTitle', name='aboutTitle')
+
+    md-input-container
+      label(translate='WEB.FORM.ABOUT_CONTENT')
+      textarea(ng-model='vm.web.aboutContent', md-maxlength='500', rows='5', md-select-on-focus='')
+
+    md-input-container()
+      label(translate='COMMON.EMAIL')
+      input(ng-model='vm.web.email')
+
+    md-input-container()
+      label(translate='COMMON.PHONE_NUMBER')
+      input(ng-model='vm.web.phoneNumber')
+
+
+
+    links(links='vm.web.links', context='{{"WEB.FORM.GUG" | translate}}')
+
+
+
+    md-button(class='md-fab md-fab-bottom-right md-primary', type='submit')
+      md-icon(md-font-icon='material-icons step') done
+
+

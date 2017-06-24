@@ -15,6 +15,7 @@ angular.module('gugCZ.webAdmin', [
 
   'gugCZ.webAdmin.loginPage',
   'gugCZ.webAdmin.chapter',
+  'gugCZ.webAdmin.web',
   'gugCZ.webAdmin.dashboard',
   'gugCZ.webAdmin.errors',
   'gugCZ.webAdmin.events',

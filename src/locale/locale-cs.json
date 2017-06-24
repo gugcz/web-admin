@@ -106,7 +106,14 @@
   },
 
   "WEB": {
-    "MANAGEMENT": "Správa obsahu webu"
+    "MANAGEMENT": "Správa obsahu webu",
+    "FORM": {
+      "GUG": "GUG",
+      "TITLE": "Nadpis",
+      "SUBTITLE": "Podnadpis",
+      "ABOUT_TITLE": "Název sekce o GUGu",
+      "ABOUT_CONTENT": "Obsah sekce o GUGu"
+    }
   },
 
   "LOGIN_PAGE": {
@@ -118,7 +125,9 @@
     "LINK_COMPONENT": {
       "SOCIAL_LINK_START": "Odkaz na",
       "SOCIAL_LINK_END": "na sociální síti"
-    }
+    },
+    "PHONE_NUMBER": "Telefonní číslo",
+    "EMAIL": "Email"
   },
   "JANUARY": "Leden",
   "FEBRUARY": "Únor",
