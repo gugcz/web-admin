@@ -30,6 +30,61 @@ angular.module('gugCZ.webAdmin', [
 
         this.selectChapter = function () {
           organizerService.setCurrentChapter(this.selectedChapter);
+
+          // TODO Refactor into function
+          if (this.selectedChapter === 'admin') {
+            this.menu = [
+              {
+                link: 'dashboard',
+                title: 'Dashboard',
+                icon: 'home'
+              },
+              {
+                link: 'organizer',
+                title: $translate.instant('PROFILE.MANAGEMENT'),
+                icon: 'account'
+              },
+              {
+                link: 'web-content',
+                title: $translate.instant('WEB.MANAGEMENT'),
+                icon: 'file-document-box'
+              },
+              {
+                link: 'chapters',
+                title: $translate.instant('CHAPTERS.MANAGEMENT'),
+                icon: 'account-multiple'
+              },
+              {
+                link: 'venues',
+                title: 'Správa venues',
+                icon: 'map-marker'
+              }
+            ];
+          }
+          else {
+            this.menu = [
+              {
+                link: 'dashboard',
+                title: 'Dashboard',
+                icon: 'home'
+              },
+              {
+                link: 'organizer',
+                title: $translate.instant('PROFILE.MANAGEMENT'),
+                icon: 'account'
+              },
+              {
+                link: 'chapter',
+                title: $translate.instant('CHAPTER.MANAGEMENT'),
+                icon: 'account-multiple'
+              },
+              {
+                link: 'venues',
+                title: 'Správa venues',
+                icon: 'map-marker'
+              }
+            ];
+          }
         };
 
         this.toggleSidenav = buildToggler('left');
