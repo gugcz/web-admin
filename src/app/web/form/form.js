@@ -2,11 +2,12 @@ function WebFormCtrl(firebaseData, $log) {
   const vm = this;
 
 
-  vm.organizer = {
-    name: 'Matěj Horák',
-    about: '',
-    profilePicture: '',
-    email: '',
+  vm.web = {
+    title: 'Google User Group',
+    subtitle: 'Komunita pořádající akce nejen o Google technologiích',
+    aboutTitle: 'Co je to GUG?',
+    aboutContent: 'Lorem Ipsum',
+    email: 'info@gug.cz',
     phoneNumber: '',
     links: [
       {url: ''}

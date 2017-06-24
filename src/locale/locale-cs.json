@@ -72,8 +72,6 @@
     "FORM": {
       "PROFILE": "profil",
       "NAME": "Jméno",
-      "EMAIL": "Email",
-      "PHONE_NUMBER": "Telefonní číslo",
       "ABOUT_ME": "O mě"
     }
   },
@@ -84,7 +82,6 @@
       "SECTION": "Sekce",
       "NAME": "Jméno",
       "ORGANIZERS": "Organizátoři",
-      "EMAIL": "Email",
       "DESCRIPTION": "Popis"
 
     },
