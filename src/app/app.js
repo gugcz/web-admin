@@ -15,7 +15,6 @@ angular.module('gugCZ.webAdmin', [
 
   'gugCZ.webAdmin.loginPage',
   'gugCZ.webAdmin.chapter',
-  'gugCZ.webAdmin.web',
   'gugCZ.webAdmin.dashboard',
   'gugCZ.webAdmin.errors',
   'gugCZ.webAdmin.events',
@@ -41,14 +40,9 @@ angular.module('gugCZ.webAdmin', [
                 icon: 'home'
               },
               {
-                link: 'organizer',
-                title: $translate.instant('PROFILE.MANAGEMENT'),
+                link: 'organizers',
+                title: $translate.instant('ORGANIZERS.MANAGEMENT'),
                 icon: 'account'
-              },
-              {
-                link: 'web-content',
-                title: $translate.instant('WEB.MANAGEMENT'),
-                icon: 'file-document-box'
               },
               {
                 link: 'chapters',

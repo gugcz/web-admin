@@ -69,6 +69,7 @@
   },
 
   "ORGANIZERS": {
+    "MANAGEMENT": "Správa organizátorů",
     "FORM": {
       "PROFILE": "profil",
       "NAME": "Jméno",
