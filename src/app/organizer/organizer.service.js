@@ -12,7 +12,6 @@ angular.module('gugCZ.webAdmin.organizers')
     this.currentUser_ = null;
 
     this.getCurrentUser = function () {
-      debugger;
       const userRef = firebaseDB.ref('auth/' + firebase.auth().currentUser.uid);
       // TODO update when fb user change
 

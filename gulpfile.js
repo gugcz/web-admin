@@ -74,6 +74,7 @@ function develServerFactory(callback) {
     gulp.watch(['src/**/*.scss'], ['sass']);
     gulp.watch(['src/**/*.js'], ['devel-app-js']);
     gulp.watch(['src/**/*.pug'], ['pug-templates']);
+    gulp.watch(['config/*.json'], ['create-constants']);
     gulp.watch(['src/locale/locale-*.json'], ['translations']);
     gulp.watch(['bower.json'], ['devel-vendor-js']);
 
