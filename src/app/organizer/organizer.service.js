@@ -12,17 +12,20 @@ angular.module('gugCZ.webAdmin.organizers')
     this.currentUser_ = null;
 
     this.getCurrentUser = function () {
-      const userRef = firebaseDB.ref('organizers/' + firebase.auth().currentUser.uid);
+      debugger;
+      const userRef = firebaseDB.ref('auth/' + firebase.auth().currentUser.uid);
       // TODO update when fb user change
 
       return userRef.once('value')
         .then(getValueFromSnapshot)
-        .then(function (user) {
-          if (!user) {
+        .then(user => firebaseDB.ref('organizers/' + user.organizerId).once('value'))
+        .then(getValueFromSnapshot)
+        .then(function (organizer) {
+          if (!organizer || !organizer.chapters) {
             return {};
           }
 
-          const chapterPromises = Object.keys(user.chapters)
+          const chapterPromises = Object.keys(organizer.chapters)
             .reduce(function (acc, key) {
               acc[key] = firebaseDB.ref('chapters/' + key)
                 .once('value')
@@ -33,10 +36,10 @@ angular.module('gugCZ.webAdmin.organizers')
 
           return $q.all(chapterPromises)
             .then(function (chapters) {
-              user.chapters = chapters;
+              organizer.chapters = chapters;
 
-              this.currentUser_ = user;
-              return user;
+              this.currentUser_ = organizer;
+              return organizer;
             }.bind(this));
 
         }.bind(this));
