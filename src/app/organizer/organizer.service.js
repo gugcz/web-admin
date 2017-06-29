@@ -45,9 +45,12 @@ angular.module('gugCZ.webAdmin.organizers')
 
     };
 
+    this.isCurrentUserAdmin = function () {
+      return (this.getCurrentUser().roles.admin);
+    };
+
     this.getAllOrganizers = function () {
-      console.log("sad")
-      return $firebaseArray(firebaseDB.ref('organizers'))
+      return $firebaseArray(firebaseDB.ref('organizers'));
     };
 
     this.setCurrentChapter = function (chapterId) {

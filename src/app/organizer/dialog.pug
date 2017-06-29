@@ -1,0 +1,20 @@
+md-dialog(aria-label="Org")
+    md-toolbar
+        .md-toolbar-tools
+            h2 {{vm.org.name}}
+            span(flex='')
+            md-button.md-icon-button(ng-click='vm.cancel()')
+                md-icon(md-svg-icon='mdi:close', aria-label='Close dialog')
+
+    md-dialog-content(layout-padding)
+        .md-dialog-content.venue-form-content
+
+            // TODO Add info
+            p Email: {{vm.org.email}}
+            p Telefon: {{vm.org.phone}}
+
+    md-dialog-actions(layout='row')
+        span(flex='')
+        md-button.md-raised(translate="BUTTONS.CANCEL",ng-click="vm.cancel()", aria-label='Cancel')
+        md-button.md-raised.md-primary(translate="Editovat", aria-label='Save venue', ng-if="vm.isMeOrAdmin()")
+
