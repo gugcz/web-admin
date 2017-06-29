@@ -1,4 +1,4 @@
-md-toolbar(layout='row').md-whiteframe-z2
+md-toolbar(layout='row').md-whiteframe-z
   .md-toolbar-tools
     md-button.md-icon-button.hide-gt-sm(ng-click="app.toggleSidenav()")
       md-icon(aria-label='Menu') menu
@@ -12,7 +12,7 @@ md-toolbar(layout='row').md-whiteframe-z2
       md-option(value='admin') Admin
     md-button(auth-logout-link) Log Out
 
-div(layout='row', flex='').md-whiteframe-z2
+div(layout='row', flex='')
   md-sidenav.md-sidenav-left.md-whiteframe-z2(layout='column', md-component-id='left', md-is-locked-open="$mdMedia('gt-sm')")
     md-list
       md-list-item(ng-repeat='item in app.menu')

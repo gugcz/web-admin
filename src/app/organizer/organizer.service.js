@@ -7,7 +7,7 @@ const getValueFromSnapshot = function (snapshot) {
 };
 
 angular.module('gugCZ.webAdmin.organizers')
-  .service('organizerService', function ($q, firebaseDB) {
+  .service('organizerService', function ($q, firebaseDB, $firebaseArray) {
     this.currentChapter_ = null;
     this.currentUser_ = null;
 
@@ -43,6 +43,11 @@ angular.module('gugCZ.webAdmin.organizers')
 
         }.bind(this));
 
+    };
+
+    this.getAllOrganizers = function () {
+      console.log("sad")
+      return $firebaseArray(firebaseDB.ref('organizers'))
     };
 
     this.setCurrentChapter = function (chapterId) {

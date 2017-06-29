@@ -64,7 +64,7 @@ angular.module('gugCZ.webAdmin', [
                 icon: 'home'
               },
               {
-                link: 'organizer',
+                link: 'organizers.me',
                 title: $translate.instant('PROFILE.MANAGEMENT'),
                 icon: 'account'
               },
@@ -125,7 +125,7 @@ angular.module('gugCZ.webAdmin', [
       controllerAs: 'app',
       templateUrl: 'app/app.html',
       data: {
-        title: 'GUG CZ Administrace',
+        title: 'GUG.cz Administrace',
         authLogged: true
       },
       resolve: {

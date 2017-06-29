@@ -1,0 +1,11 @@
+//
+   Created by horm on 27.06.17.
+md-card
+    md-content
+        md-list
+            md-list-item(ng-repeat="org in vm.organizers", ng-click="vm.showOrgDialog()")
+                img(ng-src="{{vm.getGravatarURL(org.email)}}", class="md-avatar")
+                p {{org.name}}
+
+
+        pre {{vm.organizers | json }}

@@ -12,7 +12,7 @@ md-content(layout-padding)
       input(ng-model='vm.chapter.name', id='name', name='name', ng-disabled="vm.isAdmin")
 
     // TODO - Add orgs validation
-    md-contact-chips(ng-model='vm.organizers', md-contacts='vm.delayedQuerySearch($query)', md-contact-name='name', md-contact-image='image', md-contact-email='email', md-require-match='true', md-highlight-flags='i', filter-selected='vm.filterSelected', placeholder='Organizátoři', readonly="vm.isAdmin")
+    md-contact-chips(ng-model='vm.organizers', ng-change='vm.updateOrgsIDS()', md-on-remove='vm.updateOrgsIDS()', md-contacts='vm.delayedQuerySearch($query)', md-contact-name='name', md-contact-image='image', md-contact-email='email', md-require-match='true', md-highlight-flags='i', filter-selected='vm.filterSelected', placeholder='Organizátoři')
 
         // TODO - Add field for position (selecting on map)
         // TODO - Upload picture
@@ -36,4 +36,5 @@ md-content(layout-padding)
     md-button(class='md-fab md-fab-bottom-right md-primary', type='submit')
       md-icon(md-font-icon='material-icons step') done
 
-
+    pre {{ vm.chapter | json }}
+    pre {{ vm.organizers | json }}

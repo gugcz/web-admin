@@ -7,6 +7,7 @@ angular.module('gugCZ.webAdmin.chapter', [
     $stateProvider.state('chapter', {
       url: 'chapter/form',
       parent: 'base',
+
       templateUrl: 'app/chapter/form/form.html',
       controller: 'ChapterFormController',
       controllerAs: 'vm',

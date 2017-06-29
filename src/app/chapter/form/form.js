@@ -21,11 +21,25 @@ function ChapterFormCtrl(firebaseData, $log) {
     name: 'Brno',
     description: '',
     profilePicture: '',
+    organizers: [],
     email: '',
     coordinates: '',
     links: [
       {url: ''}
     ]
+  };
+
+  vm.organizers = []
+
+  vm.updateOrgsIDS = function () {
+    $log.debug('change');
+    vm.chapter.organizers = vm.organizers.map(function (org) {
+      const orgID = {};
+      orgID[org.id] = true;
+
+      return orgID;
+
+    });
   };
 
   function createFilterFor(query) {

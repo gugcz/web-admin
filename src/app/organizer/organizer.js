@@ -4,11 +4,17 @@ angular.module('gugCZ.webAdmin.organizers', [
 ])
   .config(function ($stateProvider) {
 
-    $stateProvider.state('organizer', {
-      url: 'organizer/form',
+    $stateProvider.state('organizers', {
+      url: 'organizers',
       parent: 'base',
-      templateUrl: 'app/organizer/form/form.html',
-      controller: 'OrganizerFormController',
+      templateUrl: 'app/organizer/organizers.html',
+      controller: function ($state, $mdDialog, $translate, organizerService) {
+        this.organizers = organizerService.getAllOrganizers();
+
+        this.getGravatarURL = function (email) {
+          return gravatar(email);
+        }
+      },
       controllerAs: 'vm',
       data: {
         title: 'Profil'  // TODO Add translation
