@@ -2,7 +2,8 @@
   "BUTTONS": {
     "SIGN_IN": "Přihlásit se",
     "SAVE": "Uložit",
-    "CANCEL": "Zrušit"
+    "CANCEL": "Zrušit",
+    "EDIT": "Editovat"
   },
 
   "DIALOG": {

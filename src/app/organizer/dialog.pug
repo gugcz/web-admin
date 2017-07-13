@@ -9,12 +9,11 @@ md-dialog(aria-label="Org")
     md-dialog-content(layout-padding)
         .md-dialog-content.venue-form-content
 
-            // TODO Add info
             p Email: {{vm.org.email}}
             p Telefon: {{vm.org.phone}}
 
     md-dialog-actions(layout='row')
         span(flex='')
         md-button.md-raised(translate="BUTTONS.CANCEL",ng-click="vm.cancel()", aria-label='Cancel')
-        md-button.md-raised.md-primary(translate="Editovat", aria-label='Save venue', ng-if="vm.isMeOrAdmin()")
+        md-button.md-raised.md-primary(ng-click="edit({id: vm.org.id})", translate="BUTTONS.EDIT", aria-label='Save venue', ng-if="vm.isMeOrAdmin()")
 

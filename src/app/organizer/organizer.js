@@ -56,10 +56,6 @@ angular.module('gugCZ.webAdmin.organizers', [
         $mdDialog.hide(this.org);
       };
 
-      this.getGravatarURL = function (email) {
-        return gravatar(email);
-      };
-
       this.isMeOrAdmin = function () {
         return this.org.$id === currentUser.$id || currentUser.roles.admin;
       };
