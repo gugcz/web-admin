@@ -13,7 +13,7 @@ angular.module('gugCZ.webAdmin.organizers', [
 
         this.getGravatarURL = function (email) {
           return gravatar(email);
-        }
+        };
 
         this.showOrgDialog = function (org) {
           $mdDialog.show({   // TODO how to set dialog width?
@@ -28,7 +28,7 @@ angular.module('gugCZ.webAdmin.organizers', [
             targetEvent: null,
             clickOutsideToClose: true
           });
-        }
+        };
       },
       controllerAs: 'vm',
       resolve: {
@@ -58,11 +58,11 @@ angular.module('gugCZ.webAdmin.organizers', [
 
       this.getGravatarURL = function (email) {
         return gravatar(email);
-      }
+      };
 
       this.isMeOrAdmin = function () {
-        return this.org.$id === currentUser.$id || currentUser.roles.admin
-      }
+        return this.org.$id === currentUser.$id || currentUser.roles.admin;
+      };
     }
   });
 

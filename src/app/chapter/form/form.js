@@ -29,7 +29,7 @@ function ChapterFormCtrl(firebaseData, $log) {
     ]
   };
 
-  vm.organizers = []
+  vm.organizers = [];
 
   vm.updateOrgsIDS = function () {
     $log.debug('change');

@@ -77,8 +77,8 @@ angular.module('gugCZ.webAdmin.events', [
         controller: 'EventFormController',
         controllerAs: 'vm',
         resolve: {
-          event: function ($stateParams) {
-            console.log($stateParams.id);
+          event: function ($stateParams, $log) {
+            $log.debug($stateParams.id);
 
             return {};
             // todo load from firebase

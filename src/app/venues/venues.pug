@@ -1,0 +1,12 @@
+md-content()
+    section
+        md-subheader Venues
+        md-list(layout-padding='')
+            md-list-item(ng-repeat = 'venue in vm.venues' class='no-right' ng-click='vm.showVenueDialog(venue)')
+                p {{venue.name}}
+                md-icon(md-svg-src='mdi:map', aria-label='View on map' ng-click='vm.viewOnMap(venue)').md-secondary
+                md-icon(md-svg-src='mdi:pencil', aria-label='Edit venue' ng-click='vm.editVenue(venue)').md-secondary
+                md-icon(md-svg-src='mdi:delete', aria-label='Delete venue' ng-click='vm.deleteVenue(venue)').md-secondary
+
+
+

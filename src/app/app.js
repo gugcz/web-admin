@@ -18,6 +18,7 @@ angular.module('gugCZ.webAdmin', [
   'gugCZ.webAdmin.dashboard',
   'gugCZ.webAdmin.errors',
   'gugCZ.webAdmin.events',
+  'gugCZ.webAdmin.venues',
   'gugCZ.webAdmin.organizers'
 ])
 
