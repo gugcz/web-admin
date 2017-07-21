@@ -1,5 +1,5 @@
 const component = {
-  templateUrl: 'app/events/form/links/links.html',
+  templateUrl: 'app/components/links/links.html',
   controller: LinksController,
   controllerAs: 'vm',
   bindings: {
@@ -8,7 +8,6 @@ const component = {
   }
 };
 
-// TODO Extract from events
 function LinksController() {
 
   this.linkTypes = [
@@ -82,5 +81,5 @@ function LinksController() {
 
 }
 
-angular.module('gugCZ.webAdmin.events.form.links', [])
+angular.module('gugCZ.webAdmin.components.links', [])
   .component('links', component);

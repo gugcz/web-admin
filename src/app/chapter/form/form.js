@@ -74,7 +74,7 @@ function ChapterFormCtrl(firebaseData, $log) {
 
 angular.module('gugCZ.webAdmin.chapter.form', [
   'gugCZ.webAdmin.chapter.services',
-  'gugCZ.webAdmin.events.form.links'
+  'gugCZ.webAdmin.components.links'
 ])
   .controller('ChapterFormController', ChapterFormCtrl);
 

@@ -18,7 +18,7 @@ function OrganizerFormCtrl(firebaseData, $log) {
 
 
 angular.module('gugCZ.webAdmin.organizers.form', [
-  'gugCZ.webAdmin.events.form.links'
+  'gugCZ.webAdmin.components.links'
 ])
   .controller('OrganizerFormController', OrganizerFormCtrl);
 
