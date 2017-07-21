@@ -29,58 +29,65 @@ angular.module('gugCZ.webAdmin', [
         this.user = currentUser;
         this.selectedChapter = organizerService.getCurrentChapter();
 
+        function getAdminSideMenu() {
+          return [
+            {
+              link: 'dashboard',
+              title: 'Dashboard',
+              icon: 'home'
+            },
+            {
+              link: 'organizers',
+              title: $translate.instant('ORGANIZERS.MANAGEMENT'),
+              icon: 'account'
+            },
+            {
+              link: 'chapters',
+              title: $translate.instant('CHAPTERS.MANAGEMENT'),
+              icon: 'account-multiple'
+            }
+          ];
+        }
+
+        function getChapterSideMenu() {
+          return [
+            {
+              link: 'dashboard',
+              title: 'Dashboard',
+              icon: 'home'
+            },
+            {
+              link: 'organizers.me',
+              title: $translate.instant('PROFILE.MANAGEMENT'),
+              icon: 'account'
+            },
+            {
+              link: 'chapter',
+              title: $translate.instant('CHAPTER.MANAGEMENT'),
+              icon: 'account-multiple'
+            },
+            {
+              link: 'venues',
+              title: 'Správa venues',
+              icon: 'map-marker'
+            }
+          ];
+        }
+
+        function setSideMenuByRole() {
+          if (this.selectedChapter === 'admin') {
+            this.menu = getAdminSideMenu();
+          }
+          else {
+            this.menu = getChapterSideMenu();
+          }
+        }
+
         this.selectChapter = function () {
           organizerService.setCurrentChapter(this.selectedChapter);
 
-          // TODO Refactor into function
-          if (this.selectedChapter === 'admin') {
-            this.menu = [
-              {
-                link: 'dashboard',
-                title: 'Dashboard',
-                icon: 'home'
-              },
-              {
-                link: 'organizers',
-                title: $translate.instant('ORGANIZERS.MANAGEMENT'),
-                icon: 'account'
-              },
-              {
-                link: 'chapters',
-                title: $translate.instant('CHAPTERS.MANAGEMENT'),
-                icon: 'account-multiple'
-              },
-              {
-                link: 'venues',
-                title: 'Správa venues',
-                icon: 'map-marker'
-              }
-            ];
-          }
-          else {
-            this.menu = [
-              {
-                link: 'dashboard',
-                title: 'Dashboard',
-                icon: 'home'
-              },
-              {
-                link: 'organizers.me',
-                title: $translate.instant('PROFILE.MANAGEMENT'),
-                icon: 'account'
-              },
-              {
-                link: 'chapter',
-                title: $translate.instant('CHAPTER.MANAGEMENT'),
-                icon: 'account-multiple'
-              },
-              {
-                link: 'venues',
-                title: 'Správa venues',
-                icon: 'map-marker'
-              }
-            ];
-          }
+          // TODO Refactor .call function
+          setSideMenuByRole.call(this);
         };
 
         this.toggleSidenav = buildToggler('left');
@@ -93,33 +100,8 @@ angular.module('gugCZ.webAdmin', [
 
         this.state = $state;
 
-        this.menu = [
-          {
-            link: 'dashboard',
-            title: 'Dashboard',
-            icon: 'home'
-          },
-          {
-            link: 'organizer',
-            title: $translate.instant('PROFILE.MANAGEMENT'),
-            icon: 'account'
-          },
-          {
-            link: 'chapter',
-            title: $translate.instant('CHAPTER.MANAGEMENT'),
-            icon: 'account-multiple'
-          },
-          {
-            link: 'chapters',
-            title: $translate.instant('CHAPTERS.MANAGEMENT'),
-            icon: 'account-multiple'
-          },
-          {
-            link: 'venues',
-            title: 'Správa venues',
-            icon: 'map-marker'
-          }
-        ];
+        // TODO What is default?
+        this.menu = getChapterSideMenu();
 
 
       },
