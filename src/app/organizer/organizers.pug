@@ -1,9 +1,13 @@
-//
-   Created by horm on 27.06.17.
 
-md-card
-    md-content
-        md-list
-            md-list-item(ng-repeat="org in vm.organizers", ng-click="vm.showOrgDialog(org)")
-                img(ng-src="{{vm.getGravatarURL(org.email)}}", class="md-avatar")
-                p {{org.name}}
+md-content
+    md-list
+        md-list-item(ng-repeat="org in vm.organizers", ng-click="vm.showOrgDialog(org)")
+            img(ng-src="{{vm.getGravatarURL(org.email)}}", class="md-avatar")
+            p {{org.name}}
+            md-icon(md-svg-src='mdi:web', aria-label='View on web' ng-click='vm.viewOnWeb(org)').md-secondary
+            md-icon(md-svg-src='mdi:pencil', aria-label='Edit organizer' ng-click='vm.editOrganizer(org)').md-secondary
+            md-icon(md-svg-src='mdi:delete', aria-label='Delete organizer' ng-click='vm.deleteOrganizer(org)').md-secondary
+        // TODO Better solution for button space at end of the list?
+        md-list-item
+md-button(class="md-fab md-primary md-fab-bottom-right fixed", aria-label='Use Android', ng-click='vm.addOrganizer()')
+    md-icon add
