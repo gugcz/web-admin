@@ -1,18 +1,21 @@
 angular.module('gugCZ.webAdmin.chapter', [
   'ui.router',
-  'gugCZ.webAdmin.chapter.form'
+  'gugCZ.webAdmin.chapter.form',
+  'gugCZ.webAdmin.chapter.services'
 ])
   .config(function ($stateProvider) {
 
-    $stateProvider.state('chapter', {
-      url: 'chapter/form',
+    $stateProvider.state('chapters', {
+      url: 'chapters',
       parent: 'base',
 
-      templateUrl: 'app/chapter/form/form.html',
-      controller: 'ChapterFormController',
+      templateUrl: 'app/chapter/chapters.html',
+      controller: function (firebaseData) {
+        this.chapters = firebaseData.getAllChapters();
+      },
       controllerAs: 'vm',
       data: {
-        title: 'Správa chapteru'  // TODO Add translation
+        title: 'Správa chapterů'  // TODO Add translation
       }
     });
 

@@ -20,6 +20,10 @@ function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray)
 
   };
 
+  self.getAllChapters = function () {
+    return $firebaseArray(firebaseDB.ref('chapters'))
+  }
+
   self.setChapterID = function (chapter) {
     chapterID = getChapterID(chapter);
   };
@@ -61,5 +65,6 @@ function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray)
 
 angular.module('gugCZ.webAdmin.chapter.services', [
   'gugCZ.firebase'])
+  // TODO Bad naming
   .service('firebaseData', firebaseFactory);
 
