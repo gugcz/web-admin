@@ -20,22 +20,8 @@ angular.module('gugCZ.webAdmin.venues', [
     });
   });
 
-function VenuesController($window) {
-  this.viewOnMap = function (venue) {
-    $window.open(venue.mapLink, '_blank');
-  };
-
-  this.editVenue = function (venue) {
-    alert('Edit venue dialog will be displayed');
-  };
-
-  this.deleteVenue = function (venue) {
-    alert('Delete venue dialog will be displayed');
-  };
-
-  this.showVenueDialog = function (venue) {
-    alert('Detailed venue dialog will be displayed');
-  };
+function VenuesController($window, $mdDialog, $log) {
+  const $ctrl = this;
 
   this.venues = [
     {
@@ -55,4 +41,27 @@ function VenuesController($window) {
       mapLink: 'https://www.google.cz/maps/place/Univerzita+Pardubice+-+Fakulta+elektrotechniky+a+informatiky/@50.0334344,15.7651933,17z/data=!3m1!4b1!4m5!3m4!1s0x470dccc33b38a121:0x3b1590db8ad8b477!8m2!3d50.033431!4d15.767382?hl=cs'
     }
   ];
+
+  this.viewOnMap = function (venue) {
+    $window.open(venue.mapLink, '_blank');
+  };
+
+  this.editVenue = function (venue) {
+    alert('Edit venue dialog will be displayed');
+  };
+
+  this.deleteVenue = function (venue) {
+    const dialog = $mdDialog.confirm()
+      .title('Opravdu chcete smazat venue s názvem ' + venue.name + '?')
+      .textContent('Smazání venue nelze vrátit zpět.')
+      .ok('Ano')
+      .cancel('Ne');
+    $mdDialog.show(dialog).then(function() {
+      $ctrl.venues.splice($ctrl.venues.indexOf(venue), 1);
+    }, function() {});
+  };
+
+  this.showVenueDialog = function (venue) {
+    alert('Detailed venue dialog will be displayed');
+  };
 }
