@@ -21,8 +21,8 @@ function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray)
   };
 
   self.getAllChapters = function () {
-    return $firebaseArray(firebaseDB.ref('chapters'))
-  }
+    return $firebaseArray(firebaseDB.ref('chapters'));
+  };
 
   self.setChapterID = function (chapter) {
     chapterID = getChapterID(chapter);
