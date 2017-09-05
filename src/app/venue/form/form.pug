@@ -29,6 +29,6 @@ form(name='venueForm', ng-submit="vm.submit(venueForm)", novalidate)
 
   md-dialog-actions(layout='row')
     span(flex='')
-    md-button.md-raised(translate="BUTTONS.CANCEL",ng-click="vm.cancel()", aria-label='Cancel')
-    md-button.md-raised.md-primary(type="submit", translate="BUTTONS.SAVE", aria-label='Save venue')
+    md-button.md-raised(translate="BUTTONS.CANCEL", ng-click="vm.cancel()", aria-label='Cancel')
+    md-button.md-raised.md-primary(type="submit", translate="BUTTONS.SAVE", ng-click="vm.save()", aria-label='Save venue')
 
