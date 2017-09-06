@@ -46,6 +46,8 @@ function VenuesController($window, $mdDialog, firebaseVenues, $document) {
   };
 
   this.showVenueDialog = function (venue) {
+    const oldVenue = angular.copy(venue);
+    const index = this.venues.indexOf(venue);
     $mdDialog.show({   // TODO how to set dialog width?
       controller: DialogController,
       controllerAs: 'vm',
@@ -60,7 +62,11 @@ function VenuesController($window, $mdDialog, firebaseVenues, $document) {
       if ($ctrl.venues.indexOf(newVenue) === -1) {
         firebaseVenues.addChapterVenueByID('gdg-brno', $ctrl.venues.length, newVenue);
         $ctrl.venues.push(newVenue);
+      } else {
+        firebaseVenues.updateChapterVenueByID('gdg-brno', $ctrl.venues.indexOf(newVenue), newVenue);
       }
+    }, function () {
+      $ctrl.venues[index] = oldVenue;
     });
   };
 }
