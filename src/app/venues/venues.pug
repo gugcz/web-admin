@@ -4,7 +4,7 @@ md-content()
         md-list(layout-padding='')
             md-list-item(ng-repeat = 'venue in vm.venues' class='no-right' ng-click='vm.showVenueDialog(venue)')
                 p {{venue.name}}
-                md-icon(md-svg-src='mdi:map', aria-label='View on map' ng-click='vm.viewOnMap(venue)' ng-if='venue.mapLink').md-secondary
+                md-icon(md-svg-src='mdi:map', aria-label='View on map' ng-click='vm.viewOnMap(venue)' ng-if='venue.mapUrl').md-secondary
                 md-icon(md-svg-src='mdi:delete', aria-label='Delete venue' ng-click='vm.deleteVenue(venue)').md-secondary
 md-fab-speed-dial(md-direction='up', class="md-fab-bottom-right fixed md-hover-full md-scale")
     md-fab-trigger

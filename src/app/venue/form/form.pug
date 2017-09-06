@@ -21,11 +21,11 @@ form(name='venueForm', ng-submit="vm.submit(venueForm)", novalidate)
       div(layout="column")
         md-input-container
           label(translate='VENUE.FORM.MAP_LINK')
-          input(type="url", ng-model='vm.venue.mapLink')
+          input(type="url", ng-model='vm.venue.mapUrl')
 
         md-input-container
           label(translate='VENUE.FORM.NOTE')
-          textarea(ng-model='vm.venue.note', rows=4)
+          textarea(ng-model='vm.venue.howTo', rows=4)
 
   md-dialog-actions(layout='row')
     span(flex='')
