@@ -179,8 +179,21 @@ dates-picker {
 
 }
 
-.isActive {
-  color: orange;
+.active {
+  color: #34a853;
+  md-icon {
+    fill: #34a853 !important;
+  }
+}
+
+.menu-item:hover {
+  cursor: pointer;
+  background-color: #f3f3f3;
+}
+
+.menu-item-title {
+  padding-top: 14px;
+  padding-bottom: 12px;
 }
 
 links {

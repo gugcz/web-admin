@@ -15,11 +15,11 @@ md-toolbar(layout='row').md-whiteframe-z
 div(layout='row', flex='')
   md-sidenav.md-sidenav-left.md-whiteframe-z2(layout='column', md-component-id='left', md-is-locked-open="$mdMedia('gt-sm')")
     md-list
-      md-list-item(ng-repeat='item in app.menu')
-        md-item-content(ui-sref="{{item.link}}", md-ink-ripple, layout='row', layout-align='start center')
+      md-list-item(ng-repeat='item in app.menu', class='menu-item')
+        md-item-content(ui-sref="{{item.link}}", md-ink-ripple='rgba(0,0,0,0.87)', layout='row', layout-align='start center', ui-sref-active="active")
           .inset
             md-icon(md-svg-icon='mdi:{{item.icon}}')
-          .inset {{item.title}}
+          .inset.menu-item-title {{item.title}}
 
   #content(layout='column', flex)
     md-content.md-padding(layout='column', flex='')
