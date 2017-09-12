@@ -20,11 +20,12 @@ angular.module('gugCZ.webAdmin.venues', [
     });
   });
 
-function VenuesController($window, $mdDialog, firebaseVenues, $document) {
+function VenuesController($window, $mdDialog, firebaseVenues, $document, organizerService) {
   const $ctrl = this;
 
+  var chapter = organizerService.currentChapter_
   this.$onInit = function () {
-    firebaseVenues.getChapterVenuesByID('gdg-brno').$loaded().then(data => {
+    firebaseVenues.getChapterVenuesByID(chapter).$loaded().then(data => {
       this.venues = data.map(venue => venue);
     });
   };
@@ -40,7 +41,7 @@ function VenuesController($window, $mdDialog, firebaseVenues, $document) {
       .ok('Ano')
       .cancel('Ne');
     $mdDialog.show(dialog).then(function() {
-      firebaseVenues.removeChapterVenueByID('gdg-brno', $ctrl.venues.indexOf(venue));
+      firebaseVenues.removeChapterVenueByID(chapter, $ctrl.venues.indexOf(venue));
       $ctrl.venues.splice($ctrl.venues.indexOf(venue), 1);
     }, function() {});
   };
@@ -60,10 +61,10 @@ function VenuesController($window, $mdDialog, firebaseVenues, $document) {
     })
     .then(function(newVenue) {
       if ($ctrl.venues.indexOf(newVenue) === -1) {
-        firebaseVenues.addChapterVenueByID('gdg-brno', $ctrl.venues.length, newVenue);
+        firebaseVenues.addChapterVenueByID(chapter, $ctrl.venues.length, newVenue);
         $ctrl.venues.push(newVenue);
       } else {
-        firebaseVenues.updateChapterVenueByID('gdg-brno', $ctrl.venues.indexOf(newVenue), newVenue);
+        firebaseVenues.updateChapterVenueByID(chapter, $ctrl.venues.indexOf(newVenue), newVenue);
       }
     }, function () {
       $ctrl.venues[index] = oldVenue;
