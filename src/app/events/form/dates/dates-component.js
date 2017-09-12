@@ -162,7 +162,7 @@ function DatesController($mdDialog, $translate) {
     if (!this.endOptionsCache_) {
       this.endOptionsCache_ = this.getBaseCalendarOptions_();
       this.endOptionsCache_.defaultDate = this.dates.end;
-      this.endOptionsCache_.dateClick = this.boundedChangeendDateListener;
+      this.endOptionsCache_.dateClick = this.boundedChangeEndDateListener;
     }
 
     return this.endOptionsCache_;
