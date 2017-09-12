@@ -37,8 +37,12 @@ angular.module('gugCZ.webAdmin.events', [
           event: function ($firebaseObject, firebaseDB, currentUser, organizerService) {
 
             function initChapters() {
-              return [
-                organizerService.getCurrentChapter()
+
+              return [{
+                name: currentUser.chapters[organizerService.getCurrentChapter()].name,
+                $id: organizerService.getCurrentChapter()
+              }
+
               ];
             }
 
