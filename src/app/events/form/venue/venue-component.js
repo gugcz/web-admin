@@ -24,9 +24,10 @@ function DialogController($mdDialog, venue) {
   };
 }
 
-function VenueController($document, $mdDialog, firebaseVenues) {
-  // TODO load from Firebase
-  this.venues = firebaseVenues.getChapterVenuesByID('gdg_jihlava');
+function VenueController($document, $mdDialog, firebaseVenues, organizerService, $log) {
+  let chapter = organizerService.currentChapter_;
+  this.venues = firebaseVenues.getChapterVenuesByID(chapter);
+
 
   this.selectedVenue = null;
 
@@ -56,6 +57,7 @@ function VenueController($document, $mdDialog, firebaseVenues) {
         // TODO change firebase data?
 
         this.venues[index] = venue;
+        firebaseVenues.updateChapterVenueByID(chapter, this.venues.indexOf(venue), venue)
         this.selectedVenue = venue;
       }.bind(this));
   };
@@ -65,6 +67,7 @@ function VenueController($document, $mdDialog, firebaseVenues) {
       .then(function (venue) {
         // TODO change firebase data?
 
+        firebaseVenues.addChapterVenueByID(chapter, this.venues.length, venue);
         this.venues.push(venue);
         this.selectedVenue = venue;
       }.bind(this));

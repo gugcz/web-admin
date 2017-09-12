@@ -1,12 +1,13 @@
 angular.module('gugCZ.webAdmin.dashboard', [
-  'ui.router'
+  'ui.router',
+  'gugCZ.webAdmin.report.form'
 ])
   .config(function ($stateProvider) {
 
     $stateProvider.state('dashboard', {
       parent: 'base',
       url: 'dashboard',
-      controller: function ($state, $mdDialog, $translate) {
+      controller: function ($state, $mdDialog, $translate, $document) {
         this.isFabOpen = false;
 
         // TODO Load from firebase
@@ -121,8 +122,14 @@ angular.module('gugCZ.webAdmin.dashboard', [
         };
 
         // TODO
-        this.reportEvent = function (event) {
-          alert('TODO');
+        this.reportEvent = function (eventId) {
+          $mdDialog.show({   // TODO how to set dialog width?
+            controller: DialogController,
+            controllerAs: 'vm',
+            templateUrl: 'app/dashboard/report/report-dialog.html',
+            parent: angular.element($document.body),
+            clickOutsideToClose: true
+          });
         };
 
       },
@@ -130,3 +137,18 @@ angular.module('gugCZ.webAdmin.dashboard', [
       templateUrl: 'app/dashboard/dashboard.html'
     });
   });
+
+function DialogController($mdDialog) {
+
+  this.hide = function () {
+    $mdDialog.hide();
+  };
+
+  this.cancel = function () {
+    $mdDialog.cancel();
+  };
+
+  this.save = function () {
+    $mdDialog.hide(this.venue);
+  };
+}
