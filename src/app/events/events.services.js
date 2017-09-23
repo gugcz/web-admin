@@ -32,6 +32,11 @@ function firebaseFactory(firebaseDB, $q, $firebaseArray, $log) {
     return $firebaseArray(unreportedEventsRef)
   }
 
+  self.getUnpublishedEvents = function () {
+    var unreportedEventsRef = firebaseDB.ref('events').orderByChild('published').equalTo(false);
+    return $firebaseArray(unreportedEventsRef)
+  }
+
   function isArrayBlank(array) {
     return angular.isUndefined(array) || array.length <= 0;
   }

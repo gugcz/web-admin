@@ -12,42 +12,7 @@ angular.module('gugCZ.webAdmin.dashboard', [
 
         // TODO Load from firebase
         this.events = {
-          drafts: [
-            {
-              name: 'GDG Coding Dojo Brno #2',
-              subtitle: 'Intenzivní trénink programátora',
-              dates: {
-                start: new Date(),
-                end: new Date()
-              },
-              description: 'Tady bude popis',
-              venue: {
-                name: 'ModernTV'
-              },
-              regFormLink: 'forms.google.com',
-              links: [
-                {url: 'www.facebook.com/outer'}
-              ]
-
-            },
-            {
-              name: 'Firebase Codelab',
-              subtitle: 'Intenzivní trénink programátora',
-              dates: {
-                start: new Date(),
-                end: new Date()
-              },
-              description: 'Tady bude popis',
-              venue: {
-                name: 'MU Fakulta informatiky'
-              },
-              regFormLink: 'forms.google.com',
-              links: [
-                {url: 'www.facebook.com/outer'}
-              ]
-
-            }
-          ],
+          drafts: firebaseEvents.getUnpublishedEvents(),
           future: [
             {
               name: 'GDG Coding Dojo Brno #1',
