@@ -71,6 +71,6 @@
   "dependencies": {
     "gulp-angular-translate": "^0.1.4",
     "gulp-ng-config": "^1.4.0",
-    "gulp-pug": "^3.3.0"
+    "gulp-pug": "^3.3.0",
   }
 }

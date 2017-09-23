@@ -27,6 +27,11 @@ function firebaseFactory(firebaseDB, $q, $firebaseArray, $log) {
       });
   };
 
+  self.getUnreportedEvents = function () {
+    var unreportedEventsRef = firebaseDB.ref('events').orderByChild('report').equalTo(null);
+    return $firebaseArray(unreportedEventsRef)
+  }
+
   function isArrayBlank(array) {
     return angular.isUndefined(array) || array.length <= 0;
   }

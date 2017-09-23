@@ -27,8 +27,10 @@ md-content()
           md-icon(md-svg-src='mdi:delete', ng-click='vm.deleteEvent(futureEvent, vm.events.future, $index)', aria-label='Edit event').md-secondary
   section
     md-subheader.md-warn Proběhlé akce k reportování
+    div(ng-if="vm.events.unreported.length == 0")
+      md-progress-linear(md-mode="indeterminate").md-warn
     md-list(layout-padding='')
-      div(ng-repeat='unreportedEvent in vm.events.unreported')
+      div(ng-repeat='unreportedEvent in vm.events.unreported | filter: vm.chapterFilter')
         md-list-item
           .md-list-item-text(flex=30)
             h3.md-title {{unreportedEvent.name}}

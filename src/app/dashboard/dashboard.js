@@ -7,7 +7,7 @@ angular.module('gugCZ.webAdmin.dashboard', [
     $stateProvider.state('dashboard', {
       parent: 'base',
       url: 'dashboard',
-      controller: function ($state, $mdDialog, $translate, $document) {
+      controller: function ($state, $mdDialog, $translate, $document, firebaseEvents, organizerService) {
         this.isFabOpen = false;
 
         // TODO Load from firebase
@@ -67,25 +67,11 @@ angular.module('gugCZ.webAdmin.dashboard', [
 
             }
           ],
-          unreported: [
-            {
-              name: 'GDG Coding Dojo Brno',
-              subtitle: 'Intenzivní trénink programátora',
-              dates: {
-                start: new Date(),
-                end: new Date()
-              },
-              description: 'Tady bude popis',
-              venue: {
-                name: 'ModernTV'
-              },
-              regFormLink: 'forms.google.com',
-              links: [
-                {url: 'www.facebook.com/outer'}
-              ]
+          unreported:  firebaseEvents.getUnreportedEvents()
+        };
 
-            }
-          ]
+        this.chapterFilter = function (item) {
+          return item.chapters[organizerService.getCurrentChapter()] === true;
         };
 
         this.editEvent = function (event) {
