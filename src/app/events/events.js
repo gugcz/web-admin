@@ -57,6 +57,7 @@ angular.module('gugCZ.webAdmin.events', [
               subtitle: '',
               dates: {},
               description: '',
+              cover: null,
               venue: null,
               regFormLink: '',
               chapters: initChapters(),

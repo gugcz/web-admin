@@ -21,6 +21,26 @@ md-content(layout-padding)
 
     venue-selector(venue='vm.event.venue')
 
+    // TODO - Add material design
+    // TODO - Not working with ng-model
+    input(type='file', name='cover', image-with-preview='', ng-model='vm.event.cover', accept='image/jpeg,image/png', dimensions='height < 400 && width < 1800 && width > 2 * height')
+    span.error(ng-show='addEventForm.cover.$error.image')
+      | Not a JPEG or a PNG!
+    span.error(ng-show='addEventForm.cover.$error.dimensions')
+      | Invalid dimensions! Expecting a landscape image smaller than 1800x400.
+    img(ng-show='vm.event.cover.src', ng-src='{{vm.event.cover.src}}')
+    p
+      tt addEventForm.cover.$valid = {{addEventForm.cover.$valid}}
+      br
+      tt addEventForm.cover.$error = {{addEventForm.cover.$error}}
+      br
+      tt addEventForm.$valid = {{addEventForm.$valid}}
+      br
+      tt addEventForm.$error.image = {{!!addEventForm.$error.image}}
+      br
+      tt addEventForm.$error.dimensions (height < 400) = {{!!addEventForm.$error.dimensions}}
+      br
+
     md-input-container
       label(translate='EVENTS.FORM.REGFORM_LINK')
       input(type='url', name="regFormLink", ng-model='vm.event.regFormLink', required)
