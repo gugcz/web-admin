@@ -13,31 +13,21 @@ angular.module('gugCZ.webAdmin.dashboard', [
         // TODO Load from firebase
         this.events = {
           drafts: firebaseEvents.getUnpublishedEvents(),
-          future: [
-            {
-              name: 'GDG Coding Dojo Brno #1',
-              subtitle: 'Intenzivní trénink programátora',
-              dates: {
-                start: new Date(),
-                end: new Date()
-              },
-              description: 'Tady bude popis',
-              venue: {
-                name: 'ModernTV'
-              },
-              regFormLink: 'forms.google.com',
-              links: [
-                {url: 'www.facebook.com/outer'}
-              ]
-
-            }
-          ],
+          future: firebaseEvents.getFutureEvents(organizerService.getCurrentChapter()),
           unreported:  firebaseEvents.getUnreportedEvents()
+        };
+
+        this.publishedAndFutureFilter = function (item) {
+          return item.published === true && new Date(item.dates.start) >= new Date();
         };
 
         this.chapterFilter = function (item) {
           return item.chapters[organizerService.getCurrentChapter()] === true;
         };
+
+        this.chapterAndPastFilter = function (item) {
+          return new Date(item.dates.end) <= new Date() && item.chapters[organizerService.getCurrentChapter()] === true;
+        }
 
         this.editEvent = function (event) {
           $state.go('events.edit', {id: event.$id});

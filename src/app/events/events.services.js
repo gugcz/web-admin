@@ -27,6 +27,11 @@ function firebaseFactory(firebaseDB, $q, $firebaseArray, $log) {
       });
   };
 
+  self.getFutureEvents = function (chapterId) {
+    var unreportedEventsRef = firebaseDB.ref('events').orderByChild('chapters/' + chapterId).equalTo(true)
+    return $firebaseArray(unreportedEventsRef)
+  }
+
   self.getUnreportedEvents = function () {
     var unreportedEventsRef = firebaseDB.ref('events').orderByChild('report').equalTo(null);
     return $firebaseArray(unreportedEventsRef)
