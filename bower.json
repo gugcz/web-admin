@@ -37,6 +37,9 @@
     "angular-mocks": "1.6.5"
   },
   "overrides": {
+    "ng-image-input-with-preview": {
+      "main": "./dist/ng-image-input-with-preview.js"
+    },
     "angular-i18n": {
       "main": "./angular-locale_cs.js"
     }
