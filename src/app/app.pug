@@ -6,7 +6,7 @@ md-toolbar(layout='row').md-whiteframe-z
     span(flex='')
 
     md-button {{app.fbUser.name}}
-    // TODO reload app when change
+    // TODO reload app when change not work in event form
     md-select.md-no-underline(ng-model='app.selectedChapter', ng-change="app.selectChapter()", aria-label='Select default chapter')
       md-option(ng-repeat="(id, chapter) in app.user.chapters", value='{{id}}') {{chapter.name}}
       md-option(value='admin', ng-if="app.user.roles.admin") Admin

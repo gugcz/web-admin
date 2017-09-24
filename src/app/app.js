@@ -88,6 +88,7 @@ angular.module('gugCZ.webAdmin', [
 
           // TODO Refactor .call function
           setSideMenuByRole.call(this);
+          $state.reload()
         };
 
         this.toggleSidenav = buildToggler('left');
