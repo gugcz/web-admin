@@ -1,0 +1,20 @@
+form
+    md-toolbar
+        .md-toolbar-tools
+            h2 Reportovat akci
+            span(flex='')
+            md-button.md-icon-button(ng-click='vm.cancel()')
+                md-icon(md-svg-icon='mdi:close', aria-label='Close dialog')
+
+    md-dialog-content(layout-padding)
+
+        .md-dialog-content.venue-form-content
+            div(layout='row')
+                md-input-container
+                    label Počet účastníků
+                    input(type='number', required)
+
+    md-dialog-actions(layout='row')
+        span(flex='')
+        md-button.md-raised(translate="BUTTONS.CANCEL", ng-click="vm.cancel()", aria-label='Cancel')
+        md-button.md-raised.md-primary(type="submit", translate="BUTTONS.SAVE", ng-click="vm.save()", aria-label='Save venue')

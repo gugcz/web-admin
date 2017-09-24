@@ -6,7 +6,7 @@ yarn.lock
 
 dependencies
 dist
-report
+./report
 protractor-screenshots
 
 npm-debug.log
