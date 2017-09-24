@@ -1,55 +1,64 @@
+mixin progress-bar
+  div(ng-if="!vm.chapterEvents.$resolved")
+    md-progress-linear(md-mode="indeterminate")
+
+mixin event-info
+  .md-list-item-text(flex=30)
+    h3.md-title {{event.name}}
+  .md-list-item-text(flex=30)
+    h4 {{event.dates.start | date:'dd.MM.yyyy v HH:mm'}}
+    p {{event.venue.name}}
+
+
 md-content()
   section
     md-subheader Neuveřejněné akce
-    div(ng-if="!vm.events.drafts.$resolved")
-      md-progress-linear(md-mode="indeterminate")
+    +progress-bar
     md-list(layout-padding='')
-      md-list-item(ng-if='vm.events.drafts.filter(vm.chapterFilter).length == 0 && vm.events.drafts.$resolved')
+      md-list-item(ng-if='vm.chapterEvents.filter(vm.draftFilter).length == 0 && vm.chapterEvents.$resolved')
         p Nemáte žádné nevuveřejněné akce
-      div(ng-repeat='eventDraft in vm.events.drafts | filter: vm.chapterFilter')
+      div(ng-repeat='event in vm.chapterEvents.filter(vm.draftFilter) | orderBy: vm.dateOrder')
         md-list-item
-          .md-list-item-text(flex=30)
-            h3.md-title {{eventDraft.name}}
-          .md-list-item-text(flex=30)
-            h4 {{eventDraft.dates.start | date:'dd.MM.yyyy v HH:mm'}}
-            p {{eventDraft.venue.name}}
-          md-icon(md-svg-src='mdi:pencil', ng-click='vm.editEvent(eventDraft)', aria-label='Edit event').md-secondary
-          md-icon(md-svg-src='mdi:publish', ng-click='vm.publishEvent(eventDraft, $index)', aria-label='Publish event').md-secondary
-          md-icon(md-svg-src='mdi:delete', ng-click='vm.deleteEvent(eventDraft, vm.events.drafts, $index)', aria-label='Edit event').md-secondary
+          +event-info
+          md-icon(md-svg-src='mdi:pencil', ng-click='vm.editEvent(event)', aria-label='Edit event').md-secondary
+          md-icon(md-svg-src='mdi:publish', ng-click='vm.publishEvent(event, $index)', aria-label='Publish event').md-secondary
+          md-icon(md-svg-src='mdi:delete', ng-click='vm.deleteEvent(event, vm.events.drafts, $index)', aria-label='Edit event').md-secondary
+
+
+
   section
     md-subheader.md-primary Budoucí akce
-    div(ng-if="!vm.events.future.$resolved")
-      md-progress-linear(md-mode="indeterminate")
+    +progress-bar
     md-list(layout-padding='')
-      md-list-item(ng-if='vm.events.future.filter(vm.publishedAndFutureFilter).length == 0 && vm.events.future.$resolved')
+      md-list-item(ng-if='vm.chapterEvents.filter(vm.futureFilter).length == 0 && vm.chapterEvents.$resolved')
         p Nemáte žádné budoucí akce
-      div(ng-repeat='futureEvent in vm.events.future | filter: vm.publishedAndFutureFilter')
+      div(ng-repeat='event in vm.chapterEvents.filter(vm.futureFilter) | orderBy: vm.dateOrder')
         md-list-item
-          .md-list-item-text(flex=30)
-            h3.md-title {{futureEvent.name}}
-          .md-list-item-text(flex=30)
-            h4 {{futureEvent.dates.start | date:'dd.MM.yyyy v HH:mm'}}
-            p {{futureEvent.venue.name}}
-          md-icon(md-svg-src='mdi:pencil', ng-click='vm.editEvent(futureEvent)', aria-label='Edit event').md-secondary
-          md-icon(md-svg-src='mdi:download', ng-click='vm.hideEvent(futureEvent)', aria-label='Hide event').md-secondary
-          md-icon(md-svg-src='mdi:delete', ng-click='vm.deleteEvent(futureEvent, vm.events.future, $index)', aria-label='Edit event').md-secondary
+          +event-info
+          md-icon(md-svg-src='mdi:pencil', ng-click='vm.editEvent(event)', aria-label='Edit event').md-secondary
+          md-icon(md-svg-src='mdi:download', ng-click='vm.hideEvent(event)', aria-label='Hide event').md-secondary
+          md-icon(md-svg-src='mdi:delete', ng-click='vm.deleteEvent(event, vm.events.future, $index)', aria-label='Edit event').md-secondary
+
+
+
   section
     md-subheader.md-warn Proběhlé akce k reportování
-    div(ng-if="!vm.events.unreported.$resolved")
-      md-progress-linear(md-mode="indeterminate")
+    +progress-bar
     md-list(layout-padding='')
-      md-list-item(ng-if='vm.events.unreported.filter(vm.chapterAndPastFilter).length == 0 && vm.events.unreported.$resolved')
+      md-list-item(ng-if='vm.chapterEvents.filter(vm.unreportedFilter).length == 0 && vm.chapterEvents.$resolved')
         p Nemáte žádné nereportované akce
-      div(ng-repeat='unreportedEvent in vm.events.unreported | filter: vm.chapterAndPastFilter')
+      div(ng-repeat='event in vm.chapterEvents.filter(vm.unreportedFilter) | orderBy: vm.dateOrder')
         md-list-item
-          .md-list-item-text(flex=30)
-            h3.md-title {{unreportedEvent.name}}
-          .md-list-item-text(flex=30)
-            h4 {{unreportedEvent.dates.start | date:'dd.MM.yyyy v HH:mm'}}
-            p {{unreportedEvent.venue.name}}
-          md-icon(md-svg-src='mdi:message', ng-click='vm.reportEvent(unreportedEvent)', aria-label='Report event').md-secondary
+          +event-info
+          md-icon(md-svg-src='mdi:message', ng-click='vm.reportEvent(event)', aria-label='Report event').md-secondary
+
+      // Blank spaces for FAB
       md-list-item
       md-list-item
+
+
+
+
 
 md-fab-speed-dial(md-open='vm.isFabOpen', md-direction='up', class="md-fab-bottom-right fixed md-hover-full md-scale")
   md-fab-trigger

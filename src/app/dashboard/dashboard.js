@@ -11,22 +11,22 @@ angular.module('gugCZ.webAdmin.dashboard', [
         this.isFabOpen = false;
 
         // TODO Load from firebase
-        this.events = {
-          drafts: firebaseEvents.getUnpublishedEvents(),
-          future: firebaseEvents.getFutureEvents(organizerService.getCurrentChapter()),
-          unreported:  firebaseEvents.getUnreportedEvents()
-        };
+        this.chapterEvents = firebaseEvents.getChapterEvents(organizerService.getCurrentChapter());
 
-        this.publishedAndFutureFilter = function (item) {
+        this.draftFilter = function(item) {
+          return item.published !== true;
+        }
+
+        this.futureFilter = function(item) {
           return item.published === true && new Date(item.dates.start) >= new Date();
         };
 
-        this.chapterFilter = function (item) {
-          return item.chapters[organizerService.getCurrentChapter()] === true;
+        this.unreportedFilter = function(item) {
+          return new Date(item.dates.end) <= new Date() && angular.isUndefined(item.report)
         };
 
-        this.chapterAndPastFilter = function (item) {
-          return new Date(item.dates.end) <= new Date() && item.chapters[organizerService.getCurrentChapter()] === true;
+        this.dateOrder = function (item) {
+          return new Date(item.dates.start)
         }
 
         this.editEvent = function (event) {

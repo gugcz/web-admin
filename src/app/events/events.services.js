@@ -27,18 +27,8 @@ function firebaseFactory(firebaseDB, $q, $firebaseArray, $log) {
       });
   };
 
-  self.getFutureEvents = function (chapterId) {
+  self.getChapterEvents = function (chapterId) {
     var unreportedEventsRef = firebaseDB.ref('events').orderByChild('chapters/' + chapterId).equalTo(true)
-    return $firebaseArray(unreportedEventsRef)
-  }
-
-  self.getUnreportedEvents = function () {
-    var unreportedEventsRef = firebaseDB.ref('events').orderByChild('report').equalTo(null);
-    return $firebaseArray(unreportedEventsRef)
-  }
-
-  self.getUnpublishedEvents = function () {
-    var unreportedEventsRef = firebaseDB.ref('events').orderByChild('published').equalTo(false);
     return $firebaseArray(unreportedEventsRef)
   }
 
