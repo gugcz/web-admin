@@ -10,8 +10,7 @@ function ReportFormController() {
     if (form.$invalid) {
       return;
     }
-
-    this.onSave(this.selectedVenue);
+    this.onSave(this.report);
   };
 
 }
@@ -26,6 +25,7 @@ angular.module('gugCZ.webAdmin.report.form', [
     controller: ReportFormController,
     controllerAs: 'vm',
     bindings: {
+      report: '=',
       onCancel: '&',
       onSave: '&'
     },

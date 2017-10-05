@@ -23,7 +23,7 @@
     "eslint": "3.19.0",
     "eslint-config-angular": "0.5.0",
     "eslint-plugin-angular": "2.4.0",
-    "firebase-tools": "^3.9.0",
+    "firebase-tools": "^3.13.1",
     "gulp": "3.9.1",
     "gulp-angular-filesort": "1.1.1",
     "gulp-angular-templatecache": "2.0.0",
@@ -63,14 +63,14 @@
     "phantomjs-prebuilt": "2.1.14",
     "protractor": "5.1.2",
     "protractor-jasmine2-screenshot-reporter": "0.3.5",
-    "pug": "^2.0.0-rc.1",
+    "pug": "^2.0.0-rc.4",
     "rimraf": "2.6.1",
     "run-sequence": "1.2.2",
     "yargs": "8.0.1"
   },
   "dependencies": {
     "gulp-angular-translate": "^0.1.4",
-    "gulp-ng-config": "^1.4.0",
+    "gulp-ng-config": "^1.5.0",
     "gulp-pug": "^3.3.0"
   }
 }

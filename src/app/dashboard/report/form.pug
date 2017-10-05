@@ -1,4 +1,4 @@
-form
+form(name='reportForm', ng-submit='vm.submit(reportForm)', novalidate)
     md-toolbar
         .md-toolbar-tools
             h2 Reportovat akci
@@ -12,9 +12,9 @@ form
             div(layout='row')
                 md-input-container
                     label Počet účastníků
-                    input(type='number', required)
+                    input(type='number', ng-model='vm.report.attendeesCount')
 
     md-dialog-actions(layout='row')
         span(flex='')
         md-button.md-raised(translate="BUTTONS.CANCEL", ng-click="vm.cancel()", aria-label='Cancel')
-        md-button.md-raised.md-primary(type="submit", translate="BUTTONS.SAVE", ng-click="vm.save()", aria-label='Save venue')
+        md-button.md-raised.md-primary(translate="BUTTONS.SAVE", ng-click="vm.save()", type='submit', aria-label='Save venue')

@@ -15,19 +15,19 @@ angular.module('gugCZ.webAdmin.dashboard', [
 
         this.draftFilter = function(item) {
           return item.published !== true;
-        }
+        };
 
         this.futureFilter = function(item) {
           return item.published === true && new Date(item.dates.start) >= new Date();
         };
 
         this.unreportedFilter = function(item) {
-          return new Date(item.dates.end) <= new Date() && angular.isUndefined(item.report)
+          return new Date(item.dates.end) <= new Date() && angular.isUndefined(item.report);
         };
 
         this.dateOrder = function (item) {
-          return new Date(item.dates.start)
-        }
+          return new Date(item.dates.start);
+        };
 
         this.editEvent = function (event) {
           $state.go('events.edit', {id: event.$id});
@@ -50,23 +50,38 @@ angular.module('gugCZ.webAdmin.dashboard', [
 
         };
 
-        // TODO Buggy
+        // TODO
         this.publishEvent = function (event, index) {
-          this.events.future.push(event);
-          this.events.drafts.splice(index, 1);
-        };
 
-        // TODO Buggy
-        this.hideEvent = function (event, index) {
-          this.events.drafts.push(event);
-          this.events.future.splice(index, 1);
         };
 
         // TODO
-        this.reportEvent = function (eventId) {
-          $mdDialog.show({   // TODO how to set dialog width?
+        this.hideEvent = function (event, index) {
+
+        };
+
+        // TODO
+        this.reportEvent = function (ev, eventId) {
+          this.createReportModal_(ev, {})
+            .then(function (report) {
+                // TODO change firebase data?
+
+              console.log(eventId)
+              firebaseEvents.reportEvent(eventId, report);
+            }.bind(this));
+        };
+
+        this.createReportModal_ = function (ev, report) {
+          report = angular.copy(report);
+
+
+          return $mdDialog.show({   // TODO how to set dialog width?
             controller: DialogController,
             controllerAs: 'vm',
+            locals: {
+              report: report
+            },
+            targetEvent: ev,
             templateUrl: 'app/dashboard/report/report-dialog.html',
             parent: angular.element($document.body),
             clickOutsideToClose: true
@@ -82,14 +97,16 @@ angular.module('gugCZ.webAdmin.dashboard', [
 function DialogController($mdDialog) {
 
   this.hide = function () {
+
     $mdDialog.hide();
   };
 
   this.cancel = function () {
+
     $mdDialog.cancel();
   };
 
   this.save = function () {
-    $mdDialog.hide(this.venue);
+    $mdDialog.hide(this.report);
   };
 }

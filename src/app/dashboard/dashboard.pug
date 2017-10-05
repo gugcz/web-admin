@@ -50,7 +50,7 @@ md-content()
       div(ng-repeat='event in vm.chapterEvents.filter(vm.unreportedFilter) | orderBy: vm.dateOrder')
         md-list-item
           +event-info
-          md-icon(md-svg-src='mdi:message', ng-click='vm.reportEvent(event)', aria-label='Report event').md-secondary
+          md-icon(md-svg-src='mdi:message', ng-click='vm.reportEvent($event, event.$id)', aria-label='Report event').md-secondary
 
       // Blank spaces for FAB
       md-list-item

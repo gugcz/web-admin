@@ -2,12 +2,30 @@ function firebaseFactory(firebaseDB, $q, $firebaseArray, $log) {
   const self = this;
   const chapterID = null;
 
-  self.addEvent = function (event) {
+  function saveEvent(event, eventId) {
     $log.debug('You send this event:', event);
+    return firebaseDB.ref('events/' + eventId).set(event);
+  };
+
+  self.saveEvent = function (event) {
+    $log.debug('You send this event:', event);
+    event.isPublished = false;
+    return saveEvent(event);
+  };
+
+  self.saveAndPublishEvent = function (event) {
+    event.isPublished = true;
+    $log.debug('You send this event:', event);
+    return saveEvent(event);
   };
 
   self.getChapters = function () {
     return $firebaseArray(firebaseDB.ref('chapters'));
+  };
+
+  self.reportEvent = function (eventId, report) {
+    console.log('sending report for', eventId, report)
+    return firebaseDB.ref('events/' + eventId + '/report').set(report);
   };
 
   /**
@@ -28,9 +46,9 @@ function firebaseFactory(firebaseDB, $q, $firebaseArray, $log) {
   };
 
   self.getChapterEvents = function (chapterId) {
-    var unreportedEventsRef = firebaseDB.ref('events').orderByChild('chapters/' + chapterId).equalTo(true)
-    return $firebaseArray(unreportedEventsRef)
-  }
+    var chapterEventsRef = firebaseDB.ref('events').orderByChild('chapters/' + chapterId).equalTo(true);
+    return $firebaseArray(chapterEventsRef);
+  };
 
   function isArrayBlank(array) {
     return angular.isUndefined(array) || array.length <= 0;

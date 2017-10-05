@@ -42,7 +42,8 @@ md-content(layout-padding)
 
     links(links='vm.event.links', context='{{"EVENTS.FORM.EVENT" | translate}}')
 
-    md-button(class="md-fab md-primary md-fab-bottom-right fixed", aria-label='Use Android', type='submit')
-      md-icon done
+    div(layout='row', layout-align='end')
+      md-button(class="md-raised", aria-label='Save', type='submit') Uložit
+      md-button(class="md-raised md-primary", aria-label='Save and publish', type='submit') Uložit a publikovat
 
     pre {{ vm.event | json }}
