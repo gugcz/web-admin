@@ -21,17 +21,36 @@ function firebaseFactory(firebaseDB, $q, $firebaseArray, $log, $firebaseObject) 
 
   self.loadEvent = function (eventId) {
     return $firebaseObject(firebaseDB.ref('events/' + eventId)).$loaded().then(event => {
-      event.chapters = getArrayFromKeyValue(event.chapters)
+      event.chapters = getArrayOfObjectsWithIdFromKeyValue(event.chapters);
+      return getChapterNames(event.chapters).then(chapters => {
+        event.chapters = chapters
+        return event
+      });
 
-      return event;
     });
   };
 
   // TODO Add name
-  function getArrayFromKeyValue(keyValue) {
+  function getArrayOfObjectsWithIdFromKeyValue(keyValue) {
     return Object.keys(keyValue).map(function (key) {
       if (keyValue[key])
-        return {$id: key};
+        return {
+          $id: key
+        };
+    });
+  }
+
+  function getChapterNames(chapters) {
+    var promises = [];
+    chapters.forEach(chapter => {
+      promises.push(firebaseDB.ref('chapters/' + chapter.$id + '/name').once('value'));
+    });
+    return Promise.all(promises).then(names => {
+      return chapters.map(function (chapter, i) {
+        chapter.name = names[i].val();
+        return chapter;
+
+      });
     });
   }
 
@@ -40,7 +59,6 @@ function firebaseFactory(firebaseDB, $q, $firebaseArray, $log, $firebaseObject) 
   };
 
   self.reportEvent = function (eventId, report) {
-    console.log('sending report for', eventId, report);
     return firebaseDB.ref('events/' + eventId + '/report').set(report);
   };
 
@@ -67,15 +85,15 @@ function firebaseFactory(firebaseDB, $q, $firebaseArray, $log, $firebaseObject) 
   };
 
   self.deleteEvent = function (eventId) {
-    return firebaseDB.ref('events/' + eventId).remove()
+    return firebaseDB.ref('events/' + eventId).remove();
   };
 
   self.publishEvent = function (eventId) {
-    return firebaseDB.ref('events/' + eventId + '/published').set(true)
+    return firebaseDB.ref('events/' + eventId + '/published').set(true);
   };
 
   self.hideEvent = function (eventId) {
-    return firebaseDB.ref('events/' + eventId + '/published').set(false)
+    return firebaseDB.ref('events/' + eventId + '/published').set(false);
   };
 
   function isArrayBlank(array) {

@@ -75,6 +75,10 @@ angular.module('gugCZ.webAdmin', [
           ];
         }
 
+        this.$onInit = function () {
+          setSideMenuByRole.call(this);
+        }
+
         function setSideMenuByRole() {
           if (this.selectedChapter === 'admin') {
             this.menu = getAdminSideMenu();
@@ -88,8 +92,8 @@ angular.module('gugCZ.webAdmin', [
           organizerService.setCurrentChapter(this.selectedChapter);
 
           // TODO Refactor .call function
-          setSideMenuByRole.call(this);
           $state.reload()
+
         };
 
         this.toggleSidenav = buildToggler('left');
