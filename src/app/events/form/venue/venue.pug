@@ -1,14 +1,18 @@
 div(layout='row')
   md-input-container(flex)
-    md-select(ng-model='vm.selectedVenue', placeholder="{{ 'EVENTS.FORM.VENUE' | translate}}", required)
+    md-select(ng-model='vm.venue', placeholder="{{ 'EVENTS.FORM.VENUE' | translate}}", required)
       md-optgroup(label="Venues")
+        md-option(ng-value='vm.venue', ng-if='vm.venue && vm.venues.indexOf(vm.venue) === -1')
+          div
+            b {{vm.venue.name}}
+            span ,&nbsp;{{vm.venue.address}}
         md-option(ng-value='venue', ng-repeat='venue in vm.venues')
             div
               b {{venue.name}}
               span ,&nbsp;{{venue.address}}
 
   div(flex)
-    md-button(ng-click="vm.editVenue()", ng-if="vm.selectedVenue", aria-label='Edit venue')
+    md-button(ng-click="vm.editVenue()", ng-if="vm.venue && vm.venues.indexOf(vm.venue) !== -1", aria-label='Edit venue')
       span(translate="EVENTS.FORM.EDIT_VENUE")
 
     // TODO Add to stared from searching
