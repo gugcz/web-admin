@@ -47,23 +47,31 @@ function getLastDayOfThisMonth() {
 
 
 function DatesController($mdDialog, $translate) {
-
   const preFillData = { // TODO vstupní data z firebase
     startTime: new Date('1970-01-01T16:00Z'),
     duration: 120
   };
 
   this.$onInit = function () {
-    this.duration = preFillData.duration;
+    if (angular.isUndefined(this.dates.start) || this.dates.start === null) {
+      this.duration = preFillData.duration;
 
-    this.dates = {
-      start: setTimeByPreset(getNextMonthDate(), preFillData.startTime),
-      end: null
-    };
+      this.dates = {
+        start: setTimeByPreset(getNextMonthDate(), preFillData.startTime),
+        end: null
+      };
 
-    this.repeats = {};
 
-    this.calculateEndDate();
+      this.repeats = {};
+
+      this.calculateEndDate();
+    }
+    else {
+      this.dates.start = new Date(this.dates.start);
+      this.dates.end = new Date(this.dates.end);
+      this.duration = (this.dates.end.getTime() - this.dates.start.getTime()) / 60000;
+      this.repeats = {}; // TODO - In Firebase?
+    }
   };
 
   this.config = {
