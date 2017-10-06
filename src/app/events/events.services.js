@@ -70,6 +70,14 @@ function firebaseFactory(firebaseDB, $q, $firebaseArray, $log, $firebaseObject) 
     return firebaseDB.ref('events/' + eventId).remove()
   };
 
+  self.publishEvent = function (eventId) {
+    return firebaseDB.ref('events/' + eventId + '/published').set(true)
+  };
+
+  self.hideEvent = function (eventId) {
+    return firebaseDB.ref('events/' + eventId + '/published').set(false)
+  };
+
   function isArrayBlank(array) {
     return angular.isUndefined(array) || array.length <= 0;
   }

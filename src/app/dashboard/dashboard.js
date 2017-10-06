@@ -51,13 +51,13 @@ angular.module('gugCZ.webAdmin.dashboard', [
         };
 
         // TODO
-        this.publishEvent = function (event, index) {
-
+        this.publishEvent = function (eventId) {
+          firebaseEvents.publishEvent(eventId)
         };
 
         // TODO
-        this.hideEvent = function (event, index) {
-
+        this.hideEvent = function (eventId) {
+          firebaseEvents.hideEvent(eventId)
         };
 
         // TODO
