@@ -6,7 +6,7 @@ md-autocomplete-snap='',md-transform-chip='vm.transformChip($chip)', md-require-
     span(md-highlight-text='vm.searchText') {{item.name}}
   md-chip-template
     // TODO maybe add chapter icons
-    standard {{$chip.name}}
+    standard {{$chip.name ? $chip.name : $chip.$id}}
 
 
 div(ng-if="vm.loading")

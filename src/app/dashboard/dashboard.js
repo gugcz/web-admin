@@ -33,7 +33,7 @@ angular.module('gugCZ.webAdmin.dashboard', [
           $state.go('events.edit', {id: event.$id});
         };
 
-        this.deleteEvent = function (event, events, index) {
+        this.deleteEvent = function (eventId) {
           const confirm = $mdDialog.confirm()
             .title($translate.instant('DIALOG.ARE_YOU_SURE'))
             .textContent($translate.instant('DIALOG.DELETE_EVENT_WARN'))
@@ -43,7 +43,7 @@ angular.module('gugCZ.webAdmin.dashboard', [
 
 
           $mdDialog.show(confirm).then(function () {
-            events.splice(index, 1);
+            firebaseEvents.deleteEvent(eventId)
           }, function () {
             // Do nothing
           });

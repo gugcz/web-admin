@@ -22,7 +22,7 @@ md-content()
           +event-info
           md-icon(md-svg-src='mdi:pencil', ng-click='vm.editEvent(event)', aria-label='Edit event').md-secondary
           md-icon(md-svg-src='mdi:publish', ng-click='vm.publishEvent(event, $index)', aria-label='Publish event').md-secondary
-          md-icon(md-svg-src='mdi:delete', ng-click='vm.deleteEvent(event, vm.events.drafts, $index)', aria-label='Edit event').md-secondary
+          md-icon(md-svg-src='mdi:delete', ng-click='vm.deleteEvent(event.$id)', aria-label='Edit event').md-secondary
 
 
 
@@ -37,7 +37,7 @@ md-content()
           +event-info
           md-icon(md-svg-src='mdi:pencil', ng-click='vm.editEvent(event)', aria-label='Edit event').md-secondary
           md-icon(md-svg-src='mdi:download', ng-click='vm.hideEvent(event)', aria-label='Hide event').md-secondary
-          md-icon(md-svg-src='mdi:delete', ng-click='vm.deleteEvent(event, vm.events.future, $index)', aria-label='Edit event').md-secondary
+          md-icon(md-svg-src='mdi:delete', ng-click='vm.deleteEvent(event.$id)', aria-label='Edit event').md-secondary
 
 
 

@@ -82,10 +82,11 @@ angular.module('gugCZ.webAdmin.events', [
         controller: 'EventFormController',
         controllerAs: 'vm',
         resolve: {
-          event: function ($stateParams, $log) {
+          event: function ($stateParams, $log, firebaseEvents) {
             $log.debug($stateParams.id);
 
-            return {};
+
+            return firebaseEvents.loadEvent($stateParams.id);
             // todo load from firebase
           }
         },

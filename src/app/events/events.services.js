@@ -1,4 +1,4 @@
-function firebaseFactory(firebaseDB, $q, $firebaseArray, $log) {
+function firebaseFactory(firebaseDB, $q, $firebaseArray, $log, $firebaseObject) {
   const self = this;
   const chapterID = null;
 
@@ -19,12 +19,28 @@ function firebaseFactory(firebaseDB, $q, $firebaseArray, $log) {
     return saveEvent(event);
   };
 
+  self.loadEvent = function (eventId) {
+    return $firebaseObject(firebaseDB.ref('events/' + eventId)).$loaded().then(event => {
+      event.chapters = getArrayFromKeyValue(event.chapters)
+
+      return event;
+    });
+  };
+
+  // TODO Add name
+  function getArrayFromKeyValue(keyValue) {
+    return Object.keys(keyValue).map(function (key) {
+      if (keyValue[key])
+        return {$id: key};
+    });
+  }
+
   self.getChapters = function () {
     return $firebaseArray(firebaseDB.ref('chapters'));
   };
 
   self.reportEvent = function (eventId, report) {
-    console.log('sending report for', eventId, report)
+    console.log('sending report for', eventId, report);
     return firebaseDB.ref('events/' + eventId + '/report').set(report);
   };
 
@@ -48,6 +64,10 @@ function firebaseFactory(firebaseDB, $q, $firebaseArray, $log) {
   self.getChapterEvents = function (chapterId) {
     var chapterEventsRef = firebaseDB.ref('events').orderByChild('chapters/' + chapterId).equalTo(true);
     return $firebaseArray(chapterEventsRef);
+  };
+
+  self.deleteEvent = function (eventId) {
+    return firebaseDB.ref('events/' + eventId).remove()
   };
 
   function isArrayBlank(array) {
@@ -82,6 +102,6 @@ function getArrayWithoutDuplicates(array) {
 
 
 angular.module('gugCZ.webAdmin.events.services', [
-  'gugCZ.firebase'
+  'gugCZ.firebase',
 ])
   .service('firebaseEvents', firebaseFactory);

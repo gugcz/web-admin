@@ -20,6 +20,8 @@ function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray)
 
   };
 
+
+
   self.getAllChapters = function () {
     return $firebaseArray(firebaseDB.ref('chapters'));
   };

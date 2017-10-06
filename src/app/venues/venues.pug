@@ -1,7 +1,7 @@
 md-content()
     section
         md-subheader Venues
-        md-list(layout-padding='')
+        md-list()
             md-list-item(ng-repeat = 'venue in vm.venues' class='no-right' ng-click='vm.showVenueDialog(venue)')
                 p {{venue.name}}
                 md-icon(md-svg-src='mdi:map', aria-label='View on map' ng-click='vm.viewOnMap(venue)' ng-if='venue.mapUrl').md-secondary
