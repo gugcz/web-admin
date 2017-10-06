@@ -14,7 +14,7 @@ function EventFormController(firebaseEvents, $state, $mdToast, $translate, event
   function showMessageAndGoToDashboard() {
     $mdToast.show(
           $mdToast.simple() // TODO zapouzdřit?
-              .textContent($translate.instant('EVENTS.FORM.EVENT_ADDED'))
+              .textContent($translate.instant('EVENTS.TOASTS.EVENT_ADDED'))
               .position('bottom right')
               .hideDelay(3000)
       );

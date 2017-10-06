@@ -60,7 +60,14 @@
 
 
 
-      "EVENT_ADDED": "Akce byla vytvořena!"
+    },
+
+    "TOASTS": {
+      "EVENT_ADDED": "Akce byla vytvořena!",
+      "EVENT_DELETED": "Akce byla smázana!",
+      "EVENT_PUBLISHED": "Akce byla publikována!",
+      "EVENT_HIDED": "Akce byla schována!",
+      "EVENT_REPORTED": "Akce byla reportována!"
     }
   },
 

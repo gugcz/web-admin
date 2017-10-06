@@ -7,7 +7,7 @@ angular.module('gugCZ.webAdmin.dashboard', [
     $stateProvider.state('dashboard', {
       parent: 'base',
       url: 'dashboard',
-      controller: function ($state, $mdDialog, $translate, $document, firebaseEvents, organizerService) {
+      controller: function ($state, $mdDialog, $translate, $document, firebaseEvents, organizerService, $mdToast) {
         this.isFabOpen = false;
 
         // TODO Load from firebase
@@ -43,34 +43,41 @@ angular.module('gugCZ.webAdmin.dashboard', [
 
 
           $mdDialog.show(confirm).then(function () {
-            firebaseEvents.deleteEvent(eventId)
+            firebaseEvents.deleteEvent(eventId).then(showToast('EVENTS.TOASTS.EVENT_DELETED'));
           }, function () {
             // Do nothing
           });
 
         };
 
+
+
         // TODO
         this.publishEvent = function (eventId) {
-          firebaseEvents.publishEvent(eventId)
+          firebaseEvents.publishEvent(eventId).then(showToast('EVENTS.TOASTS.EVENT_PUBLISHED'));
         };
 
         // TODO
         this.hideEvent = function (eventId) {
-          firebaseEvents.hideEvent(eventId)
+          firebaseEvents.hideEvent(eventId).then(showToast('EVENTS.TOASTS.EVENT_HIDED'));
         };
 
         // TODO
         this.reportEvent = function (ev, eventId) {
           this.createReportModal_(ev, {})
             .then(function (report) {
-                // TODO change firebase data?
-
-              console.log(eventId)
-              firebaseEvents.reportEvent(eventId, report);
+              firebaseEvents.reportEvent(eventId, report).then(showToast('EVENTS.TOASTS.EVENT_REPORTED'));
             }.bind(this));
         };
 
+        function showToast(messageId) {
+          $mdToast.show(
+            $mdToast.simple() // TODO zapouzdřit?
+              .textContent($translate.instant(messageId))
+              .position('bottom right')
+              .hideDelay(3000)
+          );
+        }
         this.createReportModal_ = function (ev, report) {
           report = angular.copy(report);
 
