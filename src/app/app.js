@@ -28,7 +28,7 @@ angular.module('gugCZ.webAdmin', [
       url: '/',
       controller: function ($mdSidenav, $firebaseObject, $state, $scope, $translate, currentUser, organizerService) {
         this.user = currentUser;
-        this.selectedChapter = organizerService.getCurrentChapter();
+
 
         function getAdminSideMenu() {
           return [
@@ -76,8 +76,9 @@ angular.module('gugCZ.webAdmin', [
         }
 
         this.$onInit = function () {
+          this.selectedChapter = organizerService.getCurrentChapter();
           setSideMenuByRole.call(this);
-        }
+        };
 
         function setSideMenuByRole() {
           if (this.selectedChapter === 'admin') {
@@ -92,7 +93,7 @@ angular.module('gugCZ.webAdmin', [
           organizerService.setCurrentChapter(this.selectedChapter);
 
           // TODO Refactor .call function
-          $state.reload()
+          $state.reload();
 
         };
 

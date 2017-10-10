@@ -4,7 +4,7 @@ function EventFormController(firebaseEvents, $state, $mdToast, $translate, event
 
   this.saveAndPublishEvent = function () {
     firebaseEvents.saveAndPublishEvent(this.event).then(function () {
-      showMessageAndGoToDashboard();
+      showMessageAndGoToDashboard('EVENTS.TOASTS.EVENT_PUBLISHED');
     });
 
 
@@ -12,17 +12,17 @@ function EventFormController(firebaseEvents, $state, $mdToast, $translate, event
   };
   this.saveEvent = function () {
     firebaseEvents.saveEvent(this.event).then(function () {
-      showMessageAndGoToDashboard();
+      showMessageAndGoToDashboard('EVENTS.TOASTS.EVENT_SAVED');
     });
 
 
 
   };
 
-  function showMessageAndGoToDashboard() {
+  function showMessageAndGoToDashboard(messageId) {
     $mdToast.show(
           $mdToast.simple() // TODO zapouzdřit?
-              .textContent($translate.instant('EVENTS.TOASTS.EVENT_ADDED'))
+              .textContent($translate.instant(messageId))
               .position('bottom right')
               .hideDelay(3000)
       );

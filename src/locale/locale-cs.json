@@ -63,7 +63,7 @@
     },
 
     "TOASTS": {
-      "EVENT_ADDED": "Akce byla vytvořena!",
+      "EVENT_SAVED": "Akce byla uložena!",
       "EVENT_DELETED": "Akce byla smázana!",
       "EVENT_PUBLISHED": "Akce byla publikována!",
       "EVENT_HIDED": "Akce byla schována!",
