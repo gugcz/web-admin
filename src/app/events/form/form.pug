@@ -1,5 +1,5 @@
 md-content(layout-padding)
-  form(name='addEventForm', ng-submit='addEventForm.$valid && vm.addEvent()', novalidate, layout="column")
+  form(name='addEventForm', ng-submit='addEventForm.$valid && vm.saveEvent()', novalidate, layout="column")
     div(layout="row")
       md-input-container(flex)
         label(translate='EVENTS.FORM.NAME')
@@ -44,6 +44,6 @@ md-content(layout-padding)
 
     div(layout='row', layout-align='end')
       md-button(class="md-raised", aria-label='Save', type='submit') Uložit
-      md-button(class="md-raised md-primary", aria-label='Save and publish', type='submit') Uložit a publikovat
+      md-button(class="md-raised md-primary", aria-label='Save and publish', ng-click='vm.saveAndPublishEvent()') Uložit a publikovat
 
     pre {{ vm.event | json }}

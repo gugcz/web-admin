@@ -10,6 +10,14 @@ function EventFormController(firebaseEvents, $state, $mdToast, $translate, event
 
 
   };
+  this.saveEvent = function () {
+    firebaseEvents.saveEvent(this.event).then(function () {
+      showMessageAndGoToDashboard();
+    });
+
+
+
+  };
 
   function showMessageAndGoToDashboard() {
     $mdToast.show(

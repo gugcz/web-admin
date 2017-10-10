@@ -2,19 +2,37 @@ function firebaseFactory(firebaseDB, $q, $firebaseArray, $log, $firebaseObject) 
   const self = this;
   const chapterID = null;
 
-  function saveEvent(event, eventId) {
-    $log.debug('You send this event:', event);
-    return firebaseDB.ref('events/' + eventId).set(event);
+  function transformEventChaptersForFirebase(chapters) {
+    var chaptersForFirebase = {};
+    chapters.forEach(chapter => chaptersForFirebase[chapter.$id] = true);
+    return chaptersForFirebase;
+  }
+
+  function transformEventDatesForFirebase(dates) {
+    dates.start = dates.start.toISOString()
+    dates.end = dates.end.toISOString()
+    return dates;
+  }
+
+  function saveEvent(event) {
+    if (!event.urlId) {
+      event.urlId = getEventUrl(event); // TODO - Add UrlCreator (use from CF?)
+    }
+    event.dates = transformEventDatesForFirebase(event.dates);
+    event.chapters = transformEventChaptersForFirebase(event.chapters);
+
+    // TODO Not work for new event (use $state for context)
+    return event.$save();
   };
 
   self.saveEvent = function (event) {
     $log.debug('You send this event:', event);
-    event.isPublished = false;
+    event.published = false;
     return saveEvent(event);
   };
 
   self.saveAndPublishEvent = function (event) {
-    event.isPublished = true;
+    event.published = true;
     $log.debug('You send this event:', event);
     return saveEvent(event);
   };
@@ -23,8 +41,8 @@ function firebaseFactory(firebaseDB, $q, $firebaseArray, $log, $firebaseObject) 
     return $firebaseObject(firebaseDB.ref('events/' + eventId)).$loaded().then(event => {
       event.chapters = getArrayOfObjectsWithIdFromKeyValue(event.chapters);
       return getChapterNames(event.chapters).then(chapters => {
-        event.chapters = chapters
-        return event
+        event.chapters = chapters;
+        return event;
       });
 
     });
