@@ -76,6 +76,11 @@ function LinksController() {
   };
 
   this.$onInit = function () {
+    if (!this.links) {
+      this.links = [
+        {url: ''}
+      ];
+    }
     this.onLinkUpdate(0); // TODO remove or init all?
   };
 
