@@ -3,7 +3,7 @@ function EventFormController(firebaseEvents, $state, $mdToast, $translate, event
   this.event = event;
 
   this.saveAndPublishEvent = function () {
-    firebaseEvents.saveAndPublishEvent(this.event).then(function () {
+    firebaseEvents.saveAndPublishEvent(this.event, $state.is('events.edit')).then(function () {
       showMessageAndGoToDashboard('EVENTS.TOASTS.EVENT_PUBLISHED');
     });
 
@@ -11,7 +11,7 @@ function EventFormController(firebaseEvents, $state, $mdToast, $translate, event
 
   };
   this.saveEvent = function () {
-    firebaseEvents.saveEvent(this.event).then(function () {
+    firebaseEvents.saveEvent(this.event, $state.is('events.edit')).then(function () {
       showMessageAndGoToDashboard('EVENTS.TOASTS.EVENT_SAVED');
     });
 

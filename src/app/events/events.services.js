@@ -9,32 +9,68 @@ function firebaseFactory(firebaseDB, $q, $firebaseArray, $log, $firebaseObject) 
   }
 
   function transformEventDatesForFirebase(dates) {
-    dates.start = dates.start.toISOString()
-    dates.end = dates.end.toISOString()
+    dates.start = dates.start.toISOString();
+    dates.end = dates.end.toISOString();
     return dates;
   }
 
-  function saveEvent(event) {
+  function getEventUrl(event) {
+    return event.name.replace(/\s+/g, '-')           // Replace spaces with -
+            .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+            .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+            .replace(/^-+/, '')             // Trim - from start of text
+            .replace(/-+$/, '');
+  }
+
+  function transformEventVenueForFirebase(venue) {
+    // TODO - Simplest solution?
+    return {
+      name: venue.name || '',
+      address: venue.address || '',
+      mapUrl: venue.mapUrl || '',
+      howTo: venue.howTo || ''
+    };
+  }
+
+  function transformEventLinksForFirebase(links) {
+    return links.filter(link => link.url.length > 0);
+  }
+
+  function transformEventDataForFirebase(event) {
+    // TODO - Event cover
+    event.dates = transformEventDatesForFirebase(event.dates);
+    event.chapters = transformEventChaptersForFirebase(event.chapters);
+    event.venue = transformEventVenueForFirebase(event.venue);
+    event.links = transformEventLinksForFirebase(event.links);
+    return event;
+  }
+
+  function saveEvent(event, editState) {
     if (!event.urlId) {
       event.urlId = getEventUrl(event); // TODO - Add UrlCreator (use from CF?)
     }
-    event.dates = transformEventDatesForFirebase(event.dates);
-    event.chapters = transformEventChaptersForFirebase(event.chapters);
 
-    // TODO Not work for new event (use $state for context)
-    return event.$save();
+    event = transformEventDataForFirebase(event);
+
+    if (editState) {
+      return event.$save();
+    }
+    else {
+      return firebaseDB.ref('events/' + event.urlId).set(event);
+    }
+
   };
 
-  self.saveEvent = function (event) {
+  self.saveEvent = function (event, editState) {
     $log.debug('You send this event:', event);
     event.published = false;
-    return saveEvent(event);
+    return saveEvent(event, editState);
   };
 
-  self.saveAndPublishEvent = function (event) {
+  self.saveAndPublishEvent = function (event, editState) {
     event.published = true;
     $log.debug('You send this event:', event);
-    return saveEvent(event);
+    return saveEvent(event, editState);
   };
 
   self.loadEvent = function (eventId) {
