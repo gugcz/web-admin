@@ -51,8 +51,8 @@ function VenueController($document, $mdDialog, firebaseVenues, organizerService,
   };
 
   this.editVenue = function (ev) {
-    const index = this.venues.indexOf(this.selectedVenue);
-    this.createVenueModal_(ev, this.selectedVenue)
+    const index = this.venues.indexOf(this.venue);
+    this.createVenueModal_(ev, this.venue)
       .then(function (venue) {
         // TODO change firebase data?
 

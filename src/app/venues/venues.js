@@ -23,7 +23,7 @@ angular.module('gugCZ.webAdmin.venues', [
 function VenuesController($window, $mdDialog, firebaseVenues, $document, organizerService) {
   const $ctrl = this;
 
-  var chapter = organizerService.currentChapter_
+  var chapter = organizerService.currentChapter_;
   this.$onInit = function () {
     firebaseVenues.getChapterVenuesByID(chapter).$loaded().then(data => {
       this.venues = data.map(venue => venue);

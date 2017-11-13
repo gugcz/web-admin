@@ -6,17 +6,12 @@ function EventFormController(firebaseEvents, $state, $mdToast, $translate, event
     firebaseEvents.saveAndPublishEvent(this.event, $state.is('events.edit')).then(function () {
       showMessageAndGoToDashboard('EVENTS.TOASTS.EVENT_PUBLISHED');
     });
-
-
-
   };
+
   this.saveEvent = function () {
     firebaseEvents.saveEvent(this.event, $state.is('events.edit')).then(function () {
       showMessageAndGoToDashboard('EVENTS.TOASTS.EVENT_SAVED');
     });
-
-
-
   };
 
   function showMessageAndGoToDashboard(messageId) {
