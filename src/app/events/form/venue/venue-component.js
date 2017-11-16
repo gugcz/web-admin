@@ -57,7 +57,7 @@ function VenueController($document, $mdDialog, firebaseVenues, organizerService,
         // TODO change firebase data?
 
         this.venues[index] = venue;
-        firebaseVenues.updateChapterVenueByID(chapter, this.venues.indexOf(venue), venue);
+        this.venues.$save(index);
         this.venue = venue;
       }.bind(this));
   };
@@ -67,8 +67,11 @@ function VenueController($document, $mdDialog, firebaseVenues, organizerService,
       .then(function (venue) {
         // TODO change firebase data?
 
-        firebaseVenues.addChapterVenueByID(chapter, venue);
-        this.venue = venue;
+        this.venues.$add(venue);
+        this.venues.$loaded(() => {
+          this.venue = this.venues[this.venues.length - 1];
+        });
+
       }.bind(this));
   };
 
