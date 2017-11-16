@@ -1,12 +1,30 @@
 md-list
   md-list-item(ng-repeat='(index, link) in vm.links')
-    md-input-container(flex, ng-switch='link.type')
+    md-input-container(flex='85', style='margin-top: 45px')
       label {{"COMMON.LINK_COMPONENT.SOCIAL_LINK_START" | translate }} {{vm.context}} {{"COMMON.LINK_COMPONENT.SOCIAL_LINK_END" | translate }}
-
-      md-icon(ng-switch-when='facebook', md-svg-icon='mdi:facebook-box')
-      md-icon(ng-switch-when='google-plus', md-svg-icon='mdi:google-plus-box')
-      md-icon(ng-switch-when='youtube', md-svg-icon='mdi:youtube-play')
-      md-icon(ng-switch-default, md-svg-icon='mdi:link-variant')
-
       input(ng-model='link.url', ng-change='vm.onLinkUpdate(index)')
+
+
+
+    md-input-container(flex='15')
+
+      md-select(ng-model='link.type')
+        md-option(ng-value='"facebook"') Facebook
+        md-option(ng-value='"google-plus"') Google Plus
+        md-option(ng-value='"meetup"') Meetup
+        md-option(ng-value='"srazy"') Srazy
+        md-option(ng-value='"twitter"') Twitter
+        md-option(ng-value='"instagram"') Instagram
+        md-option(ng-value='"web"') Web
+        md-option(ng-value='"youtube"') YouTube
+        md-option(ng-value='"google-directory"') Google Directory
+        md-option(ng-value='"blog"') Blog
+        md-option(ng-value='"other"') Other
+
+
+
+
+
+
+
     md-icon(ng-click='vm.removeLink($index)', aria-label='Remove link').md-secondary close

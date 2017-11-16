@@ -130,7 +130,7 @@
   "COMMON": {
     "LINK_COMPONENT": {
       "SOCIAL_LINK_START": "Odkaz na",
-      "SOCIAL_LINK_END": "na sociální síti"
+      "SOCIAL_LINK_END": "na sociální síti (typ měnit až po vložení linku)"
     },
     "PHONE_NUMBER": "Telefonní číslo",
     "EMAIL": "Email"

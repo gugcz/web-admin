@@ -20,6 +20,11 @@ div(layout='row', flex='')
           .inset
             md-icon(md-svg-icon='mdi:{{item.icon}}')
           .inset.menu-item-title {{item.title}}
+      //md-list-item(class='menu-item')
+        md-item-content(md-ink-ripple='rgba(0,0,0,0.87)', layout='row', layout-align='start center')
+          .inset
+            md-icon(md-svg-icon='mdi:link')
+          .inset.menu-item-title GUG.cz Wisdom
 
   #content(layout='column', flex).md-whiteframe-z1
     md-content(layout='column', flex='')

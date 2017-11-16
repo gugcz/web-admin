@@ -63,9 +63,7 @@ angular.module('gugCZ.webAdmin.events', [
               chapters: initChapters(),
               guarantee: currentUser.$id,
               organizers: initOrganizers(),
-              links: [
-                {url: ''}
-              ]
+              links: null
             };
           }
         },
@@ -87,7 +85,6 @@ angular.module('gugCZ.webAdmin.events', [
 
 
             return firebaseEvents.loadEvent($stateParams.id);
-            // todo load from firebase
           }
         },
         data: {

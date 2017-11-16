@@ -26,10 +26,6 @@ function LinksController() {
     {
       type: 'srazy',
       re: /srazy.info/i
-    },
-    {
-      type: 'web',
-      re: /srazy.info/i
     }
   ];
 
@@ -52,7 +48,7 @@ function LinksController() {
     const lastItem = this.links[this.links.length - 1];
 
     if (lastItem.url.length > 0) {
-      this.links.push({url: ''});
+      this.links.push({url: '', type: 'other'});
     }
   };
 
@@ -66,7 +62,7 @@ function LinksController() {
     if (passedTypes.length > 0) {
       currentItem.type = passedTypes[0].type;
     } else {
-      currentItem.type = null;
+      currentItem.type = 'other';
     }
   };
 
@@ -78,7 +74,7 @@ function LinksController() {
   this.$onInit = function () {
     if (!this.links) {
       this.links = [
-        {url: ''}
+        {url: '', type: 'other'}
       ];
     }
     this.onLinkUpdate(0); // TODO remove or init all?
