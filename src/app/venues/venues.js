@@ -25,9 +25,7 @@ function VenuesController($window, $mdDialog, firebaseVenues, $document, organiz
 
   var chapter = organizerService.currentChapter_;
   this.$onInit = function () {
-    firebaseVenues.getChapterVenuesByID(chapter).$loaded().then(data => {
-      this.venues = data.map(venue => venue);
-    });
+    this.venues = firebaseVenues.getChapterVenuesByID(chapter);
   };
 
   this.viewOnMap = function (venue) {
@@ -41,8 +39,8 @@ function VenuesController($window, $mdDialog, firebaseVenues, $document, organiz
       .ok('Ano')
       .cancel('Ne');
     $mdDialog.show(dialog).then(function() {
-      firebaseVenues.removeChapterVenueByID(chapter, $ctrl.venues.indexOf(venue));
-      $ctrl.venues.splice($ctrl.venues.indexOf(venue), 1);
+      const index = $ctrl.venues.indexOf(venue);
+      $ctrl.venues.$remove(index);
     }, function() {});
   };
 
@@ -61,13 +59,16 @@ function VenuesController($window, $mdDialog, firebaseVenues, $document, organiz
     })
     .then(function(newVenue) {
       if ($ctrl.venues.indexOf(newVenue) === -1) {
-        firebaseVenues.addChapterVenueByID(chapter, $ctrl.venues.length, newVenue);
-        $ctrl.venues.push(newVenue);
+        $ctrl.venues.$add(newVenue);
       } else {
-        firebaseVenues.updateChapterVenueByID(chapter, $ctrl.venues.indexOf(newVenue), newVenue);
+        const indexOfEdittedVenue = $ctrl.venues.indexOf(newVenue);
+        $ctrl.venues[indexOfEdittedVenue] = newVenue;
+        $ctrl.venues.$save(indexOfEdittedVenue);
       }
     }, function () {
+      //TODO notification on error
       $ctrl.venues[index] = oldVenue;
+      $ctrl.venues.$save(index);
     });
   };
 }
