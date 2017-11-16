@@ -1,11 +1,13 @@
 md-content()
     section
-        md-subheader Venues
+        md-subheader {{"VENUE.SAVED_VENUES" | translate }}
         md-list()
             md-list-item(ng-repeat = 'venue in vm.venues' class='no-right' ng-click='vm.showVenueDialog(venue)')
                 p {{venue.name}}
                 md-icon(md-svg-src='mdi:map', aria-label='View on map' ng-click='vm.viewOnMap(venue)' ng-if='venue.mapUrl').md-secondary
-                md-icon(md-svg-src='mdi:delete', aria-label='Delete venue' ng-click='vm.deleteVenue(venue)').md-secondary
+                md-icon
+            md-list-item(ng-if='vm.venues.length === 0' class='no-right')
+                p {{"VENUE.NO_SAVED_VENUES" | translate }}
 md-fab-speed-dial(md-direction='up', class="md-fab-bottom-right fixed md-hover-full md-scale")
     md-fab-trigger
         md-button.md-fab.md-primary(aria-label='Add venue' ng-click='vm.showVenueDialog({})')

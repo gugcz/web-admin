@@ -43,7 +43,7 @@ md-content(layout-padding)
     links(links='vm.event.links', context='{{"EVENTS.FORM.EVENT" | translate}}')
 
     div(layout='row', layout-align='end')
-      md-button(class="md-raised", aria-label='Save', type='submit') Uložit
-      md-button(class="md-raised md-primary", aria-label='Save and publish', ng-click='vm.saveAndPublishEvent()') Uložit a publikovat
+      md-button(class="md-raised", aria-label='Save', type='submit') {{ "BUTTONS.SAVE" | translate}}
+      md-button(class="md-raised md-primary", aria-label='Save and publish', ng-click='vm.saveAndPublishEvent()') {{ "BUTTONS.SAVE_AND_PUBLISH" | translate}}
 
     pre {{ vm.event | json }}

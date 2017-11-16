@@ -2,6 +2,7 @@
   "BUTTONS": {
     "SIGN_IN": "Přihlásit se",
     "SAVE": "Uložit",
+    "SAVE_AND_PUBLISH": "Uložit a publikovat",
     "CANCEL": "Zrušit",
     "EDIT": "Editovat"
   },
@@ -14,9 +15,20 @@
   },
 
   "DASHBOARD": {
-    "TITLE": "Dashboars",
+    "TITLE": "Dashboard",
     "DESCRIPTION": "tady budou grafy,widgety, ...",
-    "NAME": "Název akce"
+    "NAME": "Název akce",
+    "EVENT_DRAFTS": "Neuveřejněné akce",
+    "NO_EVENT_DRAFTS": "Nemáte žádné nevuveřejněné akce",
+    "FUTURE_EVENTS": "Budoucí akce",
+    "NO_FUTURE_EVENTS": "Nemáte žádné budoucí akce",
+    "UNREPORTED_EVENTS": "Proběhlé akce k reportování",
+    "NO_UNREPORTED_EVENTS": "Nemáte žádné nereportované akce",
+
+    "REPORT": {
+      "TITLE": "Reportovat akci",
+      "ATTENDEES_COUNT": "Počet účastníků"
+    }
   },
 
   "EVENTS": {
@@ -56,7 +68,7 @@
       "ORGANIZERS": "Organizátoři",
       "VENUE": "Venue",
       "ADD_VENUE": "Přidat venue",
-      "EDIT_VENUE": "Upravit venue",
+      "EDIT_VENUE": "Upravit venue"
 
 
 
@@ -108,7 +120,9 @@
       "MAP_LINK": "Odkaz na mapu",
       "NOTE": "Jak se tam dostat"
     },
-    "TITLE": "Místo"
+    "TITLE": "Místo",
+    "SAVED_VENUES": "Uložená venues",
+    "NO_SAVED_VENUES": "Nemáte žádné uložené venues"
   },
 
   "WEB": {
@@ -130,7 +144,8 @@
   "COMMON": {
     "LINK_COMPONENT": {
       "SOCIAL_LINK_START": "Odkaz na",
-      "SOCIAL_LINK_END": "na sociální síti (typ měnit až po vložení linku)"
+      "SOCIAL_LINK_END": "na sociální síti (typ měnit až po vložení linku)",
+      "OTHER": "Jiný"
     },
     "PHONE_NUMBER": "Telefonní číslo",
     "EMAIL": "Email"

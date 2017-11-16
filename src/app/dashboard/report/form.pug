@@ -1,7 +1,7 @@
 form(name='reportForm', ng-submit='vm.submit(reportForm)', novalidate)
     md-toolbar
         .md-toolbar-tools
-            h2 Reportovat akci
+            h2 {{ 'DASHBOARD.REPORT.TITLE' | translate }}
             span(flex='')
             md-button.md-icon-button(ng-click='vm.cancel()')
                 md-icon(md-svg-icon='mdi:close', aria-label='Close dialog')
@@ -11,7 +11,7 @@ form(name='reportForm', ng-submit='vm.submit(reportForm)', novalidate)
         .md-dialog-content.venue-form-content
             div(layout='row')
                 md-input-container
-                    label Počet účastníků
+                    label {{ 'DASHBOARD.REPORT.ATTENDEES_COUNT' | translate }}
                     input(type='number', ng-model='vm.report.attendeesCount')
 
     md-dialog-actions(layout='row')

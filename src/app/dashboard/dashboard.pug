@@ -12,11 +12,11 @@ mixin event-info
 
 md-content()
   section
-    md-subheader Neuveřejněné akce
+    md-subheader {{"DASHBOARD.EVENT_DRAFTS" | translate }}
     +progress-bar
     md-list(layout-padding='')
       md-list-item(ng-if='vm.chapterEvents.filter(vm.draftFilter).length == 0 && vm.chapterEvents.$resolved')
-        p Nemáte žádné nevuveřejněné akce
+        p {{"DASHBOARD.NO_EVENT_DRAFTS" | translate }}
       div(ng-repeat='event in vm.chapterEvents.filter(vm.draftFilter) | orderBy: vm.dateOrder')
         md-list-item
           +event-info
@@ -27,11 +27,11 @@ md-content()
 
 
   section
-    md-subheader.md-primary Budoucí akce
+    md-subheader.md-primary {{"DASHBOARD.FUTURE_EVENTS" | translate }}
     +progress-bar
     md-list(layout-padding='')
       md-list-item(ng-if='vm.chapterEvents.filter(vm.futureFilter).length == 0 && vm.chapterEvents.$resolved')
-        p Nemáte žádné budoucí akce
+        p {{"DASHBOARD.NO_FUTURE_EVENTS" | translate }}
       div(ng-repeat='event in vm.chapterEvents.filter(vm.futureFilter) | orderBy: vm.dateOrder')
         md-list-item
           +event-info
@@ -42,11 +42,11 @@ md-content()
 
 
   section
-    md-subheader.md-warn Proběhlé akce k reportování
+    md-subheader.md-warn {{"DASHBOARD.UNREPORTED_EVENTS" | translate }}
     +progress-bar
     md-list(layout-padding='')
       md-list-item(ng-if='vm.chapterEvents.filter(vm.unreportedFilter).length == 0 && vm.chapterEvents.$resolved')
-        p Nemáte žádné nereportované akce
+        p {{"DASHBOARD.NO_UNREPORTED_EVENTS" | translate }}
       div(ng-repeat='event in vm.chapterEvents.filter(vm.unreportedFilter) | orderBy: vm.dateOrder')
         md-list-item
           +event-info
