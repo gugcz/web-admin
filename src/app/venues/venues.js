@@ -1,5 +1,5 @@
 angular.module('gugCZ.webAdmin.venues', [
-  'ui.router',
+  'ui.router', 'gugCZ.webAdmin.messages'
 ])
   .config(function ($stateProvider) {
 
@@ -20,7 +20,7 @@ angular.module('gugCZ.webAdmin.venues', [
     });
   });
 
-function VenuesController($window, $mdDialog, firebaseVenues, $document, organizerService) {
+function VenuesController($window, $mdDialog, firebaseVenues, $document, organizerService, messagesService) {
   const $ctrl = this;
 
   var chapter = organizerService.currentChapter_;
@@ -41,7 +41,11 @@ function VenuesController($window, $mdDialog, firebaseVenues, $document, organiz
     $mdDialog.show(dialog).then(function() {
       const index = $ctrl.venues.indexOf(venue);
       $ctrl.venues.$remove(index);
-    }, function() {});
+      messagesService.showPositiveMessage('Venue byla úspěšně smazána.');
+    })
+    .catch(function () {
+      messagesService.showNegativeMessage('Venue nebyla smazána.');
+    });
   };
 
   this.showVenueDialog = function (venue) {
@@ -60,15 +64,25 @@ function VenuesController($window, $mdDialog, firebaseVenues, $document, organiz
     .then(function(newVenue) {
       if ($ctrl.venues.indexOf(newVenue) === -1) {
         $ctrl.venues.$add(newVenue);
+        messagesService.showPositiveMessage('Venue byla úspěšně přidána.');
       } else {
         const indexOfEdittedVenue = $ctrl.venues.indexOf(newVenue);
         $ctrl.venues[indexOfEdittedVenue] = newVenue;
         $ctrl.venues.$save(indexOfEdittedVenue);
+        messagesService.showPositiveMessage('Venue byla úspěšně aktualizována.');
       }
     }, function () {
-      //TODO notification on error
       $ctrl.venues[index] = oldVenue;
       $ctrl.venues.$save(index);
+    })
+    .catch(function () {
+      if(index !== -1) {
+        $ctrl.venues[index] = oldVenue;
+        $ctrl.venues.$save(index);
+        messagesService.showNegativeMessage('Venue nebyla aktualizována.');
+      } else {
+        messagesService.showNegativeMessage('Venue nebyla přidána.');
+      }
     });
   };
 }

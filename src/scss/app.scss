@@ -222,3 +222,15 @@ ui-view {
   flex-grow: 1;
   flex-shrink: 1;
 }
+
+md-toast {
+  .close-cross {
+    color: rgb(250, 250, 250);
+  }
+  .positive-toast {
+    color: #8bc34a;
+  }
+  .negative-toast {
+    color: #f44336;
+  }
+}
