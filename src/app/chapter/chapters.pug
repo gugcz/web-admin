@@ -1,12 +1,13 @@
 md-content
-    md-list
-        md-list-item(ng-repeat="chapter in vm.chapters", ng-click="vm.showChapterDialog(chapter)")
-            // TODO img(ng-src="{{}}", class="md-avatar") Chapter logo
-            p {{chapter.name}}
-            md-icon(md-svg-src='mdi:web', aria-label='View on web' ng-click='vm.viewOnWeb(chapter)').md-secondary
-            md-icon(md-svg-src='mdi:pencil', aria-label='Edit chapter' ng-click='vm.editChapter(chapter)').md-secondary
-            md-icon(md-svg-src='mdi:delete', aria-label='Delete chapter' ng-click='vm.deleteChapter(chapter)').md-secondary
-        // TODO Better solution for button space at end of the list?
-        md-list-item
+    section
+        md-subheader {{"CHAPTERS.SAVED_CHAPTERS" | translate }}
+        md-list
+            md-list-item(ng-repeat="chapter in vm.chapters", ng-click="vm.showChapterDialog(chapter)")
+                // TODO img(ng-src="{{}}", class="md-avatar") Chapter logo
+                p {{chapter.name}}
+                md-icon(md-svg-src='mdi:web', aria-label='View on web' ng-click='vm.viewOnWeb(chapter)').md-secondary
+                md-icon(md-svg-src='mdi:delete', aria-label='Delete chapter' ng-click='vm.deleteChapter(chapter)').md-secondary
+            // TODO Better solution for button space at end of the list?
+            md-list-item
 md-button(class="md-fab md-primary md-fab-bottom-right fixed", aria-label='Use Android', ng-click='vm.addChapter()')
     md-icon add

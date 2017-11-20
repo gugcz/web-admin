@@ -1,44 +1,49 @@
-md-content(layout-padding)
-  form(layout='column', ng-cloak='', name='addChapterForm', ng-submit='addChapterForm.$valid && vm.form()', novalidate)
-    md-input-container
-      label(translate='CHAPTERS.FORM.SECTION')
-      md-select(ng-model='vm.chapter.section', ng-disabled="!vm.isAdmin")
-        md-option(ng-value='"GDG"') GDG
-        md-option(ng-value='"GBG"') GBG
-        md-option(ng-value='"GEG"') GEG
-        md-option(ng-value='"GXG"') GXG
-    md-input-container()
-      label(translate='CHAPTERS.FORM.NAME')
-      input(ng-model='vm.chapter.name', id='name', name='name', ng-disabled="!vm.isAdmin")
+form(layout='column', ng-cloak='', name='chapterForm', ng-submit='addChapterForm.$valid && vm.form()', novalidate, class="chapter-form")
+  md-toolbar
+    .md-toolbar-tools
+      h2(translate="VENUE.TITLE")
+      span(flex='')
+      md-button.md-icon-button(ng-click='vm.cancel()')
+        md-icon(md-svg-icon='mdi:close', aria-label='Close dialog')
+  md-dialog-content(layout-padding)
+    .md-dialog-content.venue-form-content
 
-    // TODO - Add orgs validation
-    md-contact-chips(ng-model='vm.organizers', ng-if="vm.isAdmin", ng-change='vm.updateOrgsIDS()', md-on-remove='vm.updateOrgsIDS()', md-contacts='vm.delayedQuerySearch($query)', md-contact-name='name', md-contact-image='image', md-contact-email='email', md-require-match='true', md-highlight-flags='i', filter-selected='vm.filterSelected', placeholder='Organizátoři')
-    // TODO Add org profile picture
-    md-chips(readonly='true', ng-model='vm.organizers', ng-if="!vm.isAdmin")
-      md-chip-template
-        a {{$chip.name}}
+      div(layout='row')
+        md-input-container
+          label(translate='CHAPTERS.FORM.SECTION')
+          md-select(ng-model='vm.chapter.section', ng-disabled="!vm.isAdmin")
+            md-option(ng-value='"GDG"') GDG
+            md-option(ng-value='"GBG"') GBG
+            md-option(ng-value='"GEG"') GEG
+            md-option(ng-value='"GXG"') GXG
+        md-input-container(flex)
+          label(translate='CHAPTERS.FORM.NAME')
+          input(ng-model='vm.chapter.name', id='name', name='name', ng-disabled="!vm.isAdmin")
 
-    // TODO - Add field for position (selecting on map)
-    // TODO - Upload picture
+      div(layout="column")
+        // TODO - Add orgs validation
+        md-contact-chips(ng-model='vm.organizers', ng-if="vm.isAdmin", ng-change='vm.updateOrgsIDS()', md-on-remove='vm.updateOrgsIDS()', md-contacts='vm.delayedQuerySearch($query)', md-contact-name='name', md-contact-image='image', md-contact-email='email', md-require-match='true', md-highlight-flags='i', filter-selected='vm.filterSelected', placeholder='Organizátoři', class="organizers-chips")
+        md-chips(readonly='true', ng-model='vm.organizers', ng-if="!vm.isAdmin")
+          md-chip-template
+            a {{$chip.name}}
+        md-input-container
+          label(translate='CHAPTERS.FORM.MAP_LINK')
+          input(ng-model='vm.chapter.mapLink', id='mapLink', name='mapLink', ng-disabled="!vm.isAdmin")
+        // TODO - Add chapter picture
+        md-input-container
+          label(translate='COMMON.EMAIL')
+          input(ng-model='vm.chapter.email', ng-disabled="!vm.isAdmin")
 
-    md-input-container()
-      label(translate='COMMON.EMAIL')
-      input(ng-model='vm.chapter.email', ng-disabled="!vm.isAdmin")
+        md-input-container
+          label(translate='CHAPTERS.FORM.DESCRIPTION')
+          textarea(ng-model='vm.chapter.description', md-maxlength='500', rows='5', md-select-on-focus='')
 
+      links(links='vm.chapter.links', context='{{"CHAPTERS.FORM.CHAPTER" | translate}}')
 
+      pre {{ vm.chapter | json }}
+      pre {{ vm.organizers | json }}
 
-    md-input-container
-      label(translate='CHAPTERS.FORM.DESCRIPTION')
-      textarea(ng-model='vm.chapter.description', md-maxlength='500', rows='5', md-select-on-focus='')
-
-
-
-    links(links='vm.chapter.links', context='{{"CHAPTERS.FORM.CHAPTER" | translate}}')
-
-
-
-    md-button(class='md-fab md-fab-bottom-right md-primary', type='submit')
-      md-icon(md-font-icon='material-icons step') done
-
-    pre {{ vm.chapter | json }}
-    pre {{ vm.organizers | json }}
+  md-dialog-actions(layout='row')
+    span(flex='')
+    md-button.md-raised(translate="BUTTONS.CANCEL", ng-click="vm.cancel()", aria-label='Cancel')
+    md-button.md-raised.md-primary(type="submit", translate="BUTTONS.SAVE", ng-click="vm.save()", aria-label='Save venue')

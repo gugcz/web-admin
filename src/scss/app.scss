@@ -234,3 +234,22 @@ md-toast {
     color: #f44336;
   }
 }
+
+links {
+  .link-item {
+    padding: 0 8px 0 0;
+    md-input-container {
+      margin: 0;
+    }
+    .link-container {
+      position: relative;
+      top: 12px;
+    }
+  }
+  .md-secondary-container {
+    button.md-button.md-icon-button {
+      margin-left: 0;
+      padding-left: 0;
+    }
+  }
+}

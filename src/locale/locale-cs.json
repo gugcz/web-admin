@@ -103,10 +103,11 @@
       "SECTION": "Sekce",
       "NAME": "Jméno",
       "ORGANIZERS": "Organizátoři",
-      "DESCRIPTION": "Popis"
-
+      "DESCRIPTION": "Popis",
+      "MAP_LINK": "Odkaz na mapu"
     },
-    "MANAGEMENT": "Správa chapterů"
+    "MANAGEMENT": "Správa chapterů",
+    "SAVED_CHAPTERS": "Uložené chaptery"
   },
 
   "CHAPTER": {

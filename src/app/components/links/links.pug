@@ -1,13 +1,10 @@
 md-list
-  md-list-item(ng-repeat='(index, link) in vm.links')
-    md-input-container(flex='85', style='margin-top: 45px')
+  md-list-item(ng-repeat='(index, link) in vm.links', class="link-item")
+    md-input-container(flex='80', class="link-container")
       label {{"COMMON.LINK_COMPONENT.SOCIAL_LINK_START" | translate }} {{vm.context}} {{"COMMON.LINK_COMPONENT.SOCIAL_LINK_END" | translate }}
       input(ng-model='link.url', ng-change='vm.onLinkUpdate(index)')
 
-
-
-    md-input-container(flex='15')
-
+    md-input-container(flex='20')
       md-select(ng-model='link.type')
         md-option(ng-value='"facebook"') Facebook
         md-option(ng-value='"google-plus"') Google Plus
@@ -20,11 +17,5 @@ md-list
         md-option(ng-value='"google-directory"') Google Directory
         md-option(ng-value='"blog"') Blog
         md-option(ng-value='"other"') {{"COMMON.LINK_COMPONENT.OTHER" | translate }}
-
-
-
-
-
-
 
     md-icon(ng-click='vm.removeLink($index)', aria-label='Remove link').md-secondary close

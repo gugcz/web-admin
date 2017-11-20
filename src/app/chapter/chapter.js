@@ -10,9 +10,7 @@ angular.module('gugCZ.webAdmin.chapter', [
       parent: 'base',
 
       templateUrl: 'app/chapter/chapters.html',
-      controller: function (firebaseData) {
-        this.chapters = firebaseData.getAllChapters();
-      },
+      controller: ChaptersController,
       controllerAs: 'vm',
       data: {
         title: 'Správa chapterů'  // TODO Add translation
@@ -21,3 +19,18 @@ angular.module('gugCZ.webAdmin.chapter', [
 
   });
 
+function ChaptersController(firebaseData, $mdDialog, $document) {
+  this.chapters = firebaseData.getAllChapters();
+  this.showChapterDialog = function (chapter) {
+    $mdDialog.show({   // TODO how to set dialog width?
+      controller: 'ChapterFormController',
+      controllerAs: 'vm',
+      locals: {
+        chapter: chapter
+      },
+      templateUrl: 'app/chapter/form/form.html',
+      parent: angular.element($document.body),
+      clickOutsideToClose: true
+    })
+  };
+}

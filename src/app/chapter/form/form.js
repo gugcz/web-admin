@@ -77,8 +77,3 @@ angular.module('gugCZ.webAdmin.chapter.form', [
   'gugCZ.webAdmin.components.links'
 ])
   .controller('ChapterFormController', ChapterFormCtrl);
-
-
-
-
-
