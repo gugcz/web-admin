@@ -19,18 +19,10 @@ angular.module('gugCZ.webAdmin.chapter', [
 
   });
 
-function ChaptersController(firebaseData, $mdDialog, $document) {
+function ChaptersController(firebaseData, $state) {
   this.chapters = firebaseData.getAllChapters();
   this.showChapterDialog = function (chapter) {
-    $mdDialog.show({   // TODO how to set dialog width?
-      controller: 'ChapterFormController',
-      controllerAs: 'vm',
-      locals: {
-        chapter: chapter
-      },
-      templateUrl: 'app/chapter/form/form.html',
-      parent: angular.element($document.body),
-      clickOutsideToClose: true
-    })
+    const stateParams = {urlID: chapter.section + '-' + chapter.urlId};
+    $state.go('chapters.form', stateParams);
   };
 }

@@ -1,39 +1,57 @@
-function ChapterFormCtrl(firebaseData, $log) {
-  const vm = this;
+angular.module('gugCZ.webAdmin.chapter.form', [
+  'gugCZ.webAdmin.chapter.services',
+  'gugCZ.webAdmin.components.links'
+])
+
+  .config(function ($stateProvider) {
+
+    $stateProvider.state('chapters.form', {
+      url: 'chapters/form/:urlID',
+      parent: 'base',
+      templateUrl: 'app/chapter/form/form.html',
+      controller: ChapterFormCtrl,
+      controllerAs: 'vm',
+      resolve: {
+        chapter: function ($stateParams, firebaseData) {
+          console.log($stateParams);
+          return firebaseData.getChapterByID($stateParams.urlID);
+        }
+      },
+      data: {
+        title: 'Editace chapteru'  // TODO Add translation
+      }
+    });
+
+  });
+
+
+function ChapterFormCtrl(firebaseData, chapter) {
   const organizersPromise = firebaseData.getAllOrganizers().then(loadContactsProfilePicture);
 
-  vm.filterSelected = true;
+  this.$onInit = function () {
+    console.log('hier');
+    this.filterSelected = true;
+    this.organizers = [];
 
-  vm.delayedQuerySearch = function (criteria) {
+    // TODO
+    this.isAdmin = true;
+
+    this.chapter = chapter;
+
+    this.organizers = [];
+  };
+
+
+  this.delayedQuerySearch = function (criteria) {
     return organizersPromise.then(function (organizers) {
       $log.debug(organizers);
       return organizers.filter(createFilterFor(criteria));
     });
   };
 
-  vm.organizers = [];
-
-  // TODO
-  vm.isAdmin = true;
-
-  vm.chapter = {
-    section: '',
-    name: 'Brno',
-    description: '',
-    profilePicture: '',
-    organizers: [],
-    email: '',
-    coordinates: '',
-    links: [
-      {url: ''}
-    ]
-  };
-
-  vm.organizers = [];
-
-  vm.updateOrgsIDS = function () {
+  this.updateOrgsIDS = function () {
     $log.debug('change');
-    vm.chapter.organizers = vm.organizers.map(function (org) {
+    this.chapter.organizers = this.organizers.map(function (org) {
       const orgID = {};
       orgID[org.id] = true;
 
@@ -64,16 +82,9 @@ function ChapterFormCtrl(firebaseData, $log) {
     });
   }
 
-  vm.add = function () {
-    firebaseData.setChapterID(vm.chapter);
-    firebaseData.addChapter(vm.chapter);
-    firebaseData.addChapterToOrganizers(vm.organizers);
+  this.add = function () {
+    firebaseData.setChapterID(this.chapter);
+    firebaseData.addChapter(this.chapter);
+    firebaseData.addChapterToOrganizers(this.organizers);
   };
 }
-
-
-angular.module('gugCZ.webAdmin.chapter.form', [
-  'gugCZ.webAdmin.chapter.services',
-  'gugCZ.webAdmin.components.links'
-])
-  .controller('ChapterFormController', ChapterFormCtrl);
