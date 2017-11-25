@@ -23,7 +23,7 @@ angular.module('gugCZ.webAdmin.venues', [
 function VenuesController($window, $mdDialog, firebaseVenues, $document, organizerService, messagesService) {
   const $ctrl = this;
 
-  var chapter = organizerService.currentChapter_;
+  const chapter = organizerService.currentChapter_;
   this.$onInit = function () {
     this.venues = firebaseVenues.getChapterVenuesByID(chapter);
   };
@@ -33,6 +33,7 @@ function VenuesController($window, $mdDialog, firebaseVenues, $document, organiz
   };
 
   this.deleteVenue = function (venue) {
+    //TODO Add translation
     const dialog = $mdDialog.confirm()
       .title('Opravdu chcete smazat venue s názvem ' + venue.name + '?')
       .textContent('Smazání venue nelze vrátit zpět.')
@@ -41,10 +42,10 @@ function VenuesController($window, $mdDialog, firebaseVenues, $document, organiz
     $mdDialog.show(dialog).then(function() {
       const index = $ctrl.venues.indexOf(venue);
       $ctrl.venues.$remove(index);
-      messagesService.showPositiveMessage('Venue byla úspěšně smazána.');
+      messagesService.showPositiveMessage();
     })
     .catch(function () {
-      messagesService.showNegativeMessage('Venue nebyla smazána.');
+      messagesService.showNegativeMessage();
     });
   };
 
@@ -64,13 +65,12 @@ function VenuesController($window, $mdDialog, firebaseVenues, $document, organiz
     .then(function(newVenue) {
       if ($ctrl.venues.indexOf(newVenue) === -1) {
         $ctrl.venues.$add(newVenue);
-        messagesService.showPositiveMessage('Venue byla úspěšně přidána.');
       } else {
         const indexOfEdittedVenue = $ctrl.venues.indexOf(newVenue);
         $ctrl.venues[indexOfEdittedVenue] = newVenue;
         $ctrl.venues.$save(indexOfEdittedVenue);
-        messagesService.showPositiveMessage('Venue byla úspěšně aktualizována.');
       }
+      messagesService.showPositiveMessage();
     }, function () {
       $ctrl.venues[index] = oldVenue;
       $ctrl.venues.$save(index);
@@ -79,10 +79,8 @@ function VenuesController($window, $mdDialog, firebaseVenues, $document, organiz
       if(index !== -1) {
         $ctrl.venues[index] = oldVenue;
         $ctrl.venues.$save(index);
-        messagesService.showNegativeMessage('Venue nebyla aktualizována.');
-      } else {
-        messagesService.showNegativeMessage('Venue nebyla přidána.');
       }
+      messagesService.showNegativeMessage();
     });
   };
 }

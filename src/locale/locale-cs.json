@@ -151,6 +151,11 @@
     "PHONE_NUMBER": "Telefonní číslo",
     "EMAIL": "Email"
   },
+
+  "MESSAGES": {
+    "POSITIVE": "Juchů!",
+    "NEGATIVE": "Ajaj..."
+  },
   "JANUARY": "Leden",
   "FEBRUARY": "Únor",
   "MARCH": "Březen",
