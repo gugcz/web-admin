@@ -13,7 +13,6 @@ angular.module('gugCZ.webAdmin.chapter.form', [
       controllerAs: 'vm',
       resolve: {
         chapter: function ($stateParams, firebaseData) {
-          console.log($stateParams);
           return firebaseData.getChapterByID($stateParams.urlID);
         }
       },
@@ -29,28 +28,27 @@ function ChapterFormCtrl(firebaseData, chapter) {
   const organizersPromise = firebaseData.getAllOrganizers().then(loadContactsProfilePicture);
 
   this.$onInit = function () {
-    console.log('hier');
     this.filterSelected = true;
-    this.organizers = [];
-
+    organizersPromise.then();
+    firebaseData.getChapterOrgs(chapter.$id)
+        .then(loadContactsProfilePicture)
+        .then((data) => {
+          this.organizers = data;
+        });
     // TODO
     this.isAdmin = true;
 
     this.chapter = chapter;
-
-    this.organizers = [];
   };
 
 
   this.delayedQuerySearch = function (criteria) {
     return organizersPromise.then(function (organizers) {
-      $log.debug(organizers);
       return organizers.filter(createFilterFor(criteria));
     });
   };
 
   this.updateOrgsIDS = function () {
-    $log.debug('change');
     this.chapter.organizers = this.organizers.map(function (org) {
       const orgID = {};
       orgID[org.id] = true;
@@ -69,7 +67,6 @@ function ChapterFormCtrl(firebaseData, chapter) {
   }
 
   function loadContactsProfilePicture(organizers) {
-
     return organizers.map(function (org) {
       return {
         name: org.name,

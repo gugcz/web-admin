@@ -9,18 +9,25 @@ function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray,
 
     return $q.when(ref.once('value').then(function (snapshot) {
       snapshot.forEach(function (childSnapshot) {
-
         organizers.push(childSnapshot.val());
       });
-      $log.debug(organizers);
-
       return organizers;
     }));
 
   };
 
-  this.getChapterOrgs = function (chapterID) {
-    return $firebaseArray(firebaseDB.ref(chapterID));
+  this.getChapterOrgs = function (chapterId) {
+    const organizers = [];
+    return firebaseDB
+        .ref('organizers')
+        .orderByChild('chapters/' + chapterId)
+        .equalTo(true)
+        .once('value').then(function (snapshot) {
+          snapshot.forEach(function (childSnapshot) {
+            organizers.push(childSnapshot.val());
+          });
+          return organizers;
+        });
   };
 
   this.getAllChapters = function () {

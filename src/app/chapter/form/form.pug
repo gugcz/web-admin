@@ -3,17 +3,16 @@ md-content(layout-padding)
     md-input-container
       label(translate='CHAPTERS.FORM.SECTION')
       md-select(ng-model='vm.chapter.section', ng-disabled="!vm.isAdmin")
-        md-option(ng-value='"GDG"') GDG
-        md-option(ng-value='"GBG"') GBG
-        md-option(ng-value='"GEG"') GEG
-        md-option(ng-value='"GXG"') GXG
+        md-option(ng-value='"gdg"') GDG
+        md-option(ng-value='"gbg"') GBG
+        md-option(ng-value='"geg"') GEG
+        md-option(ng-value='"gxg"') GXG
     md-input-container()
       label(translate='CHAPTERS.FORM.NAME')
       input(ng-model='vm.chapter.name', id='name', name='name', ng-disabled="!vm.isAdmin")
 
     // TODO - Add orgs validation
     md-contact-chips(ng-model='vm.organizers', ng-if="vm.isAdmin", ng-change='vm.updateOrgsIDS()', md-on-remove='vm.updateOrgsIDS()', md-contacts='vm.delayedQuerySearch($query)', md-contact-name='name', md-contact-image='image', md-contact-email='email', md-require-match='true', md-highlight-flags='i', filter-selected='vm.filterSelected', placeholder='Organizátoři')
-    // TODO Add org profile picture
     md-chips(readonly='true', ng-model='vm.organizers', ng-if="!vm.isAdmin")
       md-chip-template
         a {{$chip.name}}
