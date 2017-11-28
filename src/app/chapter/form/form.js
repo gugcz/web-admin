@@ -39,7 +39,7 @@ angular.module('gugCZ.webAdmin.chapter.form', [
   });
 
 
-function ChapterFormCtrl(firebaseData, chapter, $log) {
+function ChapterFormCtrl(firebaseData, chapter, $log, organizerService) {
   const organizersPromise = firebaseData.getAllOrganizers().then(loadContactsProfilePicture);
 
   this.$onInit = function () {
@@ -51,7 +51,7 @@ function ChapterFormCtrl(firebaseData, chapter, $log) {
           this.organizers = data;
         });
     // TODO
-    this.isAdmin = true;
+    this.isAdmin = organizerService.isCurrentUserAdmin();
 
     this.chapter = chapter;
   };

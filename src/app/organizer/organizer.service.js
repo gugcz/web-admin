@@ -46,7 +46,14 @@ angular.module('gugCZ.webAdmin.organizers')
     };
 
     this.isCurrentUserAdmin = function () {
-      return (this.getCurrentUser().roles.admin);
+
+
+
+      if (this.currentUser_.roles) {
+
+        return (this.currentUser_.roles.admin);
+      }
+      return false;
     };
 
     this.getAllOrganizers = function () {
@@ -68,7 +75,7 @@ angular.module('gugCZ.webAdmin.organizers')
     };
 
     this.loadOrganizer = function (orgId) {
-      return $firebaseObject(firebaseDB.ref('organizers/' + orgId))//.$loaded().then(organizer => {return organizer;});
+      return $firebaseObject(firebaseDB.ref('organizers/' + orgId));//.$loaded().then(organizer => {return organizer;});
     };
 
   });
