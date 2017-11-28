@@ -24,7 +24,7 @@ angular.module('gugCZ.webAdmin.chapter.form', [
   });
 
 
-function ChapterFormCtrl(firebaseData, chapter) {
+function ChapterFormCtrl(firebaseData, chapter, $log) {
   const organizersPromise = firebaseData.getAllOrganizers().then(loadContactsProfilePicture);
 
   this.$onInit = function () {
@@ -72,7 +72,7 @@ function ChapterFormCtrl(firebaseData, chapter) {
         name: org.name,
         chapters: org.chapters,
         email: org.email,
-        image: gravatar(org.email),
+        image: org.profilePicture || '/images/non_profilepic.png',
         _lowername: org.name.toLowerCase()
       };
 

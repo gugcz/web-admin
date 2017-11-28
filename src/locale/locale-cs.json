@@ -101,7 +101,7 @@
     "FORM": {
       "CHAPTER": "chapter",
       "SECTION": "Sekce",
-      "NAME": "Jméno",
+      "NAME": "Jméno (včetně zkratky)",
       "ORGANIZERS": "Organizátoři",
       "DESCRIPTION": "Popis",
       "MAP_LINK": "Odkaz na mapu"

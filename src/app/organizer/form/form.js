@@ -1,17 +1,8 @@
-function OrganizerFormCtrl(firebaseData, $log) {
+function OrganizerFormCtrl(organizer) {
   const vm = this;
 
+  vm.organizer = organizer;
 
-  vm.organizer = {
-    name: 'Matěj Horák',
-    about: '',
-    profilePicture: '',
-    email: '',
-    phoneNumber: '',
-    links: [
-      {url: ''}
-    ]
-  };
 
 
 }

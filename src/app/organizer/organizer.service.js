@@ -7,7 +7,7 @@ const getValueFromSnapshot = function (snapshot) {
 };
 
 angular.module('gugCZ.webAdmin.organizers')
-  .service('organizerService', function ($q, firebaseDB, $firebaseArray) {
+  .service('organizerService', function ($q, firebaseDB, $firebaseArray, $firebaseObject) {
     this.currentChapter_ = null;
     this.currentUser_ = null;
 
@@ -65,6 +65,10 @@ angular.module('gugCZ.webAdmin.organizers')
       }
 
       return null;
+    };
+
+    this.loadOrganizer = function (orgId) {
+      return $firebaseObject(firebaseDB.ref('organizers/' + orgId))//.$loaded().then(organizer => {return organizer;});
     };
 
   });

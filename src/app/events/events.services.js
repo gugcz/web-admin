@@ -1,4 +1,4 @@
-function firebaseFactory(firebaseDB, $q, $firebaseArray, $log, $firebaseObject) {
+function firebaseFactory(firebaseDB, $q, $firebaseArray, $log, $firebaseObject, $http) {
   const self = this;
   const chapterID = null;
 
@@ -45,19 +45,22 @@ function firebaseFactory(firebaseDB, $q, $firebaseArray, $log, $firebaseObject) 
     return event;
   }
 
-  function saveEvent(event, editState) {
+  function saveEvent(event, editState, coverImage) {
     if (!event.urlId) {
       event.urlId = getEventUrl(event); // TODO - Add UrlCreator (use from CF?)
     }
 
     event = transformEventDataForFirebase(event);
 
-    if (editState) {
+    /*if (editState) {
       return event.$save();
     }
     else {
       return firebaseDB.ref('events/' + event.urlId).set(event);
-    }
+    }*/
+
+    $http.put('saveEvent', {eventData: event, coverImage: coverImage})
+
 
   };
 
