@@ -63,7 +63,7 @@ angular.module('gugCZ.webAdmin', [
               icon: 'account'
             },
             {
-              link: 'chapter',
+              link: 'chapters.this',
               title: $translate.instant('CHAPTER.MANAGEMENT'),
               icon: 'account-multiple'
             },

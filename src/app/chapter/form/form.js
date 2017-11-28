@@ -5,8 +5,23 @@ angular.module('gugCZ.webAdmin.chapter.form', [
 
   .config(function ($stateProvider) {
 
-    $stateProvider.state('chapters.form', {
-      url: 'chapters/form/:urlID',
+    $stateProvider.state('chapters.this', {
+      url: 'chapters/edit/this',
+      parent: 'base',
+      templateUrl: 'app/chapter/form/form.html',
+      controller: ChapterFormCtrl,
+      controllerAs: 'vm',
+      resolve: {
+        chapter: function ($stateParams, firebaseData, organizerService) {
+          console.log(organizerService.getCurrentChapter());
+          return firebaseData.getChapterByID(organizerService.getCurrentChapter());
+        }
+      },
+      data: {
+        title: 'Editovat chapter'  // TODO Add translation
+      }
+    }).state('chapters.edit', {
+      url: 'chapters/edit/:urlID',
       parent: 'base',
       templateUrl: 'app/chapter/form/form.html',
       controller: ChapterFormCtrl,
@@ -17,7 +32,7 @@ angular.module('gugCZ.webAdmin.chapter.form', [
         }
       },
       data: {
-        title: 'Editace chapteru'  // TODO Add translation
+        title: 'Editovat chapter'  // TODO Add translation
       }
     });
 
