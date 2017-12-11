@@ -1,5 +1,5 @@
 md-content(layout-padding)
-  form(layout='column', ng-cloak='', name='addChapterForm', ng-submit='addChapterForm.$valid && vm.form()', novalidate)
+  form(layout='column', ng-cloak='', name='addChapterForm', ng-submit='addChapterForm.$valid && vm.saveChapter()', novalidate)
     md-input-container
       label(translate='CHAPTERS.FORM.SECTION')
       md-select(ng-model='vm.chapter.section', ng-disabled="!vm.isAdmin")

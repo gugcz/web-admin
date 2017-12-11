@@ -1,13 +1,23 @@
+// TODO - Add padding
 
-md-content
+
+md-input-container()
+    input(ng-model='vm.textForFilter')
+    label Filtrovat
+
+
+md-content(layout='column')
+
     md-list
-        md-list-item(ng-repeat="org in vm.organizers", ng-click='vm.editOrganizer(org)')
+        // TODO is correct filter? What about use of ng-change?
+        md-list-item(ng-repeat="org in vm.organizers | filter: {name: vm.textForFilter}", ng-click='vm.editOrganizer(org)')
             img(ng-src="{{org.profilePicture ? org.profilePicture : '/images/non_profilepic.png'}}", class="md-avatar")
             p {{org.name}}
             //md-icon(md-svg-src='mdi:web', aria-label='View on web' ng-click='vm.viewOnWeb(org)').md-secondary
             //md-icon(md-svg-src='mdi:pencil', aria-label='Edit organizer' ng-click='vm.editOrganizer(org)').md-secondary
             md-icon(md-svg-src='mdi:delete', aria-label='Delete organizer' ng-click='vm.deleteOrganizer(org)').md-secondary
         // TODO Better solution for button space at end of the list?
+        md-list-item
         md-list-item
 md-button(class="md-fab md-primary md-fab-bottom-right fixed", aria-label='Use Android', ng-click='vm.addOrganizer()')
     md-icon add

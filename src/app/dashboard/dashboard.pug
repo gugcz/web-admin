@@ -9,8 +9,11 @@ mixin event-info
     h4 {{event.dates.start | date:'dd.MM.yyyy v HH:mm'}}
     p {{event.venue.name}}
 
+md-content(ng-if='vm.isAdmin')
+  // TODO - Admin view?
+  p Toto ještě není hotové
 
-md-content()
+md-content(ng-if='!vm.isAdmin')
   section
     md-subheader {{"DASHBOARD.EVENT_DRAFTS" | translate }}
     +progress-bar
@@ -60,7 +63,7 @@ md-content()
 
 
 
-md-fab-speed-dial(md-open='vm.isFabOpen', md-direction='up', class="md-fab-bottom-right fixed md-hover-full md-scale")
+md-fab-speed-dial(md-open='vm.isFabOpen', md-direction='up', class="md-fab-bottom-right fixed md-hover-full md-scale", ng-if='!vm.isAdmin')
   md-fab-trigger
     md-button.md-fab.md-primary(aria-label='menu')
       md-icon add

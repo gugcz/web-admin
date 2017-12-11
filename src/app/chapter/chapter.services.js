@@ -39,8 +39,9 @@ function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray,
   };
 
   this.addChapter = function (chapter) {
-    const chaptersRef = firebaseDB.ref('chapters/');
-    chaptersRef.child(chapterID).set(chapter);
+    console.log(chapter)
+    // TODO not solved new chapter
+    chapter.$save();
   };
 
   function getChapterID(chapter) {

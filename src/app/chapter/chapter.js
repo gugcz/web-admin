@@ -20,9 +20,15 @@ angular.module('gugCZ.webAdmin.chapter', [
   });
 
 function ChaptersController(firebaseData, $state) {
+
   this.chapters = firebaseData.getAllChapters();
+
+
   this.showChapterDialog = function (chapter) {
     const stateParams = {urlID: chapter.section + '-' + chapter.urlId};
     $state.go('chapters.edit', stateParams);
+  };
+  this.addChapter = function () {
+    $state.go('chapters.add');
   };
 }

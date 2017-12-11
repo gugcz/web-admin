@@ -34,6 +34,20 @@ angular.module('gugCZ.webAdmin.chapter.form', [
       data: {
         title: 'Editovat chapter'  // TODO Add translation
       }
+    }).state('chapters.add', {
+      url: 'chapters/add',
+      parent: 'base',
+      templateUrl: 'app/chapter/form/form.html',
+      controller: ChapterFormCtrl,
+      controllerAs: 'vm',
+      resolve: {
+        chapter: function() {
+          return {};
+        }
+      },
+      data: {
+        title: 'Přidat chapter'  // TODO Add translation
+      }
     });
 
   });
@@ -94,9 +108,17 @@ function ChapterFormCtrl(firebaseData, chapter, $log, organizerService) {
     });
   }
 
-  this.add = function () {
-    firebaseData.setChapterID(this.chapter);
-    firebaseData.addChapter(this.chapter);
-    firebaseData.addChapterToOrganizers(this.organizers);
+  this.saveChapter = function () {
+
+    if ($state.is('chapters.edit')) {
+      firebaseData.addChapter(this.chapter);
+      firebaseData.addChapterToOrganizers(this.organizers);
+    }
+    else {
+      // TODO - Implement
+      console.log('Called');
+    }
+    //firebaseData.setChapterID(this.chapter);
+
   };
 }

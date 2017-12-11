@@ -10,6 +10,8 @@ angular.module('gugCZ.webAdmin.dashboard', [
       controller: function ($state, $mdDialog, $translate, $document, firebaseEvents, organizerService, $mdToast) {
         this.isFabOpen = false;
 
+        this.isAdmin = organizerService.getCurrentChapter() === 'admin';
+
         // TODO Load from firebase
         this.chapterEvents = firebaseEvents.getChapterEvents(organizerService.getCurrentChapter());
 

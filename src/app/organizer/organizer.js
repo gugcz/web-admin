@@ -10,6 +10,8 @@ angular.module('gugCZ.webAdmin.organizers', [
           parent: 'base',
           templateUrl: 'app/organizer/organizers.html',
           controller: function ($state, $mdDialog, $translate, organizerService, $document, currentUser) {
+            // TODO - Extract controller?
+
             this.organizers = organizerService.getAllOrganizers();
 
 
@@ -58,10 +60,10 @@ angular.module('gugCZ.webAdmin.organizers', [
 
               return organizerService.loadOrganizer($stateParams.id);
             }},
-            data: {
-              title: 'Editovat organizátora'  // TODO Add translation
-            }
-          });
+          data: {
+            title: 'Editovat organizátora'  // TODO Add translation
+          }
+        });
 
   });
 
