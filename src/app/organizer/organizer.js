@@ -39,8 +39,7 @@ angular.module('gugCZ.webAdmin.organizers', [
           resolve: {
             organizer: function (organizerService) {
               return organizerService.getCurrentUser().then(value => {
-                console.log(value);
-                return value;});
+                return organizerService.loadOrganizer(value.$id)});
             }
           },
           data: {

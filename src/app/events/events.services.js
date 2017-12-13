@@ -1,4 +1,4 @@
-function firebaseFactory(firebaseDB, $q, $firebaseArray, $log, $firebaseObject, $http) {
+function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, $firebaseObject, $http) {
   const self = this;
   const chapterID = null;
 
@@ -37,7 +37,6 @@ function firebaseFactory(firebaseDB, $q, $firebaseArray, $log, $firebaseObject, 
   }
 
   function transformEventDataForFirebase(event) {
-    // TODO - Event cover
     event.dates = transformEventDatesForFirebase(event.dates);
     event.chapters = transformEventChaptersForFirebase(event.chapters);
     event.venue = transformEventVenueForFirebase(event.venue);
@@ -45,24 +44,41 @@ function firebaseFactory(firebaseDB, $q, $firebaseArray, $log, $firebaseObject, 
     return event;
   }
 
+  function saveEventCoverAndGetUrl(event) {
+    let coverRef = firebaseSTORAGE.ref('covers/event/' + event.$id + '.png');
+    return coverRef.putString(event.cover.src.substring(event.cover.src.indexOf(',') + 1), 'base64').then(snapshot => {return coverRef.getDownloadURL()});
+  }
+
   function saveEvent(event, editState, coverImage) {
-    if (!event.urlId) {
-      event.urlId = getEventUrl(event); // TODO - Add UrlCreator (use from CF?)
-    }
 
-    event = transformEventDataForFirebase(event);
 
-    /*if (editState) {
+
+    if (editState) {
+
+      if (event.cover) {
+        return saveEventCoverAndGetUrl(event).then(url => {
+          event = transformEventDataForFirebase(event);
+          event.cover = url;
+          return event.$save();
+        });
+      }
+
+      event = transformEventDataForFirebase(event);
+
       return event.$save();
     }
     else {
+      // TODO
+
+      event = transformEventDataForFirebase(event);
+
+
       return firebaseDB.ref('events/' + event.urlId).set(event);
-    }*/
-
-    $http.put('saveEvent', {eventData: event, coverImage: coverImage})
-
+    }
 
   };
+
+
 
   self.saveEvent = function (event, editState) {
     $log.debug('You send this event:', event);

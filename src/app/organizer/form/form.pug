@@ -1,16 +1,18 @@
 md-content(layout-padding)
-  form(layout='column', ng-cloak='', name='OrganizerForm', ng-submit='OrganizerForm.$valid && vm.form()', novalidate)
+  form(layout='column', ng-cloak='', name='OrganizerForm', ng-submit='OrganizerForm.$valid && vm.saveOrganizer()', novalidate)
 
 
     md-input-container()
       label(translate='ORGANIZERS.FORM.NAME')
       input(ng-model='vm.organizer.name', id='name', name='name')
 
-      // TODO - Upload picture
-
     md-input-container()
       label(translate='COMMON.EMAIL')
       input(ng-model='vm.organizer.email')
+    md-input-container
+      label Profilový obrázek
+      input(type='file', name='cover', image-with-preview='', ng-model='vm.organizer.profilePicture', accept='image/jpeg,image/png', dimensions='')
+
 
     md-input-container()
       label(translate='COMMON.PHONE_NUMBER')

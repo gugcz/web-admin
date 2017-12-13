@@ -75,7 +75,11 @@ angular.module('gugCZ.webAdmin.organizers')
     };
 
     this.loadOrganizer = function (orgId) {
-      return $firebaseObject(firebaseDB.ref('organizers/' + orgId));//.$loaded().then(organizer => {return organizer;});
+      return $firebaseObject(firebaseDB.ref('organizers/' + orgId)).$loaded().then(organizer => {return organizer;});
+    };
+
+    this.saveOrganizer = function (organizer) {
+      return organizer.$save()
     };
 
   });

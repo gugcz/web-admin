@@ -23,11 +23,15 @@ md-content(layout-padding)
 
     // TODO - Add material design
     input(type='file', name='cover', image-with-preview='', ng-model='vm.event.cover', accept='image/jpeg,image/png', dimensions='')
-    span.error(ng-show='addEventForm.cover.$error.image')
-      | Not a JPEG or a PNG!
-    span.error(ng-show='addEventForm.cover.$error.dimensions')
-      | Invalid dimensions! Expecting a landscape image smaller than 1800x400.
-    //img(ng-show='vm.event.cover.src', ng-src='{{vm.event.cover.src}}')
+    .md-whiteframe-3dp
+      span.error(ng-show='addEventForm.cover.$error.image')
+        | Not a JPEG or a PNG!
+      span.error(ng-show='addEventForm.cover.$error.dimensions')
+        | Invalid dimensions! Expecting a landscape image smaller than 1800x400.
+      img(ng-show='vm.event.cover.src', ng-src='{{vm.event.cover.src}}')
+
+      // TODO - Delete image
+      md-button(ng-if='vm.event.cover') Smazat obrázek
 
     md-input-container
       label(translate='EVENTS.FORM.REGFORM_LINK')
