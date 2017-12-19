@@ -8,17 +8,24 @@ form(name='venueForm', ng-submit="vm.submit(venueForm)", novalidate)
 
   md-dialog-content(layout-padding)
     .md-dialog-content.venue-form-content
-
+      span {{vm.nameDetails}}
       div(layout="row")
         md-input-container(flex=50)
           label(translate='VENUE.FORM.NAME')
-          input(required, ng-model='vm.venue.name')
+          input(required, type='text', ng-model='vm.venue.name', ng-map-autocomplete, options="{}"
+                details="nameDetails", placeholder="Zadejte název venue" ng-change="vm.nameChanged()")
 
         md-input-container(flex=50)
-          label(translate='VENUE.FORM.ADDRESS')
-          input(required, ng-model='vm.venue.address')
+          label(translate='VENUE.FORM.CITY')
+          input(required, type='text', ng-model='vm.venue.city', ng-map-autocomplete, details="vm.cityDetails",
+                options="vm.cityOptions", maps-input-change, placeholder="Zadejte město")
 
       div(layout="column")
+        md-input-container
+          label(translate='VENUE.FORM.ADDRESS')
+          input(required, type='text', ng-model='vm.venue.address', ng-map-autocomplete, details="vm.addressDetails",
+          options="vm.addressOptions", maps-input-change, placeholder="Zadejte adresu")
+
         md-input-container
           label(translate='VENUE.FORM.MAP_LINK')
           input(type="url", ng-model='vm.venue.mapUrl')

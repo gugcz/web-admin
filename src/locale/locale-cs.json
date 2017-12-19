@@ -117,6 +117,7 @@
   "VENUE": {
     "FORM": {
       "NAME": "Název místa",
+      "CITY": "Město",
       "ADDRESS": "Adresa",
       "MAP_LINK": "Odkaz na mapu",
       "NOTE": "Jak se tam dostat"
