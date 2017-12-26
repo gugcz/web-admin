@@ -12,27 +12,24 @@ form(name='venueForm', ng-submit="vm.submit(venueForm)", novalidate)
       div(layout="row")
         md-input-container(flex=50)
           label(translate='VENUE.FORM.NAME')
-          input(required, type='text', ng-model='vm.venue.name', ng-map-autocomplete, options="{}"
-                details="nameDetails", placeholder="Zadejte název venue" ng-change="vm.nameChanged()")
+          input(required id="venue-input" type="text" placeholder="Zadejte název venue" ng-model='vm.venue.name' ng-change='vm.test')
 
         md-input-container(flex=50)
           label(translate='VENUE.FORM.CITY')
-          input(required, type='text', ng-model='vm.venue.city', ng-map-autocomplete, details="vm.cityDetails",
-                options="vm.cityOptions", maps-input-change, placeholder="Zadejte město")
+          input(required id="city-input" type="text" placeholder="Zadejte město" ng-model='vm.venue.city')
 
       div(layout="column")
         md-input-container
           label(translate='VENUE.FORM.ADDRESS')
-          input(required, type='text', ng-model='vm.venue.address', ng-map-autocomplete, details="vm.addressDetails",
-          options="vm.addressOptions", maps-input-change, placeholder="Zadejte adresu")
+          input(required id="address-input" type="text" placeholder="Zadejte adresu" ng-model='vm.venue.address')
 
         md-input-container
           label(translate='VENUE.FORM.MAP_LINK')
-          input(type="url", ng-model='vm.venue.mapUrl')
+          input(required id="url-input" type="url", ng-model='vm.venue.mapUrl')
 
         md-input-container
           label(translate='VENUE.FORM.NOTE')
-          textarea(ng-model='vm.venue.howTo', rows=4)
+          textarea(id='how-to-input' ng-model='vm.venue.howTo', rows=4)
 
   md-dialog-actions(layout='row')
     span(flex='')

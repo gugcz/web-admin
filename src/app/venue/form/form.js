@@ -1,16 +1,41 @@
-  function VenueFormController($scope, $log) {
+  function VenueFormController() {
     this.$onInit = function () {
-      this.cityOptions = {
-        types: '(cities)',
-      };
-      this.addressOptions = {
-        types: 'address',
-      };
+      this.venueInput = document.getElementById('venue-input');
+      this.addressInput = document.getElementById('address-input');
+      this.cityInput = document.getElementById('city-input');
+      this.urlInput = document.getElementById('url-input');
+      this.howToInput = document.getElementById('how-to-input');
+
+      const venueAutocomplete = new google.maps.places.Autocomplete(this.venueInput);
+      const cityAutocomplete = new google.maps.places.Autocomplete(this.cityInput);
+      const addressAutocomplete = new google.maps.places.Autocomplete(this.addressInput);
+
+      venueAutocomplete.addListener('place_changed', () => {
+        this.updateForm(venueAutocomplete.getPlace());
+      });
+
+      addressAutocomplete.addListener('place_changed', () => {
+        this.updateMapUrl(addressAutocomplete.getPlace());
+      });
     };
 
-    this.nameChanged = function () {
-      console.log($scope);              //vypise objekt s vlastnosti nameDetails
-      console.log($scope.nameDetails);  //Vypise hodnotu, kterou pri minule zmene vypsal predchozi log. Na zacatku to je undefined, kdyz tam zadas treba Praha, tak vypise undefined, kdyz ale napise Brno, tak dostanes Praha.
+    this.updateForm = function (place) {
+      this.venue.city = place.address_components.filter((address_component) => {
+        return address_component.types.indexOf("political") !== -1 && address_component.types.indexOf("administrative_area_level_2") !== -1;
+      })[0].long_name;
+      this.cityInput.value = this.venue.city;
+      this.venue.address = place.formatted_address;
+      this.addressInput.value = this.venue.address;
+      this.updateMapUrl(place);
+    };
+
+    this.updateMapUrl = function (place) {
+      console.log(place);
+      if (place) {
+        this.venue.mapUrl = place.url;
+        this.urlInput.value = place.url;
+        this.howToInput.focus();
+      }
     };
 
     this.cancel = function() {
@@ -18,7 +43,6 @@
     };
 
     this.submit = function(form) {
-      console.log($scope.nameDetails);  //vypise hodnotu objektu nameDetails
       if (form.$invalid) {
         return;
       }
@@ -29,8 +53,6 @@
   }
 
   angular.module('gugCZ.webAdmin.venue.form', [
-    'hc.marked',
-    'ngMapAutocomplete',
     'gugCZ.webAdmin.events.form.orgs',
     'gugCZ.webAdmin.events.form.dates',
     'gugCZ.webAdmin.events.form.venue'
@@ -45,14 +67,4 @@
       },
       templateUrl: 'app/venue/form/form.html'
 
-    })
-    .directive('mapsInputChange', function() {
-      return {
-        restrict: 'A',
-        link: function ($scope, element) {
-          element.bind('change', () => {
-            $scope.$emit('GOOGLE_MAPS_AUTOCOMPLETE', {details: element.details, value: element.value});
-          });
-        }
-      };
     });
