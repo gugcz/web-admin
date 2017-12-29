@@ -14,15 +14,15 @@ angular.module('gugCZ.webAdmin.messages', [])
     $mdToast.show({
       hideDelay   : 3000,
       position    : 'bottom right',
-      controller  : 'ToastCtrl',
+      controller  : 'ToastController',
       controllerAs: 'ts',
       templateUrl : 'common/messages/message-negative.html'
     });
   };
 })
 
-.controller('ToastCtrl', function ($mdToast) {
+.controller('ToastController', function ($mdToast) {
   this.close = function () {
     $mdToast.hide();
-  }
+  };
 });

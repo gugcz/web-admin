@@ -13,7 +13,6 @@ angular.module('gugCZ.webAdmin.chapter.form', [
       controllerAs: 'vm',
       resolve: {
         chapter: function ($stateParams, firebaseData, organizerService) {
-          console.log(organizerService.getCurrentChapter());
           return firebaseData.getChapterByID(organizerService.getCurrentChapter());
         }
       },
@@ -116,7 +115,6 @@ function ChapterFormCtrl(firebaseData, chapter, $log, organizerService) {
     }
     else {
       // TODO - Implement
-      console.log('Called');
     }
     //firebaseData.setChapterID(this.chapter);
 

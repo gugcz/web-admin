@@ -39,7 +39,6 @@ function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray,
   };
 
   this.addChapter = function (chapter) {
-    console.log(chapter)
     // TODO not solved new chapter
     chapter.$save();
   };

@@ -39,7 +39,8 @@ angular.module('gugCZ.webAdmin.organizers', [
           resolve: {
             organizer: function (organizerService) {
               return organizerService.getCurrentUser().then(value => {
-                return organizerService.loadOrganizer(value.$id)});
+                return organizerService.loadOrganizer(value.$id);
+              });
             }
           },
           data: {
@@ -54,11 +55,9 @@ angular.module('gugCZ.webAdmin.organizers', [
           controllerAs: 'vm',
           resolve: {
             organizer: function (organizerService, $stateParams) {
-
-              console.log('pressed');
-
               return organizerService.loadOrganizer($stateParams.id);
-            }},
+            }
+          },
           data: {
             title: 'Editovat organizátora'  // TODO Add translation
           }

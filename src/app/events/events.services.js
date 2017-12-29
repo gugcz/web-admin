@@ -46,7 +46,7 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
 
   function saveEventCoverAndGetUrl(event) {
     let coverRef = firebaseSTORAGE.ref('covers/event/' + event.$id + '.png');
-    return coverRef.putString(event.cover.src.substring(event.cover.src.indexOf(',') + 1), 'base64').then(snapshot => {return coverRef.getDownloadURL()});
+    return coverRef.putString(event.cover.src.substring(event.cover.src.indexOf(',') + 1), 'base64').then(snapshot => {return coverRef.getDownloadURL();});
   }
 
   function saveEvent(event, editState, coverImage) {

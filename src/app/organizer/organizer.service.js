@@ -79,7 +79,7 @@ angular.module('gugCZ.webAdmin.organizers')
     };
 
     this.saveOrganizer = function (organizer) {
-      return organizer.$save()
+      return organizer.$save();
     };
 
   });
