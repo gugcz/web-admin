@@ -254,3 +254,36 @@ links {
     }
   }
 }
+
+venue-form {
+  .coordinates-label {
+    color: rgba(0, 0, 0, 0.54);
+    transform: scale(0.75);
+    transform-origin: 0;
+  }
+
+  .coordinates-row {
+    md-input-container {
+      margin: 0;
+    }
+    md-input-container.degrees-container {
+      padding-right: 2px;
+      width: 40px;
+    }
+    md-input-container.minutes-container {
+      padding-right: 2px;
+      width: 70px;
+    }
+    md-input-container.pole-container {
+      position: relative;
+      top: -12px;
+    }
+    .sign {
+      position: relative;
+      top: -14px;
+    }
+    .longitude {
+      padding-left: 30px;
+    }
+  }
+}

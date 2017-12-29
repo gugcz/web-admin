@@ -27,6 +27,36 @@ form(name='venueForm', ng-submit="vm.submit(venueForm)", novalidate)
           label(translate='VENUE.FORM.MAP_LINK')
           input(required id="url-input" type="url", ng-model='vm.venue.mapUrl')
 
+        div(layout='column')
+          label(translate='VENUE.FORM.COORDINATES' class='coordinates-label')
+          div(layout='row' class='coordinates-row')
+            div(class='latitude')
+              md-input-container(class='degrees-container')
+                label
+                input(type='number' ng-model='vm.coords.lat.degrees' min='0')
+              span(class='sign') °
+              md-input-container(class='minutes-container')
+                label
+                input(type='number' ng-model='vm.coords.lat.minutes' step='0.001' min='0')
+              span(class='sign') '
+              md-input-container(class='pole-container')
+                md-select(ng-model='vm.coords.lat.pole')
+                  md-option(class='value' ng-value='"N"') N
+                  md-option(class='value' ng-value='"S"') S
+            div(class='longitude')
+              md-input-container(class='degrees-container')
+                label
+                input(type='number' ng-model='vm.coords.lng.degrees' min='0')
+              span(class='sign') °
+              md-input-container(class='minutes-container')
+                label
+                input(type='number' ng-model='vm.coords.lng.minutes' step='0.001' min='0')
+              span(class='sign') '
+              md-input-container(class='pole-container')
+                md-select(ng-model='vm.coords.lng.pole')
+                  md-option(class='value' ng-value='"E"') E
+                  md-option(class='value' ng-value='"W"') W
+
         md-input-container
           label(translate='VENUE.FORM.NOTE')
           textarea(id='how-to-input' ng-model='vm.venue.howTo', rows=4)

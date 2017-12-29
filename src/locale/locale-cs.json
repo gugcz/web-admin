@@ -120,7 +120,8 @@
       "CITY": "Město",
       "ADDRESS": "Adresa",
       "MAP_LINK": "Odkaz na mapu",
-      "NOTE": "Jak se tam dostat"
+      "NOTE": "Jak se tam dostat",
+      "COORDINATES": "Souřadnice"
     },
     "TITLE": "Místo",
     "SAVED_VENUES": "Uložená venues",
