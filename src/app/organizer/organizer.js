@@ -9,17 +9,7 @@ angular.module('gugCZ.webAdmin.organizers', [
           url: 'organizers',
           parent: 'base',
           templateUrl: 'app/organizer/organizers.html',
-          controller: function ($state, $mdDialog, $translate, organizerService, $document, currentUser) {
-            // TODO - Extract controller?
-
-            this.organizers = organizerService.getAllOrganizers();
-
-
-
-            this.editOrganizer = function (org) {
-              $state.go('organizers.edit', {id: org.$id});
-            };
-          },
+          controller: OrganizerController,
           controllerAs: 'vm',
           resolve: {
             currentUser: function (organizerService) {
@@ -65,4 +55,10 @@ angular.module('gugCZ.webAdmin.organizers', [
 
   });
 
+function OrganizerController($state, $mdDialog, $translate, organizerService, $document, currentUser) {
+  this.organizers = organizerService.getAllOrganizers();
 
+  this.editOrganizer = function (org) {
+    $state.go('organizers.edit', {id: org.$id});
+  };
+}

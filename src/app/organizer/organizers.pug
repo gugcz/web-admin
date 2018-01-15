@@ -1,12 +1,7 @@
-// TODO - Add padding
-
-
-md-input-container()
-    input(ng-model='vm.textForFilter')
-    label Filtrovat
-
-
 md-content(layout='column')
+    md-input-container.filter-input-container
+        input(ng-model='vm.textForFilter')
+        label(translate='ORGANIZERS.NAME')
 
     md-list
         // TODO is correct filter? What about use of ng-change?

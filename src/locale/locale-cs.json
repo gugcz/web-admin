@@ -89,12 +89,14 @@
   },
 
   "ORGANIZERS": {
+    "NAME": "Jméno",
     "MANAGEMENT": "Správa organizátorů",
     "FORM": {
       "PROFILE": "profil",
       "NAME": "Jméno",
       "ABOUT_ME": "O mě"
-    }
+    },
+    "SECTION_PLACEHOLDER": "Zadejte název sekce"
   },
 
   "CHAPTERS": {
