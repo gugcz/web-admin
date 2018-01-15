@@ -1,6 +1,7 @@
 angular.module('gugCZ.webAdmin', [
   'angular-loading-bar',
   'ngMaterial',
+  'ngImageInputWithPreview',
   'ngMessages',
   'ui.router',
   'txx.diacritics',

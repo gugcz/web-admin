@@ -70,6 +70,7 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
     else {
       // TODO
 
+
       event = transformEventDataForFirebase(event);
 
 

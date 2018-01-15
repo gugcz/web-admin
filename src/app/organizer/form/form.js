@@ -1,8 +1,9 @@
-function OrganizerFormCtrl(organizer, organizerService) {
+function OrganizerFormCtrl(organizer, organizerService, $state) {
   const vm = this;
   vm.organizer = organizer;
   vm.saveOrganizer = function () {
     organizerService.saveOrganizer(vm.organizer);
+    $state.reload()
   };
 }
 
