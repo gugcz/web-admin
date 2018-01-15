@@ -16,6 +16,22 @@ function LinksController() {
       re: /facebook.com/i
     },
     {
+      type: 'twitter',
+      re: /twitter.com/i
+    },
+    {
+      type: 'instagram',
+      re: /instagram.com/i
+    },
+    {
+      type: 'meetup',
+      re: /meetup.com/i
+    },
+    {
+      type: 'google-directory',
+      re: /developers.google.com/i
+    },
+    {
       type: 'google-plus',
       re: /plus.google.com/i
     },
