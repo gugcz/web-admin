@@ -9,14 +9,11 @@ form(name='venueForm', ng-submit="vm.submit(venueForm)", novalidate)
   md-dialog-content(layout-padding)
     .md-dialog-content.venue-form-content
       span {{vm.nameDetails}}
-      div(layout="row")
-        md-input-container(flex=50)
+      div(layout="column")
+        md-input-container()
           label(translate='VENUE.FORM.NAME')
+          // TODO Google Map
           input(required id="venue-input" type="text" placeholder="Zadejte název venue" ng-model='vm.venue.name' ng-change='vm.test')
-
-        md-input-container(flex=50)
-          label(translate='VENUE.FORM.CITY')
-          input(required id="city-input" type="text" placeholder="Zadejte město" ng-model='vm.venue.city')
 
       div(layout="column")
         md-input-container
@@ -27,35 +24,7 @@ form(name='venueForm', ng-submit="vm.submit(venueForm)", novalidate)
           label(translate='VENUE.FORM.MAP_LINK')
           input(required id="url-input" type="url", ng-model='vm.venue.mapUrl')
 
-        div(layout='column')
-          label(translate='VENUE.FORM.COORDINATES' class='coordinates-label')
-          div(layout='row' class='coordinates-row')
-            div(class='latitude')
-              md-input-container(class='degrees-container')
-                label
-                input(type='number' ng-model='vm.coords.lat.degrees' min='0')
-              span(class='sign') °
-              md-input-container(class='minutes-container')
-                label
-                input(type='number' ng-model='vm.coords.lat.minutes' step='0.001' min='0')
-              span(class='sign') '
-              md-input-container(class='pole-container')
-                md-select(ng-model='vm.coords.lat.pole')
-                  md-option(class='value' ng-value='"N"') N
-                  md-option(class='value' ng-value='"S"') S
-            div(class='longitude')
-              md-input-container(class='degrees-container')
-                label
-                input(type='number' ng-model='vm.coords.lng.degrees' min='0')
-              span(class='sign') °
-              md-input-container(class='minutes-container')
-                label
-                input(type='number' ng-model='vm.coords.lng.minutes' step='0.001' min='0')
-              span(class='sign') '
-              md-input-container(class='pole-container')
-                md-select(ng-model='vm.coords.lng.pole')
-                  md-option(class='value' ng-value='"E"') E
-                  md-option(class='value' ng-value='"W"') W
+
 
         md-input-container
           label(translate='VENUE.FORM.NOTE')
