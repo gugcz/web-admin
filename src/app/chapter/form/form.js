@@ -52,7 +52,7 @@ angular.module('gugCZ.webAdmin.chapter.form', [
   });
 
 
-function ChapterFormCtrl(firebaseData, chapter, $log, organizerService) {
+function ChapterFormCtrl(firebaseData, chapter, $log, organizerService, $state) {
   const organizersPromise = firebaseData.getAllOrganizers().then(loadContactsProfilePicture);
 
   this.$onInit = function () {
@@ -109,7 +109,8 @@ function ChapterFormCtrl(firebaseData, chapter, $log, organizerService) {
 
   this.saveChapter = function () {
 
-    if ($state.is('chapters.edit')) {
+    if ($state.is('chapters.edit') || $state.is('chapters.this')) {
+      console.log('called')
       firebaseData.addChapter(this.chapter);
       firebaseData.addChapterToOrganizers(this.organizers);
     }
