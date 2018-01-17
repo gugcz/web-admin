@@ -9,7 +9,8 @@ function OrganizerFormCtrl(organizer, organizerService, $state) {
 
 
 angular.module('gugCZ.webAdmin.organizers.form', [
-  'gugCZ.webAdmin.components.links'
+  'gugCZ.webAdmin.components.links',
+  'gugCZ.webAdmin.components.picture'
 ])
   .controller('OrganizerFormController', OrganizerFormCtrl);
 

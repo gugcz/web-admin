@@ -7,7 +7,7 @@ const getValueFromSnapshot = function (snapshot) {
 };
 
 angular.module('gugCZ.webAdmin.organizers')
-    .service('organizerService', function ($q, firebaseDB, $firebaseArray, $firebaseObject, firebaseSTORAGE) {
+    .service('organizerService', function ($q, firebaseDB, $firebaseArray, $firebaseObject, pictureService) {
       this.currentChapter_ = null;
       this.currentUser_ = null;
 
@@ -79,34 +79,27 @@ angular.module('gugCZ.webAdmin.organizers')
         });
       };
 
-      function isUploadedNewPicture(organizer) {
-        return organizer.profilePicture && !organizer.profilePicture.isPath;
+      function isUploadedNewPicture(picture) {
+        return picture && !isValidURL(picture);
       }
 
-      // TODO Extract and refactor
+      function isValidURL(str) {
+        return str.includes('http');
+      }
+
+
       this.saveOrganizer = function (organizer) {
 
         organizer.links = organizer.links.filter(link => link.url.length > 0);
 
-        if (isUploadedNewPicture(organizer)) {
-          let profilePicRef = firebaseSTORAGE.ref('profilepics/' + organizer.$id + '.png');
+        if (isUploadedNewPicture(organizer.profilePicture)) { // TODO What about deleting profilepic
 
-          profilePicRef.putString(organizer.profilePicture.src.substring(organizer.profilePicture.src.indexOf(',') + 1), 'base64').then(snapshot => {
-            profilePicRef.getDownloadURL().then(url => {
-              organizer.profilePicture = url;
-              return organizer.$save();
-            });
-
-          });
-
+          // TODO Not working now!!!
+          organizer.profilePicture = pictureService.saveImageAndGetUrlPromise(organizer.profilePicture, 'profilepics/' + organizer.$id + '.jpg')
         }
-        else {
 
-          if (organizer.profilePicture) {
-            organizer.profilePicture = organizer.profilePicture.src;
-          }
-          return organizer.$save();
-        }
+        console.log(organizer);
+        return organizer.$save();
 
       };
 

@@ -1,0 +1,22 @@
+div(layout='column').md-whiteframe-3dp
+    md-toolbar()
+        .md-toolbar-tools
+            h2 Obrázek
+
+    md-content
+
+
+
+        div(ng-if='vm.pictureString && !vm.picture', layout='column', layout-align="center center")
+            p
+            i {{vm.note}}
+            img(src='{{vm.pictureString}}').small-image.layout-margin
+            md-button(ng-click='vm.removePicture()') Smazat obrázek
+
+        div(ng-if='vm.picture || !vm.pictureString', layout='column', layout-align="center center")
+            p
+            i {{vm.note}}
+            img(src='{{vm.picture.src}}', ng-if='vm.picture').small-image.layout-margin
+            input(type='file', name='cover', image-with-preview='', ng-model='vm.picture', accept='image/jpeg,image/png', dimensions='', ng-change='vm.updatePictureString()').layout-padding
+
+

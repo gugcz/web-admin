@@ -94,7 +94,8 @@
     "FORM": {
       "PROFILE": "profil",
       "NAME": "Jméno",
-      "ABOUT_ME": "O mě"
+      "ABOUT_ME": "O mě",
+      "PICTURE": "Rozměry obrázku by měly být 200x200 pixelů..."
     },
     "SECTION_PLACEHOLDER": "Zadejte název sekce"
   },

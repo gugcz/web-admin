@@ -9,9 +9,8 @@ md-content(layout-padding)
     md-input-container()
       label(translate='COMMON.EMAIL')
       input(ng-model='vm.organizer.email')
-    md-input-container
-      label Profilový obrázek
-      input(type='file', name='cover', image-with-preview='', ng-model='vm.organizer.profilePicture', accept='image/jpeg,image/png', dimensions='')
+
+    picture-upload(picture-string='vm.organizer.profilePicture', note='{{"ORGANIZERS.FORM.PICTURE" | translate}}')
 
 
     md-input-container()
