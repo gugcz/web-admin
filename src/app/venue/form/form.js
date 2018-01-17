@@ -1,8 +1,6 @@
   function VenueFormController(venuesUtility, $document) {
     this.$onInit = function () {
       this.venueInput = $document[0].getElementById('venue-input');
-      this.addressInput = $document[0].getElementById('address-input');
-      this.urlInput = $document[0].getElementById('url-input');
       this.howToInput = $document[0].getElementById('how-to-input');
 
 
@@ -19,21 +17,14 @@
     this.updateForm = function (place) {
       this.venue.name = place.name;
       this.venue.address = place.formatted_address;
-      this.addressInput.value = this.venue.address;
       this.venue.coordinates = {
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng()
       }
-      this.updateMapUrl(place);
+      this.venue.mapUrl = place.url;
+      this.howToInput.focus(); // Need to change input values above
     };
 
-    this.updateMapUrl = function (place) {
-      if (place) {
-        this.venue.mapUrl = place.url;
-        this.urlInput.value = place.url;
-        this.howToInput.focus();
-      }
-    };
 
     this.cancel = function() {
       this.onCancel();
