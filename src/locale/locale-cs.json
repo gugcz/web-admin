@@ -121,12 +121,13 @@
 
   "VENUE": {
     "FORM": {
+      "HOW_TO_FILL": "Nejdříve vyplňte název pomocí Google Places. Automaticky vám to vyplní ostatní políčka. Doporučujeme je ale raději zkontrolovat a případně upravit - např. Brno-město na Brno atd...",
       "NAME": "Název místa",
-      "CITY": "Město",
+      "CITY": "Město (pro tvorbu url)",
       "ADDRESS": "Adresa",
       "MAP_LINK": "Odkaz na mapu",
       "NOTE": "Jak se tam dostat",
-      "COORDINATES": "Souřadnice"
+      "COORDINATES": "Souřadnice (pro mapku eventů)"
     },
     "TITLE": "Místo",
     "SAVED_VENUES": "Uložená venues",

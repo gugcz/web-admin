@@ -21,6 +21,9 @@
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng()
       }
+      this.venue.city = place.address_components.filter((address_component) => {
+        return address_component.types.indexOf('political') !== -1 && address_component.types.indexOf('administrative_area_level_2') !== -1;
+      })[0].long_name;
       this.venue.mapUrl = place.url;
       this.howToInput.focus(); // Need to change input values above
     };

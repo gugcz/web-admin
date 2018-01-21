@@ -9,11 +9,16 @@ form(name='venueForm', ng-submit="vm.submit(venueForm)", novalidate)
   md-dialog-content(layout-padding)
     .md-dialog-content.venue-form-content
       span {{vm.nameDetails}}
-      div(layout="column")
-        md-input-container()
+      i {{'VENUE.FORM.HOW_TO_FILL' | translate}}
+      p
+      div(layout="row")
+        md-input-container(flex=50)
           label(translate='VENUE.FORM.NAME')
-          // TODO Google Map
           input(required id="venue-input" type="text" placeholder="Zadejte název venue" ng-model='vm.venue.name' ng-change='vm.test')
+
+        md-input-container(flex=50)
+          label(translate='VENUE.FORM.CITY')
+          input(required id="city-input" type="text" placeholder="Zadejte město" ng-model='vm.venue.city')
 
       div(layout="column")
         md-input-container
@@ -24,6 +29,8 @@ form(name='venueForm', ng-submit="vm.submit(venueForm)", novalidate)
           label(translate='VENUE.FORM.MAP_LINK')
           input(required id="url-input" type="url", ng-model='vm.venue.mapUrl')
 
+        p {{ 'VENUE.FORM.COORDINATES' | translate}}: {{vm.venue.coordinates.lat}}, {{vm.venue.coordinates.lng}}
+
 
 
         md-input-container
@@ -33,5 +40,5 @@ form(name='venueForm', ng-submit="vm.submit(venueForm)", novalidate)
   md-dialog-actions(layout='row')
     span(flex='')
     md-button.md-raised(translate="BUTTONS.CANCEL", ng-click="vm.cancel()", aria-label='Cancel')
-    md-button.md-raised.md-primary(type="submit", translate="BUTTONS.SAVE", ng-click="vm.save()", aria-label='Save venue')
+    md-button.md-raised.md-primary(type="button", translate="BUTTONS.SAVE", ng-click="vm.submit(venueForm)", aria-label='Save venue')
 
