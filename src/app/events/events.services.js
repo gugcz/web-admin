@@ -46,21 +46,33 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
     return event;
   }
 
-  function saveEventCoverAndGetUrl(event) {
-    let coverRef = firebaseSTORAGE.ref('covers/event/' + event.$id + '.png');
-    return coverRef.putString(event.cover.src.substring(event.cover.src.indexOf(',') + 1), 'base64').then(snapshot => {return coverRef.getDownloadURL();});
+  function isUploadedNewCover(cover) {
+    return cover && !isValidURL(cover);
   }
 
-  function saveEvent(event, editState, coverImage) {
+  function isValidURL(str) {
+    return str.includes('http');
+  }
+
+  function saveCover(id, cover) {
+    let picRef = firebaseSTORAGE.ref('covers/event/' + id + '.png');
+
+    return picRef.putString(cover, 'base64')
+  }
+
+  // TODO Refactor!!!!!
+  function saveEvent(event, editState) {
 
 
 
     if (editState) {
 
-      if (event.cover) {
-        return saveEventCoverAndGetUrl(event).then(url => {
+      if (isUploadedNewCover(event.cover)) {
+
+        return saveCover(event.$id, event.cover).then(snapshot => {
+
+          event.cover =  snapshot.downloadURL
           event = transformEventDataForFirebase(event);
-          event.cover = url;
           return event.$save();
         });
       }
@@ -70,13 +82,25 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
       return event.$save();
     }
     else {
-      // TODO
 
+      if (isUploadedNewCover(event.cover)) {
+        var cover = event.cover;
+        event.cover = ''
+        event = transformEventDataForFirebase(event);
+
+
+        return $firebaseArray(firebaseDB.ref('events')).$add(event).then(function(ref) {
+          var id = ref.key();
+
+          return saveCover(id, cover).then(snapshot => {
+
+            return firebaseDB.ref('events/' + id + '/cover').set(snapshot.downloadURL);
+          });
+        });
+      }
 
       event = transformEventDataForFirebase(event);
-
-
-      return $firebaseArray(firebaseDB.ref('events')).$add(event);
+      return $firebaseArray(firebaseDB.ref('events')).$add(event)
     }
 
   };
@@ -161,7 +185,7 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
   };
 
   self.deleteEvent = function (eventId) {
-    return firebaseDB.ref('events/' + eventId).remove();
+    return firebaseSTORAGE.ref('covers/events/' + eventId + '.png').delete().then(() => {return firebaseDB.ref('events/' + eventId).remove()}).catch(() => {return firebaseDB.ref('events/' + eventId).remove()})
   };
 
   self.publishEvent = function (eventId) {
