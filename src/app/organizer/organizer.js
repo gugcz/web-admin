@@ -60,5 +60,6 @@ function OrganizerController($state, $mdDialog, $translate, organizerService, $d
 
   this.editOrganizer = function (org) {
     $state.go('organizers.edit', {id: org.$id});
+
   };
 }

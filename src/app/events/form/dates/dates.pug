@@ -33,7 +33,7 @@ div(layout='row')
           span(translate='EVENTS.FORM.REPEATING')
 
 div(ng-if="vm.dates.isRepeatingEvent")
-  i Aktuálně sice web nepodporuje generování nových termínů, ale určitě to je v plánu. Pro opakující se akce doporučujeme rovnou vkládat číslování do názvu (1, #1, Vol.1 atd.). Pokud číslování nedáte, web se s tím popere sám...
+  i {{'EVENTS.FORM.REPEATING_NOTE' | translate}}
 //div(ng-if="vm.isRepeating")
 
   md-radio-group(ng-model='vm.repeats.type', layout="row")

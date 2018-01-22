@@ -7,7 +7,7 @@ const getValueFromSnapshot = function (snapshot) {
 };
 
 angular.module('gugCZ.webAdmin.organizers')
-    .service('organizerService', function ($q, firebaseDB, $firebaseArray, $firebaseObject, pictureService) {
+    .service('organizerService', function ($q, firebaseDB, $firebaseArray, $firebaseObject, firebaseSTORAGE) {
       this.currentChapter_ = null;
       this.currentUser_ = null;
 
@@ -94,8 +94,13 @@ angular.module('gugCZ.webAdmin.organizers')
 
         if (isUploadedNewPicture(organizer.profilePicture)) { // TODO What about deleting profilepic
 
-          // TODO Not working now!!!
-          organizer.profilePicture = pictureService.saveImageAndGetUrlPromise(organizer.profilePicture, 'profilepics/' + organizer.$id + '.jpg')
+          let picRef = firebaseSTORAGE.ref('profilepics/' + organizer.$id + '.jpg');
+
+          return picRef.putString(organizer.profilePicture, 'base64').then(snapshot => {
+
+            organizer.profilePicture =  snapshot.downloadURL
+            return organizer.$save();
+          });
         }
 
         console.log(organizer);

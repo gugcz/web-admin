@@ -44,6 +44,7 @@
       "DATE": "Datum akce",
       "MULTIDAY": "Akce je vícedenní",
       "REPEATING": "Akce se opakuje",
+      "REPEATING_NOTE": "Aktuálně sice web nepodporuje generování nových termínů, ale určitě to je v plánu. Pro opakující se akce doporučujeme rovnou vkládat číslování do názvu (1, #1, Vol.1 atd.). Pokud číslování nedáte, web se s tím popere sám...",
       "REPEAT_BY": "Opakovat",
       "REPEAT_BY_WEEKS": "po týdnech",
       "REPEAT_BY_MONTHS": "po měsících",
@@ -68,6 +69,7 @@
       "NO_CHAPTERS": "Nevybral jsi žádný chapter...",
       "ORGANIZERS": "Organizátoři",
       "VENUE": "Venue",
+      "LAST_USED_VENUE": "Použité",
       "ADD_VENUE": "Přidat venue",
       "EDIT_VENUE": "Upravit venue"
 

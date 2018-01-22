@@ -7,6 +7,6 @@ angular.module('gugCZ.webAdmin.components.picture')
       };
 
       this.saveImageAndGetUrlPromise = function (base64String, pathWithName) {
-        return $q.resolve(this.saveImage(base64String, pathWithName).then(snapshot => {return snapshot.downloadURL}))
+        return this.saveImage(base64String, pathWithName).then(snapshot => {return snapshot.downloadURL})
       };
     });
