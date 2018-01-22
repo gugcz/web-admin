@@ -23,11 +23,13 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
   }
 
   function transformEventVenueForFirebase(venue) {
-    // TODO - Simplest solution?
+    // TODO - Simplest solution to remove $id and $priority?
     return {
       name: venue.name || '',
       address: venue.address || '',
       mapUrl: venue.mapUrl || '',
+      coordinates: venue.coordinates || '',
+      city: venue.city || '',
       howTo: venue.howTo || ''
     };
   }
@@ -37,10 +39,10 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
   }
 
   function transformEventDataForFirebase(event) {
-    event.dates = transformEventDatesForFirebase(event.dates);
-    event.chapters = transformEventChaptersForFirebase(event.chapters);
-    event.venue = transformEventVenueForFirebase(event.venue);
-    event.links = transformEventLinksForFirebase(event.links);
+    event.dates = transformEventDatesForFirebase(event.dates); // JS Date object to ISO string
+    event.chapters = transformEventChaptersForFirebase(event.chapters); // set array of chapters data as key = true
+    event.venue = transformEventVenueForFirebase(event.venue); // remove $id and $priority
+    event.links = transformEventLinksForFirebase(event.links); // remove blank links
     return event;
   }
 
@@ -74,7 +76,7 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
       event = transformEventDataForFirebase(event);
 
 
-      return firebaseDB.ref('events/' + event.urlId).set(event);
+      return $firebaseArray(firebaseDB.ref('events')).$add(event);
     }
 
   };

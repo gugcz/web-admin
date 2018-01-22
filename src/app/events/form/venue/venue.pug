@@ -4,7 +4,7 @@ div(layout='row')
       md-optgroup(label="Venues")
         md-option(ng-value='vm.venue', ng-if='vm.venue && vm.venues.indexOf(vm.venue) === -1')
           div
-            b {{vm.venue.name}}
+            b [Poslední použité] {{vm.venue.name}}
             span ,&nbsp;{{vm.venue.address}}
         md-option(ng-value='venue', ng-repeat='venue in vm.venues')
             div

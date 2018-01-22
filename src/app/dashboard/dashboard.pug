@@ -60,10 +60,14 @@ md-content(ng-if='!vm.isAdmin')
       md-list-item
 
 
+md-fab-speed-dial(md-direction='up', class="md-fab-bottom-right fixed md-hover-full md-scale")
+  md-fab-trigger
+    a(ui-sref='events.add')
+      md-button.md-fab.md-primary(aria-label='Add event')
+        md-icon add
 
 
-
-md-fab-speed-dial(md-open='vm.isFabOpen', md-direction='up', class="md-fab-bottom-right fixed md-hover-full md-scale", ng-if='!vm.isAdmin')
+//md-fab-speed-dial(md-open='vm.isFabOpen', md-direction='up', class="md-fab-bottom-right fixed md-hover-full md-scale", ng-if='!vm.isAdmin')
   md-fab-trigger
     md-button.md-fab.md-primary(aria-label='menu')
       md-icon add

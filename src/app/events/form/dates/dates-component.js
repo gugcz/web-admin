@@ -58,7 +58,8 @@ function DatesController($mdDialog, $translate) {
 
       this.dates = {
         start: setTimeByPreset(getNextMonthDate(), preFillData.startTime),
-        end: null
+        end: null,
+        isRepeatingEvent: false
       };
 
 
@@ -69,6 +70,7 @@ function DatesController($mdDialog, $translate) {
     else {
       this.dates.start = new Date(this.dates.start);
       this.dates.end = new Date(this.dates.end);
+      this.dates.isRepeatingEvent = !!this.dates.isRepeatingEvent // Undefined to boolean
       this.duration = (this.dates.end.getTime() - this.dates.start.getTime()) / 60000;
       this.repeats = {}; // TODO - In Firebase?
     }
