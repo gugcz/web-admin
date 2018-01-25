@@ -1,9 +1,19 @@
-function OrganizerFormCtrl(organizer, organizerService, $state) {
+function OrganizerFormCtrl(organizer, organizerService, $state, $translate,  $mdToast) {
   const vm = this;
   vm.organizer = organizer;
+  vm.savingOrganizer = false
   vm.saveOrganizer = function () {
-    organizerService.saveOrganizer(vm.organizer);
-    $state.reload()
+    vm.savingOrganizer = true
+    organizerService.saveOrganizer(vm.organizer).then(() => {
+      vm.savingOrganizer = false
+      $mdToast.show(
+          $mdToast.simple() // TODO zapouzdřit?
+              .textContent($translate.instant('ORGANIZERS.FORM.ORGANIZER_SAVED'))
+              .position('bottom right')
+              .hideDelay(3000)
+      );
+    });
+
   };
 }
 

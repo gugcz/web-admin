@@ -74,9 +74,7 @@ function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray,
   };
 
   this.addChapterToOrganizers = function (organizers) {
-    organizers.forEach(function (org) {
-      addChapterToOrganizer(org.email);
-    });
+    organizers.forEach(org => addChapterToOrganizer(org.email));
   };
 
   function addChapterToOrganizer(orgMail) {

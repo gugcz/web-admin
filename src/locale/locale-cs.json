@@ -98,6 +98,7 @@
       "PROFILE": "profil",
       "NAME": "Jméno",
       "ABOUT_ME": "O mě",
+      "ORGANIZER_SAVED": "Profil organizátora byl uložen",
       "PICTURE": "Rozměry obrázku by měly být 200x200 pixelů..."
     },
     "SECTION_PLACEHOLDER": "Zadejte název sekce"

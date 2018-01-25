@@ -1,4 +1,5 @@
-md-content(layout-padding)
+md-progress-linear(ng-if='vm.savingOrganizer')
+md-content(layout-padding, , ng-class='{disableWhileLoading: vm.savingOrganizer}')
   form(layout='column', ng-cloak='', name='OrganizerForm', ng-submit='OrganizerForm.$valid && vm.saveOrganizer()', novalidate)
 
 
