@@ -1,6 +1,5 @@
 function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, $firebaseObject, $http) {
   const self = this;
-  const chapterID = null;
 
   function transformEventChaptersForFirebase(chapters) {
     var chaptersForFirebase = {};
@@ -14,16 +13,9 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
     return dates;
   }
 
-  function getEventUrl(event) {
-    return event.name.replace(/\s+/g, '-')           // Replace spaces with -
-            .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-            .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-            .replace(/^-+/, '')             // Trim - from start of text
-            .replace(/-+$/, '');
-  }
 
   function transformEventVenueForFirebase(venue) {
-    // TODO - Simplest solution to remove $id and $priority?
+    // TODO - Simplest solution to remove $id, $priority and undefined fields?
     return {
       name: venue.name || '',
       address: venue.address || '',
@@ -214,16 +206,6 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
       return orgsObj;
     }, {});
   }
-}
-
-
-function getArrayWithoutDuplicates(array) {
-  for (let i = 0; i < array.length - 1; i++) {
-    if (array[i].$id == array[i + 1].$id) {
-      array.splice(i, 1);
-    }
-  }
-  return array;
 }
 
 

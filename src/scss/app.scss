@@ -300,3 +300,16 @@ venue-form {
   width: 80px; /* you can use % */
   height: auto;
 }
+
+.sample-show-hide {
+
+}
+.sample-show-hide.ng-hide {
+  opacity: 0;
+}
+
+.disableWhileLoading {
+  pointer-events:none;
+  opacity: 0.25;
+  transition: all linear 0.15s;
+}

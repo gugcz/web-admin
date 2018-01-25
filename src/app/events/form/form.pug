@@ -1,25 +1,28 @@
-md-content(layout-padding)
-  form(name='addEventForm', ng-submit='addEventForm.$valid && vm.saveEvent()', novalidate, layout="column")
+md-progress-linear(ng-if='vm.savingEvent')
+md-content(layout-padding, , ng-class='{disableWhileLoading: vm.savingEvent}')
+
+  // TODO Add organizer validation as directive
+  form(name='addEventForm', ng-submit='addEventForm.$valid && vm.isOrganizersCorrect() && vm.saveAndPublishEvent()', novalidate, layout="column")
     div(layout="row")
       md-input-container(flex)
         label(translate='EVENTS.FORM.NAME')
-        input(ng-model='vm.event.name', required)
+        input(name='name', ng-model='vm.event.name', required)
 
       md-input-container(flex)
         label(translate='EVENTS.FORM.SUBTITLE')
         input(ng-model='vm.event.subtitle')
 
     div(layout="row")
-      md-input-container(flex='50')
+      md-input-container(flex='60')
         label(translate='EVENTS.FORM.DESCRIPTION')
-        textarea(rows='4', ng-model='vm.event.description', required)
+        textarea(rows='4', ng-model='vm.event.description')
 
-      div(flex='50')
+      div(flex='40')
         div(rows='4',marked='vm.event.description')
 
     dates-picker(dates='vm.event.dates')
 
-    venue-selector(venue='vm.event.venue')
+    venue-selector(venue='vm.event.venue', name='venue')
 
 
     picture-upload(picture-string='vm.event.cover', note='{{"EVENTS.FORM.COVER" | translate}}')
@@ -27,18 +30,15 @@ md-content(layout-padding)
     md-input-container
       label(translate='EVENTS.FORM.REGFORM_LINK')
       input(type='url', name="regFormLink", ng-model='vm.event.regFormLink', required)
-      // TODO standard translated messages
-      div(ng-messages="addEventForm.regFormLink.$error")
-        div(ng-message="required") This is required.
-        div(ng-message="url") This is not url.
 
-    // TODO Add validations
     orgs-table(selected-chapters='vm.event.chapters', organizers='vm.event.organizers', guarantee='vm.event.guarantee')
 
     links(links='vm.event.links', context='{{"EVENTS.FORM.EVENT" | translate}}')
 
     div(layout='row', layout-align='end')
-      md-button(class="md-raised", aria-label='Save', type='submit') {{ "BUTTONS.SAVE" | translate}}
-      md-button(class="md-raised md-primary", aria-label='Save and publish', ng-click='vm.saveAndPublishEvent()') {{ "BUTTONS.SAVE_AND_PUBLISH" | translate}}
+      // TODO Add validations for save only or fix publishing not completed drafts
+      md-button(class="md-raised", aria-label='Save', ng-click='vm.saveEvent()', ng-disabled='true') {{ "BUTTONS.SAVE" | translate}}
+      md-button(class="md-raised md-primary", aria-label='Save and publish', type='submit') {{ "BUTTONS.SAVE_AND_PUBLISH" | translate}}
 
     pre {{ vm.event | json }}
+    pre {{ addEventForm | json }}

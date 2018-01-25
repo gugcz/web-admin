@@ -1,12 +1,21 @@
 function EventFormController(firebaseEvents, $state, $mdToast, $translate, event) {
 
   this.event = event;
+  this.savingEvent = false;
 
   this.saveAndPublishEvent = function () {
+    this.savingEvent = true
     firebaseEvents.saveAndPublishEvent(this.event, $state.is('events.edit')).then(function () {
+      this.savingEvent = false;
       showMessageAndGoToDashboard('EVENTS.TOASTS.EVENT_PUBLISHED');
-    });
+
+    }.bind(this));
   };
+
+  this.isOrganizersCorrect = function () {
+    const event = this.event;
+    return Object.keys(event.organizers).length >= 1 && Object.keys(event.chapters).length >= 1 && event.guarantee && event.organizers[event.guarantee];
+  }
 
   this.saveEvent = function () {
     firebaseEvents.saveEvent(this.event, $state.is('events.edit')).then(function () {
