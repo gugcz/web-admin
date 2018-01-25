@@ -1,4 +1,5 @@
-md-content(layout-padding)
+md-progress-linear(ng-if='vm.savingChapter')
+md-content(layout-padding, , ng-class='{disableWhileLoading: vm.savingChapter}')
     form(layout='column', ng-cloak='', name='addChapterForm', ng-submit='addChapterForm.$valid && vm.saveChapter()', novalidate)
         md-input-container
             label(translate='CHAPTERS.FORM.SECTION')
@@ -23,7 +24,7 @@ md-content(layout-padding)
             label(translate='COMMON.EMAIL')
             input(ng-model='vm.chapter.email', ng-disabled="!vm.isAdmin")
 
-        picture-upload(picture-string='vm.chapter.backgroundPicture', note='{{"CHAPTERS.FORM.BACKGROUND_PICTURE" | translate}}')
+        picture-upload(picture-string='vm.chapter.cover', note='{{"CHAPTERS.FORM.BACKGROUND_PICTURE" | translate}}')
 
 
         md-input-container

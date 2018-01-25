@@ -52,7 +52,9 @@ angular.module('gugCZ.webAdmin.chapter.form', [
   });
 
 
-function ChapterFormCtrl(firebaseData, chapter, $log, organizerService, $state) {
+function ChapterFormCtrl(firebaseData, chapter, $log, organizerService, $state, $mdToast, $translate) {
+
+  this.savingChapter = false;
   const organizersPromise = firebaseData.getAllOrganizers().then(loadContactsProfilePicture);
 
   this.$onInit = function () {
@@ -109,10 +111,21 @@ function ChapterFormCtrl(firebaseData, chapter, $log, organizerService, $state) 
 
   this.saveChapter = function () {
 
+    this.savingChapter = true;
     if ($state.is('chapters.edit') || $state.is('chapters.this')) {
       console.log('called')
-      firebaseData.addChapter(this.chapter);
-      firebaseData.addChapterToOrganizers(this.organizers);
+
+      Promise.all([firebaseData.addChapter(this.chapter), firebaseData.addChapterToOrganizers(this.organizers)]).then(() => {
+        this.savingChapter = false
+        $mdToast.show(
+            $mdToast.simple() // TODO zapouzdřit?
+                .textContent($translate.instant('CHAPTERS.FORM.CHAPTER_SAVED'))
+                .position('bottom right')
+                .hideDelay(3000)
+        );
+      })
+
+
     }
     else {
       // TODO - Implement

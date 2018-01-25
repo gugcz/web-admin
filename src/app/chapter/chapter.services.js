@@ -1,4 +1,4 @@
-function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray, $firebaseObject) {
+function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray, $firebaseObject, firebaseSTORAGE) {
   let chapterID = null;
 
   this.getAllOrganizers = function () {
@@ -38,9 +38,31 @@ function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray,
     chapterID = getChapterID(chapter);
   };
 
+  function isUploadedNewCover(cover) {
+    return cover && !isValidURL(cover);
+  }
+
+  function isValidURL(str) {
+    return str.includes('http');
+  }
+
+  function saveCover(id, cover) {
+    let picRef = firebaseSTORAGE.ref('covers/chapter/' + id + '.png');
+
+    return picRef.putString(cover, 'base64')
+  }
+
   this.addChapter = function (chapter) {
     // TODO not solved new chapter
-    chapter.$save();
+    if (isUploadedNewCover(chapter.cover)) {
+
+      return saveCover(chapter.$id, chapter.cover).then(snapshot => {
+
+        chapter.cover =  snapshot.downloadURL
+        return chapter.$save();
+      });
+    }
+    return chapter.$save();
   };
 
   function getChapterID(chapter) {
