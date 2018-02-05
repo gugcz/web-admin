@@ -3,7 +3,7 @@ mixin progress-bar
     md-progress-linear(md-mode="indeterminate")
 
 mixin event-info
-  .md-list-item-text(flex=30)
+  .md-list-item-text(flex=40)
     h3.md-title {{event.name}}
   .md-list-item-text(flex=30)
     h4 {{event.dates.start | date:'dd.MM.yyyy v HH:mm'}}
@@ -26,6 +26,7 @@ md-content(ng-if='!vm.isAdmin')
           md-icon(md-svg-src='mdi:pencil', ng-click='vm.editEvent(event)', aria-label='Edit event').md-secondary
           md-icon(md-svg-src='mdi:publish', ng-click='vm.publishEvent(event.$id)', aria-label='Publish event').md-secondary
           md-icon(md-svg-src='mdi:delete', ng-click='vm.deleteEvent(event.$id)', aria-label='Edit event').md-secondary
+        md-divider(ng-if='!$last')
 
 
 
@@ -41,6 +42,7 @@ md-content(ng-if='!vm.isAdmin')
           md-icon(md-svg-src='mdi:pencil', ng-click='vm.editEvent(event)', aria-label='Edit event').md-secondary
           md-icon(md-svg-src='mdi:download', ng-click='vm.hideEvent(event.$id)', aria-label='Hide event').md-secondary
           md-icon(md-svg-src='mdi:delete', ng-click='vm.deleteEvent(event.$id)', aria-label='Edit event').md-secondary
+        md-divider(ng-if='!$last')
 
 
 
@@ -54,6 +56,7 @@ md-content(ng-if='!vm.isAdmin')
         md-list-item
           +event-info
           md-icon(md-svg-src='mdi:message', ng-click='vm.reportEvent($event, event.$id)', aria-label='Report event').md-secondary
+        md-divider(ng-if='!$last')
 
       // Blank spaces for FAB
       md-list-item
