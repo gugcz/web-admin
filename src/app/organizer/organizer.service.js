@@ -98,12 +98,11 @@ angular.module('gugCZ.webAdmin.organizers')
 
           return picRef.putString(organizer.profilePicture, 'base64').then(snapshot => {
 
-            organizer.profilePicture =  snapshot.downloadURL
+            organizer.profilePicture =  snapshot.downloadURL;
             return organizer.$save();
           });
         }
 
-        console.log(organizer);
         return organizer.$save();
 
       };

@@ -3,8 +3,6 @@
       this.venueInput = $document[0].getElementById('venue-input');
       this.howToInput = $document[0].getElementById('how-to-input');
 
-
-
       const venueAutocomplete = new google.maps.places.Autocomplete(this.venueInput);
 
       venueAutocomplete.addListener('place_changed', () => {
@@ -20,7 +18,7 @@
       this.venue.coordinates = {
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng()
-      }
+      };
       this.venue.city = place.address_components.filter((address_component) => {
         return address_component.types.indexOf('political') !== -1 && address_component.types.indexOf('administrative_area_level_2') !== -1;
       })[0].long_name;

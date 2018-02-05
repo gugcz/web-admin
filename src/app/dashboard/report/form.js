@@ -1,5 +1,3 @@
-
-
 function ReportFormController() {
 
   this.cancel = function() {
@@ -30,5 +28,4 @@ angular.module('gugCZ.webAdmin.report.form', [
       onSave: '&'
     },
     templateUrl: 'app/dashboard/report/form.html'
-
   });

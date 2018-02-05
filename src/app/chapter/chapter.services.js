@@ -49,7 +49,7 @@ function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray,
   function saveCover(id, cover) {
     let picRef = firebaseSTORAGE.ref('covers/chapter/' + id + '.png');
 
-    return picRef.putString(cover, 'base64')
+    return picRef.putString(cover, 'base64');
   }
 
   this.addChapter = function (chapter) {
@@ -58,7 +58,7 @@ function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray,
 
       return saveCover(chapter.$id, chapter.cover).then(snapshot => {
 
-        chapter.cover =  snapshot.downloadURL
+        chapter.cover =  snapshot.downloadURL;
         return chapter.$save();
       });
     }

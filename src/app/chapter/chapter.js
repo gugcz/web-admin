@@ -30,7 +30,6 @@ function ChaptersController(firebaseData, $state) {
   this.sections = ['GBG', 'GDG', 'GEG', 'GXG'];
 
   this.chipSelected = function (chip) {
-    console.log(this.chapters);
     this.chapters = this.allChapters.filter((chapter) => {
       return this.selectedSections.length === 0 || this.selectedSections.indexOf(chapter.section.toUpperCase()) !== -1;
     }).sort(compare);
@@ -52,9 +51,6 @@ function ChaptersController(firebaseData, $state) {
   };
 
   function compare(a, b) {
-    console.log(a.name < b.name);
-    console.log(a);
-    console.log(b);
     return a.name < b.name ? -1 : 1;
   }
 

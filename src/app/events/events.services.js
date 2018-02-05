@@ -2,7 +2,7 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
   const self = this;
 
   function transformEventChaptersForFirebase(chapters) {
-    var chaptersForFirebase = {};
+    let chaptersForFirebase = {};
     chapters.forEach(chapter => chaptersForFirebase[chapter.$id] = true);
     return chaptersForFirebase;
   }
@@ -49,7 +49,7 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
   function saveCover(id, cover) {
     let picRef = firebaseSTORAGE.ref('covers/event/' + id + '.png');
 
-    return picRef.putString(cover, 'base64')
+    return picRef.putString(cover, 'base64');
   }
 
   // TODO Refactor!!!!!
@@ -63,7 +63,7 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
 
         return saveCover(event.$id, event.cover).then(snapshot => {
 
-          event.cover =  snapshot.downloadURL
+          event.cover =  snapshot.downloadURL;
           event = transformEventDataForFirebase(event);
           return event.$save();
         });
@@ -76,13 +76,13 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
     else {
 
       if (isUploadedNewCover(event.cover)) {
-        var cover = event.cover;
-        event.cover = ''
+        let cover = event.cover;
+        event.cover = '';
         event = transformEventDataForFirebase(event);
 
 
         return $firebaseArray(firebaseDB.ref('events')).$add(event).then(function(ref) {
-          var id = ref.key();
+          let id = ref.key();
 
           return saveCover(id, cover).then(snapshot => {
 
@@ -92,7 +92,7 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
       }
 
       event = transformEventDataForFirebase(event);
-      return $firebaseArray(firebaseDB.ref('events')).$add(event)
+      return $firebaseArray(firebaseDB.ref('events')).$add(event);
     }
 
   };
@@ -177,7 +177,7 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
   };
 
   self.deleteEvent = function (eventId) {
-    return firebaseSTORAGE.ref('covers/events/' + eventId + '.png').delete().then(() => {return firebaseDB.ref('events/' + eventId).remove()}).catch(() => {return firebaseDB.ref('events/' + eventId).remove()})
+    return firebaseSTORAGE.ref('covers/events/' + eventId + '.png').delete().then(() => {return firebaseDB.ref('events/' + eventId).remove();}).catch(() => {return firebaseDB.ref('events/' + eventId).remove();});
   };
 
   self.publishEvent = function (eventId) {
