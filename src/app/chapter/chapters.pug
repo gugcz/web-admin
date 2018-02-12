@@ -1,11 +1,10 @@
 md-content.chapters
-    // TODO - Filter (Pair programming with Pepa - Horm's classmate)
     section
         md-subheader.chapter-subheader {{'CHAPTERS.FILTERS' | translate}}
 
         md-input-container(class='md-block chapter-name')
-            label {{'CHAPTERS.CHAPTER_NAME' | translate}}
-            input(ng-model='vm.searchedName')
+            label(class='chapter-name-label') {{'CHAPTERS.CHAPTER_NAME' | translate}}
+            input(ng-model='vm.searchedName' ng-change='vm.inputChanged()')
 
         div.chips-container
             md-chips(ng-model='vm.selectedSections', md-autocomplete-snap='' md-on-select='vm.chipSelected(item)', md-on-remove='vm.chipSelected(item)').sections-chips
