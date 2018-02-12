@@ -105,6 +105,8 @@
   },
 
   "CHAPTERS": {
+    "CHAPTER_NAME": "Zadejte jméno chapteru",
+    "FILTERS": "Filtery",
     "FORM": {
       "CHAPTER": "chapter",
       "SECTION": "Sekce",

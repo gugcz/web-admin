@@ -288,14 +288,24 @@ venue-form {
   }
 }
 
-.chapters .chips-container {
-  padding-left: 12px;
-}
+.chapters {
+  .chips-container {
+    padding-left: 12px;
+  }
 
-.chapters .chips-container md-chips md-chips-wrap {
-  margin-bottom: 0 !important;
-}
+  .chips-container md-chips md-chips-wrap {
+    margin-bottom: 0 !important;
+  }
 
+  md-input-container.chapter-name {
+    height: 48px;
+    margin-bottom: 0;
+    margin-left: 12px;
+  }
+  .md-subheader.chapter-subheader .md-subheader-inner{
+    padding-bottom: 8px;
+  }
+}
 .small-image {
   width: 80px; /* you can use % */
   height: auto;
