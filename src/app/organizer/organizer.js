@@ -56,16 +56,22 @@ angular.module('gugCZ.webAdmin.organizers', [
   });
 
 function OrganizerController($state, $mdDialog, $translate, organizerService, $document, currentUser) {
-  this.organizers = organizerService.getAllOrganizers();
-  this.selectedSections = [];
-  this.sections = ['GBG', 'GDG', 'GEG', 'GXG'];
+  this.allOrganizers = organizerService.getAllOrganizers();
+  this.allOrganizers.$loaded((data) => {
+    this.allOrganizers = data;
+    this.organizers = data.sort(compare);
+  });
 
-  this.chipSelected = function (chip) {
-    this.chapters = this.chapters.filter(chapter => {
-      return this.selectedSections.length === 0 || this.selectedSections.indexOf(chapter.section.toUpperCase()) !== -1;
-    }).sort(compare);
+  this.inputChanged = function() {
+    this.organizers = this.allOrganizers.filter(organizer => organizer.name.toLowerCase().includes(this.searchedName.toLowerCase()));
+    this.organizers.sort(compare);
   };
+
   this.editOrganizer = function (org) {
     $state.go('organizers.edit', {id: org.$id});
   };
+
+  function compare(a, b) {
+    return a.name < b.name ? -1 : 1;
+  }
 }

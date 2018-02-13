@@ -7,13 +7,6 @@ md-content(class="organizers" layout='column')
                 label(class='filter-name-label') {{'ORGANIZERS.ORGANIZER_NAME' | translate}}
                 input(ng-model='vm.searchedName' ng-change='vm.inputChanged()')
 
-            div.chips-container
-                md-chips(ng-model='vm.selectedSections', md-autocomplete-snap='' md-on-select='vm.chipSelected(item)', md-on-remove='vm.chipSelected(item)').sections-chips
-                    md-autocomplete(md-selected-item='vm.selectedSection', md-selected-item-change='vm.chipSelected(item)', md-search-text='vm.searchText', md-items='item in vm.querySectionSearch(vm.searchText)', md-item-text='item', placeholder='{{"CHAPTERS.SECTION_PLACEHOLDER" | translate}}')
-                        span(md-highlight-text='vm.searchText') {{item}}
-                    md-chip-template
-                        span {{$chip}}
-
         md-subheader {{"ORGANIZERS.SAVED_ORGANIZERS" | translate }}
         md-list
             // TODO is correct filter? What about use of ng-change?
