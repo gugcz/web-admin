@@ -30,7 +30,7 @@ function ChaptersController(firebaseData, $state) {
   this.sections = ['GBG', 'GDG', 'GEG', 'GXG'];
 
   this.chipSelected = function (chip) {
-    this.chapters = this.chapters.filter(chapter => {
+    this.chapters = this.allChapters.filter(chapter => {
       return this.selectedSections.length === 0 || this.selectedSections.indexOf(chapter.section.toUpperCase()) !== -1;
     }).sort(compare);
   };

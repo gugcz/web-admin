@@ -288,27 +288,28 @@ venue-form {
   }
 }
 
-.chapters {
+.filters-container {
   .chips-container {
     padding-left: 12px;
   }
 
   .chips-container md-chips md-chips-wrap {
-    margin-bottom: 0 !important;
+    margin-bottom: 10px !important;
   }
 
-  md-input-container.chapter-name {
+  md-input-container.filter-name {
     height: 48px;
     margin-bottom: 0;
     margin-left: 12px;
-    label.chapter-name-label {
+    label.filter-name-label {
       width: 97%;
     }
   }
-  .md-subheader.chapter-subheader .md-subheader-inner{
+  .md-subheader.filter-subheader .md-subheader-inner{
     padding-bottom: 8px;
   }
 }
+
 .small-image {
   width: 80px; /* you can use % */
   height: auto;

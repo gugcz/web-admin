@@ -1,17 +1,18 @@
 md-content.chapters
     section
-        md-subheader.chapter-subheader {{'CHAPTERS.FILTERS' | translate}}
+        div.filters-container
+            md-subheader.filter-subheader {{'CHAPTERS.FILTERS' | translate}}
 
-        md-input-container(class='md-block chapter-name')
-            label(class='chapter-name-label') {{'CHAPTERS.CHAPTER_NAME' | translate}}
-            input(ng-model='vm.searchedName' ng-change='vm.inputChanged()')
+            md-input-container(class='md-block filter-name')
+                label(class='filter-name-label') {{'CHAPTERS.CHAPTER_NAME' | translate}}
+                input(ng-model='vm.searchedName' ng-change='vm.inputChanged()')
 
-        div.chips-container
-            md-chips(ng-model='vm.selectedSections', md-autocomplete-snap='' md-on-select='vm.chipSelected(item)', md-on-remove='vm.chipSelected(item)').sections-chips
-                md-autocomplete(md-selected-item='vm.selectedSection', md-selected-item-change='vm.chipSelected(item)', md-search-text='vm.searchText', md-items='item in vm.querySectionSearch(vm.searchText)', md-item-text='item', placeholder='{{"ORGANIZERS.SECTION_PLACEHOLDER" | translate}}')
-                    span(md-highlight-text='vm.searchText') {{item}}
-                md-chip-template
-                    span {{$chip}}
+            div.chips-container
+                md-chips(ng-model='vm.selectedSections', md-autocomplete-snap='' md-on-select='vm.chipSelected(item)', md-on-remove='vm.chipSelected(item)').sections-chips
+                    md-autocomplete(md-selected-item='vm.selectedSection', md-selected-item-change='vm.chipSelected(item)', md-search-text='vm.searchText', md-items='item in vm.querySectionSearch(vm.searchText)', md-item-text='item', placeholder='{{"CHAPTERS.SECTION_PLACEHOLDER" | translate}}')
+                        span(md-highlight-text='vm.searchText') {{item}}
+                    md-chip-template
+                        span {{$chip}}
 
         md-subheader {{"CHAPTERS.SAVED_CHAPTERS" | translate }}
         md-list

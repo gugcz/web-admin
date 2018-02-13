@@ -92,8 +92,6 @@
   },
 
   "ORGANIZERS": {
-    "NAME": "Jméno",
-    "MANAGEMENT": "Správa organizátorů",
     "FORM": {
       "PROFILE": "profil",
       "NAME": "Jméno",
@@ -101,7 +99,12 @@
       "ORGANIZER_SAVED": "Profil organizátora byl uložen",
       "PICTURE": "Rozměry obrázku by měly být 200x200 pixelů..."
     },
-    "SECTION_PLACEHOLDER": "Zadejte název sekce"
+    "FILTERS": "Filtery",
+    "NAME": "Jméno",
+    "MANAGEMENT": "Správa organizátorů",
+    "ORGANIZER_NAME": "Zadejte jméno organizátora",
+    "SECTION_PLACEHOLDER": "Zadejte název sekce",
+    "SAVED_ORGANIZERS": "Uložení organizátoři"
   },
 
   "CHAPTERS": {
@@ -118,7 +121,8 @@
       "MAP_LINK": "Odkaz na mapu"
     },
     "MANAGEMENT": "Správa chapterů",
-    "SAVED_CHAPTERS": "Uložené chaptery"
+    "SAVED_CHAPTERS": "Uložené chaptery",
+    "SECTION_PLACEHOLDER": "Zadejte název sekce"
   },
 
   "CHAPTER": {
