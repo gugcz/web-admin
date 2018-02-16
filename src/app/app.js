@@ -34,17 +34,17 @@ angular.module('gugCZ.webAdmin', [
           return [
             {
               link: 'dashboard',
-              title: 'Dashboard',
+              title: 'MENU.DASHBOARD',
               icon: 'home'
             },
             {
               link: 'organizers',
-              title: $translate.instant('ORGANIZERS.MANAGEMENT'),
+              title: 'MENU.ORGANIZERS_MANAGEMENT',
               icon: 'account'
             },
             {
               link: 'chapters',
-              title: $translate.instant('CHAPTERS.MANAGEMENT'),
+              title: 'MENU.CHAPTERS_MANAGEMENT',
               icon: 'account-multiple'
             }
           ];
@@ -54,22 +54,22 @@ angular.module('gugCZ.webAdmin', [
           return [
             {
               link: 'dashboard',
-              title: 'Dashboard',
+              title: 'MENU.DASHBOARD',
               icon: 'home'
             },
             {
               link: 'organizers.me',
-              title: $translate.instant('PROFILE.MANAGEMENT'),
+              title: 'MENU.PROFILE_MANAGEMENT',
               icon: 'account'
             },
             {
               link: 'chapters.this',
-              title: $translate.instant('CHAPTER.MANAGEMENT'),
+              title: 'MENU.CHAPTER_MANAGEMENT',
               icon: 'account-multiple'
             },
             {
               link: 'venues',
-              title: 'Správa venues',
+              title: 'MENU.VENUES_MANAGEMENT',
               icon: 'map-marker'
             }
           ];

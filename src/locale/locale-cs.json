@@ -72,9 +72,6 @@
       "LAST_USED_VENUE": "Použité",
       "ADD_VENUE": "Přidat venue",
       "EDIT_VENUE": "Upravit venue"
-
-
-
     },
 
     "TOASTS": {
@@ -84,11 +81,6 @@
       "EVENT_HIDED": "Akce byla schována!",
       "EVENT_REPORTED": "Akce byla reportována!"
     }
-  },
-
-
-  "PROFILE": {
-    "MANAGEMENT": "Profil"
   },
 
   "ORGANIZERS": {
@@ -101,7 +93,6 @@
     },
     "FILTERS": "Filtery",
     "NAME": "Jméno",
-    "MANAGEMENT": "Správa organizátorů",
     "ORGANIZER_NAME": "Zadejte jméno organizátora",
     "SECTION_PLACEHOLDER": "Zadejte název sekce",
     "SAVED_ORGANIZERS": "Uložení organizátoři"
@@ -120,13 +111,8 @@
       "CHAPTER_SAVED": "Profil chapteru byl uložen",
       "MAP_LINK": "Odkaz na mapu"
     },
-    "MANAGEMENT": "Správa chapterů",
     "SAVED_CHAPTERS": "Uložené chaptery",
     "SECTION_PLACEHOLDER": "Zadejte název sekce"
-  },
-
-  "CHAPTER": {
-    "MANAGEMENT": "Správa chapteru"
   },
 
   "VENUE": {
@@ -174,6 +160,16 @@
     "POSITIVE": "Juchů!",
     "NEGATIVE": "Ajaj..."
   },
+
+  "MENU": {
+    "DASHBOARD": "Dashboard",
+    "ORGANIZERS_MANAGEMENT": "Správa organizátorů",
+    "CHAPTERS_MANAGEMENT": "Správa chapterů",
+    "PROFILE_MANAGEMENT": "Profil",
+    "CHAPTER_MANAGEMENT": "Správa chapteru",
+    "VENUES_MANAGEMENT": "Správa venues"
+  },
+
   "JANUARY": "Leden",
   "FEBRUARY": "Únor",
   "MARCH": "Březen",
