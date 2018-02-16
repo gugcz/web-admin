@@ -17,7 +17,7 @@ angular.module('gugCZ.webAdmin.chapter.form', [
         }
       },
       data: {
-        title: 'Editovat chapter'  // TODO Add translation
+        title: 'TITLES.EDIT_CHAPTER'
       }
     }).state('chapters.edit', {
       url: 'chapters/edit/:urlID',
@@ -31,7 +31,7 @@ angular.module('gugCZ.webAdmin.chapter.form', [
         }
       },
       data: {
-        title: 'Editovat chapter'  // TODO Add translation
+        title: 'TITLES.EDIT_CHAPTER'
       }
     }).state('chapters.add', {
       url: 'chapters/add',
@@ -45,7 +45,7 @@ angular.module('gugCZ.webAdmin.chapter.form', [
         }
       },
       data: {
-        title: 'Přidat chapter'  // TODO Add translation
+        title: 'TITLES.ADD_CHAPTER'
       }
     });
 

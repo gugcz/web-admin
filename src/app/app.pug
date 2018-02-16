@@ -2,7 +2,7 @@ md-toolbar(layout='row').md-whiteframe-10dp
   .md-toolbar-tools
     md-button.md-icon-button.hide-gt-sm(ng-click="app.toggleSidenav()")
       md-icon(aria-label='Menu') menu
-    h1 {{app.state.current.data.title}}
+    h1(translate='{{app.state.current.data.title}}')
     span(flex='')
 
     md-button {{app.fbUser.name}}

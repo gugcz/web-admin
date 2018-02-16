@@ -15,7 +15,7 @@ angular.module('gugCZ.webAdmin.venues', [
         }
       },
       data: {
-        title: 'Správa venues'  // TODO Add translation
+        title: 'TITLES.VENUES_MANAGEMENT'
       }
     });
   });

@@ -22,7 +22,7 @@ angular.module('gugCZ.webAdmin.events', [
       controllerAs: 'eventsCtrl',
       templateUrl: 'app/events/events.html',
       data: {
-        title: 'Akce' // TODO Add translation
+        title: 'TITLES.EVENTS'
       }
     })
 
@@ -68,7 +68,7 @@ angular.module('gugCZ.webAdmin.events', [
           }
         },
         data: {
-          title: 'Přidat akci'  // TODO Add translation
+          title: 'TITLES.ADD_EVENT'
         }
       })
 
@@ -88,7 +88,7 @@ angular.module('gugCZ.webAdmin.events', [
           }
         },
         data: {
-          title: 'Upravit akci'  // TODO Add translation
+          title: 'TITLES.EDIT_EVENT'
         }
       });
 

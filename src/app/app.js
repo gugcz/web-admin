@@ -115,7 +115,7 @@ angular.module('gugCZ.webAdmin', [
       controllerAs: 'app',
       templateUrl: 'app/app.html',
       data: {
-        title: 'GUG.cz Administrace',
+        title: 'TITLES.GUG_ADMIN',
         authLogged: true
       },
       resolve: {

@@ -13,7 +13,7 @@ angular.module('gugCZ.webAdmin.chapter', [
       controller: ChaptersController,
       controllerAs: 'vm',
       data: {
-        title: 'Správa chapterů'  // TODO Add translation
+        title: 'TITLES.CHAPTERS_MANAGEMENT'
       }
     });
 

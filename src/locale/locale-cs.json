@@ -170,6 +170,20 @@
     "VENUES_MANAGEMENT": "Správa venues"
   },
 
+  "TITLES": {
+    "EDIT_CHAPTER": "Editovat chapter",
+    "ADD_CHAPTER": "Přidat chapter",
+    "EVENTS": "Akce",
+    "ADD_EVENT": "Přidat akci",
+    "EDIT_EVENT": "Upravit akci",
+    "VENUES_MANAGEMENT": "Správa venues",
+    "CHAPTERS_MANAGEMENT": "Správa chapterů",
+    "ORGANIZERS_MANAGEMENT": "Správa organizátorů",
+    "PROFILE": "Profil",
+    "EDIT_ORGANIZER": "Editovat organizátora",
+    "GUG_ADMIN": "GUG CZ - Administrace"
+  },
+
   "JANUARY": "Leden",
   "FEBRUARY": "Únor",
   "MARCH": "Březen",

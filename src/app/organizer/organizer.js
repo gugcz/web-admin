@@ -17,7 +17,7 @@ angular.module('gugCZ.webAdmin.organizers', [
             }
           },
           data: {
-            title: 'Správa organizátorů'  // TODO Add translation
+            title: 'TITLES.ORGANIZERS_MANAGEMENT'
           }
         })
         .state('organizers.me', {
@@ -34,7 +34,7 @@ angular.module('gugCZ.webAdmin.organizers', [
             }
           },
           data: {
-            title: 'Profil'  // TODO Add translation
+            title: 'TITLES.PROFILE'
           }
         })
         .state('organizers.edit', {
@@ -49,7 +49,7 @@ angular.module('gugCZ.webAdmin.organizers', [
             }
           },
           data: {
-            title: 'Editovat organizátora'  // TODO Add translation
+            title: 'TITLES.EDIT_ORGANIZER'
           }
         });
 
