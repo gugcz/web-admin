@@ -91,7 +91,7 @@
       "ORGANIZER_SAVED": "Profil organizátora byl uložen",
       "PICTURE": "Rozměry obrázku by měly být 200x200 pixelů..."
     },
-    "FILTERS": "Filtery",
+    "FILTERS": "Filtry",
     "NAME": "Jméno",
     "ORGANIZER_NAME": "Zadejte jméno organizátora",
     "SECTION_PLACEHOLDER": "Zadejte název sekce",
@@ -100,7 +100,7 @@
 
   "CHAPTERS": {
     "CHAPTER_NAME": "Zadejte jméno chapteru",
-    "FILTERS": "Filtery",
+    "FILTERS": "Filtry",
     "FORM": {
       "CHAPTER": "chapter",
       "SECTION": "Sekce",
