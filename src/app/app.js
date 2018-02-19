@@ -77,24 +77,38 @@ angular.module('gugCZ.webAdmin', [
 
         this.$onInit = function () {
           this.selectedChapter = organizerService.getCurrentChapter();
-          setSideMenuByRole.call(this);
+          this.lastSelectedChapter = this.selectedChapter;
+          this.setSideMenuByRole();
         };
 
-        function setSideMenuByRole() {
-          if (this.selectedChapter === 'admin') {
+        this.setSideMenuByRole = function() {
+          if (this.selectedChapter === 'admin' || this.isCurrentStateAdmin()) {
+            this.selectedChapter = 'admin';
+            organizerService.setCurrentChapter('admin');
+            this.lastSelectedChapter = this.selectedChapter;
             this.menu = getAdminSideMenu();
-          }
-          else {
+          } else {
             this.menu = getChapterSideMenu();
           }
-        }
+        };
+
+        this.isCurrentStateAdmin = function() {
+          return getAdminSideMenu().some(menuItem => menuItem.link === $state.current.url)
+              && $state.current.url !== 'dashboard'
+              && this.user.roles.admin;
+        };
 
         this.selectChapter = function () {
           organizerService.setCurrentChapter(this.selectedChapter);
-
-          // TODO Refactor .call function
-          $state.reload();
-
+          console.log(this.lastSelectedChapter);
+          console.log(this.selectedChapter);
+          if ((this.lastSelectedChapter === 'admin' && this.selectedChapter !== 'admin')
+                ||(this.lastSelectedChapter !== 'admin' && this.selectedChapter === 'admin')) {
+            console.log('ashasf');
+            $state.go('dashboard', {}, {reload: true});
+          } else {
+            $state.reload();
+          }
         };
 
         this.toggleSidenav = buildToggler('left');
