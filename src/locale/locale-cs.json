@@ -126,7 +126,7 @@
       "COORDINATES": "Souřadnice (pro mapku eventů)"
     },
     "TITLE": "Místo",
-    "SAVED_VENUES": "Uložená venues",
+    "SAVED_VENUES": "Uložené venues",
     "NO_SAVED_VENUES": "Nemáte žádné uložené venues"
   },
 
@@ -150,10 +150,26 @@
     "LINK_COMPONENT": {
       "SOCIAL_LINK_START": "Odkaz na",
       "SOCIAL_LINK_END": "na sociální síti (typ měnit až po vložení linku)",
-      "OTHER": "Jiný"
+      "OTHER": "Jiný",
+      "BLOG": "Blog",
+      "GOOGLE_DIRECTORY": "Google Directory",
+      "YOUTUBE": "YouTube",
+      "WEB": "Web",
+      "INSTAGRAM": "Instagram",
+      "TWITTER": "Twitter",
+      "SRAZY": "Srazy",
+      "MEETUP": "Meetup",
+      "GOOGLE_PLUS": "Google Plus",
+      "FACEBOOK": "Facebook"
     },
     "PHONE_NUMBER": "Telefonní číslo",
-    "EMAIL": "Email"
+    "EMAIL": "Email",
+    "ADMIN": "Admin",
+    "LOGOUT": "Odhlásit se",
+    "PICTURE": "Obrázek",
+    "DELETE_PICTURE": "Smazat obrázek",
+    "NOT_FINISHED": "Toto ještě není hotové",
+    "BACK": "Zpět"
   },
 
   "MESSAGES": {
@@ -182,6 +198,25 @@
     "PROFILE": "Profil",
     "EDIT_ORGANIZER": "Editovat organizátora",
     "GUG_ADMIN": "GUG CZ - Administrace"
+  },
+
+  "SECTIONS": {
+    "GDG": "GDG",
+    "GBG": "GBG",
+    "GEG": "GEG",
+    "GXG": "GXG"
+  },
+
+  "DATE": {
+    "ONE_HOUR": "1 hodina",
+    "ONE_AND_HALF_HOUR": "1,5 hodiny",
+    "TWO_HOURS": "2 hodiny",
+    "TWO_AND_HALF_HOURS": "2,5 hodiny",
+    "THREE_HOURS": "3 hodiny",
+    "THREE_AND_HALF_HOURS": "3,5 hodiny",
+    "FOUR_HOURS": "4 hodiny",
+    "FIVE_HOURS": "5 hodin",
+    "SIX_HOURS": "6 hodin"
   },
 
   "JANUARY": "Leden",

@@ -4,21 +4,20 @@ md-content(layout-padding, , ng-class='{disableWhileLoading: vm.savingChapter}')
         md-input-container
             label(translate='CHAPTERS.FORM.SECTION')
             md-select(ng-model='vm.chapter.section', ng-disabled="!vm.isAdmin")
-                md-option(ng-value='"gdg"') GDG
-                md-option(ng-value='"gbg"') GBG
-                md-option(ng-value='"geg"') GEG
-                md-option(ng-value='"gxg"') GXG
+                md-option(ng-value='"gdg"' translate='SECTIONS.GDG')
+                md-option(ng-value='"gbg"' translate='SECTIONS.GBG')
+                md-option(ng-value='"geg"' translate='SECTIONS.GEG')
+                md-option(ng-value='"gxg"' translate='SECTIONS.GXG')
+
         md-input-container()
             label(translate='CHAPTERS.FORM.NAME')
             input(ng-model='vm.chapter.name', id='name', name='name', ng-disabled="!vm.isAdmin")
 
         // TODO - Add orgs validation
-        md-contact-chips(ng-model='vm.organizers', ng-if="vm.isAdmin", ng-change='vm.updateOrgsIDS()', md-on-remove='vm.updateOrgsIDS()', md-contacts='vm.delayedQuerySearch($query)', md-contact-name='name', md-contact-image='image', md-contact-email='email', md-require-match='true', md-highlight-flags='i', filter-selected='vm.filterSelected', placeholder='Organizátoři')
+        md-contact-chips(ng-model='vm.organizers', ng-if="vm.isAdmin", ng-change='vm.updateOrgsIDS()', md-on-remove='vm.updateOrgsIDS()', md-contacts='vm.delayedQuerySearch($query)', md-contact-name='name', md-contact-image='image', md-contact-email='email', md-require-match='true', md-highlight-flags='i', filter-selected='vm.filterSelected', placeholder='{{"CHAPTERS.FORM.ORGANIZERS" | translate}}')
         md-chips(readonly='true', ng-model='vm.organizers', ng-if="!vm.isAdmin")
             md-chip-template
                 a {{$chip.name}}
-
-
 
         md-input-container()
             label(translate='COMMON.EMAIL')
@@ -26,16 +25,11 @@ md-content(layout-padding, , ng-class='{disableWhileLoading: vm.savingChapter}')
 
         picture-upload(picture-string='vm.chapter.cover', note='{{"CHAPTERS.FORM.BACKGROUND_PICTURE" | translate}}')
 
-
         md-input-container
             label(translate='CHAPTERS.FORM.DESCRIPTION')
             textarea(ng-model='vm.chapter.description', md-maxlength='500', rows='5', md-select-on-focus='')
 
-
-
         links(links='vm.chapter.links', context='{{"CHAPTERS.FORM.CHAPTER" | translate}}')
-
-
 
         md-button(class='md-fab md-fab-bottom-right md-primary', type='submit')
             md-icon(md-font-icon='material-icons step') done

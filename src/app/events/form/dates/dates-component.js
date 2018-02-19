@@ -84,15 +84,15 @@ function DatesController($mdDialog, $translate) {
       daysInWeek: ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY']
     },
     durations: {
-      60: '1 hodina',
-      90: '1,5 hodiny',
-      120: '2 hodiny',
-      150: '2,5 hodiny',
-      180: '3 hodiny',
-      210: '3,5 hodiny',
-      240: '4 hodiny',
-      300: '5 hodin',
-      360: '6 hodin'
+      60: $translate.instant('DATE.ONE_HOUR'),
+      90: $translate.instant('DATE.ONE_AND_HALF_HOUR'),
+      120: $translate.instant('DATE.TWO_HOURS'),
+      150: $translate.instant('DATE.TWO_AND_HALF_HOURS'),
+      180: $translate.instant('DATE.THREE_HOURS'),
+      210: $translate.instant('DATE.THREE_AND_HALF_HOURS'),
+      240: $translate.instant('DATE.FOUR_HOURS'),
+      300: $translate.instant('DATE.FIVE_HOURS'),
+      360: $translate.instant('DATE.SIX_HOURS')
     }
   };
 

@@ -6,16 +6,16 @@ md-list
 
     md-input-container(flex='20')
       md-select(ng-model='link.type')
-        md-option(ng-value='"facebook"') Facebook
-        md-option(ng-value='"google-plus"') Google Plus
-        md-option(ng-value='"meetup"') Meetup
-        md-option(ng-value='"srazy"') Srazy
-        md-option(ng-value='"twitter"') Twitter
-        md-option(ng-value='"instagram"') Instagram
-        md-option(ng-value='"web"') Web
-        md-option(ng-value='"youtube"') YouTube
-        md-option(ng-value='"google-directory"') Google Directory
-        md-option(ng-value='"blog"') Blog
-        md-option(ng-value='"other"') {{"COMMON.LINK_COMPONENT.OTHER" | translate }}
+        md-option(ng-value='"facebook"' translate='COMMON.LINK_COMPONENT.FACEBOOK')
+        md-option(ng-value='"google-plus"' translate='COMMON.LINK_COMPONENT.GOOGLE_PLUS')
+        md-option(ng-value='"meetup"' translate='COMMON.LINK_COMPONENT.MEETUP')
+        md-option(ng-value='"srazy"' translate='COMMON.LINK_COMPONENT.SRAZY')
+        md-option(ng-value='"twitter"' translate='COMMON.LINK_COMPONENT.TWITTER')
+        md-option(ng-value='"instagram"' translate='COMMON.LINK_COMPONENT.INSTAGRAM')
+        md-option(ng-value='"web"' translate='COMMON.LINK_COMPONENT.WEB')
+        md-option(ng-value='"youtube"' translate='COMMON.LINK_COMPONENT.YOUTUBE')
+        md-option(ng-value='"google-directory"' translate='COMMON.LINK_COMPONENT.BLOG')
+        md-option(ng-value='"blog"' translate='COMMON.LINK_COMPONENT.BLOG')
+        md-option(ng-value='"other"' translate='COMMON.LINK_COMPONENT.OTHER')
 
     md-icon(ng-click='vm.removeLink($index)', aria-label='Remove link').md-secondary close
