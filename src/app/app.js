@@ -100,11 +100,8 @@ angular.module('gugCZ.webAdmin', [
 
         this.selectChapter = function () {
           organizerService.setCurrentChapter(this.selectedChapter);
-          console.log(this.lastSelectedChapter);
-          console.log(this.selectedChapter);
           if ((this.lastSelectedChapter === 'admin' && this.selectedChapter !== 'admin')
                 ||(this.lastSelectedChapter !== 'admin' && this.selectedChapter === 'admin')) {
-            console.log('ashasf');
             $state.go('dashboard', {}, {reload: true});
           } else {
             $state.reload();
