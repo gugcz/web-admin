@@ -93,7 +93,8 @@ angular.module('gugCZ.webAdmin', [
         };
 
         this.isCurrentStateAdmin = function() {
-          return getAdminSideMenu().some(menuItem => menuItem.link === $state.current.url)
+          return (getAdminSideMenu().some(menuItem => menuItem.link === $state.current.name)
+              || ($state.current.name.indexOf('chapters') !== -1 && $state.current.name !== 'chapters.this'))
               && $state.current.url !== 'dashboard'
               && this.user.roles.admin;
         };
