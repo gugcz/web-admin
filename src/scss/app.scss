@@ -312,9 +312,12 @@ venue-form {
   height: auto;
 }
 
-
 .disableWhileLoading {
   pointer-events:none;
   opacity: 0.25;
   transition: all linear 0.15s;
+}
+
+.organizers-form-content {
+  padding-bottom: 64px;
 }

@@ -87,9 +87,12 @@
     "FORM": {
       "PROFILE": "profil",
       "NAME": "Jméno",
+      "NAME_REQUIRED": "Zadejte jméno organizátora.",
       "ABOUT_ME": "O mě",
       "ORGANIZER_SAVED": "Profil organizátora byl uložen",
-      "PICTURE": "Rozměry obrázku by měly být 200x200 pixelů..."
+      "PICTURE": "Rozměry obrázku by měly být 200x200 pixelů...",
+      "EMAIL_REQUIRED": "Email organizátora musí být uveden.",
+      "EMAIL_PATTERN": "Email je uveden ve špatném formátu."
     },
     "FILTERS": "Filtry",
     "NAME": "Jméno",

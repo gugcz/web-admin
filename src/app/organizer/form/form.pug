@@ -1,18 +1,21 @@
 md-progress-linear(ng-if='vm.savingOrganizer')
-md-content(layout-padding, , ng-class='{disableWhileLoading: vm.savingOrganizer}')
-  form(layout='column', ng-cloak='', name='OrganizerForm', ng-submit='OrganizerForm.$valid && vm.saveOrganizer()', novalidate)
-
+md-content(layout-padding, class='organizers-form-content', ng-class='{disableWhileLoading: vm.savingOrganizer}')
+  form(layout='column', ng-cloak='', name='organizerForm', ng-submit='organizerForm.$valid && vm.saveOrganizer()', novalidate)
 
     md-input-container()
       label(translate='ORGANIZERS.FORM.NAME')
-      input(ng-model='vm.organizer.name', id='name', name='name')
+      input(ng-model='vm.organizer.name', id='name', name='name' required)
+      div(ng-messages='organizerForm.name.$error')
+        div(ng-message='required' translate='ORGANIZERS.FORM.NAME_REQUIRED')
 
     md-input-container()
       label(translate='COMMON.EMAIL')
-      input(ng-model='vm.organizer.email')
+      input(ng-model='vm.organizer.email' name='email' required ng-pattern="/^.+@.+\..+$/")
+      div(ng-messages='organizerForm.email.$error')
+        div(ng-message='pattern' translate='ORGANIZERS.FORM.EMAIL_PATTERN')
+        div(ng-message='required' translate='ORGANIZERS.FORM.EMAIL_REQUIRED')
 
     picture-upload(picture-string='vm.organizer.profilePicture', note='{{"ORGANIZERS.FORM.PICTURE" | translate}}')
-
 
     md-input-container()
       label(translate='COMMON.PHONE_NUMBER')
@@ -24,13 +27,5 @@ md-content(layout-padding, , ng-class='{disableWhileLoading: vm.savingOrganizer}
 
     links(links='vm.organizer.links', context='{{"ORGANIZERS.FORM.PROFILE" | translate}}')
 
-    p
-    p
-    p
-
-
     md-button(class='md-fab md-fab-bottom-right md-primary', type='submit')
       md-icon(md-font-icon='material-icons step') done
-
-
-
