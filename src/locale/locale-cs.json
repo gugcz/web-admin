@@ -102,6 +102,7 @@
     "CHAPTER_NAME": "Zadejte jméno chapteru",
     "FILTERS": "Filtry",
     "FORM": {
+      "AT_LEAST_ONE_ORG_REQUIRED": "Zadejte alespoň jednoho organizátora.",
       "CHAPTER": "chapter",
       "SECTION": "Sekce",
       "NAME": "Jméno (včetně zkratky)",
@@ -109,7 +110,11 @@
       "DESCRIPTION": "Popis",
       "BACKGROUND_PICTURE": "Obrázek na pozadí by měla být fotka v rozměrech 1200x900px, která nějakým způsobem zachycuje vaši skupinu....",
       "CHAPTER_SAVED": "Profil chapteru byl uložen",
-      "MAP_LINK": "Odkaz na mapu"
+      "MAP_LINK": "Odkaz na mapu",
+      "SECTION_REQUIRED": "Sekce musí být uvedena.",
+      "NAME_REQUIRED": "Jméno chapteru musí být uvedeno.",
+      "EMAIL_REQUIRED": "Email chapteru musí být uveden.",
+      "EMAIL_PATTERN": "Email je uveden ve špatném formátu."
     },
     "SAVED_CHAPTERS": "Uložené chaptery",
     "SECTION_PLACEHOLDER": "Zadejte název sekce"
