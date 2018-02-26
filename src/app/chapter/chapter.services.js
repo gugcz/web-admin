@@ -93,9 +93,7 @@ function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray,
     return organizerObject;
   }
 
-
 }
-
 
 angular.module('gugCZ.webAdmin.chapter.services', [
   'gugCZ.firebase'])

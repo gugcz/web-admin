@@ -321,3 +321,25 @@ venue-form {
 .organizers-form-content {
   padding-bottom: 64px;
 }
+
+.chapters-form {
+  md-chips-wrap {
+    margin-bottom: 0 !important;
+  }
+
+  .chips-error {
+    .md-contact-chips {
+      md-chips-wrap {
+        box-shadow: #dd2c00 0 2px 0 0 !important;
+      }
+    }
+  }
+
+  .error {
+    color: #dd2c00;
+    font-size: 12px;
+    line-height: 14px;
+    height: 14px;
+    padding-right: 1px;
+  }
+}

@@ -1,6 +1,6 @@
 md-progress-linear(ng-if='vm.savingChapter')
-md-content(layout-padding, , ng-class='{disableWhileLoading: vm.savingChapter}')
-    form(layout='column', ng-cloak='', name='addChapterForm', ng-submit='addChapterForm.$valid && vm.saveChapter()', novalidate)
+md-content(layout-padding, ng-class='{disableWhileLoading: vm.savingChapter}').chapters-form
+    form(layout='column', ng-cloak='', name='addChapterForm', ng-submit='(addChapterForm.$valid && vm.organizers.length > 0) && vm.saveChapter()', novalidate)
         md-input-container
             label(translate='CHAPTERS.FORM.SECTION')
             md-select(ng-model='vm.chapter.section', ng-disabled="!vm.isAdmin" name="section" required)
@@ -17,13 +17,13 @@ md-content(layout-padding, , ng-class='{disableWhileLoading: vm.savingChapter}')
             div(ng-messages="addChapterForm.name.$error")
                 div(ng-message="required" translate="CHAPTERS.FORM.NAME_REQUIRED")
 
-        // TODO - Add orgs validation
+        // TODO - better orgs validation
         div(class='organizers-container')
-            md-contact-chips(ng-model='vm.organizers', ng-if="vm.isAdmin", ng-change='vm.updateOrgsIDS()', md-on-remove='vm.updateOrgsIDS()', md-contacts='vm.delayedQuerySearch($query)', md-contact-name='name', md-contact-image='image', md-contact-email='email', md-require-match='true', md-highlight-flags='i', filter-selected='vm.filterSelected', placeholder='{{"CHAPTERS.FORM.ORGANIZERS" | translate}}')
+            md-contact-chips(ng-model='vm.organizers', ng-if="vm.isAdmin", ng-change='vm.updateOrgsIDS()', md-on-remove='vm.updateOrgsIDS()', md-contacts='vm.delayedQuerySearch($query)', md-contact-name='name', md-contact-image='image', md-contact-email='email', md-require-match='true', md-highlight-flags='i', filter-selected='vm.filterSelected', placeholder='{{"CHAPTERS.FORM.ORGANIZERS" | translate}}', ng-class='{"chips-error": vm.organizers.length < 1}')
                 md-chips(readonly='true', ng-model='vm.organizers', ng-if="!vm.isAdmin")
                     md-chip-template
                         a {{$chip.name}}
-            p(ng-show='vm.organizers.length < 1' translate='CHAPTERS.FORM.AT_LEAST_ONE_ORG_REQUIRED')
+            p(class='error' ng-show='vm.organizers.length < 1' translate='CHAPTERS.FORM.AT_LEAST_ONE_ORG_REQUIRED')
 
         md-input-container()
             label(translate='COMMON.EMAIL')
