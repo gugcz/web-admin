@@ -11,6 +11,11 @@ angular.module('gugCZ.webAdmin.chapter.form', [
       templateUrl: 'app/chapter/form/form.html',
       controller: ChapterFormCtrl,
       controllerAs: 'vm',
+      resolve: {
+        chapter: function ($stateParams, firebaseData, organizerService) {
+          return firebaseData.getChapterByID(organizerService.getCurrentChapter());
+        }
+      },
       data: {
         title: 'TITLES.EDIT_CHAPTER'
       }
