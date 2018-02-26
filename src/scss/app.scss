@@ -169,7 +169,7 @@ dates-picker {
     margin: 0 20px;
 
     &:first-child {
-      margin-left:0;
+      margin-left: 0;
     }
   }
 
@@ -313,7 +313,7 @@ venue-form {
 }
 
 .disableWhileLoading {
-  pointer-events:none;
+  pointer-events: none;
   opacity: 0.25;
   transition: all linear 0.15s;
 }

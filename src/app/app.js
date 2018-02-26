@@ -28,7 +28,7 @@ angular.module('gugCZ.webAdmin', [
       url: '/',
       controller: function ($mdSidenav, $firebaseObject, $state, $scope, $translate, currentUser, organizerService) {
         this.user = currentUser;
-
+        organizerService.setCurrentChapter(this.selectedChapter);
 
         function getAdminSideMenu() {
           return [

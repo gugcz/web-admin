@@ -11,11 +11,6 @@ angular.module('gugCZ.webAdmin.chapter.form', [
       templateUrl: 'app/chapter/form/form.html',
       controller: ChapterFormCtrl,
       controllerAs: 'vm',
-      resolve: {
-        chapter: function ($stateParams, firebaseData, organizerService) {
-          return firebaseData.getChapterByID(organizerService.getCurrentChapter());
-        }
-      },
       data: {
         title: 'TITLES.EDIT_CHAPTER'
       }
@@ -58,17 +53,21 @@ function ChapterFormCtrl(firebaseData, chapter, $log, organizerService, $state, 
   const organizersPromise = firebaseData.getAllOrganizers().then(loadContactsProfilePicture);
 
   this.$onInit = function () {
+    //TODO - how to move this to resolve?
+    if ($state.current.name === 'chapters.this') {
+      this.chapter = firebaseData.getChapterByID(organizerService.getCurrentChapter());
+    } else {
+      this.chapter = chapter;
+    }
     this.filterSelected = true;
     organizersPromise.then();
-    firebaseData.getChapterOrgs(chapter.$id)
+    firebaseData.getChapterOrgs(this.chapter.$id)
         .then(loadContactsProfilePicture)
         .then((data) => {
           this.organizers = data;
         });
     // TODO
     this.isAdmin = organizerService.isCurrentUserAdmin();
-
-    this.chapter = chapter;
   };
 
 
