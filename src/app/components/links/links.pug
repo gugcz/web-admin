@@ -18,4 +18,6 @@ md-list
         md-option(ng-value='"blog"' translate='COMMON.LINK_COMPONENT.BLOG')
         md-option(ng-value='"other"' translate='COMMON.LINK_COMPONENT.OTHER')
 
-    md-icon(ng-click='vm.removeLink($index)', aria-label='Remove link').md-secondary close
+    md-button(ng-click='vm.removeLink($index)', aria-label='Remove link').md-secondary.md-icon-button
+      md-tooltip Smazat link
+      md-icon(md-svg-src='mdi:close')

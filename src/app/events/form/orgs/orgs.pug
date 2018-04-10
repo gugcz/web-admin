@@ -28,7 +28,9 @@ div(ng-if="!vm.loading")
           // TODO ng false value - mustn't store to firebase key: false
           md-checkbox(ng-model='vm.organizers[org.$id]', ng-false-value="")
           p {{org.name}}
-          md-icon(md-svg-icon='mdi:crown', ng-click='vm.setGuarantee(org)', ng-class='{isGuarantee: vm.isGuarantee(org)}', aria-label='Set as guarantee').md-secondary
+          md-button(ng-click='vm.setGuarantee(org)', aria-label='Set as guarantee').md-secondary.md-icon-button
+            md-tooltip Zvolit jako garanta
+            md-icon(md-svg-icon='mdi:crown', ng-class='{isGuarantee: vm.isGuarantee(org)}')
   div(ng-show='vm.showSearch')
     md-toolbar.md-hue-1
       .md-toolbar-tools

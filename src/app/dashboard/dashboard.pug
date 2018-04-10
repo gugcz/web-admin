@@ -23,9 +23,16 @@ md-content(ng-if='!vm.isAdmin')
       div(ng-repeat='event in vm.chapterEvents.filter(vm.draftFilter) | orderBy: vm.dateOrder')
         md-list-item
           +event-info
-          md-icon(md-svg-src='mdi:pencil', ng-click='vm.editEvent(event)', aria-label='Edit event').md-secondary
-          md-icon(md-svg-src='mdi:publish', ng-click='vm.publishEvent(event.$id)', aria-label='Publish event').md-secondary
-          md-icon(md-svg-src='mdi:delete', ng-click='vm.deleteEvent(event.$id)', aria-label='Edit event').md-secondary
+
+          md-button(ng-click='vm.editEvent(event)').md-icon-button.md-secondary
+            md-tooltip Editovat akci
+            md-icon(md-svg-src='mdi:pencil',  aria-label='Edit event')
+          md-button(ng-click='vm.publishEvent(event.$id)').md-icon-button.md-secondary
+            md-tooltip Publikovat akci
+            md-icon(md-svg-src='mdi:publish', aria-label='Publish event')
+          md-button(ng-click='vm.deleteEvent(event.$id)').md-icon-button.md-secondary
+            md-tooltip Smazat akci
+            md-icon(md-svg-src='mdi:delete', aria-label='Edit event')
         md-divider(ng-if='!$last')
 
 
@@ -39,9 +46,15 @@ md-content(ng-if='!vm.isAdmin')
       div(ng-repeat='event in vm.chapterEvents.filter(vm.futureFilter) | orderBy: vm.dateOrder')
         md-list-item
           +event-info
-          md-icon(md-svg-src='mdi:pencil', ng-click='vm.editEvent(event)', aria-label='Edit event').md-secondary
-          md-icon(md-svg-src='mdi:download', ng-click='vm.hideEvent(event.$id)', aria-label='Hide event').md-secondary
-          md-icon(md-svg-src='mdi:delete', ng-click='vm.deleteEvent(event.$id)', aria-label='Edit event').md-secondary
+          md-button(ng-click='vm.editEvent(event)', aria-label='Edit event').md-icon-button.md-secondary
+            md-icon(md-svg-src='mdi:pencil')
+            md-tooltip Editovat akci
+          md-button(ng-click='vm.hideEvent(event.$id)', aria-label='Hide event').md-icon-button.md-secondary
+            md-icon(md-svg-src='mdi:download')
+            md-tooltip Schovat akci
+          md-button(ng-click='vm.deleteEvent(event.$id)', aria-label='Edit event').md-icon-button.md-secondary
+            md-icon(md-svg-src='mdi:delete')
+            md-tooltip Smazat akci
         md-divider(ng-if='!$last')
 
 
@@ -55,7 +68,9 @@ md-content(ng-if='!vm.isAdmin')
       div(ng-repeat='event in vm.chapterEvents.filter(vm.unreportedFilter) | orderBy: vm.dateOrder')
         md-list-item
           +event-info
-          md-icon(md-svg-src='mdi:message', ng-click='vm.reportEvent($event, event.$id)', aria-label='Report event').md-secondary
+          md-button(ng-click='vm.reportEvent($event, event.$id)', aria-label='Report event').md-icon-button.md-secondary
+            md-tooltip Reportovat akci
+            md-icon(md-svg-src='mdi:message')
         md-divider(ng-if='!$last')
 
       // Blank spaces for FAB
@@ -67,20 +82,5 @@ md-fab-speed-dial(md-direction='up', class="md-fab-bottom-right fixed md-hover-f
   md-fab-trigger
     a(ui-sref='events.add')
       md-button.md-fab.md-primary(aria-label='Add event')
+        md-tooltip(md-direction='left') Přidat akci
         md-icon add
-
-
-//md-fab-speed-dial(md-open='vm.isFabOpen', md-direction='up', class="md-fab-bottom-right fixed md-hover-full md-scale", ng-if='!vm.isAdmin')
-  md-fab-trigger
-    md-button.md-fab.md-primary(aria-label='menu')
-      md-icon add
-
-  md-fab-actions()
-    a(ui-sref="events.add")
-      md-button.md-fab.md-raised.md-mini(aria-label='Add event')
-        md-tooltip(md-direction="left", md-visible="tooltipVisible", md-autohide="false") Add event
-        md-icon(md-svg-src='mdi:plus')
-
-    md-button.md-fab.md-raised.md-mini(aria-label='Add term')
-      md-tooltip(md-direction="left", md-visible="tooltipVisible", md-autohide="false") Add term
-      md-icon(md-svg-src='mdi:calendar-plus')

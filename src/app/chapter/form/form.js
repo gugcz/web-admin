@@ -103,9 +103,11 @@ function ChapterFormCtrl(firebaseData, chapter, $log, organizerService, $state, 
   function loadContactsProfilePicture(organizers) {
     return organizers.map(function (org) {
       return {
+        urlId: org.$id,
         name: org.name,
         chapters: org.chapters,
         email: org.email,
+        active: org.active,
         image: org.profilePicture || '/images/non_profilepic.png',
         _lowername: org.name.toLowerCase()
       };

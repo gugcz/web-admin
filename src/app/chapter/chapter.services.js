@@ -53,6 +53,8 @@ function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray,
   }
 
   this.addChapter = function (chapter) {
+
+
     // TODO not solved new chapter
     if (isUploadedNewCover(chapter.cover)) {
 
@@ -73,16 +75,22 @@ function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray,
     return $firebaseObject(firebaseDB.ref('chapters/' + chapterID));
   };
 
-  this.addChapterToOrganizers = function (organizers) {
+  function chapterOrganizersMap(organizer) {
+
+  }
+
+  this.addChapterToOrganizers = function (chapter, organizers) {
+    firebaseDB.ref('chapterOrganizers/' + chapter.$id).set(organizers.map(chapterOrganizersMap))
+
     organizers.forEach(org => addChapterToOrganizer(org.email));
   };
 
   function addChapterToOrganizer(orgMail) {
-    firebaseDB.ref('orgs/').orderByChild('mail').equalTo(orgMail).once('value', function (snapshot) {
+    firebaseDB.ref('organizers/').orderByChild('mail').equalTo(orgMail).once('value', function (snapshot) {
       snapshot.forEach(function (childSnapshot) {
         const orgID = childSnapshot.key;
         const updates = getOrgObjectWhichHasAddedChapter();
-        firebaseDB.ref('orgs/' + orgID + '/chapters').update(updates);
+        firebaseDB.ref('organizers/' + orgID + '/chapters').update(updates);
       });
     });
   }
