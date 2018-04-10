@@ -9,7 +9,9 @@ function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray,
 
     return $q.when(ref.once('value').then(function (snapshot) {
       snapshot.forEach(function (childSnapshot) {
-        organizers.push(childSnapshot.val());
+        let orgObject = childSnapshot.val();
+        orgObject.$id = childSnapshot.key
+        organizers.push(orgObject);
       });
       return organizers;
     }));
@@ -24,7 +26,9 @@ function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray,
         .equalTo(true)
         .once('value').then(function (snapshot) {
           snapshot.forEach(function (childSnapshot) {
-            organizers.push(childSnapshot.val());
+            let orgObject = childSnapshot.val();
+            orgObject.$id = childSnapshot.key
+            organizers.push(orgObject);
           });
           return organizers;
         });
@@ -75,32 +79,20 @@ function firebaseFactory(firebaseDB, $q, $log, removeDiacritics, $firebaseArray,
     return $firebaseObject(firebaseDB.ref('chapters/' + chapterID));
   };
 
-  function chapterOrganizersMap(organizer) {
-
-  }
 
   this.addChapterToOrganizers = function (chapter, organizers) {
-    firebaseDB.ref('chapterOrganizers/' + chapter.$id).set(organizers.map(chapterOrganizersMap))
+    let chapterId = chapter.$id;
 
-    organizers.forEach(org => addChapterToOrganizer(org.email));
-  };
+    firebaseDB.ref('chapterOrganizers/' + chapterId).remove().then(() => {
+      organizers.map(org => org.$id).forEach(orgId => {
+        // TODO Deleting records
 
-  function addChapterToOrganizer(orgMail) {
-    firebaseDB.ref('organizers/').orderByChild('mail').equalTo(orgMail).once('value', function (snapshot) {
-      snapshot.forEach(function (childSnapshot) {
-        const orgID = childSnapshot.key;
-        const updates = getOrgObjectWhichHasAddedChapter();
-        firebaseDB.ref('organizers/' + orgID + '/chapters').update(updates);
+        Promise.all([firebaseDB.ref('chapterOrganizers/' + chapterId + '/' + orgId).set(true), // TODO - Deleting
+          firebaseDB.ref('organizers/' + orgId + '/chapters/' + chapterId).set(true)]).catch(error => console.log(orgId));
       });
-    });
-  }
+    })
 
-  function getOrgObjectWhichHasAddedChapter() {
-    const organizerObject = {};
-    organizerObject[chapterID] = true;
-    return organizerObject;
-  }
-
+  };
 }
 
 angular.module('gugCZ.webAdmin.chapter.services', [

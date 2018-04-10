@@ -103,13 +103,14 @@ function ChapterFormCtrl(firebaseData, chapter, $log, organizerService, $state, 
   function loadContactsProfilePicture(organizers) {
     return organizers.map(function (org) {
       return {
-        urlId: org.$id,
+        $id: org.$id,
+        urlId: org.urlId,
         name: org.name,
         chapters: org.chapters,
         email: org.email,
         active: org.active,
         image: org.profilePicture || '/images/non_profilepic.png',
-        _lowername: org.name.toLowerCase()
+        _lowername: (org.name || 'error').toLowerCase()
       };
 
     });
@@ -120,7 +121,7 @@ function ChapterFormCtrl(firebaseData, chapter, $log, organizerService, $state, 
     this.savingChapter = true;
     if ($state.is('chapters.edit') || $state.is('chapters.this')) {
 
-      Promise.all([firebaseData.addChapter(this.chapter), firebaseData.addChapterToOrganizers(this.organizers)]).then(() => {
+      Promise.all([firebaseData.addChapterToOrganizers(this.chapter, this.organizers), firebaseData.addChapter(this.chapter)]).then(() => {
         this.savingChapter = false;
         $mdToast.show(
             $mdToast.simple() // TODO zapouzdřit?
