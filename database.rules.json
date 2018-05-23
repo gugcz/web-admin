@@ -1,4 +1,5 @@
 {
+  // Don't rewrite rules in Web Console! Please rewrite rules in web-admin repository...
   "rules": {
     ".read": "auth != null",
     ".write": "auth != null",
