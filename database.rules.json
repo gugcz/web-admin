@@ -1,6 +1,14 @@
 {
   "rules": {
     ".read": "auth != null",
-    ".write": "auth != null"
+    ".write": "auth != null",
+
+    "public": {
+      ".read": true
+    },
+
+    "publishedEvents": {
+      ".indexOn": "datesFilter/start"
+    }
   }
 }
