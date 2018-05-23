@@ -1,11 +1,11 @@
 {
   "SSO": {
-    "authTokenUrl": "https://sso.gug.cloud/api/v1/sso/firebase/newToken"
+    "authTokenUrl": "https://auth.gug.cz/api/v1/sso/firebase/newToken"
   },
   "SLACK_AUTH": {
     "clientId": "9129013744.104633928310",
     "teamId": "T093T0DMW",
-    "redirectUrl": "https://sso.gug.cloud/api/v1/sso/slackCallback"
+    "redirectUrl": "https://auth.gug.cz/api/v1/sso/slackCallback"
   },
   "FIREBASE": {
     "apiKey": "AIzaSyD_XXGas0P2AR6h8x9SenT0EVyvK3rFmSM",
