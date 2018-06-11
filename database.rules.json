@@ -8,6 +8,10 @@
       ".read": true
     },
 
+    "organizers": {
+      ".indexOn": "profilePicture"
+    },
+
     "publishedEvents": {
       ".indexOn": "datesFilter/start"
     }
