@@ -55,6 +55,8 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
   // TODO Refactor!!!!!
   function saveEvent(event, editState) {
 
+    event.created = (new Date()).toISOString()
+
 
 
     if (editState) {
