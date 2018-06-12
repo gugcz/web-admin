@@ -28,7 +28,7 @@ md-content(layout-padding, ng-class='{disableWhileLoading: vm.savingChapter}').c
         md-input-container()
             label(translate='COMMON.EMAIL')
             // TODO - better regex for email
-            input(ng-model='vm.chapter.email', ng-disabled="!vm.isAdmin" name="email" type="email" required ng-pattern="/^.+@.+\..+$/")
+            input(ng-model='vm.chapter.email', ng-disabled="!vm.isAdmin" name="email" type="email" ng-pattern="/^.+@.+\..+$/")
             div(ng-messages='addChapterForm.email.$error' role='alert')
                 div(ng-message='pattern' translate='CHAPTERS.FORM.EMAIL_PATTERN')
                 div(ng-message='required' translate='CHAPTERS.FORM.EMAIL_REQUIRED')
