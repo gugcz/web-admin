@@ -7,7 +7,7 @@ const getValueFromSnapshot = function (snapshot) {
 };
 
 angular.module('gugCZ.webAdmin.organizers')
-    .service('organizerService', function ($q, firebaseDB, $firebaseArray, $firebaseObject, firebaseSTORAGE) {
+    .service('organizerService', function ($q, firebaseDB, $firebaseArray, $firebaseObject, $mdToast, firebaseSTORAGE) {
       this.currentChapter_ = null;
       this.currentUser_ = null;
 
@@ -20,8 +20,22 @@ angular.module('gugCZ.webAdmin.organizers')
             .then(user => firebaseDB.ref('organizers/' + user.organizerId).once('value'))
             .then(getValueFromSnapshot)
             .then(function (organizer) {
-              if (!organizer || !organizer.chapters) {
-                return {};
+              if (!organizer) { // TODO hotfix - odebráno  || !organizer.chapters - uživatelé mohou existovat i bez chapterů
+                const e =  new Error('User data problem');
+                e.organizer = organizer;
+                throw e;
+              }
+
+              if (!organizer.chapters) {
+                // TODO hotfix - uživatelé mohou existovat i bez chapterů
+                organizer.chapters = {};
+                $mdToast.show(
+                  $mdToast.simple() // TODO zapouzdřit?
+                    .textContent('Váš účet není přiřazen do chapteru, vyplňte si svůj profil a požádejte administrátory o přiřazení.')
+                    .position('bottom right')
+                    .toastClass('md-warn')
+                    .hideDelay(30000)
+                );
               }
 
               const chapterPromises = Object.keys(organizer.chapters)
