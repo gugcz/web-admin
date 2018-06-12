@@ -19,7 +19,7 @@ angular.module('gugCZ.webAdmin.organizers')
             .then(getValueFromSnapshot)
           .then(user => {
             if (user.organizerId) {
-              return user.organizerId;
+              return user;
             }
 
             const e =  new Error('Auth problem');
@@ -29,8 +29,8 @@ angular.module('gugCZ.webAdmin.organizers')
             .then(user => firebaseDB.ref('organizers/' + user.organizerId).once('value'))
             .then(getValueFromSnapshot)
             .then(function (organizer) {
-              if (!organizer) { // TODO hotfix - odebráno  || !organizer.chapters - uživatelé mohou existovat i bez chapterů
-                throw new Error('User data problem');
+              if (!organizer) {
+                throw new Error('User data/pairing problem');
               }
 
               if (!organizer.chapters) {
