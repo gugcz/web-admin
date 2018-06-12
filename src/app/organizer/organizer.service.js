@@ -17,13 +17,20 @@ angular.module('gugCZ.webAdmin.organizers')
 
         return userRef.once('value')
             .then(getValueFromSnapshot)
+          .then(user => {
+            if (user.organizerId) {
+              return user.organizerId;
+            }
+
+            const e =  new Error('Auth problem');
+            e.data = user ? 'auth: ' + user.$id : 'no auth';
+            throw e;
+          })
             .then(user => firebaseDB.ref('organizers/' + user.organizerId).once('value'))
             .then(getValueFromSnapshot)
             .then(function (organizer) {
               if (!organizer) { // TODO hotfix - odebráno  || !organizer.chapters - uživatelé mohou existovat i bez chapterů
-                const e =  new Error('User data problem');
-                e.organizer = organizer;
-                throw e;
+                throw new Error('User data problem');
               }
 
               if (!organizer.chapters) {
@@ -55,7 +62,11 @@ angular.module('gugCZ.webAdmin.organizers')
                     return organizer;
                   }.bind(this));
 
-            }.bind(this));
+            }.bind(this))
+          .catch(e => {
+            alert(`Došlo k chybě, nahlašte prosím následující problém:\n ${e.message} \n ${e.stack} \n ${angular.toJson(e.data)}`);
+            $state.go('error.500');
+          });
 
       };
 
