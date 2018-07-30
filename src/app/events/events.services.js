@@ -84,7 +84,7 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
 
 
         return $firebaseArray(firebaseDB.ref('events')).$add(event).then(function(ref) {
-          let id = ref.key();
+          let id = ref.key;
 
           return saveCover(id, cover).then(snapshot => {
 
