@@ -21,15 +21,23 @@ form(name='venueForm', ng-submit="vm.submit(venueForm)", novalidate)
           input(required id="city-input" type="text" placeholder="Zadejte město" ng-model='vm.venue.city')
 
       div(layout="column")
-        md-input-container
-          label(translate='VENUE.FORM.ADDRESS')
-          input(required id="address-input" type="text" placeholder="Zadejte adresu" ng-model='vm.venue.address')
 
-        md-input-container
-          label(translate='VENUE.FORM.MAP_LINK')
-          input(required id="url-input" type="url", ng-model='vm.venue.mapUrl')
+        div(layout='row')
+          md-input-container(flex=50)
+            label(translate='VENUE.FORM.ADDRESS')
+            input(required id="address-input" type="text" placeholder="Zadejte adresu" ng-model='vm.venue.address')
 
-        p {{ 'VENUE.FORM.COORDINATES' | translate}}: {{vm.venue.coordinates.lat}}, {{vm.venue.coordinates.lng}}
+          md-input-container(flex=50)
+            label(translate='VENUE.FORM.MAP_LINK')
+            input(required id="url-input" type="url", ng-model='vm.venue.mapUrl')
+
+        div(layout='row')
+          md-input-container(flex=50)
+            label {{ 'VENUE.FORM.COORDINATES' | translate}} - Lat
+            input(required, ng-model='vm.venue.coordinates.lat')
+          md-input-container(flex=50)
+            label {{ 'VENUE.FORM.COORDINATES' | translate}} - Lng
+            input(required, ng-model='vm.venue.coordinates.lng')
 
 
 
