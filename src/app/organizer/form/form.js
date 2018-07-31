@@ -4,15 +4,27 @@ function OrganizerFormCtrl(organizer, organizerService, $state, $translate,  $md
   vm.savingOrganizer = false;
   vm.saveOrganizer = function () {
     vm.savingOrganizer = true;
-    organizerService.saveOrganizer(vm.organizer).then(() => {
+
+    organizerService.saveOrganizer(vm.organizer, $state.is('organizers.add')).then(() => {
       vm.savingOrganizer = false;
+
+      if ($state.is('organizers.add')) {
+        $state.go('organizers')
+      }
+
       $mdToast.show(
           $mdToast.simple() // TODO zapouzdřit?
               .textContent($translate.instant('ORGANIZERS.FORM.ORGANIZER_SAVED'))
               .position('bottom right')
               .hideDelay(3000)
       );
+
+
     });
+
+
+
+
 
   };
 }

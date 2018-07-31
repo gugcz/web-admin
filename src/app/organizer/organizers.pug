@@ -19,3 +19,6 @@ md-content(class="organizers" layout='column')
             // TODO Better solution for button space at end of the list?
             md-list-item
             md-list-item
+a(ui-sref='organizers.add')
+    md-button(class="md-fab md-primary md-fab-bottom-right fixed", aria-label='Use Android', ng-click='vm.addOrganizer()')
+        md-icon add

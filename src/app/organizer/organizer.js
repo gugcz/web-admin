@@ -51,6 +51,24 @@ angular.module('gugCZ.webAdmin.organizers', [
           data: {
             title: 'TITLES.EDIT_ORGANIZER'
           }
+        }).state('organizers.add', {
+          url: 'organizers/add',
+          parent: 'base',
+          templateUrl: 'app/organizer/form/form.html',
+          controller: 'OrganizerFormController',
+          controllerAs: 'vm',
+          resolve: {
+            organizer: function (organizerService, $stateParams) {
+              return {
+                name: '',
+                email: '',
+                profilePicture: '',
+              };
+            }
+          },
+          data: {
+            title: 'TITLES.ADD_ORGANIZER'
+          }
         });
 
   });
@@ -67,9 +85,29 @@ function OrganizerController($state, $mdDialog, $translate, organizerService, $d
     this.organizers.sort(compare);
   };
 
+
   this.editOrganizer = function (org) {
     $state.go('organizers.edit', {id: org.$id});
   };
+
+  this.deleteOrganizer = function (org) {
+    let $ctrl = this;
+    //TODO Add translation
+    const dialog = $mdDialog.confirm()
+        .title('Opravdu chcete smazat organizátora se jménem ' + org.name + '?')
+        .textContent('Smazání organizátora nelze vrátit zpět. Navíc obecně členy nemažeme a v systému zůstavájí, takže si to dobře rozmysli...')
+        .ok('Ano')
+        .cancel('Ne');
+    $mdDialog.show(dialog).then(function() {
+      const index = $ctrl.allOrganizers.indexOf(org);
+      $ctrl.allOrganizers.$remove(index);
+      console.log('Org was deleted')
+    })
+        .catch(function () {
+          console.log('Org was not deleted')
+        });
+  }
+
 
   function compare(a, b) {
     return a.name < b.name ? -1 : 1;
