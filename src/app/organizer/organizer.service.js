@@ -130,7 +130,8 @@ angular.module('gugCZ.webAdmin.organizers')
 
       function addNewOrganizer(organizer) {
         let profilePicture = organizer.profilePicture;
-        organizer.profilePicture = '';
+        organizer.profilePicture = null;
+        organizer.createdAt = (new Date()).toISOString()
 
         return getOrganizersRealtimeArray().$add(organizer).then(ref => getRealtimeOrgAndSaveWithPicture(ref, profilePicture));
       }

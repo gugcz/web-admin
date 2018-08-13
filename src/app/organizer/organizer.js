@@ -62,7 +62,8 @@ angular.module('gugCZ.webAdmin.organizers', [
               return {
                 name: '',
                 email: '',
-                profilePicture: '',
+                profilePicture: null,
+                active: true,
               };
             }
           },
