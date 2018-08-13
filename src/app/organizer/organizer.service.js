@@ -145,7 +145,6 @@ angular.module('gugCZ.webAdmin.organizers')
       }
 
       function saveOrganizerWithProfilePictureURL(snapshot, organizer) {
-        debugger;
 
         organizer.profilePicture = snapshot.downloadURL;
         return organizer.$save();
