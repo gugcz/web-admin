@@ -24,6 +24,7 @@
     "NO_FUTURE_EVENTS": "Nemáte žádné budoucí akce",
     "UNREPORTED_EVENTS": "Proběhlé akce k reportování",
     "NO_UNREPORTED_EVENTS": "Nemáte žádné nereportované akce",
+    "PAST_EVENTS": "Proběhlé akce za posledních 30 dní",
 
     "REPORT": {
       "TITLE": "Reportovat akci",

@@ -174,7 +174,12 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
   };
 
   self.getChapterEvents = function (chapterId) {
-    var chapterEventsRef = firebaseDB.ref('events').orderByChild('chapters/' + chapterId).equalTo(true);
+    var chapterEventsRef = firebaseDB.ref('events')
+
+    if (chapterId !== 'admin') {
+      chapterEventsRef = chapterEventsRef.orderByChild('chapters/' + chapterId).equalTo(true);
+    }
+
     return $firebaseArray(chapterEventsRef);
   };
 

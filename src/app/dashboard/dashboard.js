@@ -19,6 +19,11 @@ angular.module('gugCZ.webAdmin.dashboard', [
           return item.published !== true;
         };
 
+        this.pastFilter = function (item) {
+          let now = new Date();
+          return (new Date(item.dates.end) <= now) && (new Date(item.dates.end) >= new Date().setMonth(now.getMonth() - 1));
+        }
+
         this.futureFilter = function(item) {
           return item.published === true && new Date(item.dates.start) >= new Date();
         };
@@ -34,6 +39,10 @@ angular.module('gugCZ.webAdmin.dashboard', [
         this.editEvent = function (event) {
           $state.go('events.edit', {id: event.$id});
         };
+
+        this.getChaptersString = function (chapters) {
+          return Object.keys(chapters).join(', ')
+        }
 
         this.deleteEvent = function (eventId) {
           const confirm = $mdDialog.confirm()

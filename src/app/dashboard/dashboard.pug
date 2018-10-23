@@ -10,8 +10,19 @@ mixin event-info
     p {{event.venue.name}}
 
 md-content(ng-if='vm.isAdmin')
-  // TODO - Admin view?
-  p Přehledy ještě nejsou hotové, můžete ale zatím spravovat orgy a chaptery ;-).
+  section
+    md-subheader {{"DASHBOARD.PAST_EVENTS" | translate }}
+
+    +progress-bar
+    md-list(layout-padding='')
+      md-list-item(ng-if='vm.chapterEvents.filter(vm.pastFilter).length == 0 && vm.chapterEvents.$resolved')
+        p {{"DASHBOARD.NO_EVENT_DRAFTS" | translate }}
+      div(ng-repeat='event in vm.chapterEvents.filter(vm.pastFilter) | orderBy: vm.dateOrder')
+        md-list-item
+          .md-list-item-text
+            h3 {{event.name}}
+            h4 Datum: {{event.dates.start | date:'dd.MM.yyyy v HH:mm'}}, Chaptery: {{vm.getChaptersString(event.chapters)}}, {{"DASHBOARD.REPORT.ATTENDEES_COUNT" | translate }}: {{ event.report.attendeesCount ? event.report.attendeesCount : "Nezadáno" }}
+        md-divider(ng-if='!$last')
 
 md-content(ng-if='!vm.isAdmin')
   section
