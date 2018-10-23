@@ -22,7 +22,6 @@ function EventFormController(firebaseEvents, $state, $mdToast, $translate, event
       showMessageAndGoToDashboard('EVENTS.TOASTS.EVENT_SAVED');
     });
   };
-
   function showMessageAndGoToDashboard(messageId) {
     $mdToast.show(
           $mdToast.simple() // TODO zapouzdřit?
@@ -40,6 +39,7 @@ angular.module('gugCZ.webAdmin.events.form', [
   'gugCZ.webAdmin.events.form.orgs',
   'gugCZ.webAdmin.events.form.dates',
   'gugCZ.webAdmin.components.links',
-  'gugCZ.webAdmin.events.form.venue'
+  'gugCZ.webAdmin.events.form.description',
+  'gugCZ.webAdmin.events.form.venue',
 ])
     .controller('EventFormController', EventFormController);

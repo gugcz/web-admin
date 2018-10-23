@@ -1,0 +1,10 @@
+md-dialog(aria-label='Description')
+    md-toolbar
+        .md-toolbar-tools
+            h2 {{ 'EVENTS.FORM.DESCRIPTION_PREVIEW' | translate}}
+            span(flex='')
+            md-button.md-icon-button(ng-click='vm.cancel()')
+                md-icon(md-svg-icon='mdi:close', aria-label='Close dialog')
+    md-content.layout-padding
+        p(ng-if='!vm.description') {{ 'EVENTS.FORM.DESCRIPTION_EMPTY' | translate}}
+        div(marked='vm.description')

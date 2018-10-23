@@ -41,6 +41,8 @@
       "NAME": "Název akce",
       "SUBTITLE": "Podtitul",
       "DESCRIPTION": "Popis (podporuje markdown, takže toho využij pro odkazy)",
+      "DESCRIPTION_PREVIEW": "Náhled popisu",
+      "DESCRIPTION_EMPTY": "Popis nebyl vyplněn",
 
       "DATE": "Datum akce",
       "MULTIDAY": "Akce je vícedenní",

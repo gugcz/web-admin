@@ -12,13 +12,8 @@ md-content(layout-padding, , ng-class='{disableWhileLoading: vm.savingEvent}')
         label(translate='EVENTS.FORM.SUBTITLE')
         input(ng-model='vm.event.subtitle')
 
-    div(layout="row")
-      md-input-container(flex='60')
-        label(translate='EVENTS.FORM.DESCRIPTION')
-        textarea(rows='4', ng-model='vm.event.description')
 
-      div(flex='40')
-        div(rows='4',marked='vm.event.description')
+    description(data='vm.event.description')
 
     dates-picker(dates='vm.event.dates')
 
