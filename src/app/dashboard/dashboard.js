@@ -75,10 +75,7 @@ angular.module('gugCZ.webAdmin.dashboard', [
 
         // TODO
         this.reportEvent = function (ev, eventId) {
-          this.createReportModal_(ev, {})
-            .then(function (report) {
-              firebaseEvents.reportEvent(eventId, report).then(showToast('EVENTS.TOASTS.EVENT_REPORTED'));
-            }.bind(this));
+          $state.go('reports.add', {id: event.$id});
         };
 
         function showToast(messageId) {
