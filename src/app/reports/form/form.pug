@@ -1,20 +1,37 @@
-form(name='reportForm', ng-submit='vm.submit(reportForm)', novalidate)
-    md-toolbar
-        .md-toolbar-tools
-            h2 {{ 'DASHBOARD.REPORT.TITLE' | translate }}
-            span(flex='')
-            md-button.md-icon-button(ng-click='vm.cancel()')
-                md-icon(md-svg-icon='mdi:close', aria-label='Close dialog')
+md-progress-linear(ng-if='vm.savingEvent')
+md-content(layout-padding, , ng-class='{disableWhileLoading: vm.savingEvent}')
+    form(name='reportForm', ng-submit='reportForm.$valid && vm.saveReport()', novalidate, layout='column')
 
-    md-dialog-content(layout-padding)
+        h2.md-headline Akce: {{vm.eventNameObject.$value}}
 
-        .md-dialog-content.venue-form-content
-            div(layout='row')
-                md-input-container
-                    label {{ 'DASHBOARD.REPORT.ATTENDEES_COUNT' | translate }}
-                    input(type='number', ng-model='vm.report.attendeesCount')
+        md-input-container
+            label Text (můžeš zmínit jaká byla motivace uspářadat akci, zda se akce povedla atd.)
+            textarea(rows='5', ng-model='vm.report.text')
 
-    md-dialog-actions(layout='row')
-        span(flex='')
-        md-button.md-raised(translate="BUTTONS.CANCEL", ng-click="vm.cancel()", aria-label='Cancel')
-        md-button.md-raised.md-primary(translate="BUTTONS.SAVE", ng-click="vm.save()", type='submit', aria-label='Save venue')
+
+        md-input-container
+            label {{ 'DASHBOARD.REPORT.ATTENDEES_COUNT' | translate }}
+            input(type='number', ng-model='vm.report.attendeesCount', required)
+
+
+        md-input-container
+            label Co se povedlo?
+            textarea(rows='5', ng-model='vm.report.positives')
+
+
+        md-input-container
+            label Co by se dalo zlepšit?
+            textarea(rows='5', ng-model='vm.report.negatives')
+
+        md-input-container
+            label Odkaz na fotky
+            input(type='url', ng-model='vm.report.photoUrl')
+
+        md-input-container
+            label Odkaz na feedback
+            input(type='url', ng-model='vm.report.feedbackUrl')
+
+
+
+        div(layout='row', layout-align='end')
+            md-button.md-raised.md-primary(translate="BUTTONS.SAVE", type='submit', aria-label='Save venue')

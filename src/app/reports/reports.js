@@ -6,34 +6,37 @@ angular.module('gugCZ.webAdmin.reports', [
 
     .config(function ($stateProvider) {
 
-      $stateProvider
+      $stateProvider.state('reports', {
+        parent: 'base',
+        url: 'reports',
+        resolve: {
+          events: function () { return [];}
+        },
+        controller: function () {
+
+        },
+        controllerAs: 'reportsCtrl',
+        templateUrl: 'app/events/events.html',
+        data: {
+          title: 'TITLES.REPORTS'
+        }
+      }).state('reports.add', {
+        parent: 'base',
+
+        url: 'report/:id',
+        templateUrl: 'app/reports/form/form.html',
+        controller: 'ReportFormController',
+        controllerAs: 'vm',
+        resolve: {
+          report: function () {
 
 
-          .state('reports.add', {
-            parent: 'base',
-
-            url: 'report/:id',
-            templateUrl: 'app/reports/form/form.html',
-            controller: 'ReportFormController',
-            controllerAs: 'vm',
-            resolve: {
-              report: function ($stateParams, $log) {
-                $log.debug($stateParams.id);
-
-
-                return {
-                  text: '',
-                  positives: '',
-                  negatives: '',
-                  attendeesCount: 0,
-                  feedbackUrl: '',
-                  photoUrl: '',
-                }
-              }
-            },
-            data: {
-              title: 'TITLES.REPORT_EVENT'
-            }
-          });
+            return {};
+          }
+        },
+        data: {
+          title: 'TITLES.REPORT_EVENT'
+        }
+      });
 
     });

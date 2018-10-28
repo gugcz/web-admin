@@ -1,6 +1,5 @@
 angular.module('gugCZ.webAdmin.dashboard', [
-  'ui.router',
-  'gugCZ.webAdmin.report.form'
+  'ui.router'
 ])
   .config(function ($stateProvider) {
 
@@ -74,7 +73,7 @@ angular.module('gugCZ.webAdmin.dashboard', [
         };
 
         // TODO
-        this.reportEvent = function (ev, eventId) {
+        this.reportEvent = function (ev, event) {
           $state.go('reports.add', {id: event.$id});
         };
 
@@ -86,22 +85,7 @@ angular.module('gugCZ.webAdmin.dashboard', [
               .hideDelay(3000)
           );
         }
-        this.createReportModal_ = function (ev, report) {
-          report = angular.copy(report);
 
-
-          return $mdDialog.show({   // TODO how to set dialog width?
-            controller: DialogController,
-            controllerAs: 'vm',
-            locals: {
-              report: report
-            },
-            targetEvent: ev,
-            templateUrl: 'app/dashboard/report/report-dialog.html',
-            parent: angular.element($document.body),
-            clickOutsideToClose: true
-          });
-        };
 
       },
       controllerAs: 'vm',

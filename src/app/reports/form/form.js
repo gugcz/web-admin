@@ -1,10 +1,13 @@
-function ReportFormController(reportService, $state, $mdToast, $translate, report) {
+function ReportFormController(reportService, $state, $mdToast, $translate, report, $stateParams) {
 
   this.report = report;
   this.savingReport = false;
 
+  this.eventNameObject = reportService.getEventName($stateParams.id)
+
   this.saveReport = function () {
-    reportService.saveReport(reportId, report).then(() => {
+    this.savingReport = true;
+    reportService.saveReport($stateParams.id, this.report).then(() => {
       this.savingReport = false;
       showMessageAndGoToDashboard('EVENTS.TOASTS.EVENT_REPORTED');
     })

@@ -79,7 +79,7 @@ md-content(ng-if='!vm.isAdmin')
       div(ng-repeat='event in vm.chapterEvents.filter(vm.unreportedFilter) | orderBy: vm.dateOrder')
         md-list-item
           +event-info
-          md-button(ng-click='vm.reportEvent($event, event.$id)', aria-label='Report event').md-icon-button.md-secondary
+          md-button(ng-click='vm.reportEvent($event, event)', aria-label='Report event').md-icon-button.md-secondary
             md-tooltip Reportovat akci
             md-icon(md-svg-src='mdi:message')
         md-divider(ng-if='!$last')
