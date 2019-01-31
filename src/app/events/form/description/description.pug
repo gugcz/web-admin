@@ -4,5 +4,6 @@ div(layout='row')
         textarea(rows='4', ng-model='vm.data', max-rows='20')
 
     div(layout='column', flex='20')
-        md-button(ng-click='vm.showDescription($event, vm.data)').md-raised {{ 'EVENTS.FORM.DESCRIPTION_PREVIEW' | translate}}
+        // TODO - marked directive ot work
+        //md-button(ng-click='vm.showDescription($event, vm.data)').md-raised {{ 'EVENTS.FORM.DESCRIPTION_PREVIEW' | translate}}
         md-button(ng-href="https://cs.wikipedia.org/wiki/Markdown", target="_blank").md-raised Markdown Docs
