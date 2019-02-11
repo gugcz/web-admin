@@ -28,7 +28,14 @@
 
     "REPORT": {
       "TITLE": "Reportovat akci",
-      "ATTENDEES_COUNT": "Počet účastníků"
+      "EVENT": "Akce",
+      "ATTENDEES_COUNT": "Počet účastníků",
+      "SEND_TO_SLACK": "Posílat na Slack...",
+      "TEXT": "Text (můžeš zmínit jaká byla motivace uspářadat akci, zda se akce povedla atd.)",
+      "WHAT_WAS_GREAT": "Co se povedlo?",
+      "WHAT_WAS_TERRIBLE": "Co by se dalo zlepšit?",
+      "URL_PHOTOS": "Odkaz na fotky",
+      "URL_FEEDBACK": "Odkaz na feedback"
     }
   },
 

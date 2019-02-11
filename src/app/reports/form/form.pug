@@ -2,10 +2,10 @@ md-progress-linear(ng-if='vm.savingEvent')
 md-content(layout-padding, , ng-class='{disableWhileLoading: vm.savingEvent}')
     form(name='reportForm', ng-submit='reportForm.$valid && vm.saveReport()', novalidate, layout='column')
 
-        h2.md-headline Akce: {{vm.eventNameObject.$value}}
+        h2.md-headline {{ 'DASHBOARD.REPORT.EVENT' | translate }}: {{vm.eventNameObject.$value}}
 
         md-input-container
-            label Text (můžeš zmínit jaká byla motivace uspářadat akci, zda se akce povedla atd.)
+            label {{ 'DASHBOARD.REPORT.TEXT' | translate }}
             textarea(rows='5', ng-model='vm.report.text')
 
 
@@ -15,23 +15,23 @@ md-content(layout-padding, , ng-class='{disableWhileLoading: vm.savingEvent}')
 
 
         md-input-container
-            label Co se povedlo?
+            label {{ 'DASHBOARD.REPORT.WHAT_WAS_GREAT' | translate }}
             textarea(rows='5', ng-model='vm.report.positives')
 
 
         md-input-container
-            label Co by se dalo zlepšit?
+            label {{ 'DASHBOARD.REPORT.WHAT_WAS_TERRIBLE' | translate }}
             textarea(rows='5', ng-model='vm.report.negatives')
 
         md-input-container
-            label Odkaz na fotky
+            label {{ 'DASHBOARD.REPORT.URL_PHOTOS' | translate }}
             input(type='url', ng-model='vm.report.photoUrl')
 
         md-input-container
-            label Odkaz na feedback
+            label {{ 'DASHBOARD.REPORT.URL_FEEDBACK' | translate }}
             input(type='url', ng-model='vm.report.feedbackUrl')
 
-        md-switch(ng-model='vm.report.sendToSlack', aria-label='Send To Slack switch') Posílat na Slack
+        md-switch(ng-model='vm.report.sendToSlack', aria-label='Send To Slack switch') {{ 'DASHBOARD.REPORT.SEND_TO_SLACK' | translate }}
 
         div(layout='row', layout-align='end')
             md-button.md-raised.md-primary(translate="BUTTONS.SAVE", type='submit', aria-label='Save venue')
