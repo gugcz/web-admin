@@ -31,7 +31,7 @@ md-content(layout-padding, , ng-class='{disableWhileLoading: vm.savingEvent}')
             label Odkaz na feedback
             input(type='url', ng-model='vm.report.feedbackUrl')
 
-
+        md-switch(ng-model='vm.report.sendToSlack', aria-label='Send To Slack switch') Posílat na Slack
 
         div(layout='row', layout-align='end')
             md-button.md-raised.md-primary(translate="BUTTONS.SAVE", type='submit', aria-label='Save venue')

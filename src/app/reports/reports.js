@@ -30,8 +30,9 @@ angular.module('gugCZ.webAdmin.reports', [
         resolve: {
           report: function () {
 
-
-            return {};
+            return {
+              sendToSlack: true
+            };
           }
         },
         data: {
