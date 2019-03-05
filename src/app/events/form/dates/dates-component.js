@@ -52,6 +52,26 @@ function DatesController($mdDialog, $translate) {
     duration: 120
   };
 
+  this.config = {
+    repeats: {
+      weekRepeat: ['FIRST', 'SECOND', 'THIRD', 'FOURTH', 'LAST'],
+      weeks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      daysInWeek: ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY']
+    },
+    durations: {
+      60: $translate.instant('DATE.ONE_HOUR'),
+      90: $translate.instant('DATE.ONE_AND_HALF_HOUR'),
+      120: $translate.instant('DATE.TWO_HOURS'),
+      150: $translate.instant('DATE.TWO_AND_HALF_HOURS'),
+      180: $translate.instant('DATE.THREE_HOURS'),
+      210: $translate.instant('DATE.THREE_AND_HALF_HOURS'),
+      240: $translate.instant('DATE.FOUR_HOURS'),
+      300: $translate.instant('DATE.FIVE_HOURS'),
+      360: $translate.instant('DATE.SIX_HOURS')
+    }
+  };
+
   this.$onInit = function () {
     if (angular.isUndefined(this.dates.start) || this.dates.start === null) {
       this.duration = preFillData.duration;
@@ -72,27 +92,11 @@ function DatesController($mdDialog, $translate) {
       this.dates.end = new Date(this.dates.end);
       this.dates.isRepeatingEvent = !!this.dates.isRepeatingEvent; // Undefined to boolean
       this.duration = (this.dates.end.getTime() - this.dates.start.getTime()) / 60000;
+      if (Object.keys(this.config.durations).indexOf('' + this.duration) === -1) {
+        this.duration = 'choose-end';
+        this.isCustomEndDate = true;
+      }
       this.repeats = {}; // TODO - In Firebase?
-    }
-  };
-
-  this.config = {
-    repeats: {
-      weekRepeat: ['FIRST', 'SECOND', 'THIRD', 'FOURTH', 'LAST'],
-      weeks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-      daysInWeek: ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY']
-    },
-    durations: {
-      60: $translate.instant('DATE.ONE_HOUR'),
-      90: $translate.instant('DATE.ONE_AND_HALF_HOUR'),
-      120: $translate.instant('DATE.TWO_HOURS'),
-      150: $translate.instant('DATE.TWO_AND_HALF_HOURS'),
-      180: $translate.instant('DATE.THREE_HOURS'),
-      210: $translate.instant('DATE.THREE_AND_HALF_HOURS'),
-      240: $translate.instant('DATE.FOUR_HOURS'),
-      300: $translate.instant('DATE.FIVE_HOURS'),
-      360: $translate.instant('DATE.SIX_HOURS')
     }
   };
 
@@ -115,12 +119,27 @@ function DatesController($mdDialog, $translate) {
       return;
     }
 
-    const startTime = this.dates.start.getTime();
-    this.dates.end = new Date(startTime + this.duration * 60000);
-    this.endOptionsCache_ = null;
+    if (this.duration === 'choose-end') {
+      this.isCustomEndDate = true;
+    } else {
+      this.isCustomEndDate = false;
+      const startTime = this.dates.start.getTime();
+      this.dates.end = new Date(startTime + this.duration * 60000);
+      this.endOptionsCache_ = null;
+    }
+  };
+
+  this.cancelCustomEndDate = function() {
+    this.duration = 120;
+    this.isCustomEndDate = false;
+    this.calculateEndDate();
   };
 
   this.calculateEndDate();
+
+  this.isEndDateAfterStart = function() {
+    return this.dates.end.getTime() - this.dates.start.getTime() <= 0;
+  };
 
   function showNewsletterDialog() {
     $mdDialog.show(

@@ -2,7 +2,7 @@ md-progress-linear(ng-if='vm.savingEvent')
 md-content(layout-padding, , ng-class='{disableWhileLoading: vm.savingEvent}')
 
   // TODO Add organizer validation as directive
-  form(name='addEventForm', ng-submit='addEventForm.$valid && vm.isOrganizersCorrect() && vm.saveAndPublishEvent()', novalidate, layout="column")
+  form(name='addEventForm', ng-submit='addEventForm.$valid && vm.isDateCorrect() && vm.isOrganizersCorrect() && vm.saveAndPublishEvent()', novalidate, layout="column")
     div(layout="row")
       md-input-container(flex)
         label(translate='EVENTS.FORM.NAME')

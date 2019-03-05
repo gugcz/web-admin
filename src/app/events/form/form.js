@@ -12,6 +12,12 @@ function EventFormController(firebaseEvents, $state, $mdToast, $translate, event
     }.bind(this));
   };
 
+  this.isDateCorrect = function() {
+    const start = this.event.dates.start;
+    const end = this.event.dates.end;
+    return start.getTime() < end.getTime();
+  };
+
   this.isOrganizersCorrect = function () {
     const event = this.event;
     return Object.keys(event.organizers).length >= 1 && Object.keys(event.chapters).length >= 1 && event.guarantee && event.organizers[event.guarantee];

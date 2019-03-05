@@ -7,20 +7,30 @@ div(layout='row')
     div.md-whiteframe-3dp
       flex-calendar(options="vm.getEndDateOptions()")
 
-  div(flex="30")
+  div(flex="60")
     div.times(layout='column')
-      md-input-container
+      md-input-container.times-input
         md-checkbox(ng-model='vm.isMultiDay', ng-change="vm.calculateEndDate()")
           span(translate='') EVENTS.FORM.MULTIDAY
 
-      md-input-container
+      md-input-container.times-input
         input(type="time", ng-model="vm.dates.start", ng-change="vm.calculateEndDate()", required, aria-label='Start time')
         label(translate='EVENTS.FORM.START_TIME')
 
-      md-input-container(ng-if='!vm.isMultiDay')
-        label(translate='EVENTS.FORM.DURATION')
-        md-select(ng-model='vm.duration', ng-change="vm.calculateEndDate()")
-          md-option(ng-repeat='(duration, label) in vm.config.durations', ng-value='duration') {{label}}
+      div(layout='row')
+        md-input-container(flex="30" ng-if='!vm.isMultiDay').times-duration
+          label(translate='EVENTS.FORM.DURATION')
+          md-select(ng-model='vm.duration', ng-change="vm.calculateEndDate()")
+            md-option(ng-repeat='(duration, label) in vm.config.durations', ng-value='duration') {{label}}
+            md-option(ng-value='"choose-end"') Nastavit konec
+
+        div(ng-if='vm.isCustomEndDate && !vm.isMultiDay' flex="30").manual-end-date
+          md-input-container(md-is-error="vm.isEndDateAfterStart()").times-end-time
+            input(type="time", ng-model="vm.dates.end", ng-change="vm.calculateEndDate()", required, aria-label='End time')
+            label(translate='EVENTS.FORM.END_TIME')
+
+          md-button.md-icon-button.cross(ng-click='vm.cancelCustomEndDate()')
+            md-icon(md-svg-icon='mdi:close', aria-label='Close dialog')
 
       md-input-container(ng-if='vm.isMultiDay')
         input(type="time", ng-model="vm.dates.end", required, aria-label='End time')

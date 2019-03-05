@@ -173,8 +173,31 @@ dates-picker {
     }
   }
 
+  .times-input {
+    max-width: 30%
+  }
+
   .times {
     margin: 0 30px;
+  }
+
+  .times-duration, .times-end-time {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .times-duration {
+    margin-right: 16px;
+  }
+
+  .manual-end-date {
+    display: flex;
+    align-items: center;
+  }
+
+  .cross {
+    position: relative;
+    top: -18px;
   }
 
 }
