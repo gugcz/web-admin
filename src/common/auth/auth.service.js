@@ -77,7 +77,7 @@ function AuthService($firebaseAuth, $http, $log, $q, $rootScope, $state, SSO, sl
   };
 
   this.getOAuthToken = function () {
-    return this.authObj.$getAuth().qa;
+    return this.authObj.$getAuth()._lat;
   }
 
 
