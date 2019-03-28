@@ -5,7 +5,9 @@ jobs:
       - image: circleci/node:9.8.0
     steps:
       - checkout
-
+      - run:
+          name: install firebase tools
+          command: npm install -g firebase-tools
       - run:
           name: npm install
           command: npm install
