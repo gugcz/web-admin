@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  deploy:
+  deploy_admin:
     docker:
       - image: circleci/node:4.8.2
     steps:
@@ -16,7 +16,7 @@ workflows:
   version: 2
   deploy:
     jobs:
-      - deploy:
+      - deploy_admin:
           filters:
             branches:
               only: master
