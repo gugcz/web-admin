@@ -1,0 +1,22 @@
+version: 2.1
+jobs:
+  deploy:
+    docker:
+      - image: circleci/node:4.8.2
+    steps:
+      - run:
+          name: npm build
+          command: npm run build
+      - run:
+          name: deploy
+          command: firebase deploy --token=$FIREBASE_TOKEN --non-interactive
+
+
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only: master

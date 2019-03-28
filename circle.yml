@@ -1,9 +1,0 @@
-machine:
-  node:
-    version: 6.9.5
-deployment:
-  production:
-    branch: master
-    commands:
-      - npm run build
-      - firebase deploy --token=$FIREBASE_TOKEN --non-interactive
