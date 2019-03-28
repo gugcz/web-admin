@@ -117,7 +117,7 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
 
         return saveCover(id, cover).then(snapshot => {
 
-          return firebaseDB.ref('events/' + id + '/cover').set(snapshot.downloadURL);
+          return firebaseDB.ref('events/' + id + '/cover').set(snapshot.downloadURL || '').then(() => Promise.resolve({key: id}));
         });
       });
     }
