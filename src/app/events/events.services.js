@@ -134,7 +134,7 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
 
       return saveCover(event.$id, event.cover).then(snapshot => {
 
-        event.cover = snapshot.downloadURL;
+        event.cover = snapshot.downloadURL || '';
         event = transformEventDataForFirebase(event);
         return event.$save();
       });
