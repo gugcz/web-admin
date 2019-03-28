@@ -13,7 +13,8 @@
     "databaseURL": "https://gug-web.firebaseio.com",
     "projectId": "gug-web",
     "storageBucket": "gug-web.appspot.com",
-    "messagingSenderId": "1082612211992"
+    "messagingSenderId": "1082612211992",
+    "cloudFunctionsURL": "https://us-central1-gug-web.cloudfunctions.net"
   },
   "LANGUAGE": {
     "preferred": "cs"

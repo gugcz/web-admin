@@ -76,6 +76,10 @@ function AuthService($firebaseAuth, $http, $log, $q, $rootScope, $state, SSO, sl
     return !authDataStore.pending && authDataStore.firebaseUser;
   };
 
+  this.getOAuthToken = function () {
+    return this.authObj.$getAuth().qa;
+  }
+
 
   /**
    * @return {boolean}

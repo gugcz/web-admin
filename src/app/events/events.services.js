@@ -1,5 +1,56 @@
-function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, $firebaseObject, $http) {
+function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, $firebaseObject, $http, authService, FIREBASE) {
   const self = this;
+
+  self.saveEvent = function (event, editState) {
+    event.published = false;
+
+    if (editState) {
+      return updateEvent(event);
+    }
+    else {
+      return addEvent(event);
+    }
+  };
+
+  self.saveAndPublishEvent = function (event, editState) {
+    event.published = true;
+
+    if (editState) {
+      return updateEvent(event).then((ref) => getPublishCloudFunctionRequest('updatePublishedEvent', ref.key));
+    }
+    else {
+      return addEvent(event).then((ref) => getPublishCloudFunctionRequest('publishEvent', ref.key));
+    }
+
+  };
+
+  self.deleteEvent = eventId => getPublishCloudFunctionRequest('unpublishEvent', eventId)
+      .then(() => firebaseSTORAGE.ref('covers/events/' + eventId + '.png').delete())
+      .then(() => firebaseDB.ref('events/' + eventId).remove())
+      .catch(() => firebaseDB.ref('events/' + eventId).remove());
+
+  self.publishEvent = eventId => getEventPublishedRef(eventId)
+      .set(true)
+      .then(() => getPublishCloudFunctionRequest('publishEvent', eventId));
+
+  self.hideEvent = eventId => getEventPublishedRef(eventId)
+      .set(false)
+      .then(() => getPublishCloudFunctionRequest('unpublishEvent', eventId));
+
+  self.reportEvent = (eventId, report) => firebaseDB.ref('events/' + eventId + '/report').set(report);
+
+
+  self.loadEvent = function (eventId) {
+    return $firebaseObject(firebaseDB.ref('events/' + eventId)).$loaded().then(event => {
+      event.chapters = getArrayOfObjectsWithIdFromKeyValue(event.chapters);
+      return getChapterNames(event.chapters).then(chapters => {
+        event.chapters = chapters;
+        return event;
+      });
+
+    });
+  };
+
 
   function transformEventChaptersForFirebase(chapters) {
     let chaptersForFirebase = {};
@@ -47,82 +98,73 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
   }
 
   function saveCover(id, cover) {
-    let picRef = firebaseSTORAGE.ref('covers/event/' + id + '.png');
-
-    return picRef.putString(cover, 'base64');
+    return firebaseSTORAGE.ref('covers/event/' + id + '.png').putString(cover, 'base64');
   }
 
   // TODO Refactor!!!!!
-  function saveEvent(event, editState) {
+  function addEvent(event) {
 
-    event.created = (new Date()).toISOString()
+    event.created = (new Date()).toISOString();
 
-
-
-    if (editState) {
-
-      if (isUploadedNewCover(event.cover)) {
-
-        return saveCover(event.$id, event.cover).then(snapshot => {
-
-          event.cover =  snapshot.downloadURL;
-          event = transformEventDataForFirebase(event);
-          return event.$save();
-        });
-      }
-
+    if (isUploadedNewCover(event.cover)) {
+      let cover = event.cover;
+      event.cover = '';
       event = transformEventDataForFirebase(event);
 
-      return event.$save();
-    }
-    else {
 
-      if (isUploadedNewCover(event.cover)) {
-        let cover = event.cover;
-        event.cover = '';
-        event = transformEventDataForFirebase(event);
+      return $firebaseArray(firebaseDB.ref('events')).$add(event).then(function (ref) {
+        let id = ref.key;
 
+        return saveCover(id, cover).then(snapshot => {
 
-        return $firebaseArray(firebaseDB.ref('events')).$add(event).then(function(ref) {
-          let id = ref.key;
-
-          return saveCover(id, cover).then(snapshot => {
-
-            return firebaseDB.ref('events/' + id + '/cover').set(snapshot.downloadURL);
-          });
+          return firebaseDB.ref('events/' + id + '/cover').set(snapshot.downloadURL);
         });
-      }
-
-      event = transformEventDataForFirebase(event);
-      return $firebaseArray(firebaseDB.ref('events')).$add(event);
-    }
-
-  };
-
-
-
-  self.saveEvent = function (event, editState) {
-    $log.debug('You send this event:', event);
-    event.published = false;
-    return saveEvent(event, editState);
-  };
-
-  self.saveAndPublishEvent = function (event, editState) {
-    event.published = true;
-    $log.debug('You send this event:', event);
-    return saveEvent(event, editState);
-  };
-
-  self.loadEvent = function (eventId) {
-    return $firebaseObject(firebaseDB.ref('events/' + eventId)).$loaded().then(event => {
-      event.chapters = getArrayOfObjectsWithIdFromKeyValue(event.chapters);
-      return getChapterNames(event.chapters).then(chapters => {
-        event.chapters = chapters;
-        return event;
       });
+    }
 
-    });
+    event = transformEventDataForFirebase(event);
+    return $firebaseArray(firebaseDB.ref('events')).$add(event);
+
   };
+
+  function updateEvent(event) {
+    event.created = (new Date()).toISOString();
+
+    if (isUploadedNewCover(event.cover)) {
+
+      return saveCover(event.$id, event.cover).then(snapshot => {
+
+        event.cover = snapshot.downloadURL;
+        event = transformEventDataForFirebase(event);
+        return event.$save();
+      });
+    }
+
+    event = transformEventDataForFirebase(event);
+
+    return event.$save();
+  }
+
+
+
+
+  function getPublishCloudFunctionRequest(functionName, eventId) {
+    let token = authService.getOAuthToken();
+    return $http({
+      url: FIREBASE.cloudFunctionsURL + '/' + functionName + '?eventId=' + eventId,
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token
+
+      }
+    }).catch(() => Promise.resolve()); // TODO - Remove cors errors
+  }
+
+
+
+  const getEventPublishedRef = eventId => firebaseDB.ref('events/' + eventId + '/published');
+
+
 
   // TODO Add name
   function getArrayOfObjectsWithIdFromKeyValue(keyValue) {
@@ -152,9 +194,7 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
     return $firebaseArray(firebaseDB.ref('chapters'));
   };
 
-  self.reportEvent = function (eventId, report) {
-    return firebaseDB.ref('events/' + eventId + '/report').set(report);
-  };
+
 
   /**
    * @return Promise<array>
@@ -167,14 +207,14 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
     }
 
     return $q.all(chapters.map(loadChapterOrgs))
-      .then(function (chaptersOrgs) {
-        const chaptersOrgsByIds = chaptersOrgs.map(transformToOrgsById);
-        return Object.assign.apply(Object, chaptersOrgs.map(transformToOrgsById));  // merge to one object by ids
-      });
+        .then(function (chaptersOrgs) {
+          const chaptersOrgsByIds = chaptersOrgs.map(transformToOrgsById);
+          return Object.assign.apply(Object, chaptersOrgs.map(transformToOrgsById));  // merge to one object by ids
+        });
   };
 
   self.getChapterEvents = function (chapterId) {
-    var chapterEventsRef = firebaseDB.ref('events')
+    var chapterEventsRef = firebaseDB.ref('events');
 
     if (chapterId !== 'admin') {
       chapterEventsRef = chapterEventsRef.orderByChild('chapters/' + chapterId).equalTo(true);
@@ -183,17 +223,6 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
     return $firebaseArray(chapterEventsRef);
   };
 
-  self.deleteEvent = function (eventId) {
-    return firebaseSTORAGE.ref('covers/events/' + eventId + '.png').delete().then(() => {return firebaseDB.ref('events/' + eventId).remove();}).catch(() => {return firebaseDB.ref('events/' + eventId).remove();});
-  };
-
-  self.publishEvent = function (eventId) {
-    return firebaseDB.ref('events/' + eventId + '/published').set(true);
-  };
-
-  self.hideEvent = function (eventId) {
-    return firebaseDB.ref('events/' + eventId + '/published').set(false);
-  };
 
   function isArrayBlank(array) {
     return angular.isUndefined(array) || array.length <= 0;
@@ -201,10 +230,10 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
 
   function loadChapterOrgs(chapter) {
     return $firebaseArray(firebaseDB
-      .ref('organizers')
-      .orderByChild('chapters/' + chapter.$id)
-      .equalTo(true))
-      .$loaded();
+        .ref('organizers')
+        .orderByChild('chapters/' + chapter.$id)
+        .equalTo(true))
+        .$loaded();
   }
 
   function transformToOrgsById(chaptersOrgs) {
@@ -219,4 +248,4 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
 angular.module('gugCZ.webAdmin.events.services', [
   'gugCZ.firebase',
 ])
-  .service('firebaseEvents', firebaseFactory);
+    .service('firebaseEvents', firebaseFactory);
