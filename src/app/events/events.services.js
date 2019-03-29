@@ -157,7 +157,7 @@ function firebaseFactory(firebaseDB, firebaseSTORAGE, $q, $firebaseArray, $log, 
         'Authorization': 'Bearer ' + token
 
       }
-    }).catch(() => Promise.resolve()); // TODO - Remove cors errors
+    });
   }
 
 
