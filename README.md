@@ -2,7 +2,7 @@
 [![devDependency Status](https://david-dm.org/gugcz/web-admin/dev-status.png)](https://david-dm.org/gugcz/web-admin#info=devDependencies)
 
 # web-admin
-Administration for new GUG.cz web - https://gug-web.firebaseapp.com/
+Administration for GUG.cz web
 
 ## Requirements 
 - [git](http://git-scm.com/downloads)
@@ -53,3 +53,7 @@ Open [http://localhost:8000/](http://localhost:8000/)in browser and happy develo
  
  npm build              # zbuilduje celou aplikaci do složky dist
 ```
+
+## Deployment
+
+A repository contains a configuration for Circle CI/CD. Each commit on `master` branch will deploy project to Firebase hosting. 
